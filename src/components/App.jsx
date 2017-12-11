@@ -1,20 +1,25 @@
 import React from 'react'
-import './App.css'
-
-import AppLogo from 'components/AppLogo'
+import PokemonList from 'components/PokemonList'
 
 class App extends React.Component {
    constructor() {
         super(...arguments)
+
+        this.state = {};
+
+        this.state.ids = [];
+        for (let i = 1; i < 20; i++) {
+            this.state.ids.push(i);
+        }
     }
 
     render() { 
         return (
             <div className='app'>
-                <AppLogo />
+                <PokemonList pokemons={this.state.ids}/>
             </div>
         )
     }
 }
 
-export default App 
+export default App; 
