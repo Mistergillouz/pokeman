@@ -1,5 +1,6 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
+import Species from 'components/Species'
 
 class Pokemon extends React.Component {
    
@@ -7,23 +8,24 @@ class Pokemon extends React.Component {
         super(...arguments)
     }
 
+    buildSpecies(id) {
+        return (<Species id={id}/>);
+    }
+
     render() { 
         let pokemon = PokedexHelper.getPokemon(this.props.id);
         let name = PokedexHelper.loc(pokemon);
-        var gen = pokemon.gen;
         var h2Class = ''; //(args.inactive) ? 'inactive-h2' : '';
         var valueClass = 'value'; //(args.inactive) ? 'inactive-value' : 'value';
 
-        var speciesHtml = '';
-        for (var i = 0; i < pokemon.species.length; i++) {
-            speciesHtml += pokemon.species[i] + ' '; //
-        }
 
         return (
             <div className="gen" data-id={this.props.id}>
-                <a className="pokemon g1" href="#" data-gen={gen}>
+                <a className="pokemon g1" href="#" data-gen={pokemon.gen}>
                 <h2 className={h2Class}>{name}</h2>
-                    <div className="types">{speciesHtml}</div>
+                    <div className="types">
+                        {pokemon.species.map(this.buildSpecies)}
+                    </div>
                     <img className="lazimage" src={"https://www.serebii.net/art/th/" + this.props.id + ".png"} style={{ display: 'block' }}/>
                     <div className="bar">
                         <div className={valueClass}></div>
