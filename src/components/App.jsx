@@ -1,6 +1,8 @@
 import React from 'react'
 import './App.css'
 
+import AppLogo from 'components/AppLogo'
+
 class App extends React.Component {
    constructor() {
         super(...arguments)
@@ -9,8 +11,7 @@ class App extends React.Component {
     render() { 
         return (
             <div className='app'>
-                <label>OUIIII!</label>
-                <label>NON!!!!</label>
+                <AppLogo />
             </div>
         )
     }
