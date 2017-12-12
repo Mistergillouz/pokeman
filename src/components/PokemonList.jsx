@@ -12,9 +12,15 @@ class PokemonList extends React.Component {
         return (<Pokemon id={pokemonId}/>);
     }
 
+    componentDidMount() {
+        console.log('After render called');
+    }
+    
     render() { 
+
+        let styles = this.props.top ? { top: this.props.top + 'px'} : {};
         return (
-            <div className='pokemon-list'>
+            <div className='pokemon-list' style={styles}>
                 {this.props.pokemons.map(this.buildPokemon)}
             </div>
         )

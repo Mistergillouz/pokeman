@@ -1,22 +1,15 @@
 import React from 'react'
-import PokemonList from 'components/PokemonList'
+import MainPage from 'components/MainPage'
 
 class App extends React.Component {
    constructor() {
         super(...arguments)
-
-        this.state = {};
-
-        this.state.ids = [];
-        for (let i = 1; i < 20; i++) {
-            this.state.ids.push(i);
-        }
     }
 
     render() { 
         return (
             <div className='app'>
-                <PokemonList pokemons={this.state.ids}/>
+                <MainPage/>
             </div>
         )
     }

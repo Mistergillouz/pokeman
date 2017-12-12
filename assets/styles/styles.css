@@ -77,7 +77,7 @@ input {
 }
 
 .back-button {
-    background-image: url('../img/back.png');
+    background-image: url('../images/back.png');
     background-repeat: no-repeat; /* Do not repeat the icon image */
     background-position: center;
     width: 2.5em;
@@ -92,7 +92,7 @@ input {
     border-radius: 3px;
 }
 .filter-toggle {
-    background-image: url('../img/filteron.png');
+    background-image: url('../images/filteron.png');
     background-repeat: no-repeat; /* Do not repeat the icon image */
     background-position: center;
     background-position-x: 7px;
@@ -105,7 +105,7 @@ input {
 }
 
 .filter-toggle-off {
-    background-image: url('../img/filteroff.png');
+    background-image: url('../images/filteroff.png');
     background-color: #e0e0e0;
 }
 
@@ -117,7 +117,7 @@ input {
 }
 .search-input {
     width: 65%;
-    background-image: url('../img/searchicon.png'); /* Add a search icon to input */
+    background-image: url('../images/searchicon.png'); /* Add a search icon to input */
     background-position: center;
     background-position-x: 4px;
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -280,7 +280,7 @@ input {
     opacity: 1;
     transition: opacity 0.5s;
 
-    z-index: 15;
+    z-index: 55;
     background-color: #FFF;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
@@ -320,8 +320,9 @@ input {
 
 .pokemon-list {
     margin: 5px 5px 5px 5px;
-    top: 50px;
     position: absolute;
+    top: 50px;
+    width: 100%;
 }
 
 .pokemon-list {
