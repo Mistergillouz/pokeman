@@ -1,6 +1,8 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import PokedexHelper from 'data/PokedexHelper'
 import Species from 'components/Species'
+import Constants from 'data/Constants'
 
 class SpeciesTooltip extends React.Component {
    constructor() {
@@ -34,13 +36,34 @@ class SpeciesTooltip extends React.Component {
         return null;
     }
 
+    onBlur() {
+        this.props.eventHandler({
+            event: Constants.EVENT.HideTooltip
+        });
+    }
+
+    componentDidUpdate() {
+        if (this.props.id !== -1) {
+            // Reposition tooltip within screen
+
+            let node = ReactDOM.findDOMNode(this);
+            let px = this.props.x + 5, py = this.props.y + 10;
+            let ttw = node.scrollWidth, tth = node.scrollHeight;
+            let scw = document.body.clientWidth - 20, sch = document.documentElement.clientHeight - 20;
+            let x = ((px + ttw) > scw) ? scw - ttw : px, y = ((py + tth) > sch) ? sch - tth : py;
+            node.style.top = y + 'px';
+            node.style.left = x + 'px';
+
+            node.focus();
+        }
+    }
+
     render() { 
 
         if (this.props.id !== -1) {
             let rows = this.buildStrengthWeaknessTr(this.props.id);
-            let styles = { top: this.props.y, left: this.props.x };
             return (
-                <div className="strength-table-container" tabIndex="-1" style={ styles }>
+                <div className="strength-table-container" tabIndex="-1" onBlur={() => this.onBlur() }>
                     <table className="strength-table">
                         <tbody>
                             {rows}

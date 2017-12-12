@@ -5,6 +5,7 @@ import LocaleFlag from 'components/LocaleFlag'
 import LocalePopover from 'components/LocalePopover'
 import FilterPanel from 'components/FilterPanel'
 import SpeciesTooltip from 'components/SpeciesTooltip'
+import Constants from 'data/Constants'
 
 class MainPage extends React.Component {
    
@@ -24,7 +25,6 @@ class MainPage extends React.Component {
         };
 
         this.props = {
-            selectedPokemonId: -1
         };
 
         this.query = { text: '', genId: null,types: [] };
@@ -38,7 +38,7 @@ class MainPage extends React.Component {
         }
     }
 
-    onShowTooltip(args) {
+    handleEvent(args) {
         if (args.id !== this.props.tooltipTypeId) {
             this.setState({ tooltipTypeId: args.id });
             this.tooltip.x = args.event.clientX;
@@ -46,8 +46,25 @@ class MainPage extends React.Component {
         }
     }
 
-    onPokemonClicked(pokemonId) {
-        console.log('Pokemon ' + pokemonId + ' clicked');
+    eventHandler(args) {
+
+        switch (args.event) {
+            
+            case Constants.EVENT.ShowTooltip: 
+
+                this.tooltip.x = args.x;
+                this.tooltip.y = args.y;
+                this.setState({ tooltipTypeId: args.id });
+                break;
+            
+            case Constants.EVENT.HideTooltip:
+                this.setState({ tooltipTypeId: -1 });
+                break;
+            
+            case Constants.EVENT.PokemonSelected:
+                break;
+
+        }
     }
 
     
@@ -116,10 +133,9 @@ class MainPage extends React.Component {
 
                 <PokemonList top={this.state.filterPanelHeight} 
                     pokemons={this.state.pokemons} 
-                    onPokemonClicked={(id) => this.onPokemonClicked(id) }
-                    onShowTooltip={ (args) => this.onShowTooltip(args) }/>
+                    eventHandler={(args) => this.eventHandler(args) }/>
 
-                <SpeciesTooltip ref={ (element) => this.setFocus(element) } id={ this.state.tooltipTypeId } x={ this.tooltip.x } y={ this.tooltip.y }/>
+                <SpeciesTooltip ref="speciesTooltip" id={ this.state.tooltipTypeId } x={ this.tooltip.x } y={ this.tooltip.y } eventHandler={ (args) => this.eventHandler(args)}/>
             </div>
         )
     }

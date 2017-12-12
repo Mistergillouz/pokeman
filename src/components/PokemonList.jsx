@@ -9,7 +9,7 @@ class PokemonList extends React.Component {
     }
 
     buildPokemon(pokemonId) {
-        return (<Pokemon id={pokemonId} onPokemonClicked={ this.props.onPokemonClicked } onShowTooltip={ this.props.onShowTooltip }/>);
+        return (<Pokemon id={pokemonId} eventHandler={ this.props.eventHandler }/>);
     }
 
     componentDidMount() {

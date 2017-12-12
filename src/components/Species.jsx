@@ -1,6 +1,7 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
 import SpeciesTooltip from 'components/SpeciesTooltip'
+import Constants from 'data/Constants'
 
 class Species extends React.Component {
    
@@ -8,13 +9,17 @@ class Species extends React.Component {
         super(...arguments)
     }
 
-    onShowTooltip(event) {
+    onTypeClicked(event) {
 
-        if (this.props.onShowTooltip) {
-            this.props.onShowTooltip({
+        if (this.props.eventHandler) {
+            this.props.eventHandler({
+                event: Constants.EVENT.ShowTooltip,
                 id: this.props.id,
-                event: event
+                x: event.clientX,
+                y: event.clientY
             });
+            
+            event.stopPropagation();
         }
     }
 
@@ -22,10 +27,10 @@ class Species extends React.Component {
 
         let species = PokedexHelper.getTypeInfos(this.props.id);
         let speciesName = PokedexHelper.loc(species);
-        var speciesCss = PokedexHelper.loc(species, PokedexHelper.LOCALES.ENGLISH).toUpperCase();
+        var speciesCss = PokedexHelper.loc(species, Constants.LOCALES.ENGLISH).toUpperCase();
         
         return (
-            <div className={ "type POKEMON_TYPE_" + speciesCss } type-id={ species.id } onClick={ (e) => this.onShowTooltip(e) }>{ speciesName }
+            <div className={ "type POKEMON_TYPE_" + speciesCss } type-id={ species.id } onClick={ (e) => this.onTypeClicked(e) }>{ speciesName }
             </div>
         )
     }

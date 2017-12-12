@@ -1,17 +1,11 @@
 import {Pokedex} from 'data/pokedex'
+import Constants from 'data/Constants'
 
 class PokedexHelper {
    
     constructor() {
 
-        this.MAX_GEN = 7;
-
-        this.LOCALES = { 
-            FRENCH: { country: 'fr', name: 'Francais', id: 5 }, 
-            ENGLISH: { country: 'en', name: 'English', id: 9 }
-        };
-
-        this.locale = this.LOCALES.FRENCH;
+        this.locale = Constants.LOCALES.FRENCH;
     }
 
     getStrengthWeakness(typeId) {
@@ -74,8 +68,8 @@ class PokedexHelper {
     }
 
     setLocaleCountry(country) {
-        for (let key in this.LOCALES) {
-            let locale = this.LOCALES[key];
+        for (let key in Constants.LOCALES) {
+            let locale = Constants.LOCALES[key];
             if (locale.country === country) {
                 this.locale = locale;
             }
@@ -138,13 +132,15 @@ class PokedexHelper {
     getLocales() {
 
         let locales = [];
-        for (let locale in this.LOCALES) {
-            locales.push({ id: this.LOCALES[locale].country, name: this.LOCALES[locale].name });
+        for (let locale in Constants.LOCALES) {
+            locales.push({ id: Constants.LOCALES[locale].country, name: Constants.LOCALES[locale].name });
         }
         return locales;
     }
 }
 
+
+// Singleton
 let PokedexHelperObj = new PokedexHelper();
 
 export default PokedexHelperObj
