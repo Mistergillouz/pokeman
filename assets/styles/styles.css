@@ -2,6 +2,14 @@
 /*  GENERAL
 /*---------------------------------------------------------------------*/
 
+#app-root {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, pre, a, img, b, u, i, ol, ul, li, form, label, table, tbody, tfoot, thead, tr, th, td, embed {
     margin: 0;
     padding: 0;
@@ -125,17 +133,14 @@ input {
 }
 
 .page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     z-index: 5;
     border: 0;
     background-color: #f8f8f8;
     border-color: #e7e7e7;
     border-radius: 4px;
-    height: 50px;
-    
 }
 
 .right-panel, .left-panel {
@@ -157,6 +162,9 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    
 }
 
 @media all and (max-width: 1024px) {
@@ -166,9 +174,7 @@ input {
 }
 
 .filters-container {
-    position: absolute;
     width: 100%;
-    top: 50px;
     user-select: none;
     background-color: white;
     border-bottom: 1px solid lightgray;
@@ -319,9 +325,6 @@ input {
 }
 
 .pokemon-list {
-    margin: 5px 5px 5px 5px;
-    position: absolute;
-    top: 50px;
     width: 100%;
 }
 

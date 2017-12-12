@@ -9,7 +9,7 @@ class Pokemon extends React.Component {
     }
 
     buildSpecies(id) {
-        return (<Species id={id}/>);
+        return (<Species key={id} id={id}/>);
     }
 
     render() { 

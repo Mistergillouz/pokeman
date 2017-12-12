@@ -7,14 +7,9 @@ class FilterPanel extends React.Component {
         super(...arguments)
 
         this.state = {
-            visible: false,
             selectedGen: 0,
             selectedTypes: []
         }
-    }
-
-    toggle() {
-        this.setState({ visible: !this.state.visible });
     }
 
     onGenClicked(genNumber) {
@@ -68,7 +63,7 @@ class FilterPanel extends React.Component {
 
     render() { 
 
-        if (this.state.visible) {
+        if (this.props.visible) {
 
             let genButtons = [];
 
@@ -80,7 +75,7 @@ class FilterPanel extends React.Component {
                 }
 
                 genButtons.push(
-                    <label 
+                    <label key={ i }
                         className={ "gen-button " + clazz } 
                         onClick={(e) => { this.onGenClicked(i) }}>
                         {i}
@@ -93,7 +88,7 @@ class FilterPanel extends React.Component {
                     clazz += ' selected';
                 }
 				return (
-                    <div 
+                    <div key={ type.id }
                         className={ clazz }
                         onClick={(e) => { this.onTypeClicked(type.id) }}>
                         {type.name}

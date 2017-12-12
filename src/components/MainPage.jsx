@@ -26,8 +26,7 @@ class MainPage extends React.Component {
 
 
     onToggleFilterPanel(event) {
-        this.refs.filterPanel.toggle();
-        //updateListOrigin();
+        this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
     onToggleLocalePopover() {
@@ -66,24 +65,26 @@ class MainPage extends React.Component {
     render() { 
 
         return (
-            <div>
-                <div className="page" data-content-id="tiles-container">
-                    <div className="navbar">
+            <div className="page" data-content-id="tiles-container">
+
+                <div className="navbar">
                     <div className="left-panel filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                        <input type="search" className="search-input ui-styles" placeholder="Rechercher un Pokémon" onChange={(e) => this.onFilterTextChanged(e)}></input>
-                        <div className="right-panel" onClick={ (e) => this.onToggleLocalePopover(e) }>
-                                <LocaleFlag country={this.state.country}/>
-                                <img src="../assets/images/arrow-down.png"/>
-                        </div>
-                    </div> 
-                    <FilterPanel ref="filterPanel" notifyChange={ this.onFilterChangeListener.bind(this) }/>
-                    <div className="popover hidden" tabIndex="-1" ref="localePopover">
-                        <ul>
-                            <li className="locale-item" data-id="fr" onClick={ (e) => this.onLocaleSelected(e) }>Francais</li>
-                            <li className="locale-item" data-id="en" onClick={ (e) => this.onLocaleSelected(e) }>English</li>
-                        </ul>
+                    <input type="search" className="search-input ui-styles" placeholder="Rechercher un Pokémon" onChange={(e) => this.onFilterTextChanged(e)}></input>
+                    <div className="right-panel" onClick={ (e) => this.onToggleLocalePopover(e) }>
+                            <LocaleFlag country={this.state.country}/>
+                            <img src="../assets/images/arrow-down.png"/>
                     </div>
+                </div> 
+
+                <FilterPanel ref="filterPanel" visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
+
+                <div className="popover hidden" tabIndex="-1" ref="localePopover">
+                    <ul>
+                        <li className="locale-item" data-id="fr" onClick={ (e) => this.onLocaleSelected(e) }>Francais</li>
+                        <li className="locale-item" data-id="en" onClick={ (e) => this.onLocaleSelected(e) }>English</li>
+                    </ul>
                 </div>
+                
                 <PokemonList top={this.state.filterPanelHeight} pokemons={this.state.pokemons}/>
             </div>
         )
