@@ -30,7 +30,7 @@ class FilterPanel extends React.Component {
         if (index !== -1) {
             selectedTypes.splice(index, 1);
         } else {
-            selectedTypes.push(typeId);
+            selectedTypes.splice(0, 0, typeId);
             selectedTypes.splice(2);
         }
 
@@ -39,11 +39,31 @@ class FilterPanel extends React.Component {
     }
 
     componentDidUpdate() {
-        let height = 0, node = ReactDOM.findDOMNode(this);
-        if (node) {
-            height = node.getBoundingClientRect().bottom;
+        this.updateHeight();
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.updateHeight.bind(this));
+        window.addEventListener("orientationchange", this.updateHeight.bind(this));
+    }
+
+    updateHeight() {
+
+        if (this.timerId) {
+            clearTimeout(this.timerId);
         }
-        this.props.notifyChange(null, height);
+
+        this.timerId = setTimeout(() => {
+
+            let height = 0, node = ReactDOM.findDOMNode(this);
+            if (node) {
+                height = node.getBoundingClientRect().bottom;
+            }
+
+            this.props.notifyChange(null, height);
+            delete this.timerId;
+
+        }, 100);
     }
 
     render() { 
