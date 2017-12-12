@@ -24,10 +24,9 @@ class MainPage extends React.Component {
 
         };
 
-        this.props = {
-        };
+        this.props = {};
 
-        this.query = { text: '', genId: null,types: [] };
+        this.searchSettings = { text: '', genId: null, types: [] };
         this.tooltip = {
             x: 0,
             y: 0
@@ -35,14 +34,6 @@ class MainPage extends React.Component {
 
         for (let i = 1; i < 15; i++) {
             this.state.pokemons.push(i);
-        }
-    }
-
-    handleEvent(args) {
-        if (args.id !== this.props.tooltipTypeId) {
-            this.setState({ tooltipTypeId: args.id });
-            this.tooltip.x = args.event.clientX;
-            this.tooltip.y = args.event.clientY;
         }
     }
 
@@ -91,22 +82,16 @@ class MainPage extends React.Component {
     onFilterChangeListener(args, height) {
         this.applyFilter(args);
 
-        if (this.state.filterPanelHeight !== height) {
+        if (height && this.state.filterPanelHeight !== height) {
             this.setState({ filterPanelHeight: height });
         }
     }
 
     applyFilter(args) {
         if (args) {
-            Object.assign(this.query, args);
-            let ids = PokedexHelper.search(this.query);
+            Object.assign(this.searchSettings, args);
+            let ids = PokedexHelper.search(this.searchSettings);
             this.setState({ pokemons: ids });
-        }
-    }
-
-    setFocus(element) {
-        if (element) {
-            //element.focus();
         }
     }
 
