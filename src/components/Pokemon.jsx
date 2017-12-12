@@ -9,7 +9,7 @@ class Pokemon extends React.Component {
     }
 
     buildSpecies(id) {
-        return (<Species key={id} id={id}/>);
+        return (<Species key={id} id={id} onShowTooltip={ this.props.onShowTooltip }/>);
     }
 
     render() { 
@@ -20,11 +20,11 @@ class Pokemon extends React.Component {
         let valueClass = this.props.inactive ? 'inactive-value' : 'value';
 
         return (
-            <div className="gen" data-id={ this.props.id }>
+            <div className="gen" data-id={ this.props.id } onClick={(e) => this.props.onPokemonClicked(this.props.id) }>
                 <a className="pokemon g1" href="#" data-gen={ pokemon.gen }>
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">
-                        { pokemon.species.map(this.buildSpecies) }
+                        { pokemon.species.map((id) => this.buildSpecies(id)) }
                     </div>
                     <img className="lazimage" src={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
                     <div className="bar">

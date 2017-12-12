@@ -1,23 +1,17 @@
 import React from 'react'
-
-const LOCALES = [
-    { id: 'fr', name: 'Français' },
-    { id: 'en', name: 'English' }
-]
+import PokedexHelper from 'data/PokedexHelper'
 
 class LocalePopover extends React.Component {
    
     constructor() {
         super(...arguments)
-        this.renderLocale = this._renderLocale.bind(this)
     }
 
-    _renderLocale(locale, index) {
+    renderLocale(locale) {
         return (
             <li key={locale.id} 
                 className="locale-item" 
-                data-id={locale.id} 
-                onClick={ this.props.onLocaleSelected }>
+                onClick={ () => this.props.onLocaleSelected(locale.id) }>
                 {locale.name}
             </li>
         )
@@ -28,7 +22,7 @@ class LocalePopover extends React.Component {
         return this.props.show && (
             <div className='popover'>
                 <ul>
-                    { LOCALES.map(this.renderLocale) }
+                    { PokedexHelper.getLocales().map((locale) => this.renderLocale(locale)) }
                 </ul>
             </div>
         )

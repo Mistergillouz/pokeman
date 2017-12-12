@@ -9,7 +9,7 @@ class PokemonList extends React.Component {
     }
 
     buildPokemon(pokemonId) {
-        return (<Pokemon id={pokemonId}/>);
+        return (<Pokemon id={pokemonId} onPokemonClicked={ this.props.onPokemonClicked } onShowTooltip={ this.props.onShowTooltip }/>);
     }
 
     componentDidMount() {
@@ -21,7 +21,7 @@ class PokemonList extends React.Component {
         let styles = this.props.top ? { top: this.props.top + 'px'} : {};
         return (
             <div className='pokemon-list' style={styles}>
-                {this.props.pokemons.map(this.buildPokemon)}
+                { this.props.pokemons.map((id) => this.buildPokemon(id)) }
             </div>
         )
     }

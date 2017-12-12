@@ -4,6 +4,7 @@ import PokedexHelper from 'data/PokedexHelper'
 import LocaleFlag from 'components/LocaleFlag'
 import LocalePopover from 'components/LocalePopover'
 import FilterPanel from 'components/FilterPanel'
+import SpeciesTooltip from 'components/SpeciesTooltip'
 
 class MainPage extends React.Component {
    
@@ -16,17 +17,40 @@ class MainPage extends React.Component {
             localePopoverVisible: false,
             filterVisible: false,
             filterPanelHeight: 0,
-            pokemons: []
+            pokemons: [],
+
+            tooltipTypeId: -1
+
+        };
+
+        this.props = {
+            selectedPokemonId: -1
         };
 
         this.query = { text: '', genId: null,types: [] };
-        
+        this.tooltip = {
+            x: 0,
+            y: 0
+        };
+
         for (let i = 1; i < 15; i++) {
             this.state.pokemons.push(i);
         }
     }
 
+    onShowTooltip(args) {
+        if (args.id !== this.props.tooltipTypeId) {
+            this.setState({ tooltipTypeId: args.id });
+            this.tooltip.x = args.event.clientX;
+            this.tooltip.y = args.event.clientY;
+        }
+    }
 
+    onPokemonClicked(pokemonId) {
+        console.log('Pokemon ' + pokemonId + ' clicked');
+    }
+
+    
     onToggleFilterPanel(event) {
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
@@ -35,8 +59,7 @@ class MainPage extends React.Component {
         this.setState({ localePopoverVisible: !this.state.localePopoverVisible })
     }
 
-    onLocaleSelected(event) {
-        let country = event.currentTarget.dataset.id;
+    onLocaleSelected(country) {
         PokedexHelper.setLocaleCountry(country);
         this.setState({ country: country });
 
@@ -64,23 +87,39 @@ class MainPage extends React.Component {
         }
     }
 
+    setFocus(element) {
+        if (element) {
+            //element.focus();
+        }
+    }
+
     render() { 
 
         return (
-            <div className="page" data-content-id="tiles-container">
-                <div className="navbar">
+            <div>
+                <div className="page" data-content-id="tiles-container">
+                    <div className="navbar">
 
-                <div className="left-panel filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                    <input type="search" className="search-input ui-styles" placeholder="Rechercher un Pokémon" onChange={(e) => this.onFilterTextChanged(e)}></input>
-                    <div className="right-panel" onClick={ this.onToggleLocalePopover.bind(this) }>
-                            <LocaleFlag country={this.state.country}/>
-                            <img src="../assets/images/arrow-down.png"/>
-                    </div>
-                </div> 
+                        <div className="left-panel filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }>
+                        </div>
 
-                <FilterPanel ref="filterPanel" notifyChange={ this.onFilterChangeListener.bind(this) }/>
-                <PokemonList top={this.state.filterPanelHeight} pokemons={this.state.pokemons}/>
-                <LocalePopover show={this.state.localePopoverVisible} onLocaleSelected={this.onLocaleSelected.bind(this)}/>
+                        <input type="search" className="search-input ui-styles" placeholder="Rechercher un Pokémon" onChange={(e) => this.onFilterTextChanged(e)}></input>
+                        <div className="right-panel" onClick={ this.onToggleLocalePopover.bind(this) }>
+                                <LocaleFlag country={this.state.country}/>
+                                <img src="../assets/images/arrow-down.png"/>
+                        </div>
+                    </div> 
+
+                    <FilterPanel ref="filterPanel" visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
+                    <LocalePopover show={this.state.localePopoverVisible} onLocaleSelected={ (id) => this.onLocaleSelected(id) }/>
+                </div>
+
+                <PokemonList top={this.state.filterPanelHeight} 
+                    pokemons={this.state.pokemons} 
+                    onPokemonClicked={(id) => this.onPokemonClicked(id) }
+                    onShowTooltip={ (args) => this.onShowTooltip(args) }/>
+
+                <SpeciesTooltip ref={ (element) => this.setFocus(element) } id={ this.state.tooltipTypeId } x={ this.tooltip.x } y={ this.tooltip.y }/>
             </div>
         )
     }

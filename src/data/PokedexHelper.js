@@ -7,11 +7,35 @@ class PokedexHelper {
         this.MAX_GEN = 7;
 
         this.LOCALES = { 
-            FRENCH: { country: 'fr', id: 5 }, 
-            ENGLISH: { country: 'en', id: 9 }
+            FRENCH: { country: 'fr', name: 'Francais', id: 5 }, 
+            ENGLISH: { country: 'en', name: 'English', id: 9 }
         };
 
         this.locale = this.LOCALES.FRENCH;
+    }
+
+    getStrengthWeakness(typeId) {
+        let species = this.species(typeId), strong = [], weak = [];
+        for (let targetId in species.dmg) {
+            let value = species.dmg[targetId];
+            if (value !== 100) {
+                var against = {
+                    id: targetId,
+                    amount: value,
+                    text: this.loc(this.species(targetId))
+                };
+                if (value > 100) {
+                    strong.push(against);
+                } else {
+                    weak.push(against);
+                }
+            }
+        }
+    
+        return {
+            strong: strong,
+            weak: weak
+        };
     }
 
     search(query) {
@@ -111,6 +135,14 @@ class PokedexHelper {
         return str.replace(new RegExp(find, 'g'), replace);
     }
     
+    getLocales() {
+
+        let locales = [];
+        for (let locale in this.LOCALES) {
+            locales.push({ id: this.LOCALES[locale].country, name: this.LOCALES[locale].name });
+        }
+        return locales;
+    }
 }
 
 let PokedexHelperObj = new PokedexHelper();
