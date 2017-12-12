@@ -7,7 +7,7 @@ class LocaleFlag extends React.Component {
 
     render() { 
         return (
-            <img src={ "../assets/images/" + this.props.country + ".png" }/>
+            <img src={ "assets/images/" + this.props.country + ".png" }/>
         )
     }
 }
