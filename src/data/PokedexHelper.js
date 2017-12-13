@@ -8,6 +8,47 @@ class PokedexHelper {
         this.locale = Constants.LOCALES.FRENCH;
     }
 
+    getAttacks(pokemonId) {
+        
+        let pokemon = this.pokemon(pokemonId);
+        let charged = this._getAttacks(pokemon, Pokedex.attacks.charged);
+        let fast = this._getAttacks(pokemon, Pokedex.attacks.fast);
+        
+        return {
+            charged: charged,
+            fast: fast
+        };
+    }
+        
+    _getAttacks(pokemon, attacks) {
+        
+        let result = [];
+        attacks.forEach(attack => {
+            attack.pokemons.forEach(id => {
+                if (id === pokemon.id) {
+                    
+                    var bonus = 1;
+                    pokemon.species.forEach(type => {
+                        if (type === attack.type) {
+                            bonus = 1.2;
+                        }
+                    });
+        
+                    var entry = Object.assign({}, attack, {
+                        name:  this.loc(attack),
+                        dps: this._round(attack.rawdps * bonus, 1)
+                    });
+        
+                    result.push(entry);
+                }
+            });
+        });
+    
+        result.sort((a, b) => { return b.dps - a.dps; });
+        return result;
+    }
+
+        
     getEvolvesList(pokemonId) {
         let evolves = [{
             id: pokemonId,
@@ -191,8 +232,12 @@ class PokedexHelper {
         }
         return locales;
     }
+    
+    _round(num, decimals) {
+        var n = Math.pow(10, decimals);
+        return Math.round( (n * num).toFixed(decimals) )  / n;
+    }
 }
-
 
 // Singleton
 let PokedexHelperObj = new PokedexHelper();

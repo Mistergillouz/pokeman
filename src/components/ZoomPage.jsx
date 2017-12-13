@@ -1,7 +1,8 @@
 import React from 'react'
 import Constants from 'data/Constants'
+import PokedexHelper from 'data/PokedexHelper'
 import Pokemon from 'components/Pokemon'
-//import CombatPanel from 'components/CombatPanel'
+import CombatPanel from 'components/CombatPanel'
 
 class ZoomPage extends React.Component {
    constructor() {
@@ -65,7 +66,7 @@ class ZoomPage extends React.Component {
                         {evolves}
                     </div>
     		    </div>
-               // <CombatPanel id={ this.props.id }/>
+               <CombatPanel id={ this.props.id }/>
 		    </div>
         )
     }

@@ -65,6 +65,7 @@ class SpeciesTooltip extends React.Component {
             return (
                 <div className="strength-table-container" tabIndex="-1" onBlur={() => this.onBlur() }>
                     <table className="strength-table">
+                        <thead><th>Fort vs</th><th>Faible vs</th></thead>
                         <tbody>
                             {rows}
                         </tbody>
