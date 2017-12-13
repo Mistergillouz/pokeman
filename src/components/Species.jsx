@@ -13,10 +13,9 @@ class Species extends React.Component {
 
         if (this.props.eventHandler) {
             this.props.eventHandler({
-                event: Constants.EVENT.ShowTooltip,
+                eventType: Constants.EVENT.ShowTooltip,
                 id: this.props.id,
-                x: event.clientX,
-                y: event.clientY
+                event: event
             });
             
             event.stopPropagation();

@@ -125,6 +125,8 @@ input {
 }
 
 .page {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 0;
     left: 0;
@@ -316,13 +318,12 @@ input {
 }
 
 .pokemon-list {
-    margin: 5px 5px 5px 5px;
-}
-
-.pokemon-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin: 5px 5px 5px 5px;
+    overflow-y: auto;
+    height: 100%;
 }
 
 .pokemon-zoom {
@@ -498,6 +499,73 @@ h2, .inactive-h2 {
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
 }
+
+.icon-type-BUG, .icon-type-DARK, .icon-type-DRAGON, .icon-type-ELECTRIC, .icon-type-FAIRY, 
+.icon-type-FIGHTING, .icon-type-FIRE, .icon-type-FLYING, .icon-type-GHOST, .icon-type-GRASS, 
+.icon-type-GROUND, .icon-type-ICE, .icon-type-NORMAL, .icon-type-POISON, .icon-type-PSYCHIC, 
+.icon-type-ROCK, .icon-type-STEEL, .icon-type-WATER {
+    background: url(../assets/images/types.png);
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: transparent;
+}
+
+.icon-type-BUG {
+    background-position: -24px 0;
+}
+.icon-type-DARK {
+    background-position: -48px 0;
+}
+.icon-type-DRAGON {
+    background-position: 0 -24px;
+}
+.icon-type-ELECTRIC {
+    background-position: -24px -24px;
+}
+.icon-type-FAIRY {
+    background-position: -48px -24px;
+}
+.icon-type-FIGHTING {
+    background-position: -72px -24px;
+}
+.icon-type-FIRE {
+    background-position: 0 -48px;
+}
+.icon-type-FLYING {
+    background-position: -24px -48px;
+}
+.icon-type-GHOST {
+    background-position: -48px -48px;
+}
+.icon-type-GRASS {
+    background-position: -72px -48px;
+}
+.icon-type-GROUND {
+    background-position: 0 -72px;
+}
+.icon-type-ICE {
+    background-position: -24px -72px;
+}
+.icon-type-NORMAL {
+    background-position: -48px -72px;
+}
+.icon-type-POISON {
+    background-position: -72px -72px;
+}
+.icon-type-PSYCHIC {
+    background-position: 0 -96px;
+}
+.icon-type-ROCK {
+    background-position: -24px -96px;
+}
+.icon-type-STEEL {
+    background-position: -48px -96px;
+}
+.icon-type-WATER {
+    background-position: -72px -96px;
+}
+
 
 /*---------------------------------------------------------------------*/
 /*  CONST

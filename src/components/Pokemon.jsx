@@ -17,7 +17,7 @@ class Pokemon extends React.Component {
     onPokemonClicked(event) {
         if (this.props.eventHandler) {
             this.props.eventHandler({
-                event: Constants.EVENT.PokemonSelected,
+                eventType: Constants.EVENT.PokemonSelected,
                 id: this.props.id
             });
         }

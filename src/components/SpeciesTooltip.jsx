@@ -38,7 +38,7 @@ class SpeciesTooltip extends React.Component {
 
     onBlur() {
         this.props.eventHandler({
-            event: Constants.EVENT.HideTooltip
+            eventType: Constants.EVENT.HideTooltip
         });
     }
 

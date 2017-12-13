@@ -1,19 +1,23 @@
 import React from 'react'
 import Constants from 'data/Constants'
 import Pokemon from 'components/Pokemon'
+//import CombatPanel from 'components/CombatPanel'
 
 class ZoomPage extends React.Component {
    constructor() {
         super(...arguments)
     }
 
+    eventHandler(args) {
+
+    }
     generateEvolves(evolutions, evolves, level) {    
         
         let children = [], trs = [];
         evolutions.forEach((evolution) => {
 
             trs.push(
-                <tr><td><Pokemon id={ evolution.id } inactive={ !evolution.active }/></td></tr>
+                <tr><td><Pokemon id={ evolution.id } inactive={ !evolution.active } eventHandler={ this.props.eventHandler }/></td></tr>
             );
 
             if (evolution.children.length) {
@@ -22,7 +26,7 @@ class ZoomPage extends React.Component {
         });
 
         evolves.push(
-            <table className={ 'zoom-indent' + level } border="0" cellspacing="0" cellpadding="0"><tbody>
+            <table className={ 'zoom-indent' + level } border="0" cellSpacing="0" cellPadding="0"><tbody>
                 {trs}
             </tbody></table>
         );
@@ -35,7 +39,7 @@ class ZoomPage extends React.Component {
     onBack() {
 
         this.props.eventHandler({
-            event: Constants.EVENT.ZoomPageClosed
+            eventType: Constants.EVENT.ZoomPageClosed
         });
     }
     
@@ -46,7 +50,8 @@ class ZoomPage extends React.Component {
         }
 
         let evolves = [];
-        this.generateEvolves(this.props.evolutions, evolves, 0);
+        let evolutions = PokedexHelper.getEvolvesList(this.props.id);
+        this.generateEvolves(evolutions, evolves, 0);
 
         return (
 
@@ -60,6 +65,7 @@ class ZoomPage extends React.Component {
                         {evolves}
                     </div>
     		    </div>
+               // <CombatPanel id={ this.props.id }/>
 		    </div>
         )
     }
