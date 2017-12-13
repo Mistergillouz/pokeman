@@ -7,13 +7,12 @@ class Lazimage extends React.Component {
         this.updateFunct = this.update.bind(this);
         this.state = {};
 
-        this.wait = false;
+        this.waitLoaded = false;
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.updateFunct, false);
         window.addEventListener('resize', this.updateFunct, false);
-        this.update();
     }
     
     componentWillUnmount() {
@@ -32,16 +31,16 @@ class Lazimage extends React.Component {
     }
 
     update() {
-        if (this.wait && this.isVisible()) {
+        if (this.waitLoaded && this.isVisible()) {
             this.setState({ src: this.props.target });
         }
     }
 
     onLoad() {
 
-        if (!this.wait) {
+        if (!this.waitLoaded) {
             // "Loading please wait" image is loaded
-            this.wait = true;
+            this.waitLoaded = true;
             this.update();  
         } else {
             this.detach();
