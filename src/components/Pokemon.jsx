@@ -7,16 +7,6 @@ class Pokemon extends React.Component {
         super(...arguments)
     }
 
-    toSpecies(id) {
-        let species = PokedexHelper.getTypes(id);
-        let speciesName = PokedexHelper.loc(species);
-        let speciesClassName = PokedexHelper.loc(species).toUpperCase();
-
-        return (
-            <div key={id} className={"type POKEMON_TYPE_" + speciesClassName}>{speciesName}</div>
-        )
-    }
-
     render() { 
         let pokemon = PokedexHelper.getPokemon(this.props.id);
         let name = PokedexHelper.loc(pokemon);
@@ -24,13 +14,16 @@ class Pokemon extends React.Component {
         var h2Class = ''; //(args.inactive) ? 'inactive-h2' : '';
         var valueClass = 'value'; //(args.inactive) ? 'inactive-value' : 'value';
 
+        var speciesHtml = '';
+        for (var i = 0; i < pokemon.species.length; i++) {
+            speciesHtml += pokemon.species[i] + ' '; //
+        }
+
         return (
             <div className="gen" data-id={this.props.id}>
                 <a className="pokemon g1" href="#" data-gen={gen}>
                 <h2 className={h2Class}>{name}</h2>
-                    <div className="types">
-                        {pokemon.species.map(this.toSpecies)}
-                    </div>
+                    <div className="types">{speciesHtml}</div>
                     <img className="lazimage" src={"https://www.serebii.net/art/th/" + this.props.id + ".png"} style={{ display: 'block' }}/>
                     <div className="bar">
                         <div className={valueClass}></div>

@@ -8,7 +8,7 @@ class App extends React.Component {
         this.state = {};
 
         this.state.ids = [];
-        for (let i = 1; i < 10; i++) {
+        for (let i = 1; i < 20; i++) {
             this.state.ids.push(i);
         }
     }

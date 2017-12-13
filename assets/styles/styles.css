@@ -77,7 +77,7 @@ input {
 }
 
 .back-button {
-    background-image: url('../img/back.png');
+    background-image: url('../images/back.png');
     background-repeat: no-repeat; /* Do not repeat the icon image */
     background-position: center;
     width: 2.5em;
@@ -92,7 +92,7 @@ input {
     border-radius: 3px;
 }
 .filter-toggle {
-    background-image: url('../img/filteron.png');
+    background-image: url('../images/filteron.png');
     background-repeat: no-repeat; /* Do not repeat the icon image */
     background-position: center;
     background-position-x: 7px;
@@ -105,7 +105,7 @@ input {
 }
 
 .filter-toggle-off {
-    background-image: url('../img/filteroff.png');
+    background-image: url('../images/filteroff.png');
     background-color: #e0e0e0;
 }
 
@@ -117,7 +117,7 @@ input {
 }
 .search-input {
     width: 65%;
-    background-image: url('../img/searchicon.png'); /* Add a search icon to input */
+    background-image: url('../images/searchicon.png'); /* Add a search icon to input */
     background-position: center;
     background-position-x: 4px;
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -125,17 +125,13 @@ input {
 }
 
 .page {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 5;
-    border: 0;
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-    border-radius: 4px;
-    height: 50px;
-    
+    bottom: 0;
 }
 
 .right-panel, .left-panel {
@@ -153,7 +149,11 @@ input {
 }
 
 .navbar {
-    height: 100%;
+    position: relative;
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    border-radius: 4px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -166,9 +166,8 @@ input {
 }
 
 .filters-container {
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: 50px;
     user-select: none;
     background-color: white;
     border-bottom: 1px solid lightgray;
@@ -280,7 +279,7 @@ input {
     opacity: 1;
     transition: opacity 0.5s;
 
-    z-index: 15;
+    z-index: 55;
     background-color: #FFF;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
@@ -319,24 +318,19 @@ input {
 }
 
 .pokemon-list {
-    margin: 5px 5px 5px 5px;
-    top: 50px;
-    position: absolute;
-}
-
-.pokemon-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.pokemon-zoom {
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    margin: 5px 5px 5px 5px;
+    overflow-y: auto;
+    /* height: 100%; */
+}
 
-    top: 50px;
+.pokemon-zoom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: calc(100% - 50px);
 }
@@ -507,6 +501,73 @@ h2, .inactive-h2 {
     border-radius: .25rem;
 }
 
+.icon-type-BUG, .icon-type-DARK, .icon-type-DRAGON, .icon-type-ELECTRIC, .icon-type-FAIRY, 
+.icon-type-FIGHTING, .icon-type-FIRE, .icon-type-FLYING, .icon-type-GHOST, .icon-type-GRASS, 
+.icon-type-GROUND, .icon-type-ICE, .icon-type-NORMAL, .icon-type-POISON, .icon-type-PSYCHIC, 
+.icon-type-ROCK, .icon-type-STEEL, .icon-type-WATER {
+    background: url(../assets/images/types.png);
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: transparent;
+}
+
+.icon-type-BUG {
+    background-position: -24px 0;
+}
+.icon-type-DARK {
+    background-position: -48px 0;
+}
+.icon-type-DRAGON {
+    background-position: 0 -24px;
+}
+.icon-type-ELECTRIC {
+    background-position: -24px -24px;
+}
+.icon-type-FAIRY {
+    background-position: -48px -24px;
+}
+.icon-type-FIGHTING {
+    background-position: -72px -24px;
+}
+.icon-type-FIRE {
+    background-position: 0 -48px;
+}
+.icon-type-FLYING {
+    background-position: -24px -48px;
+}
+.icon-type-GHOST {
+    background-position: -48px -48px;
+}
+.icon-type-GRASS {
+    background-position: -72px -48px;
+}
+.icon-type-GROUND {
+    background-position: 0 -72px;
+}
+.icon-type-ICE {
+    background-position: -24px -72px;
+}
+.icon-type-NORMAL {
+    background-position: -48px -72px;
+}
+.icon-type-POISON {
+    background-position: -72px -72px;
+}
+.icon-type-PSYCHIC {
+    background-position: 0 -96px;
+}
+.icon-type-ROCK {
+    background-position: -24px -96px;
+}
+.icon-type-STEEL {
+    background-position: -48px -96px;
+}
+.icon-type-WATER {
+    background-position: -72px -96px;
+}
+
+
 /*---------------------------------------------------------------------*/
 /*  CONST
 /*---------------------------------------------------------------------*/
@@ -528,4 +589,5 @@ h2, .inactive-h2 {
 .POKEMON_TYPE_FAIRY {background-color:#EE99AC;}
 .POKEMON_TYPE_DARK {background-color:#705848;}
 .POKEMON_TYPE_FLYING {background-color:#A890F0;}
-.POKEMON_TYPE_FIGHTING {background-color:#C02038;}
+.POKEMON_TYPE_FIGHTING {background-color:#C02038;
+}
