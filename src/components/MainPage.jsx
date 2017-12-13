@@ -53,11 +53,11 @@ class MainPage extends React.Component {
                 break;
             
             case Constants.EVENT.PokemonSelected:
+                this.props.eventHandler(args);
                 break;
 
         }
     }
-
     
     onToggleFilterPanel(event) {
         this.setState({ filterVisible: !this.state.filterVisible });
@@ -97,6 +97,10 @@ class MainPage extends React.Component {
 
     render() { 
 
+        if (!this.props.visible) {
+            return null;
+        }
+
         return (
             <div>
                 <div className="page" data-content-id="tiles-container">
@@ -114,6 +118,7 @@ class MainPage extends React.Component {
 
                     <FilterPanel ref="filterPanel" visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
                     <LocalePopover show={this.state.localePopoverVisible} onLocaleSelected={ (id) => this.onLocaleSelected(id) }/>
+                    
                 </div>
 
                 <PokemonList top={this.state.filterPanelHeight} 

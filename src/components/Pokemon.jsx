@@ -1,7 +1,8 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
-import Species from 'components/Species'
 import Constants from 'data/Constants'
+import Species from 'components/Species'
+import Lazimage from 'components/Lazimage'
 
 class Pokemon extends React.Component {
    
@@ -14,10 +15,12 @@ class Pokemon extends React.Component {
     }
 
     onPokemonClicked(event) {
-        this.props.eventHandler({
-            event: Constants.EVENT.PokemonSelected,
-            id: this.props.id
-        });
+        if (this.props.eventHandler) {
+            this.props.eventHandler({
+                event: Constants.EVENT.PokemonSelected,
+                id: this.props.id
+            });
+        }
     }
 
     render() { 
@@ -34,7 +37,7 @@ class Pokemon extends React.Component {
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }
                     </div>
-                    <img className="lazimage" src={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
+                    <Lazimage className="lazimage" src='../assets/images/wait.gif' target={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
                     <div className="bar">
                         <div className={ valueClass }></div>
                     </div>

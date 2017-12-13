@@ -4,7 +4,8 @@ const Constants = {
     EVENT: {
         ShowTooltip: 'ShowTooltip',
         HideTooltip: 'HideTooltip',
-        PokemonSelected: 'PokemonSelected'
+        PokemonSelected: 'PokemonSelected',
+        ZoomPageClosed: 'ZoomPageClosed'
     },
 
     MAX_GEN: 7,

@@ -8,6 +8,56 @@ class PokedexHelper {
         this.locale = Constants.LOCALES.FRENCH;
     }
 
+    getEvolvesList(pokemonId) {
+        let evolves = [{
+            id: pokemonId,
+            active: true,
+            children: this._getEvolves(pokemonId)
+        }];
+    
+        this._getParents(pokemonId, evolves);
+        return evolves;
+    };
+    
+    _getEvolves(pokemonId) {
+        let children = [];
+        let pokemon = this.pokemon(pokemonId);
+        if (pokemon.evolves) {
+            pokemon.evolves.forEach((id) => {
+    
+                let evolutions = { 
+                    id: id,
+                    children: this._getEvolves(id)
+                };
+    
+                children.push(evolutions)
+    
+            });
+        }
+    
+        return children;
+    };
+    
+    _getParents(pokemonId, evolves) {
+        for (let id in Pokedex.pokemons) {
+            let pokemon = Pokedex.pokemons[id];
+            if (pokemon.evolves) {
+                pokemon.evolves.forEach((id) => {
+                    if (id === pokemonId) {
+                        evolves.push( {
+                            id: pokemon.id,
+                            children: evolves.splice(0, evolves.length)
+                        });
+    
+                        this._getParents(pokemon.id, evolves);
+                    }
+    
+                });
+            }
+        }
+    };
+
+    
     getStrengthWeakness(typeId) {
         let species = this.species(typeId), strong = [], weak = [];
         for (let targetId in species.dmg) {
@@ -99,6 +149,10 @@ class PokedexHelper {
 
     species(speciesId) {
         return Pokedex.species[speciesId];
+    }
+
+    pokemon(id) {
+        return Pokedex.pokemons[id];
     }
 
     loc(object, locale) {

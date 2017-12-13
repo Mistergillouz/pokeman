@@ -129,13 +129,7 @@ input {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 5;
-    border: 0;
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-    border-radius: 4px;
-    height: 50px;
-    
+    bottom: 0;
 }
 
 .right-panel, .left-panel {
@@ -153,7 +147,11 @@ input {
 }
 
 .navbar {
-    height: 100%;
+    position: relative;
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    border-radius: 4px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,7 +320,6 @@ input {
     margin: 5px 5px 5px 5px;
     position: absolute;
     top: 50px;
-    width: 100%;
 }
 
 .pokemon-list {
@@ -332,12 +329,9 @@ input {
 }
 
 .pokemon-zoom {
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    top: 50px;
     width: 100%;
     height: calc(100% - 50px);
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PokedexHelper from 'data/PokedexHelper'
+import Constants from 'data/Constants'
 
 class FilterPanel extends React.Component {
    constructor() {
@@ -45,6 +46,10 @@ class FilterPanel extends React.Component {
 
     updateHeight() {
 
+        if (!this.props.visible) {
+            return;
+        }
+
         if (this.timerId) {
             clearTimeout(this.timerId);
         }
@@ -68,9 +73,9 @@ class FilterPanel extends React.Component {
 
             let genButtons = [];
 
-            for (let i = 1; i <= PokedexHelper.MAX_GEN; i++) {
+            for (let i = 1; i <= Constants.MAX_GEN; i++) {
 
-                let clazz = (i === 1) ? 'gen-button-left' : (i === PokedexHelper.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
+                let clazz = (i === 1) ? 'gen-button-left' : (i === Constants.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
                 if (i === this.state.selectedGen) {
                     clazz += ' selected';
                 }
