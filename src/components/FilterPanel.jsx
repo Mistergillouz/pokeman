@@ -45,7 +45,7 @@ class FilterPanel extends React.Component {
     }
 
     updateHeight() {
-
+/* 
         if (!this.props.visible) {
             return;
         }
@@ -65,6 +65,7 @@ class FilterPanel extends React.Component {
             delete this.timerId;
 
         }, 100);
+*/
     }
 
     render() { 

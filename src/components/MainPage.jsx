@@ -119,12 +119,11 @@ class MainPage extends React.Component {
                     <FilterPanel ref="filterPanel" visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
                     <LocalePopover show={this.state.localePopoverVisible} onLocaleSelected={ (id) => this.onLocaleSelected(id) }/>
                     
+                    <PokemonList top={this.state.filterPanelHeight} 
+                        pokemons={this.state.pokemons} 
+                        eventHandler={(args) => this.eventHandler(args) }/>
+
                 </div>
-
-                <PokemonList top={this.state.filterPanelHeight} 
-                    pokemons={this.state.pokemons} 
-                    eventHandler={(args) => this.eventHandler(args) }/>
-
                 <SpeciesTooltip ref="speciesTooltip" id={ this.state.tooltipTypeId } x={ this.tooltip.x } y={ this.tooltip.y } eventHandler={ (args) => this.eventHandler(args)}/>
             </div>
         )

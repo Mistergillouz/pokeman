@@ -164,9 +164,8 @@ input {
 }
 
 .filters-container {
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: 50px;
     user-select: none;
     background-color: white;
     border-bottom: 1px solid lightgray;
@@ -318,8 +317,6 @@ input {
 
 .pokemon-list {
     margin: 5px 5px 5px 5px;
-    position: absolute;
-    top: 50px;
 }
 
 .pokemon-list {
