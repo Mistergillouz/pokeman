@@ -11,7 +11,7 @@ class Lazimage extends React.Component {
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', this.updateFunct, false);
+        window.addEventListener('scroll', this.updateFunct, true);
         window.addEventListener('resize', this.updateFunct, false);
     }
     
@@ -30,10 +30,14 @@ class Lazimage extends React.Component {
         return visible;
     }
 
-    update() {
+    update(e) {
+
         if (this.waitLoaded && this.isVisible()) {
             this.setState({ src: this.props.target });
+            return true;
         }
+
+        return false;
     }
 
     onLoad() {
@@ -41,7 +45,8 @@ class Lazimage extends React.Component {
         if (!this.waitLoaded) {
             // "Loading please wait" image is loaded
             this.waitLoaded = true;
-            this.update();  
+            this.update();
+
         } else {
             this.detach();
         }

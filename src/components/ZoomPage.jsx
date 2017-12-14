@@ -61,12 +61,12 @@ class ZoomPage extends React.Component {
                     <button className="left-panel back-button" onClick= {() => this.onBack() }></button>
                     <label>Evolutions</label>
                 </div>
-                <div className="pokemon-zoom" >
+                <div className="pokemon-zoom">
                     <div className="zoom-container">
                         {evolves}
                     </div>
+                    <CombatPanel id={ this.props.id }/>
     		    </div>
-               <CombatPanel id={ this.props.id }/>
 		    </div>
         )
     }

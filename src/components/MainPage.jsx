@@ -16,7 +16,6 @@ class MainPage extends React.Component {
             country: 'fr',
             localePopoverVisible: false,
             filterVisible: false,
-            filterPanelHeight: 0,
             pokemons: [],
 
             tooltipTypeId: -1
@@ -58,10 +57,6 @@ class MainPage extends React.Component {
 
     onFilterChangeListener(args, height) {
         this.applyFilter(args);
-
-        if (height && this.state.filterPanelHeight !== height) {
-            this.setState({ filterPanelHeight: height });
-        }
     }
 
     applyFilter(args) {
@@ -94,7 +89,7 @@ class MainPage extends React.Component {
 
                 <FilterPanel ref="filterPanel" visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
                 <LocalePopover show={this.state.localePopoverVisible} onLocaleSelected={ (id) => this.onLocaleSelected(id) }/>
-                <PokemonList top={this.state.filterPanelHeight} 
+                <PokemonList
                     pokemons={this.state.pokemons} 
                     eventHandler={ this.props.eventHandler }/>
             </div>

@@ -39,6 +39,52 @@ input {
     padding: .5rem .75rem;
 }
 
+.attack-table {
+    width: 300px;
+    border: none;
+    background-color: white;
+    padding-bottom: 0.5em;
+    margin-bottom: 2em;
+}
+
+.attack-table th {
+    border-radius: 5px 5px 0px 0px;
+    background-color: #83baf8;
+    border-bottom: 4px solid lightsalmon;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.attack-table .section {
+    font-weight: 700;
+    padding-top: 1em;
+    padding-left: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 12pt;
+}
+
+.section-td {
+    font-variant-caps: all-small-caps;
+}
+
+.attack-table td {
+    font-size: 10pt;
+    padding-top: 0.5em;
+}
+
+.attack-table tbody td:first-child {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 2em;
+}
+
+.attack-table td:last-of-type { 
+    padding-right: 0.5em;
+};
+
 .logo {
     position: absolute;
     height: 100%;
@@ -330,16 +376,15 @@ input {
 
 .pokemon-zoom {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: calc(100% - 50px);
+    flex-direction: column;
+    overflow-y: auto;
 }
 
 .zoom-container {
-    margin: 5px 5px 5px 5px;
-    flex-direction: row;
     display: flex;
+    flex-direction: row;
+    margin: 5px 5px 5px 5px;
 }
 
 .zoom-indent0, .zoom-indent1, .zoom-indent2 {
@@ -355,8 +400,6 @@ input {
 
     .zoom-container {
         display: block;
-        position: absolute;
-        top: 0;
     }
 
     .zoom-indent0, .zoom-indent1, .zoom-indent2 {
@@ -506,7 +549,7 @@ h2, .inactive-h2 {
 .icon-type-FIGHTING, .icon-type-FIRE, .icon-type-FLYING, .icon-type-GHOST, .icon-type-GRASS, 
 .icon-type-GROUND, .icon-type-ICE, .icon-type-NORMAL, .icon-type-POISON, .icon-type-PSYCHIC, 
 .icon-type-ROCK, .icon-type-STEEL, .icon-type-WATER {
-    background: url(../assets/images/types.png);
+    background: url(../images/types.png);
     width: 24px;
     height: 24px;
     line-height: 24px;

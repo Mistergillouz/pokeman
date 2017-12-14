@@ -35,39 +35,6 @@ class FilterPanel extends React.Component {
         this.setState({ selectedTypes: selectedTypes });
     }
 
-    componentDidUpdate() {
-        this.updateHeight();
-    }
-
-    componentDidMount() {
-        window.addEventListener("resize", this.updateHeight.bind(this));
-        window.addEventListener("orientationchange", this.updateHeight.bind(this));
-    }
-
-    updateHeight() {
-/* 
-        if (!this.props.visible) {
-            return;
-        }
-
-        if (this.timerId) {
-            clearTimeout(this.timerId);
-        }
-
-        this.timerId = setTimeout(() => {
-
-            let height = 0, node = ReactDOM.findDOMNode(this);
-            if (node) {
-                height = node.getBoundingClientRect().bottom;
-            }
-
-            this.props.notifyChange(null, height);
-            delete this.timerId;
-
-        }, 100);
-*/
-    }
-
     render() { 
 
         if (this.props.visible) {
