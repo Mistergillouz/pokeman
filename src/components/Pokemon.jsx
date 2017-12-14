@@ -31,13 +31,13 @@ class Pokemon extends React.Component {
         let valueClass = this.props.inactive ? 'inactive-value' : 'value';
 
         return (
-            <div className="gen" data-id={ this.props.id } onClick={ (e) => this.onPokemonClicked(e) }>
-                <a className="pokemon g1" href="#" data-gen={ pokemon.gen }>
+            <div className="gen" onClick={ (e) => this.onPokemonClicked(e) }>
+                <a className="pokemon g1" href="#">
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }
                     </div>
-                    <Lazimage className="lazimage" src='../assets/images/wait.gif' target={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
+                    <Lazimage className="lazimage" key={ this.props.id } src='../assets/images/wait.gif' target={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
                     <div className="bar">
                         <div className={ valueClass }></div>
                     </div>

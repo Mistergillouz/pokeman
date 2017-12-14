@@ -1,7 +1,8 @@
 import React from 'react'
 import Constants from 'data/Constants'
+import PokedexHelper from 'data/PokedexHelper'
 import Pokemon from 'components/Pokemon'
-//import CombatPanel from 'components/CombatPanel'
+import CombatPanel from 'components/CombatPanel'
 
 class ZoomPage extends React.Component {
    constructor() {
@@ -17,7 +18,7 @@ class ZoomPage extends React.Component {
         evolutions.forEach((evolution) => {
 
             trs.push(
-                <tr><td><Pokemon id={ evolution.id } inactive={ !evolution.active } eventHandler={ this.props.eventHandler }/></td></tr>
+                <tr><td><Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } eventHandler={ this.props.eventHandler }/></td></tr>
             );
 
             if (evolution.children.length) {
@@ -60,12 +61,12 @@ class ZoomPage extends React.Component {
                     <button className="left-panel back-button" onClick= {() => this.onBack() }></button>
                     <label>Evolutions</label>
                 </div>
-                <div className="pokemon-zoom" >
+                <div className="pokemon-zoom">
                     <div className="zoom-container">
                         {evolves}
                     </div>
+                    <CombatPanel id={ this.props.id }/>
     		    </div>
-               // <CombatPanel id={ this.props.id }/>
 		    </div>
         )
     }
