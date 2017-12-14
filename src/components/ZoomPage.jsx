@@ -17,20 +17,14 @@ class ZoomPage extends React.Component {
         let children = [], trs = [];
         evolutions.forEach((evolution) => {
 
-            trs.push(
-                <tr><td><Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } eventHandler={ this.props.eventHandler }/></td></tr>
+            evolves.push(
+                <Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } className={ 'zoom-indent' + level } eventHandler={ this.props.eventHandler }/>
             );
 
             if (evolution.children.length) {
                 children.push(evolution.children);
             }
         });
-
-        evolves.push(
-            <table className={ 'zoom-indent' + level } border="0" cellSpacing="0" cellPadding="0"><tbody>
-                {trs}
-            </tbody></table>
-        );
 
         children.forEach((child) => {
             this.generateEvolves(child, evolves, level + 1);
