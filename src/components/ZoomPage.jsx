@@ -18,7 +18,7 @@ class ZoomPage extends React.Component {
         evolutions.forEach((evolution) => {
 
             trs.push(
-                <tr><td><Pokemon id={ evolution.id } inactive={ !evolution.active } eventHandler={ this.props.eventHandler }/></td></tr>
+                <tr><td><Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } eventHandler={ this.props.eventHandler }/></td></tr>
             );
 
             if (evolution.children.length) {

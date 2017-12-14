@@ -20,9 +20,10 @@ class Lazimage extends React.Component {
     }
 
     isVisible() {
+
         let node = ReactDOM.findDOMNode(this);
-        var rect = node.getBoundingClientRect();
-        
+        let rect = node.getBoundingClientRect();
+    
         let visible = (rect.top >= 0 && rect.left >= 0 &&
             rect.top <= (window.innerHeight || document.documentElement.clientHeight) && 
             rect.left <= (window.innerWidth || document.documentElement.clientWidth));
@@ -53,7 +54,7 @@ class Lazimage extends React.Component {
     }
 
     detach() {
-        window.removeEventListener('scroll', this.updateFunct);
+        window.removeEventListener('scroll', this.updateFunct, true);
         window.removeEventListener('resize', this.updateFunct);
     }
 
