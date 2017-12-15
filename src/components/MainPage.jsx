@@ -67,6 +67,10 @@ class MainPage extends React.Component {
         }
     }
 
+    onShowEggPanel() {
+        this.props.eventHandler({ eventType: Constants.EVENT.EggPage })
+    }
+
     render() { 
 
         if (!this.props.visible) {
@@ -77,7 +81,9 @@ class MainPage extends React.Component {
             <div className="page" data-content-id="tiles-container">
                 <div className="navbar">
 
-                    <div className="left-panel filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }>
+                    <div className="left-panel">
+                        <div className="filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
+                        <div className="egg-button" onClick={ (e) => this.onShowEggPanel(e) }></div>
                     </div>
 
                     <input type="search" className="search-input ui-styles" placeholder="Rechercher un Pokémon" onChange={(e) => this.onFilterTextChanged(e)}></input>

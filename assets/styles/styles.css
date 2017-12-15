@@ -34,6 +34,10 @@ body {
 }
 
 
+.ui-borders, .ui-styles, .popover, .strength-table-container, .egg-button {
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
 
 input {
     padding: .5rem .75rem;
@@ -126,10 +130,11 @@ input {
     background-image: url('../images/back.png');
     background-repeat: no-repeat; /* Do not repeat the icon image */
     background-position: center;
-    width: 2.5em;
-    height: 2.5em;
-
-    background-color: transparent;
+    background-size: 24px;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: rgb(67, 49, 77);
     border: 0;
 }
 
@@ -163,12 +168,13 @@ input {
 }
 .search-input {
     width: 65%;
-    background-image: url('../images/searchicon.png'); /* Add a search icon to input */
+    background-image: url(../images/searchicon.png);
     background-position: center;
     background-position-x: 4px;
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    padding: 0.5rem 0px 0.25em 2em !important;
-}
+    background-repeat: no-repeat;
+    background-size: 14px;
+    padding: 0.4rem 0px 0.25em 1.5em !important;
+    font-size: 11pt !important;}
 
 .page {
     display: flex;
@@ -182,7 +188,6 @@ input {
 
 .right-panel, .left-panel {
     position: absolute;
-    right: 5px;
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -190,8 +195,11 @@ input {
 }
 
 .left-panel {
-    left: 10px;
-    right: none;
+    left: 5px;
+}
+
+.right-panel {
+    right: 5px;
 }
 
 .navbar {
@@ -210,6 +218,74 @@ input {
     .navbar {
         border-radius: 0;
     }
+}
+
+.egg-button {
+    background-image: url('../images/egg.png');
+    background-position: center;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-color: white;
+    width: 2em;
+    height: 2em;
+    margin-left: 5px;
+}
+
+.eggs-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: white;
+    height: 100%;
+}
+
+.egg-group-text {
+    left: 0;
+    right: 0;
+    width: 50%;
+    margin: 25px auto;
+    padding: 5px;
+    background-color: blanchedalmond;
+    border-radius: 20px;
+    font-size: 14pt;
+    text-align: center;
+}
+
+.egg-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.egg-pokemon {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.egg-pokemon-img {
+    height: auto;
+    width: auto;
+    max-width: 50px;
+    max-height: 50px;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.egg-pokemon-img-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 8pt;
 }
 
 .filters-container {
@@ -257,7 +333,7 @@ input {
 .gen-button {
     background-color: #e4e4e4;
     border: 1px solid rgba(0,0,0,.15);
-    width: 4em;
+    width: 2.5em;
     height: 2em;
     text-align: center;
     border-left-width: 0;
@@ -413,6 +489,9 @@ input {
     .zoom-indent2 {
         padding-left: 100px;
     }
+    .search-input {
+        width: 55%;
+    }
 }
 
 /* Tiles */
@@ -540,10 +619,6 @@ h2, .inactive-h2 {
     padding: .5rem .75rem;
 }
 
-.ui-borders, .ui-styles, .popover, .strength-table-container {
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: .25rem;
-}
 
 .icon-type-BUG, .icon-type-DARK, .icon-type-DRAGON, .icon-type-ELECTRIC, .icon-type-FAIRY, 
 .icon-type-FIGHTING, .icon-type-FIRE, .icon-type-FLYING, .icon-type-GHOST, .icon-type-GRASS, 

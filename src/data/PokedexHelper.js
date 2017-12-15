@@ -22,11 +22,7 @@ class PokedexHelper {
 
     getEggs() {
         
-        return {    
-            "2":[325,316,265,263,261,223,218,200,190,175,174,173,172,167,102,98,92,79,74,66,63,50,43,32,29],
-            "5":[360,355,353,298,296,285,258,255,252,240,239,238,236,234,231,228,226,220,216,215,213,211,209,207,206,204,203,202,194,187,183,177,170,158,155,152,140,138,133,127,123,114,111,109,108,104,100,96,95,90,88,86,77,60,58],
-            "10":[302,287,280,246,241,227,185,179,147,143,142,137,131,113]
-        };        
+        return Pokedex.eggs;        
     }
         
     _getAttacks(pokemon, attacks) {
@@ -241,7 +237,18 @@ class PokedexHelper {
         }
         return locales;
     }
-    
+
+    toggle(array, value) {
+        let copy = array.slice(), index = copy.indexOf(value);
+        if (index !== -1) {
+            copy.splice(index, 1);
+        } else {
+            copy.push(value);
+        }
+
+        return copy
+    }
+
     _round(num, decimals) {
         var n = Math.pow(10, decimals);
         return Math.round( (n * num).toFixed(decimals) )  / n;

@@ -21,16 +21,7 @@ class FilterPanel extends React.Component {
 
     onTypeClicked(typeId) {
 
-        let selectedTypes = this.state.selectedTypes.slice();
-        let index = selectedTypes.indexOf(typeId);
-        if (index !== -1) {
-            selectedTypes.splice(index, 1);
-        } else {
-            selectedTypes.push(typeId);
-            //selectedTypes.splice(0, 0, typeId);
-            //selectedTypes.splice(2);
-        }
-
+        let selectedTypes = PokedexHelper.toggle(this.state.selectedTypes, typeId)
         this.props.notifyChange({ types: selectedTypes });
         this.setState({ selectedTypes: selectedTypes });
     }

@@ -14,6 +14,7 @@ class App extends React.Component {
         super(...arguments)
 
         this.state = {
+            //page: PAGES.EggPage,
             page: PAGES.MainPage,
             tooltipTypeId: -1,
             tooltip: {}
@@ -24,6 +25,10 @@ class App extends React.Component {
 
         switch (args.eventType) {
 
+            case Constants.EVENT.EggPage: 
+                this.setState({ page: PAGES.EggPage })
+                break;
+        
             case Constants.EVENT.ShowTooltip: 
             
                 this.setState({ tooltipTypeId: args.id, tooltip: { x: args.event.clientX, y: args.event.clientY } });
@@ -42,7 +47,7 @@ class App extends React.Component {
 
                 break;
 
-            case Constants.EVENT.ZoomPageClosed:
+            case Constants.EVENT.PageClosed:
 
                 this.setState({
                     page: PAGES.MainPage,
