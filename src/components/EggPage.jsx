@@ -140,7 +140,7 @@ class EggPage extends React.Component {
     }
     
     onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.PageClosed })
+        this.props.eventHandler({ eventType: Constants.EVENT.Back })
     }
 
     render() { 

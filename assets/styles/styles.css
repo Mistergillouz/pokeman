@@ -138,10 +138,6 @@ input {
     border: 0;
 }
 
-.back-button:hover {
-    background-color: lightgray;
-    border-radius: 3px;
-}
 .filter-toggle {
     background-image: url('../images/filteron.png');
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -255,6 +251,7 @@ input {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .egg-pokemon {

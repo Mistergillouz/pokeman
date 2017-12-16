@@ -31,7 +31,7 @@ class Pokemon extends React.Component {
         let valueClass = this.props.inactive ? 'inactive-value' : 'value';
 
         return (
-            <div className="gen" onClick={ (e) => this.onPokemonClicked(e) }>
+            <div className={ "gen " + (this.props.className || '') } onClick={ (e) => this.onPokemonClicked(e) }>
                 <a className="pokemon g1" href="#">
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">

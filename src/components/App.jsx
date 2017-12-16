@@ -47,7 +47,7 @@ class App extends React.Component {
 
                 break;
 
-            case Constants.EVENT.PageClosed:
+            case Constants.EVENT.Back:
 
                 this.setState({
                     page: PAGES.MainPage,
@@ -63,7 +63,7 @@ class App extends React.Component {
                 <MainPage visible={ this.state.page === PAGES.MainPage } eventHandler = { this.eventHandler.bind(this) }/>
                 <ZoomPage visible={ this.state.page === PAGES.ZoomPage } id={ this.state.id } eventHandler = { this.eventHandler.bind(this) }/>
                 <EggPage visible={ this.state.page === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
-                <SpeciesTooltip ref="speciesTooltip" id={ this.state.tooltipTypeId } x={ this.state.tooltip.x } y={ this.state.tooltip.y } eventHandler={ (args) => this.eventHandler(args)}/>
+                <SpeciesTooltip id={ this.state.tooltipTypeId } x={ this.state.tooltip.x } y={ this.state.tooltip.y } eventHandler={ (args) => this.eventHandler(args)}/>
             </div>
         )
     }

@@ -30,7 +30,7 @@ class MainPage extends React.Component {
             y: 0
         };
 
-        for (let i = 1; i < 15; i++) {
+        for (let i = 1; i < 151; i++) {
             this.state.pokemons.push(i);
         }
     }

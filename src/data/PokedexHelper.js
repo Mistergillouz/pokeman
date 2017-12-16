@@ -10,14 +10,16 @@ class PokedexHelper {
 
     getAttacks(pokemonId) {
         
-        let pokemon = this.pokemon(pokemonId);
-        let charged = this._getAttacks(pokemon, Pokedex.attacks.charged);
-        let fast = this._getAttacks(pokemon, Pokedex.attacks.fast);
+        let pokemon = this.pokemon(pokemonId), fast = [], charged = []
+        if (pokemon.attacks) {
+            charged = this._getAttacks(pokemon, pokemon.attacks.charged)
+            fast = this._getAttacks(pokemon, pokemon.attacks.fast)
+        }
         
         return {
             charged: charged,
             fast: fast
-        };
+        }
     }
 
     getEggs() {
@@ -28,26 +30,27 @@ class PokedexHelper {
     _getAttacks(pokemon, attacks) {
         
         let result = [];
-        attacks.forEach(attack => {
-            attack.pokemons.forEach(id => {
-                if (id === pokemon.id) {
-                    
-                    var bonus = 1;
-                    pokemon.species.forEach(type => {
-                        if (type === attack.type) {
-                            bonus = 1.2;
-                        }
-                    });
-        
-                    var entry = Object.assign({}, attack, {
-                        name:  this.loc(attack),
-                        dps: this._round(attack.rawdps * bonus, 1)
-                    });
-        
-                    result.push(entry);
-                }
+
+        if (attacks) {
+            attacks.forEach(attackId => {
+                let attack = Pokedex.attacks[attackId];
+                        
+                let bonus = 1;
+                pokemon.species.forEach(type => {
+                    if (type === attack.type) {
+                        bonus = 1.2;
+                    }
+                });
+    
+                let dps = this._round((attack.dmg / attack.duration) * bonus, 1) ;
+                let entry = Object.assign({}, attack, {
+                    name:  this.loc(attack),
+                    dps: dps
+                });
+    
+                result.push(entry);
             });
-        });
+        }
     
         result.sort((a, b) => { return b.dps - a.dps; });
         return result;

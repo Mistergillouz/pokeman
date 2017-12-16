@@ -34,7 +34,7 @@ class ZoomPage extends React.Component {
     onBack() {
 
         this.props.eventHandler({
-            eventType: Constants.EVENT.PageClosed
+            eventType: Constants.EVENT.Back
         });
     }
     
