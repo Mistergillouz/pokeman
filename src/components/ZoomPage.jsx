@@ -10,7 +10,8 @@ class ZoomPage extends React.Component {
     }
 
     eventHandler(args) {
-
+        args.noPageStack = true
+        this.props.eventHandler(args)
     }
     generateEvolves(evolutions, evolves, level) {    
         
@@ -18,7 +19,7 @@ class ZoomPage extends React.Component {
         evolutions.forEach((evolution) => {
 
             evolves.push(
-                <Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } className={ 'zoom-indent' + level } eventHandler={ this.props.eventHandler }/>
+                <Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } className={ 'zoom-indent' + level } eventHandler={ (args) => this.eventHandler(args) }/>
             );
 
             if (evolution.children.length) {

@@ -16,8 +16,13 @@ class App extends React.Component {
         this.state = {
             //page: PAGES.EggPage,
             pageId: PAGES.MainPage,
-            args: {}
+            args: {},
+            pages: []
         }
+
+        this.state.pages.push({ 
+            pageId: PAGES.MainPage 
+        })
     }
 
     showTooltip(show, args) {
@@ -30,42 +35,63 @@ class App extends React.Component {
                 id: args.id
         }
 
-        this.setState({ tooltipArgs: tooltipArgs })
+        let pages = this.state.pages.slice()
+        pages[pages.length - 1].tooltipArgs = tooltipArgs;
+        this.setState({ pages: pages })
+    }
+
+    pushPage(pageId, args) {
+        let pages = this.state.pages.slice(), entry = { pageId: pageId, args: args }
+        if (!args || !args.noPageStack) {
+            pages.push(entry)
+        } else {
+            pages[pages.length - 1] = entry
+        }
+
+        this.setState({ pages: pages })
+    }
+
+    popPage() {
+        let pages = this.state.pages.splice(0, this.state.pages.length - 1)
+        this.setState({ pages: pages })
     }
 
     eventHandler(args) {
 
-        console.log(args)
         switch (args.eventType) {
 
             case Constants.EVENT.EggPage: 
-                this.setState({ pageId: PAGES.EggPage })
+                this.pushPage(PAGES.EggPage)
                 break;
         
             case Constants.EVENT.ShowTooltip: 
             case Constants.EVENT.HideTooltip: 
-                this.showTooltip( args.eventType === Constants.EVENT.ShowTooltip, args)
+                this.showTooltip(args.eventType === Constants.EVENT.ShowTooltip, args)
                 break;
 
             case Constants.EVENT.PokemonSelected:
-                this.setState({ pageId: PAGES.ZoomPage, args: args })
-                    break;
+                this.pushPage(PAGES.ZoomPage, args)
+                break;
 
             case Constants.EVENT.Back:
-                this.setState({ pageId: PAGES.MainPage })
+                this.popPage()
                 break;
         }
     }
 
+    currentPage() {
+        return this.state.pages[this.state.pages.length - 1]
+    }
+
     render() { 
 
-        let pageId = this.state.pageId;
+        let page = this.currentPage(), pageId = page.pageId
         return (
             <div className='app'>
                 <MainPage visible={ pageId === PAGES.MainPage } eventHandler = { this.eventHandler.bind(this) }/>
-                <ZoomPage visible={ pageId === PAGES.ZoomPage } args={ this.state.args } eventHandler = { this.eventHandler.bind(this) }/>
+                <ZoomPage visible={ pageId === PAGES.ZoomPage } args={ page.args } eventHandler = { this.eventHandler.bind(this) }/>
                 <EggPage visible={ pageId === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
-                <SpeciesTooltip visible={ this.state.tooltipArgs } args={ this.state.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
+                <SpeciesTooltip visible={ page.tooltipArgs } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
             </div>
         )
     }

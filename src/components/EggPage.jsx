@@ -55,11 +55,18 @@ class EggPage extends React.Component {
             })
         })
     }
+
+    onPokemonClicked(id) {
+        this.props.eventHandler({
+            eventType: Constants.EVENT.PokemonSelected,
+            id: id
+        });
+    }
     
     generatePokemons(pokemons) {
         let tiles = pokemons.map(pokemon => {
             return (
-                <div className="egg-pokemon">
+                <div className="egg-pokemon" onClick = { () => this.onPokemonClicked(pokemon.id) }>
                     <Lazimage className="egg-pokemon-img"
                         key={ pokemon.name } 
                         src='../assets/images/wait.gif'

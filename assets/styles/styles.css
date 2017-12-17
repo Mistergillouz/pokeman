@@ -261,6 +261,7 @@ input {
     display: flex;
     flex-direction: column;
     background-color: white;
+    cursor: pointer;
 }
 
 .egg-pokemon-img {
