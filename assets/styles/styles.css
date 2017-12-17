@@ -43,6 +43,33 @@ input {
     padding: .5rem .75rem;
 }
 
+/*---------------------------------------------------------------------*/
+/*  NOT FOUND
+/*---------------------------------------------------------------------*/
+
+.not-found-container {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    max-width: 65%;
+    border-left: 4px solid lightsalmon;
+    border-radius: 0 0 10px 0;
+    padding: 0.25em;
+}
+
+.not-found-image {
+    max-width: 70px;
+}
+.not-found-text {
+    font-size: 10pt;
+    padding: 5px;
+}
+
+/*---------------------------------------------------------------------*/
+/*  ATTACK PANEL
+/*---------------------------------------------------------------------*/
+
 .attack-table {
     width: 300px;
     border: none;
@@ -87,43 +114,6 @@ input {
 
 .attack-table td:last-of-type { 
     padding-right: 0.5em;
-};
-
-.logo {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: white;
-}
-
-.logo .img {
-    background-image: url(../img/logo.png);
-    background-position: bottom center;
-    background-repeat: no-repeat;
-    width: 35%;
-    height: 35%;
-    background-size: contain;
-}
-
-.logo .pokeball {
-    background-image: url('../img/pokeball.png');
-    background-position: bottom right;
-    background-size: 24px 24px;
-    background-repeat: no-repeat;
-    position: absolute;
-}
-
-.logo .version {
-    bottom: 5px;
-    right: 10px;
-    position: absolute;
-    font-size: 8pt;
-    font-weight: 700;
-}
-
-.logo .text {
-    font-weight: 700;
-    padding-left: 10px;
 }
 
 .back-button {
@@ -215,6 +205,10 @@ input {
         border-radius: 0;
     }
 }
+
+/*---------------------------------------------------------------------*/
+/*  EGG PANEL
+/*---------------------------------------------------------------------*/
 
 .egg-button {
     background-image: url('../images/egg.png');
@@ -617,6 +611,9 @@ h2, .inactive-h2 {
     padding: .5rem .75rem;
 }
 
+/*---------------------------------------------------------------------*/
+/*  ATTACK TYPES
+/*---------------------------------------------------------------------*/
 
 .icon-type-BUG, .icon-type-DARK, .icon-type-DRAGON, .icon-type-ELECTRIC, .icon-type-FAIRY, 
 .icon-type-FIGHTING, .icon-type-FIRE, .icon-type-FLYING, .icon-type-GHOST, .icon-type-GRASS, 

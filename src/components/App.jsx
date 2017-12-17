@@ -14,15 +14,8 @@ class App extends React.Component {
         super(...arguments)
 
         this.state = {
-            //page: PAGES.EggPage,
-            pageId: PAGES.MainPage,
-            args: {},
-            pages: []
+            pages: [{ pageId: PAGES.MainPage }]
         }
-
-        this.state.pages.push({ 
-            pageId: PAGES.MainPage 
-        })
     }
 
     showTooltip(show, args) {
@@ -52,8 +45,12 @@ class App extends React.Component {
     }
 
     popPage() {
-        let pages = this.state.pages.splice(0, this.state.pages.length - 1)
+        let pages = this.state.pages.slice().splice(0, this.state.pages.length - 1)
         this.setState({ pages: pages })
+    }
+
+    currentPage() {
+        return this.state.pages[this.state.pages.length - 1] || {}
     }
 
     eventHandler(args) {
@@ -77,10 +74,6 @@ class App extends React.Component {
                 this.popPage()
                 break;
         }
-    }
-
-    currentPage() {
-        return this.state.pages[this.state.pages.length - 1]
     }
 
     render() { 

@@ -244,13 +244,13 @@ class PokedexHelper {
     toggle(array, value, monoValues) {
         let  index = array.indexOf(value), copy
         if (!monoValues) {
-            let copy = array.slice()
+            copy = array.slice()
             if (index !== -1) {
                 copy.splice(index, 1);
             } else {
                 copy.push(value);
             }
-            
+
         } else if (index !== -1) {
             copy = [];
         } else {
