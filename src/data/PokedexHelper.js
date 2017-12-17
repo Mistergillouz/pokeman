@@ -241,12 +241,20 @@ class PokedexHelper {
         return locales;
     }
 
-    toggle(array, value) {
-        let copy = array.slice(), index = copy.indexOf(value);
-        if (index !== -1) {
-            copy.splice(index, 1);
+    toggle(array, value, monoValues) {
+        let  index = array.indexOf(value), copy
+        if (!monoValues) {
+            let copy = array.slice()
+            if (index !== -1) {
+                copy.splice(index, 1);
+            } else {
+                copy.push(value);
+            }
+            
+        } else if (index !== -1) {
+            copy = [];
         } else {
-            copy.push(value);
+            copy = [ value ];
         }
 
         return copy

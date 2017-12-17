@@ -7,7 +7,7 @@ import EggPage from 'components/EggPage'
 import Constants from 'data/Constants'
 import SpeciesTooltip from 'components/SpeciesTooltip'
 
-const PAGES = { MainPage: 'MainPage', ZoomPage: ' ZoomPage', EggPage: 'EggPage' };
+const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType' };
 
 class App extends React.Component {
    constructor() {
@@ -15,55 +15,57 @@ class App extends React.Component {
 
         this.state = {
             //page: PAGES.EggPage,
-            page: PAGES.MainPage,
-            tooltipTypeId: -1,
-            tooltip: {}
+            pageId: PAGES.MainPage,
+            args: {}
         }
+    }
+
+    showTooltip(show, args) {
+
+        let tooltipArgs;
+        if (args.event)
+            tooltipArgs = { 
+                x: args.event.clientX,
+                y: args.event.clientY,
+                id: args.id
+        }
+
+        this.setState({ tooltipArgs: tooltipArgs })
     }
 
     eventHandler(args) {
 
+        console.log(args)
         switch (args.eventType) {
 
             case Constants.EVENT.EggPage: 
-                this.setState({ page: PAGES.EggPage })
+                this.setState({ pageId: PAGES.EggPage })
                 break;
         
             case Constants.EVENT.ShowTooltip: 
-            
-                this.setState({ tooltipTypeId: args.id, tooltip: { x: args.event.clientX, y: args.event.clientY } });
+            case Constants.EVENT.HideTooltip: 
+                this.showTooltip( args.eventType === Constants.EVENT.ShowTooltip, args)
                 break;
-        
-            case Constants.EVENT.HideTooltip:
-                this.setState({ tooltipTypeId: -1 });
-                break;
-            
+
             case Constants.EVENT.PokemonSelected:
-
-                this.setState({
-                    page: PAGES.ZoomPage,
-                    id: args.id
-                });
-
-                break;
+                this.setState({ pageId: PAGES.ZoomPage, args: args })
+                    break;
 
             case Constants.EVENT.Back:
-
-                this.setState({
-                    page: PAGES.MainPage,
-                });
-
+                this.setState({ pageId: PAGES.MainPage })
                 break;
         }
     }
 
     render() { 
+
+        let pageId = this.state.pageId;
         return (
             <div className='app'>
-                <MainPage visible={ this.state.page === PAGES.MainPage } eventHandler = { this.eventHandler.bind(this) }/>
-                <ZoomPage visible={ this.state.page === PAGES.ZoomPage } id={ this.state.id } eventHandler = { this.eventHandler.bind(this) }/>
-                <EggPage visible={ this.state.page === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
-                <SpeciesTooltip id={ this.state.tooltipTypeId } x={ this.state.tooltip.x } y={ this.state.tooltip.y } eventHandler={ (args) => this.eventHandler(args)}/>
+                <MainPage visible={ pageId === PAGES.MainPage } eventHandler = { this.eventHandler.bind(this) }/>
+                <ZoomPage visible={ pageId === PAGES.ZoomPage } args={ this.state.args } eventHandler = { this.eventHandler.bind(this) }/>
+                <EggPage visible={ pageId === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
+                <SpeciesTooltip visible={ this.state.tooltipArgs } args={ this.state.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
             </div>
         )
     }

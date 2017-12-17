@@ -45,7 +45,7 @@ class ZoomPage extends React.Component {
         }
 
         let evolves = [];
-        let evolutions = PokedexHelper.getEvolvesList(this.props.id);
+        let evolutions = PokedexHelper.getEvolvesList(this.props.args.id);
         this.generateEvolves(evolutions, evolves, 0);
 
         return (
@@ -59,7 +59,7 @@ class ZoomPage extends React.Component {
                     <div className="zoom-container">
                         {evolves}
                     </div>
-                    <CombatPanel id={ this.props.id }/>
+                    <CombatPanel id={ this.props.args.id }/>
     		    </div>
 		    </div>
         )

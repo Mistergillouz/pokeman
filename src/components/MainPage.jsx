@@ -22,7 +22,8 @@ class MainPage extends React.Component {
 
         };
 
-        this.props = {};
+        this.props = {
+        };
 
         this.searchSettings = { text: '', genId: null, types: [] };
         this.tooltip = {
@@ -86,7 +87,12 @@ class MainPage extends React.Component {
                         <div className="egg-button" onClick={ (e) => this.onShowEggPanel(e) }></div>
                     </div>
 
-                    <input type="search" className="search-input ui-styles" placeholder="Rechercher un Pokémon" onChange={(e) => this.onFilterTextChanged(e)}></input>
+                    <input type="search" 
+                        className="search-input ui-styles" 
+                        placeholder="Rechercher un Pokémon" 
+                        onChange={(e) => this.onFilterTextChanged(e)}
+                        value={ this.searchSettings.text }>
+                    </input>
                     <div className="right-panel" onClick={ this.onToggleLocalePopover.bind(this) }>
                             <LocaleFlag country={this.state.country}/>
                             <img src="../assets/images/arrow-down.png"/>

@@ -32,7 +32,7 @@ class Pokemon extends React.Component {
 
         return (
             <div className={ "gen " + (this.props.className || '') } onClick={ (e) => this.onPokemonClicked(e) }>
-                <a className="pokemon g1" href="#">
+                <a className="pokemon g1" href="#" data-gen={ pokemon.gen }>
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }

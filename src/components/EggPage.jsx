@@ -130,12 +130,12 @@ class EggPage extends React.Component {
     }
 
     onDistanceClicked(distance) {
-        let distances = PokedexHelper.toggle(this.state.distances, distance)
+        let distances = PokedexHelper.toggle(this.state.distances, distance, true)
         this.setState({ distances: distances })
     }
 
     onGenClicked(gen) {
-        let gens = PokedexHelper.toggle(this.state.gens, gen)
+        let gens = PokedexHelper.toggle(this.state.gens, gen, true)
         this.setState({ gens: gens })
     }
     
