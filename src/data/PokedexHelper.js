@@ -91,8 +91,8 @@ class PokedexHelper {
         for (let id in Pokedex.pokemons) {
             let pokemon = Pokedex.pokemons[id];
             if (pokemon.evolves) {
-                pokemon.evolves.forEach((id) => {
-                    if (id === pokemonId) {
+                pokemon.evolves.forEach((aid) => {
+                    if (Number(aid) === Number(pokemonId)) {
                         evolves.push( {
                             id: pokemon.id,
                             children: evolves.splice(0, evolves.length)
