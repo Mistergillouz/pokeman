@@ -22,14 +22,8 @@ class MainPage extends React.Component {
 
         };
 
-        this.props = {
-        };
-
         this.searchSettings = { text: '', genId: null, types: [] };
-        this.tooltip = {
-            x: 0,
-            y: 0
-        };
+        this.tooltip = { x: 0, y: 0};
 
         for (let i = 1; i < 151; i++) {
             this.state.pokemons.push(i);
@@ -49,7 +43,6 @@ class MainPage extends React.Component {
         this.setState({ country: country });
 
         this.onToggleLocalePopover();
-        this.forceUpdate();
     }
 
     onFilterTextChanged(event) {
@@ -99,7 +92,7 @@ class MainPage extends React.Component {
                     </div>
                 </div> 
 
-                <FilterPanel ref="filterPanel" visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
+                <FilterPanel visible={ this.state.filterVisible } notifyChange={ this.onFilterChangeListener.bind(this) }/>
                 <LocalePopover show={this.state.localePopoverVisible} onLocaleSelected={ (id) => this.onLocaleSelected(id) }/>
                 <PokemonList
                     pokemons={this.state.pokemons} 

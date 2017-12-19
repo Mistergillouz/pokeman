@@ -13,23 +13,47 @@ class ZoomPage extends React.Component {
         args.noPageStack = true
         this.props.eventHandler(args)
     }
-    generateEvolves(evolutions, evolves, level) {    
-        
-        let children = [], trs = [];
-        evolutions.forEach((evolution) => {
 
-            evolves.push(
-                <Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } className={ 'zoom-indent' + level } eventHandler={ (args) => this.eventHandler(args) }/>
-            );
+    createEvolvesGrid(evolutions, grid, level) {
 
-            if (evolution.children.length) {
-                children.push(evolution.children);
+        let gridRow = (level === 0) ? this._addGridRow(grid) : grid[grid.length - 1]
+        evolutions.forEach((evolution, index) => {
+            if (index > 0) {
+                gridRow = this._addGridRow(grid)
             }
-        });
+            gridRow[level] = evolution.id
+            this.createEvolvesGrid(evolution.children, grid, level + 1)
+        })
+    }
 
-        children.forEach((child) => {
-            this.generateEvolves(child, evolves, level + 1);
-        });
+    _addGridRow(grid) {
+        let row = []
+        grid.push(row)
+        return row
+    }
+
+    generateEvolvesRows(evolutions) {    
+        
+        let grid = [], trs = []
+        this.createEvolvesGrid(evolutions, grid, 0)
+        grid.forEach(row => {
+
+            let tds = []
+            row.forEach((id, level) => {
+                let pokemonId = Number(id)
+                if (pokemonId) {
+                    tds.push(<Pokemon key={ pokemonId } 
+                        id={ pokemonId } 
+                        inactive={ pokemonId !== Number(this.props.args.id) } 
+                        className={ 'zoom-indent' + level } 
+                        eventHandler={ (args) => this.eventHandler(args) }/>)
+                }
+            })
+
+            trs.push(<tr>{ tds }</tr>)
+        })
+
+        return trs
     }
 
     onBack() {
@@ -47,7 +71,7 @@ class ZoomPage extends React.Component {
 
         let evolves = [];
         let evolutions = PokedexHelper.getEvolvesList(this.props.args.id);
-        this.generateEvolves(evolutions, evolves, 0);
+        let trs = this.generateEvolvesRows(evolutions);
 
         return (
 
@@ -58,7 +82,9 @@ class ZoomPage extends React.Component {
                 </div>
                 <div className="pokemon-zoom">
                     <div className="zoom-container">
-                        {evolves}
+                        <table><tbody>
+                        {trs}
+                        </tbody></table>
                     </div>
                     <CombatPanel id={ this.props.args.id }/>
     		    </div>
