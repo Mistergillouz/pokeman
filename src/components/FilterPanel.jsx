@@ -44,21 +44,27 @@ class FilterPanel extends React.Component {
 
                 let clazz = (i === 1) ? 'gen-button-left' : (i === Constants.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
                 if (i === this.state.selectedGen) {
-                    clazz += ' selected';
+                    clazz += ' genSelected';
+                }
+                if (this.state.selectedGen === 0) {
+                    clazz += ' genInactive';
                 }
 
                 genButtons.push(
-                    <label key={ i }
-                        className={ "gen-button " + clazz } 
+                    <div key={ i }
+                        className={ "gen-button gen"+ (i) + " " + clazz } 
                         onClick={(e) => { this.onGenClicked(i) }}>
                         {i}
-                    </label>);
+                    </div>);
             }
 
 			let types = PokedexHelper.getAllSpecies().map((type) => {
-                let clazz = 'filter-type-toggle';
+                let clazz = 'filter-type-toggle POKEMON_TYPE_' + type.key;
                 if (this.state.selectedTypes.indexOf(type.id) !== -1) {
-                    clazz += ' selected';
+                    clazz += ' typeSelected';
+                }
+                if (this.state.selectedTypes.length === 0) {
+                    clazz += ' typeInactive';
                 }
 				return (
                     <div key={ type.id }
