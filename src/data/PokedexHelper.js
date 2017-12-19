@@ -188,6 +188,10 @@ class PokedexHelper {
         return types;
     }
 
+    getPokemonName(pokemonId) {
+        return this.loc(this.getPokemon(pokemonId))
+    }
+    
     getPokemon(pokemonId) {
         return Pokedex.pokemons[pokemonId];
     }

@@ -7,11 +7,15 @@ import CombatPanel from 'components/CombatPanel'
 class ZoomPage extends React.Component {
    constructor() {
         super(...arguments)
+        this.state = {}
     }
 
-    eventHandler(args) {
-        args.noPageStack = true
-        this.props.eventHandler(args)
+    onPokemonClicked(pokemonId) {
+        this.setState({ highlightedId: pokemonId })
+    }
+
+    selectedId() {
+        return this.state.highlightedId || this.props.args.id
     }
 
     createEvolvesGrid(evolutions, grid, level) {
@@ -34,7 +38,7 @@ class ZoomPage extends React.Component {
 
     generateEvolvesRows(evolutions) {    
         
-        let grid = [], trs = []
+        let grid = [], trs = [], highlightedId = this.selectedId()
         this.createEvolvesGrid(evolutions, grid, 0)
         grid.forEach(row => {
 
@@ -44,9 +48,9 @@ class ZoomPage extends React.Component {
                 if (pokemonId) {
                     tds.push(<Pokemon key={ pokemonId } 
                         id={ pokemonId } 
-                        inactive={ pokemonId !== Number(this.props.args.id) } 
+                        inactive={ pokemonId !== highlightedId } 
                         className={ 'zoom-indent' + level } 
-                        eventHandler={ (args) => this.eventHandler(args) }/>)
+                        eventHandler={ (args) => this.onPokemonClicked(args.id) }/>)
                 }
             })
 
@@ -69,16 +73,15 @@ class ZoomPage extends React.Component {
             return null;
         }
 
-        let evolves = [];
         let evolutions = PokedexHelper.getEvolvesList(this.props.args.id);
         let trs = this.generateEvolvesRows(evolutions);
-
+        let label = 'Evolutions: ' + PokedexHelper.getPokemonName(this.props.args.id)
         return (
 
             <div className="page">
                 <div className="navbar">
                     <button className="left-panel back-button" onClick= {() => this.onBack() }></button>
-                    <label>Evolutions</label>
+                    <label>{ label }</label>
                 </div>
                 <div className="pokemon-zoom">
                     <div className="zoom-container">
@@ -86,7 +89,7 @@ class ZoomPage extends React.Component {
                         {trs}
                         </tbody></table>
                     </div>
-                    <CombatPanel id={ this.props.args.id }/>
+                    <CombatPanel id={ this.selectedId() }/>
     		    </div>
 		    </div>
         )
