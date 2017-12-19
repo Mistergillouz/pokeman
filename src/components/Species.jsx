@@ -26,7 +26,7 @@ class Species extends React.Component {
 
         let species = PokedexHelper.getTypeInfos(this.props.id);
         let speciesName = PokedexHelper.loc(species);
-        var speciesCss = PokedexHelper.loc(species, Constants.LOCALES.ENGLISH).toUpperCase();
+        var speciesCss = PokedexHelper.getSpeciesKey(species);
         
         return (
             <div className={ "type POKEMON_TYPE_" + speciesCss } type-id={ species.id } onClick={ (e) => this.onTypeClicked(e) }>{ speciesName }

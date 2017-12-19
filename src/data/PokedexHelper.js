@@ -178,7 +178,7 @@ class PokedexHelper {
     getAllSpecies() {
         let types = [];
         for (let id in Pokedex.species) {
-            types.push({ id: Number(id), name: this.loc(this.species(id)) });
+            types.push({ id: Number(id), name: this.loc(this.species(id)), key: this.getSpeciesKey(this.species(id)) });
         }
     
         types.sort((a, b) => {
@@ -262,6 +262,10 @@ class PokedexHelper {
         }
 
         return copy
+    }
+
+    getSpeciesKey(species) {
+        return this.loc(species, Constants.LOCALES.ENGLISH).toUpperCase()
     }
 
     _round(num, decimals) {
