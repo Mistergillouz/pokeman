@@ -26,7 +26,7 @@ class CombatPanel extends React.Component {
         }
 
         let species = PokedexHelper.species(attack.type);
-        let iconClass = 'icon-type-' + PokedexHelper.loc(species, Constants.LOCALES.ENGLISH).toUpperCase();
+        let iconClass = 'icon-type-' + PokedexHelper.getSpeciesKey(species);
         let atkName = PokedexHelper.loc(attack);
 
         let tds = [];
