@@ -21,7 +21,7 @@ class ZoomPage extends React.Component {
     }
 
     selectedId() {
-        return this.state.highlightedId
+        return Number(this.state.highlightedId)
     }
 
     createEvolvesGrid(evolutions, grid, level) {
