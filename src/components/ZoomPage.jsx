@@ -10,12 +10,18 @@ class ZoomPage extends React.Component {
         this.state = {}
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.args) {
+            this.setState({ highlightedId: nextProps.args.id })
+        }
+    }
+    
     onPokemonClicked(pokemonId) {
         this.setState({ highlightedId: pokemonId })
     }
 
     selectedId() {
-        return this.state.highlightedId || this.props.args.id
+        return this.state.highlightedId
     }
 
     createEvolvesGrid(evolutions, grid, level) {
