@@ -1,8 +1,8 @@
 import React from 'react'
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
-import Pokemon from 'components/Pokemon'
 import CombatPanel from 'components/CombatPanel'
+import SmallPokemon from 'components/SmallPokemon'
 
 class ZoomPage extends React.Component {
    constructor() {
@@ -37,7 +37,7 @@ class ZoomPage extends React.Component {
     }
 
     _addGridRow(grid) {
-        let row = []
+        let row = [0 ,0, 0]
         grid.push(row)
         return row
     }
@@ -52,11 +52,14 @@ class ZoomPage extends React.Component {
             row.forEach((id, level) => {
                 let pokemonId = Number(id)
                 if (pokemonId) {
-                    tds.push(<Pokemon key={ pokemonId } 
+                    let name = PokedexHelper.getPokemonName(pokemonId)
+                    tds.push(<td><SmallPokemon key={ pokemonId } 
                         id={ pokemonId } 
-                        inactive={ pokemonId !== highlightedId } 
-                        className={ 'zoom-indent' + level } 
-                        eventHandler={ (args) => this.onPokemonClicked(args.id) }/>)
+                        name={ name }
+                        selected = { pokemonId === this.selectedId() }
+                        onClick={ id => this.onPokemonClicked(id) }/></td>)
+                } else {
+                    tds.push(<td></td>)
                 }
             })
 

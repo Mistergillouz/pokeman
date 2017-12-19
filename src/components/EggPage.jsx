@@ -1,7 +1,7 @@
 import React from 'react'
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
-import Lazimage from 'components/Lazimage'
+import SmallPokemon from 'components/SmallPokemon'
 
 class EggPage extends React.Component {
    constructor() {
@@ -66,13 +66,7 @@ class EggPage extends React.Component {
     generatePokemons(pokemons) {
         let tiles = pokemons.map(pokemon => {
             return (
-                <div className="egg-pokemon" onClick = { () => this.onPokemonClicked(pokemon.id) }>
-                    <Lazimage className="egg-pokemon-img"
-                        key={ pokemon.name } 
-                        src='../assets/images/wait.gif'
-                        target={ "https://www.serebii.net/art/th/" + pokemon.id + ".png" }/>
-                    <label className="egg-pokemon-img-text">{ PokedexHelper.loc(pokemon) }</label>
-                </div>
+                <SmallPokemon id={ pokemon.id } name={ PokedexHelper.loc(pokemon) } onClick = { () => this.onPokemonClicked(pokemon.id) }/>
             )
         })
 

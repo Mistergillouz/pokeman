@@ -19,7 +19,7 @@ class PokemonList extends React.Component {
             return this.props.pokemons.map((id) => this.buildPokemon(id))
         }
 
-        return <NotFound/>
+        return <NotFound text='Pas de pokémons retournés par votre recherche...'/>
     }    
 
     render() { 

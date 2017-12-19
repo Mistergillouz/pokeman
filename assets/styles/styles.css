@@ -250,12 +250,19 @@ input {
 
 .egg-pokemon {
     position: relative;
-    width: 70px;
-    height: 70px;
     display: flex;
     flex-direction: column;
+    margin: 0.25em;
+    width: 70px;
+    height: 70px;
     background-color: white;
+    border: 2px solid transparent;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+.egg-pokemon-selected {
+    border: 2px solid lightsalmon;
 }
 
 .egg-pokemon-img {
@@ -450,18 +457,7 @@ input {
 }
 
 .zoom-container {
-    display: flex;
-    flex-direction: row;
     margin: 5px 5px 5px 5px;
-}
-
-.zoom-indent0, .zoom-indent1, .zoom-indent2 {
-}
-
-.zoom-indent1 {
-}
-
-.zoom-indent2 {
 }
 
 @media all and (max-width: 550px) {
@@ -470,17 +466,6 @@ input {
         display: block;
     }
 
-    .zoom-indent0, .zoom-indent1, .zoom-indent2 {
-        position: relative;
-        top: 0;
-        left: 0;
-    }
-    .zoom-indent1 {
-        padding-left: 50px;
-    }
-    .zoom-indent2 {
-        padding-left: 100px;
-    }
     .search-input {
         width: 55%;
     }
