@@ -43,11 +43,11 @@ class SpeciesTooltip extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.id !== -1) {
+        if (this.props.visible) {
             // Reposition tooltip within screen
 
             let node = ReactDOM.findDOMNode(this);
-            let px = this.props.x + 5, py = this.props.y + 10;
+            let px = this.props.args.x + 5, py = this.props.args.y + 10;
             let ttw = node.scrollWidth, tth = node.scrollHeight;
             let scw = document.body.clientWidth - 20, sch = document.documentElement.clientHeight - 20;
             let x = ((px + ttw) > scw) ? scw - ttw : px, y = ((py + tth) > sch) ? sch - tth : py;
@@ -60,12 +60,17 @@ class SpeciesTooltip extends React.Component {
 
     render() { 
 
-        if (this.props.id !== -1) {
-            let rows = this.buildStrengthWeaknessTr(this.props.id);
+        if (!this.props.visible) {
+            return null
+        }
+
+        let id = this.props.args.id;
+        if (id !== -1) {
+            let rows = this.buildStrengthWeaknessTr(id);
             return (
-                <div className="strength-table-container" tabIndex="-1" onBlur={() => this.onBlur() }>
+                <div className="strength-table-container" tabIndex="-1" onBlur={() => this.onBlur() } onClick={ () => this.onBlur() }>
                     <table className="strength-table">
-                        <thead><th>Fort vs</th><th>Faible vs</th></thead>
+                        <thead><tr><th>Fort vs</th><th>Faible vs</th></tr></thead>
                         <tbody>
                             {rows}
                         </tbody>

@@ -1,38 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PokedexHelper from 'data/PokedexHelper'
+import Store from 'data/Store'
 import Constants from 'data/Constants'
+
+const KEY = 'filters'
 
 class FilterPanel extends React.Component {
    constructor() {
         super(...arguments)
 
-        this.state = {
+        this.state = Store.get(KEY, {
             selectedGen: 0,
             selectedTypes: []
-        }
+        })
+    }
+
+    setState(args) {
+        super.setState(args)
+        Store.set(KEY, args)
     }
 
     onGenClicked(genNumber) {
         let selectedGen = (genNumber === this.state.selectedGen) ? 0 : genNumber;
-        this.props.notifyChange({ genId: selectedGen });
         this.setState({ selectedGen: selectedGen });
+        this.props.notifyChange({ genId: selectedGen });
     }
 
     onTypeClicked(typeId) {
 
-        let selectedTypes = this.state.selectedTypes.slice();
-        let index = selectedTypes.indexOf(typeId);
-        if (index !== -1) {
-            selectedTypes.splice(index, 1);
-        } else {
-            selectedTypes.push(typeId);
-            //selectedTypes.splice(0, 0, typeId);
-            //selectedTypes.splice(2);
-        }
-
-        this.props.notifyChange({ types: selectedTypes });
+        let selectedTypes = PokedexHelper.toggle(this.state.selectedTypes, typeId)
         this.setState({ selectedTypes: selectedTypes });
+        this.props.notifyChange({ types: selectedTypes });
     }
 
     render() { 

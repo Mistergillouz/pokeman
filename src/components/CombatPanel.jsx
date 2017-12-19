@@ -1,6 +1,7 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
+import NotFound from 'components/NotFound'
 
 class CombatPanel extends React.Component {
    
@@ -21,7 +22,7 @@ class CombatPanel extends React.Component {
 
     generateAttackRow(attack, summary, quick) {
         if (!attack) {
-            return null;
+            return null
         }
 
         let species = PokedexHelper.species(attack.type);
@@ -94,7 +95,7 @@ class CombatPanel extends React.Component {
 
         let attacks = PokedexHelper.getAttacks(this.props.id);
         if (!attacks.fast.length || !attacks.charged.length) {
-            return null;
+            return <NotFound text='Pas de données sur les attaques de ce pokemon...'/>;
         }
 
         return (

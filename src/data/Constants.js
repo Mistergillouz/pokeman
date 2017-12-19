@@ -5,7 +5,8 @@ const Constants = {
         ShowTooltip: 'ShowTooltip',
         HideTooltip: 'HideTooltip',
         PokemonSelected: 'PokemonSelected',
-        ZoomPageClosed: 'ZoomPageClosed'
+        Back: 'Back',
+        EggPage: 'EggPage'
     },
 
     MAX_GEN: 7,

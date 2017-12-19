@@ -61,7 +61,7 @@ class Lazimage extends React.Component {
     render() { 
         var img = this.state.src || this.props.src;
         return (
-            <img src= { img } onLoad={ () => this.onLoad() }/>
+            <img src= { img } onLoad={ () => this.onLoad() } className={ this.props.className }/>
         )
     }
 }

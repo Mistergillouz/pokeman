@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Pokemon from 'components/Pokemon'
+import NotFound from 'components/NotFound'
 
 class PokemonList extends React.Component {
    
@@ -12,16 +13,23 @@ class PokemonList extends React.Component {
         return (<Pokemon id={pokemonId} eventHandler={ this.props.eventHandler }/>);
     }
 
-    componentDidMount() {
-        console.log('After render called');
-    }
-    
+    generateList() {
+
+        if (this.props.pokemons.length) {
+            return this.props.pokemons.map((id) => this.buildPokemon(id))
+        }
+
+        return <NotFound text='Pas de pokémons retournés par votre recherche...'/>
+    }    
+
     render() { 
 
+        let content = this.generateList();
         return (
             <div className='pokemon-list'>
-                { this.props.pokemons.map((id) => this.buildPokemon(id)) }
+                { content }
             </div>
+                
         )
     }
 }

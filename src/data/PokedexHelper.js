@@ -10,48 +10,47 @@ class PokedexHelper {
 
     getAttacks(pokemonId) {
         
-        let pokemon = this.pokemon(pokemonId);
-        let charged = this._getAttacks(pokemon, Pokedex.attacks.charged);
-        let fast = this._getAttacks(pokemon, Pokedex.attacks.fast);
+        let pokemon = this.pokemon(pokemonId), fast = [], charged = []
+        if (pokemon.attacks) {
+            charged = this._getAttacks(pokemon, pokemon.attacks.charged)
+            fast = this._getAttacks(pokemon, pokemon.attacks.fast)
+        }
         
         return {
             charged: charged,
             fast: fast
-        };
+        }
     }
 
     getEggs() {
         
-        return {    
-            "2":[325,316,265,263,261,223,218,200,190,175,174,173,172,167,102,98,92,79,74,66,63,50,43,32,29],
-            "5":[360,355,353,298,296,285,258,255,252,240,239,238,236,234,231,228,226,220,216,215,213,211,209,207,206,204,203,202,194,187,183,177,170,158,155,152,140,138,133,127,123,114,111,109,108,104,100,96,95,90,88,86,77,60,58],
-            "10":[302,287,280,246,241,227,185,179,147,143,142,137,131,113]
-        };        
+        return Pokedex.eggs;        
     }
         
     _getAttacks(pokemon, attacks) {
         
         let result = [];
-        attacks.forEach(attack => {
-            attack.pokemons.forEach(id => {
-                if (id === pokemon.id) {
-                    
-                    var bonus = 1;
-                    pokemon.species.forEach(type => {
-                        if (type === attack.type) {
-                            bonus = 1.2;
-                        }
-                    });
-        
-                    var entry = Object.assign({}, attack, {
-                        name:  this.loc(attack),
-                        dps: this._round(attack.rawdps * bonus, 1)
-                    });
-        
-                    result.push(entry);
-                }
+
+        if (attacks) {
+            attacks.forEach(attackId => {
+                let attack = Pokedex.attacks[attackId];
+                        
+                let bonus = 1;
+                pokemon.species.forEach(type => {
+                    if (type === attack.type) {
+                        bonus = 1.2;
+                    }
+                });
+    
+                let dps = this._round((attack.dmg / attack.duration) * bonus, 1) ;
+                let entry = Object.assign({}, attack, {
+                    name:  this.loc(attack),
+                    dps: dps
+                });
+    
+                result.push(entry);
             });
-        });
+        }
     
         result.sort((a, b) => { return b.dps - a.dps; });
         return result;
@@ -92,8 +91,8 @@ class PokedexHelper {
         for (let id in Pokedex.pokemons) {
             let pokemon = Pokedex.pokemons[id];
             if (pokemon.evolves) {
-                pokemon.evolves.forEach((id) => {
-                    if (id === pokemonId) {
+                pokemon.evolves.forEach((aid) => {
+                    if (Number(aid) === Number(pokemonId)) {
                         evolves.push( {
                             id: pokemon.id,
                             children: evolves.splice(0, evolves.length)
@@ -189,6 +188,10 @@ class PokedexHelper {
         return types;
     }
 
+    getPokemonName(pokemonId) {
+        return this.loc(this.getPokemon(pokemonId))
+    }
+    
     getPokemon(pokemonId) {
         return Pokedex.pokemons[pokemonId];
     }
@@ -241,7 +244,26 @@ class PokedexHelper {
         }
         return locales;
     }
-    
+
+    toggle(array, value, monoValues) {
+        let  index = array.indexOf(value), copy
+        if (!monoValues) {
+            copy = array.slice()
+            if (index !== -1) {
+                copy.splice(index, 1);
+            } else {
+                copy.push(value);
+            }
+
+        } else if (index !== -1) {
+            copy = [];
+        } else {
+            copy = [ value ];
+        }
+
+        return copy
+    }
+
     _round(num, decimals) {
         var n = Math.pow(10, decimals);
         return Math.round( (n * num).toFixed(decimals) )  / n;

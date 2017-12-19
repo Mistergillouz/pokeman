@@ -1,40 +1,78 @@
 import React from 'react'
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
-import Pokemon from 'components/Pokemon'
 import CombatPanel from 'components/CombatPanel'
+import SmallPokemon from 'components/SmallPokemon'
 
 class ZoomPage extends React.Component {
    constructor() {
         super(...arguments)
+        this.state = {}
     }
 
-    eventHandler(args) {
-
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.args) {
+            this.setState({ highlightedId: nextProps.args.id })
+        }
     }
-    generateEvolves(evolutions, evolves, level) {    
-        
-        let children = [], trs = [];
-        evolutions.forEach((evolution) => {
+    
+    onPokemonClicked(pokemonId) {
+        this.setState({ highlightedId: pokemonId })
+    }
 
-            evolves.push(
-                <Pokemon key={ evolution.id } id={ evolution.id } inactive={ !evolution.active } className={ 'zoom-indent' + level } eventHandler={ this.props.eventHandler }/>
-            );
+    selectedId() {
+        return Number(this.state.highlightedId)
+    }
 
-            if (evolution.children.length) {
-                children.push(evolution.children);
+    createEvolvesGrid(evolutions, grid, level) {
+
+        let gridRow = (level === 0) ? this._addGridRow(grid) : grid[grid.length - 1]
+        evolutions.forEach((evolution, index) => {
+            if (index > 0) {
+                gridRow = this._addGridRow(grid)
             }
-        });
+            gridRow[level] = evolution.id
+            this.createEvolvesGrid(evolution.children, grid, level + 1)
+        })
+    }
 
-        children.forEach((child) => {
-            this.generateEvolves(child, evolves, level + 1);
-        });
+    _addGridRow(grid) {
+        let row = [0 ,0, 0]
+        grid.push(row)
+        return row
+    }
+
+    generateEvolvesRows(evolutions) {    
+        
+        let grid = [], trs = [], highlightedId = this.selectedId()
+        this.createEvolvesGrid(evolutions, grid, 0)
+        grid.forEach(row => {
+
+            let tds = []
+            row.forEach((id, level) => {
+                let pokemonId = Number(id)
+                if (pokemonId) {
+                    let name = PokedexHelper.getPokemonName(pokemonId)
+                    tds.push(<td><SmallPokemon key={ pokemonId } 
+                        id={ pokemonId } 
+                        name={ name }
+                        selected = { pokemonId === this.selectedId() }
+                        onClick={ id => this.onPokemonClicked(id) }/></td>)
+                } else {
+                    tds.push(<td></td>)
+                }
+            })
+
+            trs.push(<tr>{ tds }</tr>)
+        })
+
+        return trs
     }
 
     onBack() {
 
         this.props.eventHandler({
-            eventType: Constants.EVENT.ZoomPageClosed
+            eventType: Constants.EVENT.Back
         });
     }
     
@@ -44,22 +82,23 @@ class ZoomPage extends React.Component {
             return null;
         }
 
-        let evolves = [];
-        let evolutions = PokedexHelper.getEvolvesList(this.props.id);
-        this.generateEvolves(evolutions, evolves, 0);
-
+        let evolutions = PokedexHelper.getEvolvesList(this.props.args.id);
+        let trs = this.generateEvolvesRows(evolutions);
+        let label = 'Evolutions: ' + PokedexHelper.getPokemonName(this.props.args.id)
         return (
 
             <div className="page">
                 <div className="navbar">
                     <button className="left-panel back-button" onClick= {() => this.onBack() }></button>
-                    <label>Evolutions</label>
+                    <label>{ label }</label>
                 </div>
                 <div className="pokemon-zoom">
                     <div className="zoom-container">
-                        {evolves}
+                        <table><tbody>
+                        {trs}
+                        </tbody></table>
                     </div>
-                    <CombatPanel id={ this.props.id }/>
+                    <CombatPanel id={ this.selectedId() }/>
     		    </div>
 		    </div>
         )
