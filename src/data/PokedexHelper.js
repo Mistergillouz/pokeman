@@ -1,4 +1,5 @@
-import {Pokedex} from 'data/pokedex'
+import Pokedex from 'data/pokedex.json'
+import Eggs from 'data/eggs.json'
 import Constants from 'data/Constants'
 
 class PokedexHelper {
@@ -24,7 +25,7 @@ class PokedexHelper {
 
     getEggs() {
         
-        return Pokedex.eggs;        
+        return Eggs;        
     }
         
     _getAttacks(pokemon, attacks) {

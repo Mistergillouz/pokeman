@@ -457,7 +457,7 @@ input {
 }
 
 .zoom-container {
-    margin: 5px 5px 5px 5px;
+    margin: 5px 5px 15px 5px;
 }
 
 @media all and (max-width: 550px) {
