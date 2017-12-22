@@ -67,7 +67,7 @@ class PokedexHelper {
     
         this._getParents(pokemonId, evolves);
         return evolves;
-    };
+    }
     
     _getEvolves(pokemonId) {
         let children = [];

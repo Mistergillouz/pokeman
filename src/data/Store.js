@@ -2,12 +2,12 @@
 class Store {
     
      constructor() {
-         this.model = {};
+         this.model = {}
      }
 
      set(key, data) {
         if (this.model[key] === void 0) {
-            this.model[key] = {};
+            this.model[key] = {}
         }
         return Object.assign(this.model[key], data)
      }
@@ -26,6 +26,6 @@ class Store {
 }
  
  // Singleton
- let storeObj = new Store();
+ let storeObj = new Store()
  export default storeObj
  

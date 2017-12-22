@@ -1,8 +1,6 @@
 import React from 'react'
 import Lazimage from 'components/Lazimage'
 
-const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType' };
-
 class SmallPokemon extends React.Component {
    constructor() {
         super(...arguments)
@@ -15,7 +13,7 @@ class SmallPokemon extends React.Component {
                     <Lazimage className="egg-pokemon-img"
                         key={ this.props.id } 
                         src='../assets/images/wait.gif'
-                        target={ "https://www.serebii.net/art/th/" + this.props.id + ".png" }/>
+                        target={ 'https://www.serebii.net/art/th/' + this.props.id + '.png' }/>
                     <label className="egg-pokemon-img-text">{ this.props.name }</label>
                 </div>
         )

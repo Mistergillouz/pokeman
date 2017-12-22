@@ -25,11 +25,11 @@ class CombatPanel extends React.Component {
             return null
         }
 
-        let species = PokedexHelper.species(attack.type);
-        let iconClass = 'icon-type-' + PokedexHelper.getSpeciesKey(species);
-        let atkName = PokedexHelper.loc(attack);
+        let species = PokedexHelper.species(attack.type)
+        let iconClass = 'icon-type-' + PokedexHelper.getSpeciesKey(species)
+        let atkName = PokedexHelper.loc(attack)
 
-        let tds = [];
+        let tds = []
         if (!summary) {
             if (quick) {
                 tds.push(<td align="right">{ attack.dpe }</td>);
@@ -56,11 +56,11 @@ class CombatPanel extends React.Component {
         let rows = [
             this.generateAttackRow(attacks.fast[0], true),
             this.generateAttackRow(attacks.charged[0], true)
-        ];
+        ]
 
         return (
             this.generateTable('Meilleurs attaques', rows, true)
-        );
+        )
     }
 
     generateSection(title, quick) {
@@ -70,20 +70,20 @@ class CombatPanel extends React.Component {
                 { quick ? <td className="section-td" align="right">EPS</td> :  <td className="section-td" align="right">Energie</td> }
                 <td className="section-td" align="right">DPS</td>
             </tr>
-        );
+        )
     }
 
     generateDetailsTable(attacks) {
-        let rows = [];
+        let rows = []
 
-        rows.push(this.generateSection('Attaques rapides', true));
+        rows.push(this.generateSection('Attaques rapides', true))
         attacks.fast.forEach(attack => {
-            rows.push(this.generateAttackRow(attack, false));
+            rows.push(this.generateAttackRow(attack, false))
         });
 
         rows.push(this.generateSection('Attaques Chargées'));
         attacks.charged.forEach(attack => {
-            rows.push(this.generateAttackRow(attack, false));
+            rows.push(this.generateAttackRow(attack, false))
         });
 
         return (
@@ -93,9 +93,9 @@ class CombatPanel extends React.Component {
     
     render() { 
 
-        let attacks = PokedexHelper.getAttacks(this.props.id);
+        let attacks = PokedexHelper.getAttacks(this.props.id)
         if (!attacks.fast.length || !attacks.charged.length) {
-            return <NotFound text='Pas de données sur les attaques de ce pokemon...'/>;
+            return <NotFound text='Pas de données sur les attaques de ce pokemon...'/>
         }
 
         return (

@@ -30,7 +30,7 @@ class MainPage extends React.Component {
         }
     }
 
-    onToggleFilterPanel(event) {
+    onToggleFilterPanel() {
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
@@ -49,7 +49,7 @@ class MainPage extends React.Component {
         this.applyFilter({ text:  event.target.value });
     }
 
-    onFilterChangeListener(args, height) {
+    onFilterChangeListener(args) {
         this.applyFilter(args);
     }
 

@@ -44,12 +44,12 @@ class ZoomPage extends React.Component {
 
     generateEvolvesRows(evolutions) {    
         
-        let grid = [], trs = [], highlightedId = this.selectedId()
+        let grid = [], trs = []
         this.createEvolvesGrid(evolutions, grid, 0)
         grid.forEach(row => {
 
             let tds = []
-            row.forEach((id, level) => {
+            row.forEach(id => {
                 let pokemonId = Number(id)
                 if (pokemonId) {
                     let name = PokedexHelper.getPokemonName(pokemonId)
@@ -99,7 +99,7 @@ class ZoomPage extends React.Component {
                         </tbody></table>
                     </div>
                     <CombatPanel id={ this.selectedId() }/>
-    		    </div>
+                </div>
 		    </div>
         )
     }

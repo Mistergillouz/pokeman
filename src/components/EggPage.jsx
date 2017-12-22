@@ -72,7 +72,7 @@ class EggPage extends React.Component {
 
         return tiles
     }
-    generateSection(pokemons, distance, addSectionText) {
+    generateSection(pokemons, distance) {
 
         let tiles = this.generatePokemons(pokemons)
         return (
@@ -107,7 +107,7 @@ class EggPage extends React.Component {
             }
 
             buttons.push(
-                <label className={ "gen-button " + clazz } onClick={(e) => { this.onGenClicked(i) }}>{ i }</label>
+                <label className={ 'gen-button ' + clazz } onClick={() => { this.onGenClicked(i) }}>{ i }</label>
             )
         }
         return buttons
@@ -124,7 +124,7 @@ class EggPage extends React.Component {
             }
 
             buttons.push(
-                <label className={ "gen-button " + clazz } onClick={(e) => { this.onDistanceClicked(keys[i]) }}>{ keys[i] }</label>
+                <label className={ 'gen-button ' + clazz } onClick={() => { this.onDistanceClicked(keys[i]) }}>{ keys[i] }</label>
             )
         }
         return buttons

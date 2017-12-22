@@ -7,7 +7,7 @@ import EggPage from 'components/EggPage'
 import Constants from 'data/Constants'
 import SpeciesTooltip from 'components/SpeciesTooltip'
 
-const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType' };
+const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType' }
 
 class App extends React.Component {
    constructor() {
@@ -20,7 +20,7 @@ class App extends React.Component {
 
     showTooltip(show, args) {
 
-        let tooltipArgs;
+        let tooltipArgs
         if (args.event)
             tooltipArgs = { 
                 x: args.event.clientX,
@@ -29,7 +29,7 @@ class App extends React.Component {
         }
 
         let pages = this.state.pages.slice()
-        pages[pages.length - 1].tooltipArgs = tooltipArgs;
+        pages[pages.length - 1].tooltipArgs = tooltipArgs
         this.setState({ pages: pages })
     }
 
@@ -59,20 +59,20 @@ class App extends React.Component {
 
             case Constants.EVENT.EggPage: 
                 this.pushPage(PAGES.EggPage)
-                break;
+                break
         
             case Constants.EVENT.ShowTooltip: 
             case Constants.EVENT.HideTooltip: 
                 this.showTooltip(args.eventType === Constants.EVENT.ShowTooltip, args)
-                break;
+                break
 
             case Constants.EVENT.PokemonSelected:
                 this.pushPage(PAGES.ZoomPage, args)
-                break;
+                break
 
             case Constants.EVENT.Back:
                 this.popPage()
-                break;
+                break
         }
     }
 
@@ -90,4 +90,4 @@ class App extends React.Component {
     }
 }
 
-export default App; 
+export default App

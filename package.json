@@ -15,6 +15,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
+    "eslint": "^4.13.1",
+    "eslint-plugin-react": "^7.5.1",
     "file-loader": "^0.11.2",
     "imports-loader": "^0.7.1",
     "style-loader": "^0.16.1",
@@ -26,6 +28,7 @@
   "scripts": {
     "prod": "webpack -p",
     "dist": "webpack",
-    "watch": "webpack-dev-server --progress --colors --history-api-fallback"
+    "watch": "webpack-dev-server --progress --colors --history-api-fallback",
+    "lint": "eslint src/**/*.js*"
   }
 }

@@ -11,10 +11,10 @@ class Pokemon extends React.Component {
     }
 
     buildSpecies(id) {
-        return (<Species key={id} id={id} eventHandler={ this.props.eventHandler }/>);
+        return (<Species key={id} id={id} eventHandler={ this.props.eventHandler }/>)
     }
 
-    onPokemonClicked(event) {
+    onPokemonClicked() {
         if (this.props.eventHandler) {
             this.props.eventHandler({
                 eventType: Constants.EVENT.PokemonSelected,
