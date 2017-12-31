@@ -91,17 +91,26 @@ class CombatPanel extends React.Component {
         )
     }
     
+    generateInfoTable(pokemon) {
+        let rows = []
+        rows.push(<tr><td colSpan="2" align="left">Maximum CP</td><td align="right">{ pokemon.cpmax }</td></tr>)
+        rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
+        rows.push(<tr><td colSpan="2" align="left">Distance copain</td><td align="right">{ pokemon.buddy }</td></tr>)
+        return this.generateTable("Statistiques", rows)
+    }
+
     render() { 
 
+        let pokemon = PokedexHelper.pokemon(this.props.id)
         let attacks = PokedexHelper.getAttacks(this.props.id)
-        if (!attacks.fast.length || !attacks.charged.length) {
-            return <NotFound text='Pas de données sur les attaques de ce pokemon...'/>
+        let elements = []
+        elements.push(this.generateInfoTable(pokemon))
+        if (attacks.fast.length && attacks.charged.length) {
+            elements.push(this.generateSummaryTable(attacks))
+            elements.push(this.generateDetailsTable(attacks))
         }
 
-        return (
-             [ this.generateSummaryTable(attacks),
-            this.generateDetailsTable(attacks) ]
-        )
+        return elements
     }
 }
 
