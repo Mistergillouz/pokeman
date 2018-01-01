@@ -11,9 +11,13 @@ class MainPage extends React.Component {
     constructor() {
         super(...arguments)
 
+        let storage = getStorageData()
+        let country = storage.loc || 'fr'
+        PokedexHelper.setLocaleCountry(country)
+
         this.state = {
             visible: true,
-            country: 'fr',
+            country: country,
             localePopoverVisible: false,
             filterVisible: false,
             pokemons: [],
@@ -41,8 +45,11 @@ class MainPage extends React.Component {
     onLocaleSelected(country) {
         PokedexHelper.setLocaleCountry(country);
         this.setState({ country: country });
-
         this.onToggleLocalePopover();
+
+        let data = getStorageData()
+        data.loc = country
+        setStorageData(data)
     }
 
     onFilterTextChanged(event) {
@@ -101,5 +108,23 @@ class MainPage extends React.Component {
         )
     }
 }
+
+function getStorageData() {
+    if (window.localStorage) {
+        let res = localStorage.getItem('pokeman')
+        if (res) {
+            return JSON.parse(res)
+        }
+    }
+
+    return {}
+}
+
+function setStorageData(value) {
+    if (window.localStorage) {
+        localStorage.setItem('pokeman', JSON.stringify(value))
+    }
+}
+
 
 export default MainPage

@@ -3,10 +3,19 @@ import React from 'react'
 import Pokemon from 'components/Pokemon'
 import NotFound from 'components/NotFound'
 
+
 class PokemonList extends React.Component {
    
     constructor() {
         super(...arguments)
+    }
+
+    componentDidMount() {
+        this.refs['pokemon-list'].addEventListener('scroll', (e) => {
+            PokemonList.scrollTop = e.target.scrollTop
+        })
+
+        this.refs['pokemon-list'].scrollTop = PokemonList.scrollTop
     }
 
     buildPokemon(pokemonId) {
@@ -26,12 +35,14 @@ class PokemonList extends React.Component {
 
         let content = this.generateList();
         return (
-            <div className='pokemon-list'>
+            <div ref="pokemon-list" key="pokelist" className='pokemon-list'>
                 { content }
             </div>
                 
         )
     }
 }
+
+PokemonList.scrollTop = 0
 
 export default PokemonList
