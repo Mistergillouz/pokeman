@@ -102,14 +102,17 @@ class CombatPanel extends React.Component {
     render() { 
 
         let pokemon = PokedexHelper.pokemon(this.props.id)
-        let attacks = PokedexHelper.getAttacks(this.props.id)
         let elements = []
-        elements.push(this.generateInfoTable(pokemon))
-        if (attacks.fast.length && attacks.charged.length) {
-            elements.push(this.generateSummaryTable(attacks))
-            elements.push(this.generateDetailsTable(attacks))
+        if (pokemon.gen < 4) {
+            let attacks = PokedexHelper.getAttacks(this.props.id)
+            elements.push(this.generateInfoTable(pokemon))
+            if (attacks.fast.length && attacks.charged.length) {
+                elements.push(this.generateSummaryTable(attacks))
+                elements.push(this.generateDetailsTable(attacks))
+            }
+        } else {
+            elements.push(<NotFound text="Désolé. Seules les informations sur les pokémons existants dans Pokemon-Go sont disponibles"/>)
         }
-
         return elements
     }
 }
