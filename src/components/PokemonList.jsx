@@ -35,7 +35,7 @@ class PokemonList extends React.Component {
 
         let content = this.generateList();
         return (
-            <div ref="pokemon-list" key="pokelist" className='pokemon-list'>
+            <div ref="pokemon-list" className='pokemon-list'>
                 { content }
             </div>
                 
