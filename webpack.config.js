@@ -7,9 +7,7 @@ var webpack = require('webpack');
 module.exports = {
 
     entry: path.resolve(__dirname, './src/index.jsx'),
-
     devtool: 'source-map',
-    
     output: {
         path: path.resolve(__dirname, 'build'), 
         filename: 'bundle.js'
