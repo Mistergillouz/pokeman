@@ -112,47 +112,9 @@ class CombatPanel extends React.Component {
         )
     }
 
-    generateTypesTable(species) {
-
-        let iconRows = species.map(species => {
-            let type = PokedexHelper.species(species)
-            return <td align="center"><div className= { 'info-type-icon icon-type-' + PokedexHelper.getSpeciesKey(type) }></div></td>
-        })
-
-        return (
-            <table className="info-types-table" border="0" cellSpacing="0" cellPadding="0">
-            <tbody>
-                <tr>{ iconRows }</tr>
-            </tbody>
-            </table>)
-    }
-
     render() { 
 
         let pokemon = PokedexHelper.pokemon(this.props.id)
-<<<<<<< HEAD
-        let attacks = PokedexHelper.getAttacks(this.props.id)
-        let elements = []
-
-        elements.push(this.generateTypesTable(pokemon.species))
-        elements.push(this.generateInfoTable(pokemon))
-        if (attacks.fast.length && attacks.charged.length) {
-            elements.push(this.generateSummaryTable(attacks))
-            elements.push(this.generateDetailsTable(attacks))
-        }
-
-        let species = PokedexHelper.species(pokemon.species[0])
-        let speciesKey = PokedexHelper.getSpeciesKey(species)
-
-
-        return (
-            <div className={ 'info-background back-' + speciesKey }>
-                <label className="info-cpmax"><span className="info-cpmax-cp">CP</span>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</label>
-                <div className='info-hpmeter'></div>
-                <img className='info-pokemon-img' src={ 'https://www.serebii.net/art/th/' + this.props.id + '.png' }></img>
-                { elements }
-            </div>)
-=======
 
         if (pokemon.gen < 4) {
             let typesTable = this.generateTypesTable(pokemon.species)
@@ -182,9 +144,7 @@ class CombatPanel extends React.Component {
         } else {
             return <NotFound text="Désolé. Seules les informations sur les pokémons existants dans Pokemon-Go sont disponibles"/>
         }
->>>>>>> fa1ad2b953aab35b8046875e5d9e6c77c292b922
     }
 }
-
 
 export default CombatPanel
