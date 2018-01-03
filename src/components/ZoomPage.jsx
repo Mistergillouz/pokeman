@@ -82,11 +82,9 @@ class ZoomPage extends React.Component {
             return null;
         }
 
-        let evolutions = PokedexHelper.getEvolvesList(this.props.args.id), trs = null
-        if (evolutions[0].children.length) {
-            trs = this.generateEvolvesRows(evolutions);
-        }
-        let label = PokedexHelper.getPokemonName(this.props.args.id)
+        let evolutions = PokedexHelper.getEvolvesList(this.props.args.id);
+        let trs = this.generateEvolvesRows(evolutions);
+        let label = 'Evolutions: ' + PokedexHelper.getPokemonName(this.props.args.id)
         return (
 
             <div className="page">
@@ -100,7 +98,7 @@ class ZoomPage extends React.Component {
                         {trs}
                         </tbody></table>
                     </div>
-                    <CombatPanel id={ this.selectedId() } onClose={() => this.onBack() }/>
+                    <CombatPanel id={ this.selectedId() }/>
                 </div>
 		    </div>
         )
