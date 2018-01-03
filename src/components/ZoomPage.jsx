@@ -98,7 +98,7 @@ class ZoomPage extends React.Component {
                         {trs}
                         </tbody></table>
                     </div>
-                    <CombatPanel id={ this.selectedId() }/>
+                    <CombatPanel id={ this.selectedId() } onClick={() => this.onBack() }/>
                 </div>
 		    </div>
         )

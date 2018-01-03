@@ -71,30 +71,29 @@ input {
 /*---------------------------------------------------------------------*/
 
 .attack-table {
-    width: 300px;
+    width: 100%;
     border: none;
     background-color: white;
     padding-bottom: 0.5em;
-    margin-bottom: 2em;
+    border-bottom: 2px solid lightslategray;
 }
 
 .attack-table th {
-    border-radius: 5px 5px 0px 0px;
-    background-color: #83baf8;
-    border-bottom: 4px solid lightsalmon;
-    color: white;
-    font-size: 20px;
-    text-align: center;
+    border-bottom: 1px solid lightgray;
+    font-size: 12pt;
+    text-align: left;
+    color: inherit;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 5px;
+    font-weight: bold;
 }
 
 .attack-table .section {
     font-weight: 700;
     padding-top: 1em;
     padding-left: 0.5em;
-    padding-bottom: 0.5em;
-    font-size: 12pt;
+    padding-bottom: 5px;
+    font-size: 9pt;
 }
 
 .section-td {
@@ -102,13 +101,13 @@ input {
 }
 
 .attack-table td {
-    font-size: 10pt;
+    font-size: 8pt;
     padding-top: 0.5em;
 }
 
 .attack-table tbody td:first-child {
     padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-right: 1em;
     width: 2em;
 }
 
@@ -454,6 +453,8 @@ input {
     align-items: center;
     flex-direction: column;
     overflow-y: auto;
+    height: 100%;
+    background-color: white;
 }
 
 .zoom-container {
@@ -665,6 +666,101 @@ h2, .inactive-h2 {
 .icon-type-WATER {
     background-position: -72px -96px;
 }
+
+.info-container {
+    background-repeat: no-repeat;
+    width: 300px;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #44696C;
+    box-shadow: 2px 2px 5px 0px #cfcfcf;
+    border-radius: 3px;
+}
+
+.info-cp-circle {
+    background-image: url(../images/cpcircle.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 210px;
+    margin-bottom: 20px;
+}
+
+.info-cp-label {
+    font-size: 12pt;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.info-cp-value {
+    font-size: 18pt;
+    color: white;
+}
+
+.info-pokemon-img {
+    position: relative;
+    top: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    min-height: 115px;
+}
+
+.info-types-table {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.info-types-table div {
+    margin-right: 3px;
+}
+
+.info-pokemon-details {
+    background-color: white;
+    border-radius: 8px;
+    margin-top: -20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+.info-pokemon-details table:last-of-type {
+    border: none;
+}
+
+.info-pokemon-name {
+    font-size: 15pt;
+    border-bottom: 3px solid #6DEDB7;
+}
+
+.close-button {
+    background-image: url(../images/close.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 40px;
+    background-size: 35px;
+}
+
+.info-back-BUG { background-image: url(../images/BUG.png); background-color: #bcab11; }
+.info-back-DARK { background-image: url(../images/DARK.png); background-color: #0B1334; }
+.info-back-DRAGON { background-image: url(../images/DRAGON.png); background-color: #3e683e; }
+.info-back-ELECTRIC { background-image: url(../images/ELECTRIC.png); background-color: #0e3761; }
+.info-back-FAIRY { background-image: url(../images/FAIRY.png); background-color: #8e70e3; }
+.info-back-FIGHTING { background-image: url(../images/FIGHTING.png); background-color: #827150; }
+.info-back-FIRE { background-image: url(../images/FIRE.png); background-color: #5d2a3c; }
+.info-back-FLYING { background-image: url(../images/FLYING.png); background-color: #6d9feb; }
+.info-back-GHOST { background-image: url(../images/GHOST.png); background-color: #123b65; }
+.info-back-GRASS { background-image: url(../images/GRASS.png); background-color: #aed05a; }
+.info-back-GROUND { background-image: url(../images/GROUND.png); background-color: #bb9a71; }
+.info-back-ICE { background-image: url(../images/ICE.png); background-color: #416886; }
+.info-back-NORMAL { background-image: url(../images/NORMAL.png); background-color: #d4c49a; }
+.info-back-POISON { background-image: url(../images/POISON.png); background-color: #181255; }
+.info-back-PSYCHIC { background-image: url(../images/PSYCHIC.png); background-color: #2029b5; }
+.info-back-ROCK { background-image: url(../images/ROCK.png); background-color: #767f8f; }
+.info-back-STEEL { background-image: url(../images/STEEL.png); background-color: #1A2B33; }
+.info-back-WATER { background-image: url(../images/WATER.png); background-color: #0485a2; }
 
 
 /*---------------------------------------------------------------------*/
