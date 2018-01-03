@@ -73,9 +73,10 @@ input {
 .attack-table {
     width: 300px;
     border: none;
-    background-color: white;
+    background-color: transparent;
     padding-bottom: 0.5em;
     margin-bottom: 2em;
+    margin: 0 auto;
 }
 
 .attack-table th {
@@ -87,6 +88,10 @@ input {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.attack-table tbody td {
+    background-color: white;
 }
 
 .attack-table .section {
@@ -595,6 +600,80 @@ h2, .inactive-h2 {
     background-color: #fff;
     padding: .5rem .75rem;
 }
+
+/*---------------------------------------------------------------------*/
+/*  BACKGROUNDS
+/*---------------------------------------------------------------------*/
+
+.info-background {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding-top: 25px;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.info-hpmeter {
+    background-image: url(../images/hpmeter.svg);
+    background-size: 250px;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-bottom: 140px;
+    margin-top: 35px;
+}
+
+.info-pokemon-img {
+    position: absolute;
+    height: 120px;
+    max-height: 120px;
+    max-width: 120px;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    padding-top: 45px;
+}
+
+.info-cpmax {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: white;
+    font-size: 18pt;
+}
+
+.info-cpmax-cp {
+    font-size: 14pt;
+}
+
+.info-types-table {
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.info-type-icon {
+    zoom: 0.8;
+}
+
+.back-NORMAL { background-image: url(../images/NORMAL.png); }
+.back-FIGHTING { background-image: url(../images/FIGHTING.png); }
+.back-FLYING { background-image: url(../images/FLYING.png); }
+.back-POISON { background-image: url(../images/POISON.png); }
+.back-GROUND { background-image: url(../images/GROUND.png); }
+.back-ROCK { background-image: url(../images/ROCK.png); }
+.back-BUG { background-image: url(../images/BUG.png); }
+.back-GHOST { background-image: url(../images/GHOST.png); }
+.back-STEEL { background-image: url(../images/STEEL.png); }
+.back-FIRE { background-image: url(../images/FIRE.png); }
+.back-WATER { background-image: url(../images/WATER.png); }
+.back-GRASS { background-image: url(../images/GRASS.png); background-color: #aed05a; }
+.back-ELECTRIC { background-image: url(../images/ELECTRIC.png); }
+.back-PSYCHIC { background-image: url(../images/PSYCHIC.png); }
+.back-ICE { background-image: url(../images/ICE.png); }
+.back-DRAGON { background-image: url(../images/DRAGON.png); }
+.back-DARK { background-image: url(../images/DARK.png); }
+.back-FAIRY { background-image: url(../images/FAIRY.png); }
 
 /*---------------------------------------------------------------------*/
 /*  ATTACK TYPES
