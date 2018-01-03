@@ -93,10 +93,11 @@ class CombatPanel extends React.Component {
     
     generateInfoTable(pokemon) {
         let rows = []
-        rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
+        
+        if (!isNaN(pokemon.candy)) {
+            rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
+        }
         rows.push(<tr><td colSpan="2" align="left">Distance copain</td><td align="right">{ pokemon.buddy }</td></tr>)
-        rows.push(<tr><td colSpan="2" align="left">Maximum CP</td><td align="right">{ pokemon.cpmax }</td></tr>)
-        rows.push(<tr><td colSpan="2" align="left">Generation</td><td align="right">{ pokemon.gen }</td></tr>)
         return this.generateTable("Informations", rows)
     }
 
@@ -126,7 +127,7 @@ class CombatPanel extends React.Component {
 
             return (
                 <div className={ 'info-container info-back-' + typeKey }>
-                    <div className='info-cp-label'>CP<span className='info-cp-value'>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</span></div>
+                    <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</span></div>
                     <div className='info-cp-circle'>
                         <div className='info-pokemon-img' style={ styles }/>
                     </div>
@@ -136,7 +137,7 @@ class CombatPanel extends React.Component {
                         { this.generateSummaryTable(attacks) }
                         { this.generateDetailsTable(attacks) }
                         { this.generateInfoTable(pokemon) }
-                        <div className='close-button' onClick={() => this.props.onClick() }/>
+                        <div className='close-button' onClick={() => this.props.onClose() }/>
                     </div>
                 </div>
             )
