@@ -46,7 +46,7 @@ class CombatPanel extends React.Component {
         return (
             <tr>
                 <td><div className={ iconClass }></div></td>
-                <td>{atkName}</td>
+                <td align="left">{atkName}</td>
                 {tds}
             </tr>
         )
@@ -59,14 +59,14 @@ class CombatPanel extends React.Component {
         ]
 
         return (
-            this.generateTable('Meilleurs attaques', rows, true)
+            this.generateTable('Meilleures attaques', rows, true)
         )
     }
 
     generateSection(title, quick) {
         return (
             <tr>
-                <td className="section" colSpan="2">{title}</td>
+                <td className="section" align="left" colSpan="2">{title}</td>
                 { quick ? <td className="section-td" align="right">EPS</td> :  <td className="section-td" align="right">Energie</td> }
                 <td className="section-td" align="right">DPS</td>
             </tr>
@@ -93,10 +93,23 @@ class CombatPanel extends React.Component {
     
     generateInfoTable(pokemon) {
         let rows = []
-        rows.push(<tr><td colSpan="2" align="left">Maximum CP</td><td align="right">{ pokemon.cpmax }</td></tr>)
-        rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
+        
+        if (!isNaN(pokemon.candy)) {
+            rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
+        }
         rows.push(<tr><td colSpan="2" align="left">Distance copain</td><td align="right">{ pokemon.buddy }</td></tr>)
-        return this.generateTable("Statistiques", rows)
+        return this.generateTable("Informations", rows)
+    }
+
+    generateTypesTable(species) {
+        let rows = species.map(id => {
+            let species = PokedexHelper.species(id)
+            return <div className={ 'icon-type-' + PokedexHelper.getSpeciesKey(species) }/>
+        })
+
+        return (
+            <div className='info-types-table'>{ rows }</div>
+        )
     }
 
     generateTypesTable(species) {
@@ -117,6 +130,7 @@ class CombatPanel extends React.Component {
     render() { 
 
         let pokemon = PokedexHelper.pokemon(this.props.id)
+<<<<<<< HEAD
         let attacks = PokedexHelper.getAttacks(this.props.id)
         let elements = []
 
@@ -138,6 +152,37 @@ class CombatPanel extends React.Component {
                 <img className='info-pokemon-img' src={ 'https://www.serebii.net/art/th/' + this.props.id + '.png' }></img>
                 { elements }
             </div>)
+=======
+
+        if (pokemon.gen < 4) {
+            let typesTable = this.generateTypesTable(pokemon.species)
+            let species = PokedexHelper.species(pokemon.species[0])
+            let typeKey = PokedexHelper.getSpeciesKey(species)
+            let attacks = PokedexHelper.getAttacks(this.props.id)
+            let styles = {
+                backgroundImage: 'url(https://www.serebii.net/art/th/' + this.props.id + '.png)'
+            }
+
+            return (
+                <div className={ 'info-container info-back-' + typeKey }>
+                    <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</span></div>
+                    <div className='info-cp-circle'>
+                        <div className='info-pokemon-img' style={ styles }/>
+                    </div>
+                    <div className="info-pokemon-details">
+                        <span className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</span>
+                        { typesTable }
+                        { this.generateSummaryTable(attacks) }
+                        { this.generateDetailsTable(attacks) }
+                        { this.generateInfoTable(pokemon) }
+                        <div className='close-button' onClick={() => this.props.onClose() }/>
+                    </div>
+                </div>
+            )
+        } else {
+            return <NotFound text="Désolé. Seules les informations sur les pokémons existants dans Pokemon-Go sont disponibles"/>
+        }
+>>>>>>> fa1ad2b953aab35b8046875e5d9e6c77c292b922
     }
 }
 
