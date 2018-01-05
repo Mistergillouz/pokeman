@@ -34,7 +34,7 @@ body {
 }
 
 
-.ui-borders, .ui-styles, .popover, .strength-table-container, .egg-button {
+.ui-borders, .ui-styles, .popover, .strength-table-container, .egg-button, .compare-button {
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
 }
@@ -209,8 +209,7 @@ input {
 /*  EGG PANEL
 /*---------------------------------------------------------------------*/
 
-.egg-button {
-    background-image: url('../images/egg.png');
+.egg-button, .compare-button {
     background-position: center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -218,6 +217,15 @@ input {
     width: 2em;
     height: 2em;
     margin-left: 5px;
+}
+
+.egg-button {
+    background-image: url('../images/egg.png');
+}
+
+.compare-button {
+    background-image: url('../images/compare.png');
+    display: none;
 }
 
 .eggs-container {
@@ -501,8 +509,6 @@ input {
     z-index: 100;
 }
 
-
-
 .gen .pokemon .types {
     margin: 30px 10px 0;
     display: flex;
@@ -608,6 +614,15 @@ h2, .inactive-h2 {
     line-height: 1.25;
     background-color: #fff;
     padding: .5rem .75rem;
+}
+
+/*---------------------------------------------------------------------*/
+/*  COMPARE PAGE
+/*---------------------------------------------------------------------*/
+
+.compare-container {
+    position: relative;
+    top: 50px;
 }
 
 /*---------------------------------------------------------------------*/

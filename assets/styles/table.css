@@ -1,0 +1,44 @@
+ .sort-table {
+    margin: 0 0 40px 0;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    display: table;
+    border-collapse: collapse;
+}
+ 
+.sort-table thead tr th {
+    background-color: #BBDEFB;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border: 3px solid white;
+    border-radius: 7px 7px 0 0;
+} 
+
+.sort-table-sort {
+    border-bottom-color: orange !important;
+}
+
+.sort-table tbody tr {
+    font-size: 10pt;
+    line-height: 20px;
+}
+
+.sort-table tbody tr.active {
+    background-color: #E0F2F1;
+}
+
+.sort-table tbody tr {
+    border-bottom: 1px solid lightblue;
+}
+.sort-table tbody td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.sort-table td, th {
+    padding-left: 10px;
+    padding-right: 10px;
+}

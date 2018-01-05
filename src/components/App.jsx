@@ -4,17 +4,19 @@ import PokedexHelper from 'data/PokedexHelper'
 import MainPage from 'components/MainPage'
 import ZoomPage from 'components/ZoomPage'
 import EggPage from 'components/EggPage'
+import ComparePage from 'components/ComparePage'
 import Constants from 'data/Constants'
 import SpeciesTooltip from 'components/SpeciesTooltip'
 
-const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType' }
+const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', ComparePage: 'ComparePage' }
 
 class App extends React.Component {
    constructor() {
         super(...arguments)
 
         this.state = {
-            pages: [{ pageId: PAGES.MainPage }]
+            selected: [],
+            pages: [_pageEntry(PAGES.MainPage)]
         }
     }
 
@@ -34,14 +36,12 @@ class App extends React.Component {
     }
 
     pushPage(pageId, args) {
-        let pages = this.state.pages.slice(), entry = { pageId: pageId, args: args }
+        let pages = this.state.pages.slice(), entry = _pageEntry(pageId, args)
         if (!args || !args.noPageStack) {
             pages.push(entry)
         } else {
             pages[pages.length - 1] = entry
-        }
-
-        this.setState({ pages: pages })
+        }this.setState({ pages: pages })
     }
 
     popPage() {
@@ -50,7 +50,7 @@ class App extends React.Component {
     }
 
     currentPage() {
-        return this.state.pages[this.state.pages.length - 1] || {}
+        return this.state.pages[this.state.pages.length - 1] || { args: {}}
     }
 
     eventHandler(args) {
@@ -66,8 +66,20 @@ class App extends React.Component {
                 this.showTooltip(args.eventType === Constants.EVENT.ShowTooltip, args)
                 break
 
+            case Constants.EVENT.PokemonSelected:
+                this.toggleSelected(args.id)
+                break;
+
             case Constants.EVENT.PokemonClicked:
-                this.pushPage(PAGES.ZoomPage, args)
+                if (this.state.selected.length) {
+                    this.toggleSelected(args.id)
+                } else {
+                    this.pushPage(PAGES.ZoomPage, args)
+                }
+                break;
+
+            case Constants.EVENT.ComparePage:
+                this.pushPage(PAGES.ComparePage, args)
                 break
 
             case Constants.EVENT.Back:
@@ -84,9 +96,17 @@ class App extends React.Component {
                 <MainPage visible={ pageId === PAGES.MainPage } eventHandler = { this.eventHandler.bind(this) }/>
                 <ZoomPage visible={ pageId === PAGES.ZoomPage } args={ page.args } eventHandler = { this.eventHandler.bind(this) }/>
                 <EggPage visible={ pageId === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
+                <ComparePage visible={ pageId === PAGES.ComparePage } pokemons={ page.args.pokemons } eventHandler = { this.eventHandler.bind(this) }/>
                 <SpeciesTooltip visible={ page.tooltipArgs } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
             </div>
         )
+    }
+}
+
+function _pageEntry(pageId, args) {
+    return {
+        pageId: pageId,
+        args: args || {}
     }
 }
 

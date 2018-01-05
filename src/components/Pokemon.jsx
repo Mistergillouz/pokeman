@@ -25,8 +25,9 @@ class Pokemon extends React.Component {
         }
     }
 
-    _onMouseDown() {
+    _onMouseDown(e) {
         this.timer = setTimeout(() => this._onLongPress(), 1000)
+        e.preventDefault()
     }
 
     _onLongPress() {
@@ -40,6 +41,7 @@ class Pokemon extends React.Component {
             this.onPokemonClicked()
         }
 
+        e.preventDefault()
         clearTimeout(this.timer)
         delete this.timer
         delete this.ignoreNextUp
@@ -56,9 +58,9 @@ class Pokemon extends React.Component {
     }
 
     componentDidMount() {
-        this.refs.pokemon.addEventListener('touchstart', () => { this._onMouseDown() })
+        this.refs.pokemon.addEventListener('touchstart', (e) => { this._onMouseDown(e) })
         this.refs.pokemon.addEventListener('touchend', (e) => { this._onMouseUp(e) })
-        this.refs.pokemon.addEventListener('mousedown', () => { this._onMouseDown() })
+        this.refs.pokemon.addEventListener('mousedown', (e) => { this._onMouseDown(e) })
         this.refs.pokemon.addEventListener('mouseup', (e) => { this._onMouseUp(e) })
     }
 

@@ -6,6 +6,7 @@ const Constants = {
         HideTooltip: 'HideTooltip',
         PokemonClicked: 'PokemonClicked',
         PokemonSelected: 'PokemonSelected',
+        ComparePage: 'ComparePage',
         Back: 'Back',
         EggPage: 'EggPage'
     },
