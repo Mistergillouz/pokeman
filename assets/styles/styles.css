@@ -475,6 +475,7 @@ input {
 /* Tiles */
 .gen {
     display: flex;
+    position: relative;
     margin-right: 10px;
     margin-bottom: 10px;
 }
@@ -486,6 +487,18 @@ input {
     background: #FFF;
     margin-bottom: 2px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-checked {
+    background-image: url(../images/checked.png);
+    background-repeat: no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    z-index: 100;
 }
 
 

@@ -4,6 +4,7 @@ const Constants = {
     EVENT: {
         ShowTooltip: 'ShowTooltip',
         HideTooltip: 'HideTooltip',
+        PokemonClicked: 'PokemonClicked',
         PokemonSelected: 'PokemonSelected',
         Back: 'Back',
         EggPage: 'EggPage'

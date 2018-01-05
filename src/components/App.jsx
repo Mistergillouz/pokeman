@@ -66,7 +66,7 @@ class App extends React.Component {
                 this.showTooltip(args.eventType === Constants.EVENT.ShowTooltip, args)
                 break
 
-            case Constants.EVENT.PokemonSelected:
+            case Constants.EVENT.PokemonClicked:
                 this.pushPage(PAGES.ZoomPage, args)
                 break
 

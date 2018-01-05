@@ -58,7 +58,7 @@ class EggPage extends React.Component {
 
     onPokemonClicked(id) {
         this.props.eventHandler({
-            eventType: Constants.EVENT.PokemonSelected,
+            eventType: Constants.EVENT.PokemonClicked,
             id: id
         });
     }

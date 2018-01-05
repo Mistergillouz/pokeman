@@ -8,6 +8,7 @@ class Pokemon extends React.Component {
    
     constructor() {
         super(...arguments)
+        this.state = {}
     }
 
     buildSpecies(id) {
@@ -15,12 +16,50 @@ class Pokemon extends React.Component {
     }
 
     onPokemonClicked() {
+
         if (this.props.eventHandler) {
             this.props.eventHandler({
-                eventType: Constants.EVENT.PokemonSelected,
+                eventType: Constants.EVENT.PokemonClicked,
                 id: this.props.id
             });
         }
+    }
+
+    _onMouseDown() {
+        this.timer = setTimeout(() => this._onLongPress(), 1000)
+    }
+
+    _onLongPress() {
+        this.onSelect(true)
+        this.ignoreNextUp = true
+    }
+
+    _onMouseUp(e) {
+
+        if (!this.ignoreNextUp) {
+            this.onPokemonClicked()
+        }
+
+        clearTimeout(this.timer)
+        delete this.timer
+        delete this.ignoreNextUp
+    }
+
+    onSelect(selected) {
+        if (this.props.eventHandler) {
+            this.props.eventHandler({
+                eventType: Constants.EVENT.PokemonSelected,
+                id: this.props.id,
+                selected: selected
+            });
+        }
+    }
+
+    componentDidMount() {
+        this.refs.pokemon.addEventListener('touchstart', () => { this._onMouseDown() })
+        this.refs.pokemon.addEventListener('touchend', (e) => { this._onMouseUp(e) })
+        this.refs.pokemon.addEventListener('mousedown', () => { this._onMouseDown() })
+        this.refs.pokemon.addEventListener('mouseup', (e) => { this._onMouseUp(e) })
     }
 
     render() { 
@@ -31,8 +70,9 @@ class Pokemon extends React.Component {
         let valueClass = this.props.inactive ? 'inactive-value' : 'value';
 
         return (
-            <div className={ "gen " + (this.props.className || '') } onClick={ (e) => this.onPokemonClicked(e) }>
-                <a className="pokemon g1" href="#" data-gen={ pokemon.gen }>
+            <div className={ "gen " + (this.props.className || '') }>
+                <div onClick={ (e) => this.onSelect(false) } className={ this.props.selected ? 'pokemon-checked' : '' }/>
+                <a ref="pokemon" className="pokemon g1" href="#" data-gen={ pokemon.gen }>
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }

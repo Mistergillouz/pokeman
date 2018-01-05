@@ -6,10 +6,14 @@ class Store {
      }
 
      set(key, data) {
-        if (this.model[key] === void 0) {
-            this.model[key] = {}
+        let value = this.model[key]
+        if (value !== void 0) {
+            if (typeof value === 'object' && typeof data === 'object') {
+                return Object.assign(value, data)
+            }
         }
-        return Object.assign(this.model[key], data)
+        this.model[key] = data
+        return data
      }
 
      get(key, defValues) {
