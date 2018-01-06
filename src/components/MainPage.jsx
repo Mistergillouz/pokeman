@@ -108,8 +108,6 @@ class MainPage extends React.Component {
 
         this.setState({ selected: selected })
         Store.set('selected', selected)
-
-        this.refs['compare-button'].style.display = selected.length > 1 ? 'block' : 'none'
     }
 
     render() { 
@@ -118,26 +116,31 @@ class MainPage extends React.Component {
             return null;
         }
 
+        let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
+
         return (
             <div className="page" data-content-id="tiles-container">
                 <div className="navbar">
 
+                    <div className="right-panel" onClick={ this.onToggleLocalePopover.bind(this) }>
+                        <LocaleFlag country={this.state.country}/>
+                        <img src="../assets/images/arrow-down.png"/>
+                    </div>
+
+
                     <div className="left-panel">
                         <div className="filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
                         <div className="egg-button" onClick={ (e) => this.onShowEggPanel(e) }></div>
-                        <div ref='compare-button' className="compare-button" onClick={ () => this.onCompare() }></div>
+                        <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
+                        <input type="search" 
+                            className="search-input ui-styles" 
+                            placeholder="Rechercher un Pokémon" 
+                            onChange={(e) => this.onFilterTextChanged(e)}
+                            value={ this.searchSettings.text }>
+                        </input>
                     </div>
 
-                    <input type="search" 
-                        className="search-input ui-styles" 
-                        placeholder="Rechercher un Pokémon" 
-                        onChange={(e) => this.onFilterTextChanged(e)}
-                        value={ this.searchSettings.text }>
-                    </input>
-                    <div className="right-panel" onClick={ this.onToggleLocalePopover.bind(this) }>
-                            <LocaleFlag country={this.state.country}/>
-                            <img src="../assets/images/arrow-down.png"/>
-                    </div>
+                    
                 </div> 
 
                 <FilterPanel 

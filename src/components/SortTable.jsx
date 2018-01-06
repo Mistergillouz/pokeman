@@ -15,14 +15,12 @@ class SortTable extends React.Component {
      * text: String
      * align: left/right/center (left: default)
      * sortable: true/false (true: default)
+     * callback: custom renderer
      */
 
     generateHeader() {
         let header = this.props.columns.map((column, colIndex) => {
-            let clazz = ''
-            if (colIndex === this.state.sortIndex) {
-                clazz =  'sort-table-sort'
-            }
+            let clazz = colIndex === this.state.sortIndex ? 'sort-table-sort-th' : ''
             return <th align={ _align(column) } className={ clazz }>{ column.text }</th>
         })
 
@@ -34,9 +32,13 @@ class SortTable extends React.Component {
      * datas: array of array 
      */
     generateTable() {
-        let rows = this.props.datas.map((row, rowIndex) => {
-            let cols = row.map((value, colIndex) => {
-                return <td align={ _align(this.props.columns[colIndex]) }>{ value }</td>
+        let rows = this.getIndices().map(rowIndex => {
+            let cols = this.props.datas[rowIndex].map((value, colIndex) => {
+                if (this.props.columns[colIndex].callback) {
+                    value = this.props.columns[colIndex].callback(rowIndex, colIndex)
+                }
+                let clazz = colIndex === this.state.sortIndex ? 'sort-table-sort-td' : ''
+                return <td align={ _align(this.props.columns[colIndex]) } className={ clazz }>{ value }</td>
             });
             return <tr>{ cols }</tr>
         })
@@ -55,11 +57,11 @@ class SortTable extends React.Component {
             ascending = !ascending
         } else {
             sortIndex = index
-            ascending = true
+            ascending = false
         }
 
-        this.props.datas.sort((a, b) => {
-            let v0 = a[sortIndex], v1 = b[sortIndex]
+        this.getIndices().sort((a, b) => {
+            let v0 = this.props.datas[a][sortIndex], v1 = this.props.datas[b][sortIndex]
             let res = (typeof v0 === 'number') ? v0 - v1 : v0.localeCompare(v1)
             return ascending ? res : -res
         })
@@ -72,10 +74,11 @@ class SortTable extends React.Component {
         for (let i = 0; i < cells.length; i++) {
             cells[i].addEventListener('click', () => this.onSort(i))
         }
+
     }
-
+    
     render() { 
-
+        
         return (
             <table ref='table' className='sort-table'>
             { this.generateHeader() }
@@ -83,14 +86,22 @@ class SortTable extends React.Component {
             </table>
         )
     }
+    
+    getIndices() {
+        if (!this.indices) {
+            this.indices = this.props.datas.map((_, index) => index)
+        }
+
+        return this.indices;
+    }
 }
 
 function _align(column) {
     switch (column.align) {
         case 'right': return 'right'
-        case 'center': return 'center'
+        case 'left': return 'left'
     }
-    return 'left'
+    return 'center'
 }
 
 export default SortTable; 

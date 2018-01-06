@@ -91,8 +91,10 @@ class ZoomPage extends React.Component {
 
             <div className="page">
                 <div className="navbar">
-                    <button className="left-panel back-button" onClick= {() => this.onBack() }></button>
-                    <label>{ label }</label>
+                    <div className="left-panel">
+                        <button className="back-button" onClick= {() => this.onBack() }></button>
+                        <sup className='title-text'>{ label }</sup>
+                    </div>
                 </div>
                 <div className="pokemon-zoom">
                     <div className="zoom-container">

@@ -27,7 +27,7 @@ class Pokemon extends React.Component {
 
     _onMouseDown(e) {
         this.timer = setTimeout(() => this._onLongPress(), 1000)
-        e.preventDefault()
+        //e.preventDefault()
     }
 
     _onLongPress() {

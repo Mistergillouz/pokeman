@@ -153,14 +153,16 @@ class EggPage extends React.Component {
         return (
             <div className="page">
                 <div className="navbar">
-                <div className="left-panel">
-                    <button className="back-button" onClick= {() => this.onBack() }></button>
-                    { this.generateDistancesFilter() }
-                </div>
-                <sup>Oeufs</sup>
                 <div className="right-panel">
                     { this.generateGenFilter() }
                 </div>
+
+                <div className="left-panel">
+                    <button className="back-button" onClick= {() => this.onBack() }></button>
+                    { this.generateDistancesFilter() }
+                    <sup className='title-text'>Oeufs</sup>
+                </div>
+                
                 </div>
                 <div className="eggs-container">
                     { this.generatePage() }

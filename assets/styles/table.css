@@ -17,8 +17,12 @@
     border-radius: 7px 7px 0 0;
 } 
 
-.sort-table-sort {
+.sort-table-sort-th {
     border-bottom-color: orange !important;
+}
+
+.sort-table-sort-td {
+    background-color: #f0f0f0;
 }
 
 .sort-table tbody tr {

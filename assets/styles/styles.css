@@ -34,7 +34,7 @@ body {
 }
 
 
-.ui-borders, .ui-styles, .popover, .strength-table-container, .egg-button, .compare-button {
+.ui-borders, .ui-styles, .popover, .strength-table-container {
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
 }
@@ -115,30 +115,7 @@ input {
     padding-right: 0.5em;
 }
 
-.back-button {
-    background-image: url('../images/back.png');
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    background-position: center;
-    background-size: 24px;
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    background-color: rgb(67, 49, 77);
-    border: 0;
-}
 
-.filter-toggle {
-    background-image: url('../images/filteron.png');
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    background-position: center;
-    background-position-x: 7px;
-    background-size: 1.2em 1.2em;
-    opacity: 0.57;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: .25rem;
-    width: 2em;
-    height: 2em;
-}
 
 .filter-toggle-off {
     background-image: url('../images/filteroff.png');
@@ -151,8 +128,9 @@ input {
     text-indent: 10px;
     width: 120px;
 }
+
 .search-input {
-    width: 65%;
+    width: 100%;
     background-image: url(../images/searchicon.png);
     background-position: center;
     background-position-x: 4px;
@@ -172,19 +150,21 @@ input {
 }
 
 .right-panel, .left-panel {
-    position: absolute;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    height: 50px;
 }
 
 .left-panel {
-    left: 5px;
+    padding-right: 5px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .right-panel {
-    right: 5px;
+    float: right;
+    right: 0;
 }
 
 .navbar {
@@ -192,11 +172,7 @@ input {
     background-color: #f8f8f8;
     border-color: #e7e7e7;
     border-radius: 4px;
-    height: 50px;
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    max-height: 50px;
 }
 
 @media all and (max-width: 1024px) {
@@ -209,14 +185,25 @@ input {
 /*  EGG PANEL
 /*---------------------------------------------------------------------*/
 
-.egg-button, .compare-button {
+.egg-button, .compare-button, .filter-toggle, .back-button {
     background-position: center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
     background-color: white;
+    min-width: 2em;
+    min-height: 2em;
     width: 2em;
-    height: 2em;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
     margin-left: 5px;
+}
+
+
+.back-button {
+    background-image: url('../images/back.png');
+    border-radius: 50%;
+    background-color: rgb(67, 49, 77);
+    border: 0;
 }
 
 .egg-button {
@@ -225,7 +212,14 @@ input {
 
 .compare-button {
     background-image: url('../images/compare.png');
-    display: none;
+}
+
+.filter-toggle {
+    background-image: url('../images/filteron.png');
+    background-position-x: 7px;
+    background-size: 1.2em 1.2em;
+    opacity: 0.57;
+    margin-left: none;
 }
 
 .eggs-container {
@@ -245,6 +239,11 @@ input {
     background-color: blanchedalmond;
     border-radius: 20px;
     font-size: 14pt;
+    text-align: center;
+}
+
+.title-text {
+    width: 100%;
     text-align: center;
 }
 
@@ -340,6 +339,7 @@ input {
     background-color: #e4e4e4;
     border: 1px solid rgba(0,0,0,.15);
     width: 2.5em;
+    min-width: 2.5em;
     height: 2em;
     text-align: center;
     border-left-width: 0;
@@ -473,10 +473,6 @@ input {
 
     .zoom-container {
         display: block;
-    }
-
-    .search-input {
-        width: 55%;
     }
 }
 
@@ -621,8 +617,18 @@ h2, .inactive-h2 {
 /*---------------------------------------------------------------------*/
 
 .compare-container {
-    position: relative;
-    top: 50px;
+    background-color: white;
+    height: 100%;
+}
+
+.icon-type-small {
+    zoom: 0.6;
+}
+
+.compare-col-0 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /*---------------------------------------------------------------------*/
@@ -694,6 +700,7 @@ h2, .inactive-h2 {
 .icon-type-WATER {
     background-position: -72px -96px;
 }
+
 
 .info-container {
     background-repeat: no-repeat;

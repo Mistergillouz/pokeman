@@ -9,24 +9,37 @@ class ComparePage extends React.Component {
         super(...arguments)
     }
 
-    generatePage() {
-        return (
-            null
-        )
-    }
-
     onBack() {
         this.props.eventHandler({ eventType: Constants.EVENT.Back })
+    }
+
+    getColumnName(rowIndex) {
+        let pokemonId = this.props.pokemons[rowIndex]
+        let pokemon = PokedexHelper.getPokemon(pokemonId)
+        let name = PokedexHelper.loc(pokemon)
+        let typeIcons = pokemon.species.map(specie => {
+            let type = PokedexHelper.species(specie)
+            let key = PokedexHelper.getSpeciesKey(type)   
+            return <div className={ 'icon-type-' + key + ' icon-type-small'}/> 
+        });
+        return (
+            <div className='compare-col-0'>
+                { name }
+                <div className='compare-col-0'>
+                    { typeIcons }
+                </div>
+            </div>
+        )
     }
 
     getColumns() {
 
         return [
-            { text: 'Nom' },
-            { text: 'PC', align: 'right' },
-            { text: 'ATK', align: 'right' },
-            { text: 'DEF', align: 'right' },
-            { text: 'RES', align: 'right' }
+            { text: 'Pokemon', align: 'left', callback: row => this.getColumnName(row) },
+            { text: 'PC' },
+            { text: 'ATK' },
+            { text: 'DEF' },
+            { text: 'RES' }
         ]
     }
 
@@ -42,6 +55,7 @@ class ComparePage extends React.Component {
             ]
         })
     }
+    
     render() { 
         if (!this.props.visible) {
             return null
@@ -51,8 +65,8 @@ class ComparePage extends React.Component {
             <div className="navbar">
                 <div className="left-panel">
                     <button className="back-button" onClick= {() => this.onBack() }></button>
+                    <sup className='title-text'>Comparaisons</sup>
                 </div>
-                <sup>Comparaisons</sup>
             </div>
             <div className="compare-container">
                 <SortTable columns={ this.getColumns() } datas={ this.getDatas() }/>
