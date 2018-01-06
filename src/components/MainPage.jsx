@@ -1,11 +1,11 @@
 import React from 'react'
 import PokemonList from 'components/PokemonList'
 import PokedexHelper from 'data/PokedexHelper'
-import LocaleFlag from 'components/LocaleFlag'
-import LocalePopover from 'components/LocalePopover'
 import FilterPanel from 'components/FilterPanel'
+import Hamburger from 'components/Hamburger'
 import Constants from 'data/Constants'
 import Store from 'data/Store'
+
 
 class MainPage extends React.Component {
    
@@ -19,7 +19,6 @@ class MainPage extends React.Component {
         this.state = {
             visible: true,
             country: country,
-            localePopoverVisible: false,
             filterVisible: false,
             pokemons: [],
 
@@ -39,6 +38,10 @@ class MainPage extends React.Component {
 
         switch (args.eventType) {
 
+            case Constants.EVENT.LocaleSelected:
+                this.onLocaleSelected(args.country);
+                break;
+
             case Constants.EVENT.PokemonSelected:
                 this.toggleSelected(args.id)
                 break;
@@ -46,10 +49,13 @@ class MainPage extends React.Component {
             case Constants.EVENT.PokemonClicked:
                 if (this.state.selected.length) {
                     this.toggleSelected(args.id)
-                } else {
-                    this.props.eventHandler(args)
+                    break;
                 }
-                break;
+
+                // Fall thru
+
+            default:
+                this.props.eventHandler(args)
         }
     }
 
@@ -57,14 +63,9 @@ class MainPage extends React.Component {
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
-    onToggleLocalePopover() {
-        this.setState({ localePopoverVisible: !this.state.localePopoverVisible })
-    }
-
     onLocaleSelected(country) {
         PokedexHelper.setLocaleCountry(country);
         this.setState({ country: country });
-        this.onToggleLocalePopover();
 
         let data = getStorageData()
         data.loc = country
@@ -85,10 +86,6 @@ class MainPage extends React.Component {
             let ids = PokedexHelper.search(this.searchSettings);
             this.setState({ pokemons: ids });
         }
-    }
-
-    onShowEggPanel() {
-        this.props.eventHandler({ eventType: Constants.EVENT.EggPage })
     }
 
     onCompare() {
@@ -122,15 +119,10 @@ class MainPage extends React.Component {
             <div className="page" data-content-id="tiles-container">
                 <div className="navbar">
 
-                    <div className="right-panel" onClick={ this.onToggleLocalePopover.bind(this) }>
-                        <LocaleFlag country={this.state.country}/>
-                        <img src="../assets/images/arrow-down.png"/>
-                    </div>
-
+                    <Hamburger eventHandler={ args => this.eventHandler(args) }/>
 
                     <div className="left-panel">
                         <div className="filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                        <div className="egg-button" onClick={ (e) => this.onShowEggPanel(e) }></div>
                         <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
                         <input type="search" 
                             className="search-input ui-styles" 
@@ -146,9 +138,6 @@ class MainPage extends React.Component {
                 <FilterPanel 
                     visible={ this.state.filterVisible } 
                     notifyChange={ this.onFilterChangeListener.bind(this) }/>
-                <LocalePopover 
-                    show={this.state.localePopoverVisible} 
-                    onLocaleSelected={ (id) => this.onLocaleSelected(id) }/>
                 <PokemonList
                     pokemons={ this.state.pokemons } 
                     selected={ this.state.selected }

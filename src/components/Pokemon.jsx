@@ -4,6 +4,9 @@ import Constants from 'data/Constants'
 import Species from 'components/Species'
 import Lazimage from 'components/Lazimage'
 
+
+const LONG_PRESS_DURATION = 500
+
 class Pokemon extends React.Component {
    
     constructor() {
@@ -26,18 +29,24 @@ class Pokemon extends React.Component {
     }
 
     _onMouseDown(e) {
-        this.timer = setTimeout(() => this._onLongPress(), 1000)
+        this.timer = setTimeout(() => this._onLongPress(), LONG_PRESS_DURATION)
         //e.preventDefault()
     }
 
+    _onMouseMove(e) {
+        this.moved = true
+    }
+
     _onLongPress() {
-        this.onSelect(true)
-        this.ignoreNextUp = true
+        if (!this.moved) {
+            this.onSelect(true)
+            this.ignoreNextUp = true
+        }
     }
 
     _onMouseUp(e) {
 
-        if (!this.ignoreNextUp) {
+        if (!this.moved && !this.ignoreNextUp) {
             this.onPokemonClicked()
         }
 
@@ -45,6 +54,7 @@ class Pokemon extends React.Component {
         clearTimeout(this.timer)
         delete this.timer
         delete this.ignoreNextUp
+        delete this.moved
     }
 
     onSelect(selected) {
@@ -60,6 +70,7 @@ class Pokemon extends React.Component {
     componentDidMount() {
         this.refs.pokemon.addEventListener('touchstart', (e) => { this._onMouseDown(e) })
         this.refs.pokemon.addEventListener('touchend', (e) => { this._onMouseUp(e) })
+        this.refs.pokemon.addEventListener('touchmove', (e) => { this._onMouseMove(e) })
         this.refs.pokemon.addEventListener('mousedown', (e) => { this._onMouseDown(e) })
         this.refs.pokemon.addEventListener('mouseup', (e) => { this._onMouseUp(e) })
     }

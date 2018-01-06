@@ -36,7 +36,7 @@ class ComparePage extends React.Component {
 
         return [
             { text: 'Pokemon', align: 'left', callback: row => this.getColumnName(row) },
-            { text: 'PC' },
+            { text: 'PC', default: true },
             { text: 'ATK' },
             { text: 'DEF' },
             { text: 'RES' }

@@ -25,6 +25,7 @@ a {
 body {
     font-family: 'Roboto', sans-serif;
     color: #303030;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .hidden {
@@ -185,7 +186,7 @@ input {
 /*  EGG PANEL
 /*---------------------------------------------------------------------*/
 
-.egg-button, .compare-button, .filter-toggle, .back-button {
+.compare-button, .filter-toggle, .back-button {
     background-position: center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -204,10 +205,6 @@ input {
     border-radius: 50%;
     background-color: rgb(67, 49, 77);
     border: 0;
-}
-
-.egg-button {
-    background-image: url('../images/egg.png');
 }
 
 .compare-button {

@@ -213,6 +213,10 @@ class PokedexHelper {
         return object.loc[locale ? locale.id : this.locale.id];
     }
 
+    getLocaleCountry() {
+        return this.locale.country
+    }
+
     normalizeText(text) {
         
         const subs = [

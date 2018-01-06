@@ -2,26 +2,42 @@ import React from 'react'
 import '../../assets/styles/table.css'
 
 class SortTable extends React.Component {
-   constructor() {
-        super(...arguments)
+   constructor(props) {
+        super(props)
+
+        let sortIndex = -1, ascending = false
+        props.columns.forEach((column, colIndex) => {
+            if (column.default) {
+                sortIndex = colIndex
+            }
+        })
+
         this.state = {
-            sortIndex: -1,
-            ascending: false
+            sortIndex: sortIndex,
+            ascending: ascending
+        }
+
+        if (sortIndex !== -1) {
+            this._sort(sortIndex, ascending)
         }
     }
 
+    componentWillReceiveProps(a, b) {
+        console.log(a, b)
+    }
     /**
      * columns (array): 
      * text: String
      * align: left/right/center (left: default)
      * sortable: true/false (true: default)
+     * default: true/false (false: default)
      * callback: custom renderer
      */
 
     generateHeader() {
         let header = this.props.columns.map((column, colIndex) => {
             let clazz = colIndex === this.state.sortIndex ? 'sort-table-sort-th' : ''
-            return <th align={ _align(column) } className={ clazz }>{ column.text }</th>
+            return <th align={ _align(column) } className={ clazz } onClick={ () => this.onSort(colIndex) }>{ column.text }</th>
         })
 
         return (<thead><tr>{ header }</tr></thead>)
@@ -60,29 +76,24 @@ class SortTable extends React.Component {
             ascending = false
         }
 
+        this._sort(sortIndex, ascending)
+        this.setState({ ascending: ascending, sortIndex: sortIndex })
+    }
+
+    _sort(sortIndex, ascending) {
         this.getIndices().sort((a, b) => {
             let v0 = this.props.datas[a][sortIndex], v1 = this.props.datas[b][sortIndex]
             let res = (typeof v0 === 'number') ? v0 - v1 : v0.localeCompare(v1)
             return ascending ? res : -res
         })
-
-        this.setState({ ascending: ascending, sortIndex: sortIndex })
     }
 
-    componentDidMount() {
-        var cells = this.refs.table.getElementsByTagName('th')
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].addEventListener('click', () => this.onSort(i))
-        }
-
-    }
-    
     render() { 
         
         return (
             <table ref='table' className='sort-table'>
-            { this.generateHeader() }
-            { this.generateTable() }
+                { this.generateHeader() }
+                { this.generateTable() }
             </table>
         )
     }
