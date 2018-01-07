@@ -3,3 +3,9 @@ import App from 'components/App'
 import { render } from 'react-dom'
 
 render(<App/>, document.getElementById('app-root'))
+
+window.oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+}

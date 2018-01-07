@@ -14,7 +14,7 @@ const Constants = {
 
     MAX_GEN: 7,
     LOCALES: { 
-        FRENCH: { country: 'fr', name: 'Francais', id: 5 }, 
+        FRENCH: { country: 'fr', name: 'Français', id: 5 }, 
         ENGLISH: { country: 'en', name: 'English', id: 9 }
     }
 }

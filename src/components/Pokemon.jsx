@@ -85,12 +85,12 @@ class Pokemon extends React.Component {
         return (
             <div className={ "gen " + (this.props.className || '') }>
                 <div onClick={ (e) => this.onSelect(false) } className={ this.props.selected ? 'pokemon-checked' : '' }/>
-                <a ref="pokemon" className="pokemon g1" href="#" data-gen={ pokemon.gen }>
+                <a ref="pokemon" key={ 'gen' + this.props.id } className="pokemon g1" href="#" data-gen={ pokemon.gen }>
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }
                     </div>
-                    <Lazimage className="lazimage" key={ this.props.id } src='../assets/images/wait.gif' target={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
+                    <Lazimage className="lazimage" src='../assets/images/wait.gif' target={ "https://www.serebii.net/art/th/" + this.props.id + ".png" } style={{ display: 'block' }}/>
                     <div className="bar">
                         <div className={ valueClass }></div>
                     </div>

@@ -43,7 +43,7 @@ class PokedexHelper {
                     }
                 });
     
-                let dps = this._round((attack.dmg / attack.duration) * bonus, 1) ;
+                let dps = _round((attack.dmg / attack.duration) * bonus, 1) ;
                 let entry = Object.assign({}, attack, {
                     name:  this.loc(attack),
                     dps: dps
@@ -135,20 +135,37 @@ class PokedexHelper {
     search(query) {
             
         let ids = [];
-        
-        let text = this.normalizeText(query.text.trim().toLowerCase());
-
-        Object.keys(Pokedex.pokemons).forEach((pokemonId) => {
+        let textParts = this.normalizeText(query.text.trim().toLowerCase()).split(' ')
+        function matchRuleShort(str, rule) {
+            return new RegExp("^" + rule.split("*").join(".*") + "$").test(str);
+          }
+        let keys = Object.keys(Pokedex.pokemons)
+        keys.forEach(pokemonId => {
 
             let pokemon = Pokedex.pokemons[pokemonId];
             if (query.genId && pokemon.gen !== query.genId) {
                 return;
             }
+
+            let name = this.normalizeText(this.loc(pokemon) || '').toLowerCase();
+            if (!name.length) {
+                return;
+            }
     
-            if (text.length) {
-                var name = this.normalizeText(this.loc(pokemon) || '').toLowerCase();
-                if (!name.length || name.indexOf(text) === -1) {
-                    return;
+            if (textParts.length) {
+                let found = false
+                textParts.forEach(text => {
+                    if (keys[text]) {
+                        pokemonId = text
+                        found = true
+                    }
+                    else if (_match(name, text)) {
+                        found = true
+                    }
+                })
+
+                if (!found) {
+                    return
                 }
             }
     
@@ -159,7 +176,7 @@ class PokedexHelper {
                 } 
             });
     
-            if (!rejected) {
+            if (!rejected && ids.indexOf(pokemonId) === -1) {
                 ids.push(pokemonId);
             }
         });
@@ -273,10 +290,16 @@ class PokedexHelper {
         return this.loc(species, Constants.LOCALES.ENGLISH).toUpperCase()
     }
 
-    _round(num, decimals) {
-        var n = Math.pow(10, decimals);
-        return Math.round( (n * num).toFixed(decimals) )  / n;
-    }
+}
+
+function _round(num, decimals) {
+    var n = Math.pow(10, decimals);
+    return Math.round( (n * num).toFixed(decimals) )  / n;
+}
+
+function _match(str, rule) {
+    let regex = new RegExp("^" + rule.split("*").join(".*") + "$")
+    return regex.test(str) || str.indexOf(rule) !== -1
 }
 
 // Singleton

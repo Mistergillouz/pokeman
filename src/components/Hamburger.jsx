@@ -12,24 +12,25 @@ class Hamburger extends React.Component {
     }
 
     onShowEggPanel() {
-        this.onToggleMenuVisibility()
+        this.onToggleMenuVisibilityAsync()
         this.props.eventHandler({ eventType: Constants.EVENT.EggPage })
     }
 
+    onToggleMenuVisibilityAsync() {
+        setTimeout(() => this.onToggleMenuVisibility() , 750)
+    }
+
     onToggleMenuVisibility() {
-        setTimeout(() => {
-            let navigation = this.refs.navigation;
-            if (navigation) {
-                navigation.classList.toggle('nav-opened')
-            }
-        }, 750)
-        
+        let navigation = this.refs.navigation;
+        if (navigation) {
+            navigation.classList.toggle('nav-opened')
+        }
     }
 
     onRadioCheck(country) {
-        this.onToggleMenuVisibility()
         this.props.eventHandler({ eventType: Constants.EVENT.LocaleSelected, country: country })
         this.setState({ country: country })
+        this.onToggleMenuVisibilityAsync()
     }
 
     generateLangRadio() {
@@ -37,7 +38,7 @@ class Hamburger extends React.Component {
             let locale = Constants.LOCALES[key]
             let checkedClass = locale.country === this.state.country ? 'checked' : ''
             return (
-                <li onClick={ () => this.onRadioCheck(locale.country) }>
+                <li key={ locale.country } onClick={ () => this.onRadioCheck(locale.country) }>
                     <i className={ checkedClass }/>
                     <span>{ locale.name }</span>
                 </li>
@@ -47,16 +48,39 @@ class Hamburger extends React.Component {
         return radios
     }
 
+    startButtonAnimation() {
+        let navigation = this.refs['btn-navigation']
+        if (!navigation) {
+            return
+        }
+        let animationListener = () => {
+            navigation.removeEventListener('transitionend', animationListener)
+            navigation.classList.remove('navigation-scale-anim')
+            navigation.classList.add('navigation-scale-anim-end')
+        }
+        navigation.classList.add('navigation-scale-anim')
+        navigation.addEventListener('transitionend', animationListener, false)
+        
+    }
+
+    componentWillMount() {
+        if (!Hamburger.ANIM_DONE) {
+            Hamburger.ANIM_DONE = true
+            setTimeout(() => this.startButtonAnimation(), 1000)
+        }
+    }
+
     render() { 
 
         return (
             <div>
-                <div className="btn-navigation" onClick={ () => this.onToggleMenuVisibility() }>
+                <div key="btn-nav" className="btn-navigation" ref='btn-navigation' onClick={ () => this.onToggleMenuVisibility() }>
                     <div className="btn-navigation-barre"></div>
                     <div className="btn-navigation-barre"></div>
                     <div className="btn-navigation-barre"></div>
                 </div>
-                <div className="navigation" ref="navigation">
+                <div key="nav-pan" className="navigation" ref="navigation">
+                    <span className="navigation-title">POKEMAN</span>
                     <ul>
                         <li className="menu-section">Langues</li>
                         { this.generateLangRadio() }
@@ -72,5 +96,7 @@ class Hamburger extends React.Component {
         )
     }
 }
+
+Hamburger.ANIM_DONE = false
 
 export default Hamburger

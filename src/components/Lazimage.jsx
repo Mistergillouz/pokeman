@@ -5,7 +5,6 @@ class Lazimage extends React.Component {
    constructor() {
         super(...arguments)
         this.updateFunct = this.update.bind(this);
-        this.state = {};
 
         this.waitLoaded = false;
     }
@@ -32,9 +31,8 @@ class Lazimage extends React.Component {
     }
 
     update(e) {
-
         if (this.waitLoaded && this.isVisible()) {
-            this.setState({ src: this.props.target });
+            this.forceUpdate()
             return true;
         }
 
@@ -43,11 +41,10 @@ class Lazimage extends React.Component {
 
     onLoad() {
 
+        // "Loading please wait" image is loaded
         if (!this.waitLoaded) {
-            // "Loading please wait" image is loaded
             this.waitLoaded = true;
             this.update();
-
         } else {
             this.detach();
         }
@@ -59,9 +56,9 @@ class Lazimage extends React.Component {
     }
 
     render() { 
-        var img = this.state.src || this.props.src;
+        var img = this.waitLoaded ? this.props.target : this.props.src;
         return (
-            <img src= { img } onLoad={ () => this.onLoad() } className={ this.props.className }/>
+            <img src={ img } onLoad={ () => this.onLoad() } className={ this.props.className }/>
         )
     }
 }

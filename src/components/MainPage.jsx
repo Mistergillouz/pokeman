@@ -20,17 +20,21 @@ class MainPage extends React.Component {
             visible: true,
             country: country,
             filterVisible: false,
-            pokemons: [],
-
+            
             tooltipTypeId: -1,
-            selected: Store.get('selected', [])
+            selected: Store.get('selected', []),
+            searchSettings: { 
+                text: '', 
+                genId: null,
+                types: [] 
+            }
         }
-
-        this.searchSettings = { text: '', genId: null, types: [] };
+        
         this.tooltip = { x: 0, y: 0};
-
+        
+        this.pokemons = []
         for (let i = 1; i < 151; i++) {
-            this.state.pokemons.push(i);
+            this.pokemons.push(i);
         }
     }
 
@@ -60,6 +64,7 @@ class MainPage extends React.Component {
     }
 
     onToggleFilterPanel() {
+        this.refs.filterToggle.classList.toggle('filter-toggle-off')
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
@@ -73,7 +78,10 @@ class MainPage extends React.Component {
     }
 
     onFilterTextChanged(event) {
-        this.applyFilter({ text:  event.target.value });
+        if (this.filterTimerId) {
+            clearTimeout(this.filterTimerId)
+        }
+        this.filterTimerId = setTimeout(() =>  this.applyFilter({ text: this.refs.search.value }), 750)
     }
 
     onFilterChangeListener(args) {
@@ -82,9 +90,9 @@ class MainPage extends React.Component {
 
     applyFilter(args) {
         if (args) {
-            Object.assign(this.searchSettings, args);
-            let ids = PokedexHelper.search(this.searchSettings);
-            this.setState({ pokemons: ids });
+            let searchSettings = Object.assign({}, this.state.searchSettings, args)
+            this.pokemons = PokedexHelper.search(searchSettings);
+            this.setState({ searchSettings: searchSettings });
         }
     }
 
@@ -114,7 +122,6 @@ class MainPage extends React.Component {
         }
 
         let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
-
         return (
             <div className="page" data-content-id="tiles-container">
                 <div className="navbar">
@@ -122,13 +129,12 @@ class MainPage extends React.Component {
                     <Hamburger eventHandler={ args => this.eventHandler(args) }/>
 
                     <div className="left-panel">
-                        <div className="filter-toggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
+                        <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
                         <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
-                        <input type="search" 
+                        <input key="search-input" type="text" ref="search"
                             className="search-input ui-styles" 
                             placeholder="Rechercher un Pokémon" 
-                            onChange={(e) => this.onFilterTextChanged(e)}
-                            value={ this.searchSettings.text }>
+                            onChange={ e => this.onFilterTextChanged(e) }>
                         </input>
                     </div>
 
@@ -139,7 +145,7 @@ class MainPage extends React.Component {
                     visible={ this.state.filterVisible } 
                     notifyChange={ this.onFilterChangeListener.bind(this) }/>
                 <PokemonList
-                    pokemons={ this.state.pokemons } 
+                    pokemons={ this.pokemons } 
                     selected={ this.state.selected }
                     eventHandler={ args => this.eventHandler(args) }/>
             </div>

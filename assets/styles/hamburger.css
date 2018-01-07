@@ -4,7 +4,7 @@
     right: 0;
     padding: 0 50px 0 0;
     background-color: white;
-    border-left: 2px solid lightgrey;
+    border-left: 1px solid darkgrey;
     width: 30%;
     z-index: 150;
     height: 100%;
@@ -39,8 +39,8 @@
     outline-style: none;
 }
 
-.navigation ul li a {
-    color: black;
+.navigation ul li span {
+    padding-left: 5px;
 }
 
 .nav-separator {
@@ -62,7 +62,7 @@
 .btn-navigation-barre {
     width: 20px;
     height: 3px;
-    background-color: black;
+    background-color: #404040;
     margin-top: 3px;
     border-radius: 5px;
 }
@@ -91,3 +91,16 @@ i {
     max-width: 24px;
 }
 
+.navigation-scale-anim-end, .navigation-scale-anim {
+    transition: all 0.5s ease;
+}
+.navigation-scale-anim {
+    transform: scale(1.5) perspective(1px);
+}
+
+.navigation-title {
+    position: relative;
+    top: 14px;
+    left: 17px;
+    font-size: 14pt;
+}
