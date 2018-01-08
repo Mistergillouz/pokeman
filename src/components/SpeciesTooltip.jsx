@@ -33,7 +33,7 @@ class SpeciesTooltip extends React.Component {
             return (<td align="center"><Species id={amountData.id}/></td>);
         }
 
-        return null;
+        return <td></td>
     }
 
     onBlur() {
