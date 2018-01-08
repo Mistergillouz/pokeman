@@ -104,13 +104,18 @@ class MainPage extends React.Component {
     }
 
     toggleSelected(id) {
-        let selected = this.state.selected.slice(), index = selected.indexOf(id)
-        if (index === -1) {
-            selected.push(id)
+        let selected;
+        if (id !== -1) {
+            selected = this.state.selected.slice()
+            let index = selected.indexOf(id)
+            if (index === -1) {
+                selected.push(id)
+            } else {
+                selected.splice(index, 1)
+            }
         } else {
-            selected.splice(index, 1)
+            selected = []
         }
-
         this.setState({ selected: selected })
         Store.set('selected', selected)
     }

@@ -63,6 +63,11 @@ class Hamburger extends React.Component {
         
     }
 
+    onDeselectAll() {
+        this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: -1 })
+        this.onToggleMenuVisibilityAsync()
+    }
+
     componentWillMount() {
         if (!Hamburger.ANIM_DONE) {
             Hamburger.ANIM_DONE = true
@@ -89,6 +94,10 @@ class Hamburger extends React.Component {
                         <li onClick={ () => this.onShowEggPanel() }>
                             <img className='nav-icon' src='../assets/images/egg.png'/>
                             <span>Voir les oeufs</span>
+                        </li>
+                        <li onClick={ () => this.onDeselectAll() }>
+                            <img className='nav-icon' src='../assets/images/unselect.png'/>
+                            <span>Déselectionner</span>
                         </li>
                     </ul>
                 </div>

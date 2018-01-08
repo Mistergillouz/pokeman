@@ -5,7 +5,7 @@
     padding: 0 50px 0 0;
     background-color: white;
     border-left: 1px solid darkgrey;
-    width: 30%;
+    width: 15%;
     z-index: 150;
     height: 100%;
 
@@ -13,6 +13,13 @@
     -webkit-transition: transform 0.25s ease-in-out;
     transform: translateX(100%);
     -webkit-transform: translateX(100%);
+}
+
+
+@media all and (max-width: 1024px) {
+    .navigation {
+        width: 40%;
+    }
 }
 
 .navigation.nav-opened {
