@@ -68,14 +68,6 @@ class Pokemon extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.refs.pokemon.addEventListener('touchstart', (e) => { this._onMouseDown(e) })
-        this.refs.pokemon.addEventListener('touchend', (e) => { this._onMouseUp(e) })
-        this.refs.pokemon.addEventListener('touchmove', (e) => { this._onMouseMove(e) })
-        this.refs.pokemon.addEventListener('mousedown', (e) => { this._onMouseDown(e) })
-        this.refs.pokemon.addEventListener('mouseup', (e) => { this._onMouseUp(e) })
-    }
-
     render() { 
 
         let pokemon = PokedexHelper.getPokemon(this.props.id);
@@ -86,7 +78,14 @@ class Pokemon extends React.Component {
         return (
             <div className={ "gen " + (this.props.className || '') }>
                 <div onClick={ (e) => this.onSelect(false) } className={ this.props.selected ? 'pokemon-checked' : '' }/>
-                <a ref="pokemon" key={ 'gen' + this.props.id } className="pokemon g1" href="#" data-gen={ pokemon.gen }>
+                
+                <a ref="pokemon" key={ 'gen' + this.props.id } className="pokemon g1" href="#" data-gen={ pokemon.gen }
+                    onTouchStart={ e => this._onMouseDown(e) }
+                    onTouchEnd={ e => this._onMouseUp(e) }
+                    onTouchMove={ e => this._onMouseMove(e) }
+                    onMouseDown={ e => this._onMouseDown(e) }
+                    onMouseUp={ e => this._onMouseUp(e) }>
+
                 <h2 className={ h2Class }>{ name }</h2>
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }
