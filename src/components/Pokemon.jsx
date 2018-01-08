@@ -30,7 +30,6 @@ class Pokemon extends React.Component {
 
     _onMouseDown(e) {
         this.timer = setTimeout(() => this._onLongPress(), LONG_PRESS_DURATION)
-        //e.preventDefault()
     }
 
     _onMouseMove(e) {
@@ -46,11 +45,13 @@ class Pokemon extends React.Component {
 
     _onMouseUp(e) {
 
-        if (!this.moved && !this.ignoreNextUp) {
-            this.onPokemonClicked()
+        if (!this.moved) {
+            if (!this.ignoreNextUp) {
+                this.onPokemonClicked()
+            }
+            e.preventDefault()
         }
 
-        e.preventDefault()
         clearTimeout(this.timer)
         delete this.timer
         delete this.ignoreNextUp
