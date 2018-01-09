@@ -20,7 +20,8 @@ class Hamburger extends React.Component {
         setTimeout(() => this.onToggleMenuVisibility() , 150)
     }
 
-    onToggleMenuVisibility() {
+    onToggleMenuVisibility(e) {
+        
         let navigation = this.refs.navigation;
         if (navigation) {
             navigation.classList.toggle('nav-opened')
@@ -30,7 +31,6 @@ class Hamburger extends React.Component {
     onRadioCheck(country) {
         this.props.eventHandler({ eventType: Constants.EVENT.LocaleSelected, country: country })
         this.setState({ country: country })
-        this.onToggleMenuVisibilityAsync()
     }
 
     generateLangRadio() {
@@ -65,7 +65,6 @@ class Hamburger extends React.Component {
 
     onSelect(select) {
         this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: select })
-        this.onToggleMenuVisibilityAsync()
     }
 
     componentWillMount() {
@@ -79,22 +78,23 @@ class Hamburger extends React.Component {
 
         return (
             <div>
-                <div key="btn-nav" className="btn-navigation" ref='btn-navigation' onClick={ () => this.onToggleMenuVisibility() }>
+                <div key="btn-nav" className="btn-navigation" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }>
                     <div className="btn-navigation-barre"></div>
                     <div className="btn-navigation-barre"></div>
                     <div className="btn-navigation-barre"></div>
                 </div>
-                <div key="nav-pan" className="navigation" ref="navigation">
+                <div key="nav-pan" className="navigation" ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
                     <span className="navigation-title">POKEMAN</span>
                     <ul>
                         <li className="menu-section">Langues</li>
                         { this.generateLangRadio() }
                         <li className="nav-separator"></li>
-                        <li className="menu-section">Autres</li>
                         <li onClick={ () => this.onShowEggPanel() }>
                             <img className='nav-icon' src='../assets/images/egg.png'/>
                             <span>Voir les oeufs</span>
                         </li>
+                        <li className="nav-separator"></li>
+                        <li className="menu-section">Tout</li>
                         <li onClick={ () => this.onSelect(Constants.SELECT.SELECT_ALL) }>
                             <img className='nav-icon' src='../assets/images/checked.png'/>
                             <span>Selectionner</span>
