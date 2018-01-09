@@ -18,6 +18,12 @@ class Lazimage extends React.Component {
         this.detach();
     }
 
+    componentWillReceiveProps() {
+        if (!this.visible) {
+            setTimeout(() => this.update(), 150)
+        }
+    }
+
     isVisible() {
 
         let node = ReactDOM.findDOMNode(this);
@@ -32,7 +38,9 @@ class Lazimage extends React.Component {
 
     update(e) {
         if (this.waitLoaded && this.isVisible()) {
+            this.visible = true
             this.forceUpdate()
+            this.detach();
             return true;
         }
 
@@ -45,8 +53,6 @@ class Lazimage extends React.Component {
         if (!this.waitLoaded) {
             this.waitLoaded = true;
             this.update();
-        } else {
-            this.detach();
         }
     }
 
@@ -56,7 +62,8 @@ class Lazimage extends React.Component {
     }
 
     render() { 
-        var img = this.waitLoaded ? this.props.target : this.props.src;
+        var img = this.visible ? this.props.target : this.props.src;
+        
         return (
             <img src={ img } onLoad={ () => this.onLoad() } className={ this.props.className }/>
         )

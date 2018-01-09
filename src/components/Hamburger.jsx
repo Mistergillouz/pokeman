@@ -17,7 +17,7 @@ class Hamburger extends React.Component {
     }
 
     onToggleMenuVisibilityAsync() {
-        setTimeout(() => this.onToggleMenuVisibility() , 750)
+        setTimeout(() => this.onToggleMenuVisibility() , 150)
     }
 
     onToggleMenuVisibility() {
@@ -63,8 +63,8 @@ class Hamburger extends React.Component {
         
     }
 
-    onDeselectAll() {
-        this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: -1 })
+    onSelect(select) {
+        this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: select })
         this.onToggleMenuVisibilityAsync()
     }
 
@@ -95,7 +95,11 @@ class Hamburger extends React.Component {
                             <img className='nav-icon' src='../assets/images/egg.png'/>
                             <span>Voir les oeufs</span>
                         </li>
-                        <li onClick={ () => this.onDeselectAll() }>
+                        <li onClick={ () => this.onSelect(Constants.SELECT.SELECT_ALL) }>
+                            <img className='nav-icon' src='../assets/images/checked.png'/>
+                            <span>Selectionner</span>
+                        </li>
+                        <li onClick={ () => this.onSelect(Constants.SELECT.UNSELECT_ALL) }>
                             <img className='nav-icon' src='../assets/images/unselect.png'/>
                             <span>Déselectionner</span>
                         </li>

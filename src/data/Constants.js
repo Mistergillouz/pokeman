@@ -16,6 +16,11 @@ const Constants = {
     LOCALES: { 
         FRENCH: { country: 'fr', name: 'Français', id: 5 }, 
         ENGLISH: { country: 'en', name: 'English', id: 9 }
+    },
+
+    SELECT: {
+        SELECT_ALL: -1,
+        UNSELECT_ALL: -2
     }
 }
 

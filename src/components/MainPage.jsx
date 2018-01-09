@@ -103,19 +103,31 @@ class MainPage extends React.Component {
         })
     }
 
+    componentDidUpdate() {
+        if (this.refs.search) {
+            this.refs.search.value = this.state.searchSettings.text
+        }
+    }
+
     toggleSelected(id) {
         let selected;
-        if (id !== -1) {
-            selected = this.state.selected.slice()
-            let index = selected.indexOf(id)
-            if (index === -1) {
-                selected.push(id)
-            } else {
-                selected.splice(index, 1)
-            }
-        } else {
-            selected = []
+        switch (id) {
+            case Constants.SELECT.UNSELECT_ALL:
+                selected = []
+                break;
+            case Constants.SELECT.SELECT_ALL:
+                selected = this.pokemons.slice()
+                break;
+            default:
+                selected = this.state.selected.slice()
+                let index = selected.indexOf(id)
+                if (index === -1) {
+                    selected.push(id)
+                } else {
+                    selected.splice(index, 1)
+                }
         }
+
         this.setState({ selected: selected })
         Store.set('selected', selected)
     }
@@ -136,7 +148,7 @@ class MainPage extends React.Component {
                     <div className="left-panel">
                         <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
                         <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
-                        <input key="search-input" type="text" ref="search"
+                        <input key="search-input" type="search" ref="search"
                             className="search-input ui-styles" 
                             placeholder="Rechercher un Pokémon" 
                             onChange={ e => this.onFilterTextChanged(e) }>
