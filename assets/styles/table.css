@@ -5,8 +5,13 @@
     background-color: white;
     display: table;
     border-collapse: collapse;
+    cursor: pointer;
 }
  
+.sort-table tr:nth-child(even) {
+    background-color: #fafaff;
+}
+
 .sort-table thead tr th {
     background-color: #BBDEFB;
     line-height: 30px;

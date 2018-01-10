@@ -55,6 +55,10 @@ class ComparePage extends React.Component {
             ]
         })
     }
+
+    onCellClicked(rowIndex) {
+        this.props.eventHandler({ eventType: Constants.EVENT.PokemonClicked, id: this.props.pokemons[rowIndex] })
+    }
     
     render() { 
         if (!this.props.visible) {
@@ -69,7 +73,7 @@ class ComparePage extends React.Component {
                 </div>
             </div>
             <div className="compare-container">
-                <SortTable columns={ this.getColumns() } datas={ this.getDatas() }/>
+                <SortTable columns={ this.getColumns() } datas={ this.getDatas() } onCellClicked={ (row, col) => this.onCellClicked(row, col) }/>
             </div>
         </div>
     }

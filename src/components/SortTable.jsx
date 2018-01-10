@@ -1,4 +1,5 @@
 import React from 'react'
+import Store from '../data/Store'
 import '../../assets/styles/table.css'
 
 class SortTable extends React.Component {
@@ -12,19 +13,16 @@ class SortTable extends React.Component {
             }
         })
 
-        this.state = {
+        this.state = Store.get(SortTable.KEY, {
             sortIndex: sortIndex,
             ascending: ascending
-        }
+        })
 
         if (sortIndex !== -1) {
             this._sort(sortIndex, ascending)
         }
     }
 
-    componentWillReceiveProps(a, b) {
-        console.log(a, b)
-    }
     /**
      * columns (array): 
      * text: String
@@ -53,13 +51,17 @@ class SortTable extends React.Component {
                 if (this.props.columns[colIndex].callback) {
                     value = this.props.columns[colIndex].callback(rowIndex, colIndex)
                 }
-                let clazz = colIndex === this.state.sortIndex ? 'sort-table-sort-td' : ''
-                return <td align={ _align(this.props.columns[colIndex]) } className={ clazz }>{ value }</td>
+                // let clazz = colIndex === this.state.sortIndex ? 'sort-table-sort-td' : ''
+                return <td align={ _align(this.props.columns[colIndex]) } /* className={ clazz } */>{ value }</td>
             });
-            return <tr>{ cols }</tr>
+            return <tr data-index={ rowIndex } onClick={(e) => this.onClick(e) }>{ cols }</tr>
         })
-
         return (<tbody>{ rows }</tbody>)
+    }
+
+    onClick(e) {
+        let rowIndex = e.currentTarget.dataset.index
+        this.props.onCellClicked(rowIndex)
     }
 
     onSort(index) {
@@ -77,7 +79,10 @@ class SortTable extends React.Component {
         }
 
         this._sort(sortIndex, ascending)
-        this.setState({ ascending: ascending, sortIndex: sortIndex })
+
+        let state = { ascending: ascending, sortIndex: sortIndex }
+        this.setState(state)
+        Store.set(SortTable.KEY, state)
     }
 
     _sort(sortIndex, ascending) {
@@ -115,4 +120,5 @@ function _align(column) {
     return 'center'
 }
 
+SortTable.KEY = 'sort-table'
 export default SortTable; 
