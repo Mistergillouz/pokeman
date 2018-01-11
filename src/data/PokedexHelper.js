@@ -147,7 +147,7 @@ class PokedexHelper {
                 return;
             }
 
-            if (query.rarity === true && !pokemon.rarity) {
+            if (query.rarity === true && LEGENDARY.indexOf(Number(pokemonId)) === -1) {
                 return
             }
 
@@ -305,6 +305,8 @@ function _match(str, rule) {
     let regex = new RegExp("^" + rule.split("*").join(".*") + "$")
     return regex.test(str) || str.indexOf(rule) !== -1
 }
+
+const LEGENDARY = [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 480, 481, 482, 483, 484, 485, 486, 487, 488, 491, 492, 493, 494, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649]
 
 // Singleton
 let PokedexHelperObj = new PokedexHelper();

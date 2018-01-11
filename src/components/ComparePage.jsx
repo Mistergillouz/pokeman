@@ -36,10 +36,10 @@ class ComparePage extends React.Component {
 
         return [
             { text: 'Pokemon', align: 'left', callback: row => this.getColumnName(row) },
-            { text: 'PC', default: true },
-            { text: 'ATK' },
-            { text: 'DEF' },
-            { text: 'RES' }
+            { text: 'PC', default: true, type: 'number' },
+            { text: 'ATK', type: 'number' },
+            { text: 'DEF', type: 'number' },
+            { text: 'RES', type: 'number' }
         ]
     }
 
@@ -48,10 +48,10 @@ class ComparePage extends React.Component {
             let pokemon = PokedexHelper.getPokemon(pokemonId)
             return [
                 PokedexHelper.loc(pokemon),
-                _val(pokemon.cpmax),
-                _val(pokemon.atk),
-                _val(pokemon.def),
-                _val(pokemon.sta)
+                pokemon.cpmax,
+                pokemon.atk,
+                pokemon.def,
+                pokemon.sta
             ]
         })
     }
@@ -77,10 +77,6 @@ class ComparePage extends React.Component {
             </div>
         </div>
     }
-}
-
-function _val(value) {
-    return value !== undefined ? value : '-'
 }
 
 export default ComparePage

@@ -25,11 +25,12 @@ class SortTable extends React.Component {
 
     /**
      * columns (array): 
-     * text: String
+     * value: String
      * align: left/right/center (left: default)
      * sortable: true/false (true: default)
      * default: true/false (false: default)
      * callback: custom renderer
+     * type: string/number (string: default)
      */
 
     generateHeader() {
@@ -51,7 +52,9 @@ class SortTable extends React.Component {
                 if (this.props.columns[colIndex].callback) {
                     value = this.props.columns[colIndex].callback(rowIndex, colIndex)
                 }
-                // let clazz = colIndex === this.state.sortIndex ? 'sort-table-sort-td' : ''
+                if (value === undefined) {
+                    value = '-'
+                }
                 return <td align={ _align(this.props.columns[colIndex]) } /* className={ clazz } */>{ value }</td>
             });
             return <tr data-index={ rowIndex } onClick={(e) => this.onClick(e) }>{ cols }</tr>
@@ -88,7 +91,12 @@ class SortTable extends React.Component {
     _sort(sortIndex, ascending) {
         this.getIndices().sort((a, b) => {
             let v0 = this.props.datas[a][sortIndex], v1 = this.props.datas[b][sortIndex]
-            let res = (typeof v0 === 'number') ? v0 - v1 : v0.localeCompare(v1)
+            if (v0 === undefined && v1 != undefined) {
+                return 1
+            }  else if (v0 === undefined && v1 !== undefined) {
+                return -1
+            }
+            let res = (this.props.columns[sortIndex].type === 'number') ? v0 - v1 : v0.localeCompare(v1)
             return ascending ? res : -res
         })
     }
