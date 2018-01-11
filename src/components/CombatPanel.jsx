@@ -94,7 +94,7 @@ class CombatPanel extends React.Component {
     generateInfoTable(pokemon) {
         let rows = []
         
-        if (!isNaN(pokemon.candy)) {
+        if (pokemon.candy) {
             rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
         }
         rows.push(<tr><td colSpan="2" align="left">Distance copain</td><td align="right">{ pokemon.buddy }</td></tr>)

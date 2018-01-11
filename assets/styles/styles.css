@@ -350,7 +350,8 @@ input {
 }
 
 .gen-button-right {
-    border-radius: 0 10px 10px 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     margin-right: 5px;
 }
 

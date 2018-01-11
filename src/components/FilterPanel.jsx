@@ -12,7 +12,8 @@ class FilterPanel extends React.Component {
 
         this.state = Store.get(KEY, {
             selectedGen: 0,
-            selectedTypes: []
+            selectedTypes: [],
+            rarity: false
         })
     }
 
@@ -32,6 +33,12 @@ class FilterPanel extends React.Component {
         let selectedTypes = PokedexHelper.toggle(this.state.selectedTypes, typeId)
         this.setState({ selectedTypes: selectedTypes });
         this.props.notifyChange({ types: selectedTypes });
+    }
+
+    onToggleLeg() {
+        let rarity = !this.state.rarity
+        this.setState({ rarity: rarity })
+        this.props.notifyChange({ rarity: rarity });
     }
 
     render() { 
@@ -73,6 +80,7 @@ class FilterPanel extends React.Component {
                 <div className="filters-container">
                     <div id="gen-table-container" className="gen-table-container">
                         {genButtons}
+                        <div onClick={ () => this.onToggleLeg() } className={ 'gen-button gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }>Lég</div>
                     </div>
                     <div id="type-table-container" className="type-table-container">
                         {types}

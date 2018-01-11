@@ -147,6 +147,10 @@ class PokedexHelper {
                 return;
             }
 
+            if (query.rarity === true && !pokemon.rarity) {
+                return
+            }
+
             let name = this.normalizeText(this.loc(pokemon) || '').toLowerCase();
             if (!name.length) {
                 return;
