@@ -10,7 +10,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, pre, a, img, b, u, i, ol, ul, 
     font: inherit;
 }
 html {
-    background-color: #e5e5e5;
+    background-color: white;
 }
 
 article, aside, footer, header, main, nav, section {
@@ -25,6 +25,7 @@ a {
 body {
     font-family: 'Roboto', sans-serif;
     color: #303030;
+    background-color: white;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -144,6 +145,7 @@ input {
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: #e5e5e5;
 }
 
 .right-panel, .left-panel {
@@ -282,6 +284,19 @@ input {
     margin: 0 auto;
     text-align: center;
     font-size: 8pt;
+}
+
+.egg-pokemon-gen {
+    position: absolute;
+    right: 0;
+    font-size: 8pt;
+    color: white;
+    text-align: center;
+    padding: 1px;
+    background-color: sandybrown;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
 }
 
 .filters-container {

@@ -57,6 +57,31 @@ class PokedexHelper {
         return result;
     }
 
+    getEvolveFromTo(from, to) {
+
+        let result = {}
+        Object.keys(Pokedex.pokemons).forEach(id => {
+            let pokemonId = Number(id)
+            
+            let pokemon = this.pokemon(pokemonId)
+            if (!pokemon.evolves || from.indexOf(pokemon.gen) === -1) {
+                return;
+            }
+
+            pokemon.evolves.forEach(evolveId => {
+                let pokemon = this.pokemon(evolveId)
+                if (to.indexOf(pokemon.gen) !== -1) {
+                    if (!result[pokemonId]) {
+                        result[pokemonId] = []
+                    }
+
+                    result[pokemonId].push(evolveId)
+                }
+            })
+        })
+
+        return result
+    }
         
     getEvolvesList(pokemonId) {
         let evolves = [{
@@ -269,25 +294,6 @@ class PokedexHelper {
             locales.push({ id: Constants.LOCALES[locale].country, name: Constants.LOCALES[locale].name });
         }
         return locales;
-    }
-
-    toggle(array, value, monoValues) {
-        let  index = array.indexOf(value), copy
-        if (!monoValues) {
-            copy = array.slice()
-            if (index !== -1) {
-                copy.splice(index, 1);
-            } else {
-                copy.push(value);
-            }
-
-        } else if (index !== -1) {
-            copy = [];
-        } else {
-            copy = [ value ];
-        }
-
-        return copy
     }
 
     getSpeciesKey(species) {

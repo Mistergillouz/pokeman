@@ -67,6 +67,10 @@ class Hamburger extends React.Component {
         this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: select })
     }
 
+    onShowEvolutionPanel() {
+        this.props.eventHandler({ eventType: Constants.EVENT.EvolutionPage })
+    }
+
     componentWillMount() {
         if (!Hamburger.ANIM_DONE) {
             Hamburger.ANIM_DONE = true
@@ -92,6 +96,10 @@ class Hamburger extends React.Component {
                         <li onClick={ () => this.onShowEggPanel() }>
                             <img className='nav-icon' src='../assets/images/egg.png'/>
                             <span>Voir les oeufs</span>
+                        </li>
+                        <li onClick={ () => this.onShowEvolutionPanel() }>
+                            <img className='nav-icon' src='../assets/images/egg.png'/>
+                            <span>Evolutions explorer</span>
                         </li>
                         <li className="nav-separator"></li>
                         <li className="menu-section">Tout</li>

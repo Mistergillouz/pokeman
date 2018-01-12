@@ -55,7 +55,6 @@ class ZoomPage extends React.Component {
                     let name = PokedexHelper.getPokemonName(pokemonId)
                     tds.push(<td><SmallPokemon key={ pokemonId } 
                         id={ pokemonId } 
-                        name={ name }
                         selected = { pokemonId === this.selectedId() }
                         onClick={ id => this.onPokemonClicked(id) }/></td>)
                 } else {

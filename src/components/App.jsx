@@ -7,8 +7,10 @@ import EggPage from 'components/EggPage'
 import ComparePage from 'components/ComparePage'
 import Constants from 'data/Constants'
 import SpeciesTooltip from 'components/SpeciesTooltip'
+import EvolutionPage from 'components/EvolutionPage'
 
-const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', ComparePage: 'ComparePage' }
+
+const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', ComparePage: 'ComparePage', EvolutionPage: 'EvolutionPage' }
 
 class App extends React.Component {
    constructor() {
@@ -85,6 +87,10 @@ class App extends React.Component {
             case Constants.EVENT.Back:
                 this.popPage()
                 break
+            
+            case Constants.EVENT.EvolutionPage:
+                this.pushPage(PAGES.EvolutionPage, args)
+                break
         }
     }
 
@@ -98,6 +104,8 @@ class App extends React.Component {
                 <EggPage visible={ pageId === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
                 <ComparePage visible={ pageId === PAGES.ComparePage } pokemons={ page.args.pokemons } eventHandler = { this.eventHandler.bind(this) }/>
                 <SpeciesTooltip visible={ page.tooltipArgs } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
+                <EvolutionPage visible={ pageId === PAGES.EvolutionPage } eventHandler = { this.eventHandler.bind(this)} />
+
             </div>
         )
     }

@@ -5,6 +5,7 @@ import FilterPanel from 'components/FilterPanel'
 import Hamburger from 'components/Hamburger'
 import Constants from 'data/Constants'
 import Store from 'data/Store'
+import EvolutionPage from './EvolutionPage';
 
 
 class MainPage extends React.Component {

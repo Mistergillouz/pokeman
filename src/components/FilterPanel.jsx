@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PokedexHelper from 'data/PokedexHelper'
 import Store from 'data/Store'
+import Utils from 'data/Utils'
 import Constants from 'data/Constants'
 
 const KEY = 'filters'
@@ -30,7 +31,7 @@ class FilterPanel extends React.Component {
 
     onTypeClicked(typeId) {
 
-        let selectedTypes = PokedexHelper.toggle(this.state.selectedTypes, typeId)
+        let selectedTypes = Utils.toggle(this.state.selectedTypes, typeId)
         this.setState({ selectedTypes: selectedTypes });
         this.props.notifyChange({ types: selectedTypes });
     }
@@ -43,23 +44,7 @@ class FilterPanel extends React.Component {
 
     render() { 
 
-        let genButtons = [];
-
-        for (let i = 1; i <= Constants.MAX_GEN; i++) {
-
-            let clazz = (i === 1) ? 'gen-button-left' : (i === Constants.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
-            if (i === this.state.selectedGen) {
-                clazz += ' selected';
-            }
-
-            genButtons.push(
-                <label key={ i }
-                    className={ "gen-button " + clazz } 
-                    onClick={(e) => { this.onGenClicked(i) }}>
-                    {i}
-                </label>);
-        }
-
+        let genButtons = Utils.generateGenButtons(this.state.selectedGen, this.onGenClicked.bind(this))
         let types = PokedexHelper.getAllSpecies().map((type) => {
             let clazz = 'filter-type-toggle';
             if (this.state.selectedTypes.indexOf(type.id) !== -1) {

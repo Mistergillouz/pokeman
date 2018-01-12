@@ -9,7 +9,8 @@ const Constants = {
         ComparePage: 'ComparePage',
         LocaleSelected: 'LocaleSelected',
         Back: 'Back',
-        EggPage: 'EggPage'
+        EggPage: 'EggPage',
+        EvolutionPage: 'EvolutionPage'
     },
 
     MAX_GEN: 7,

@@ -38,7 +38,7 @@
 .navigation ul li {
     list-style-type: none;
     margin: 10px 0;
-    font-size: 1em;
+    font-size: 10pt;
     padding-left: 15px;
     display: flex;
     align-items: center;

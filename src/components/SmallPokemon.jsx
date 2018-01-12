@@ -1,21 +1,32 @@
 import React from 'react'
 import Lazimage from 'components/Lazimage'
+import PokedexHelper from 'data/PokedexHelper'
 
 class SmallPokemon extends React.Component {
    constructor() {
         super(...arguments)
     }
 
+    onClick() {
+        if (this.props.onClick) {
+            this.props.onClick(this.props.id)
+        }
+    }
     render() {
 
         let clazz = this.props.selected ? 'egg-pokemon-selected' : ''
-        return (<div className={ 'egg-pokemon ' + clazz } onClick = { () => this.props.onClick(this.props.id) }>
-                    <Lazimage className="egg-pokemon-img"
-                        key={ this.props.id } 
-                        src='../assets/images/wait.gif'
-                        target={ 'https://www.serebii.net/art/th/' + this.props.id + '.png' }/>
-                    <label className="egg-pokemon-img-text">{ this.props.name }</label>
-                </div>
+        let genSpanClasses = this.props.showGen ? 'egg-pokemon-gen' : 'hidden'
+        let pokemon = PokedexHelper.pokemon(this.props.id)
+
+        return (
+            <div className={ 'egg-pokemon ' + clazz } onClick={ () => this.onClick() }>
+                <Lazimage className="egg-pokemon-img"
+                    key={ this.props.id } 
+                    src='../assets/images/wait.gif'
+                    target={ 'https://www.serebii.net/art/th/' + this.props.id + '.png' }/>
+                <label className="egg-pokemon-img-text">{ PokedexHelper.loc(pokemon) }</label>
+                <span className={ genSpanClasses }>{ pokemon.gen }</span>
+            </div>
         )
     }
 }

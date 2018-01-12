@@ -1,6 +1,7 @@
 import React from 'react'
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
+import Utils from 'data/Utils'
 import SmallPokemon from 'components/SmallPokemon'
 
 class EggPage extends React.Component {
@@ -66,7 +67,7 @@ class EggPage extends React.Component {
     generatePokemons(pokemons) {
         let tiles = pokemons.map(pokemon => {
             return (
-                <SmallPokemon id={ pokemon.id } name={ PokedexHelper.loc(pokemon) } onClick = { () => this.onPokemonClicked(pokemon.id) }/>
+                <SmallPokemon id={ pokemon.id } onClick = { () => this.onPokemonClicked(pokemon.id) }/>
             )
         })
 
@@ -131,12 +132,12 @@ class EggPage extends React.Component {
     }
 
     onDistanceClicked(distance) {
-        let distances = PokedexHelper.toggle(this.state.distances, distance, true)
+        let distances = Utils.toggle(this.state.distances, distance, true)
         this.setState({ distances: distances })
     }
 
     onGenClicked(gen) {
-        let gens = PokedexHelper.toggle(this.state.gens, gen, true)
+        let gens = Utils.toggle(this.state.gens, gen, true)
         this.setState({ gens: gens })
     }
     
