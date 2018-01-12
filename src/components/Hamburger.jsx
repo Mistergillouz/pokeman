@@ -98,7 +98,7 @@ class Hamburger extends React.Component {
                             <span>Voir les oeufs</span>
                         </li>
                         <li onClick={ () => this.onShowEvolutionPanel() }>
-                            <img className='nav-icon' src='../assets/images/egg.png'/>
+                            <img className='nav-icon' src='../assets/images/evolves.png'/>
                             <span>Evolutions explorer</span>
                         </li>
                         <li className="nav-separator"></li>
