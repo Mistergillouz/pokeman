@@ -59,28 +59,39 @@ class PokedexHelper {
 
     getEvolveFromTo(from, to) {
 
-        let result = {}
+        let result = {}, done = {}
         Object.keys(Pokedex.pokemons).forEach(id => {
             let pokemonId = Number(id)
-            
+            if (done[pokemonId]) {
+                return
+            }
+
             let pokemon = this.pokemon(pokemonId)
-            if (!pokemon.evolves || from.indexOf(pokemon.gen) === -1) {
+            if (from.indexOf(pokemon.gen) === -1) {
                 return;
             }
 
-            pokemon.evolves.forEach(evolveId => {
-                let pokemon = this.pokemon(evolveId)
-                if (to.indexOf(pokemon.gen) !== -1) {
-                    if (!result[pokemonId]) {
-                        result[pokemonId] = []
-                    }
+            let evolves = [{
+                id: pokemonId,
+                active: true,
+                children: this._getEvolves(pokemonId, to)
+            }];
 
-                    result[pokemonId].push(evolveId)
-                }
-            })
+            if (evolves[0].children.length) {
+                result[pokemonId] = evolves
+                this._gatherEvolveIds(evolves[0], done)
+            }
+
         })
 
         return result
+    }
+
+    _gatherEvolveIds(evolves, done) {
+        evolves.children.forEach(evolve => {
+            done[evolve.id] = true
+            this._gatherEvolveIds(evolve, done)
+        })
     }
         
     getEvolvesList(pokemonId) {
@@ -94,15 +105,22 @@ class PokedexHelper {
         return evolves;
     }
     
-    _getEvolves(pokemonId) {
+    _getEvolves(pokemonId, gens) {
         let children = [];
         let pokemon = this.pokemon(pokemonId);
         if (pokemon.evolves) {
             pokemon.evolves.forEach((id) => {
-    
+                
+                if (gens) {
+                    let targetPokemon = this.pokemon(id)
+                    if (gens.indexOf(targetPokemon.gen) === -1) {
+                        return
+                    }
+                }
+
                 let evolutions = { 
                     id: id,
-                    children: this._getEvolves(id)
+                    children: this._getEvolves(id, gens)
                 };
     
                 children.push(evolutions)

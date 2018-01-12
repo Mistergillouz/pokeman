@@ -1,6 +1,6 @@
 import React from 'react'
-import SmallPokemon from './SmallPokemon';
-import NotFound from './NotFound';
+import EvolutionPanel from './EvolutionPanel'
+import NotFound from './NotFound'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Utils from 'data/Utils'
@@ -12,8 +12,8 @@ class EvolutionPage extends React.Component {
         super(...arguments)
 
         this.state = {
-            fromGens: [1, 2, 3],
-            toGens: [4, 5, 6, 7]
+            fromGens: [3],
+            toGens: [3]
         }
     }
 
@@ -28,31 +28,17 @@ class EvolutionPage extends React.Component {
 
     }
 
-    generateEvolve(pokemonId, children) {
-
-        let rows = children.map((childId, index) => {
-            let html = []
-            if (index === 0) {
-                html.push(<td><SmallPokemon id={ pokemonId } showGen='true'/></td>)
-            } else {
-                html.push(<td></td>)
-            }
-
-            html.push(<td><img src='../assets/images/rightarrow.png' className='evol-right-arrow'/></td>)
-            html.push(<td><SmallPokemon id={ childId } showGen='true'/></td>)
-            return (
-                <tr>{ html }</tr>
-            ) 
-        })
-
-        return (
-            <table key={ pokemonId }><tbody>{ rows }</tbody></table>
-        )
+    onPokemonClick(pokemonId) {
+        this.props.eventHandler({
+            eventType: Constants.EVENT.PokemonClicked,
+            id: pokemonId
+        });
     }
 
     resolve() {
         let evolves = PokedexHelper.getEvolveFromTo(this.state.fromGens, this.state.toGens)
-        let rows = Object.keys(evolves).map(pokemonId => this.generateEvolve(pokemonId, evolves[pokemonId]))
+        let showGen = this.state.fromGens.length !== 1 || this.state.toGens.length !== 1 || this.state.toGens[0] !== this.state.fromGens[0]
+        let rows = Object.keys(evolves).map(pokemonId => <EvolutionPanel evolves={ evolves[pokemonId] } showGen={ showGen } onClick={ id => this.onPokemonClick(id) }/>)
         return (
             rows.length ? rows : <NotFound text="Désolé. Pas de resultats correspond aux critéres d'évolutions séléctionnés"/>
         )

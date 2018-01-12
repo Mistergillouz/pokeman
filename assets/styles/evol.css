@@ -36,6 +36,11 @@
     overflow: auto;
 }
 
+.evol-results .zoom-container:nth-child(even) {
+    background-color: #f0f8fd;
+    border-radius: 5px;
+}
+
 .evol-right-arrow {
     max-width: 12px;
     opacity: 0.5;
