@@ -291,11 +291,19 @@ input {
     background-color: white;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    z-index: 50;
+    transition: max-height 1.5s ease;
 }
 
+.filters-container-open {
+    max-height: 100%;
+    overflow-y: unset;
+}
+
+.filters-container-closed {
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height -1s ease;
+}
 
 .type-table-container {
     display: flex;
@@ -303,6 +311,8 @@ input {
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0.5em 0.5em 0 0em;
+    padding-bottom: 5px;
+    background-color: white;
 }
 
 .filter-type-toggle {
@@ -323,6 +333,8 @@ input {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-top: 5px;
+    background-color: white;
 }
 
 

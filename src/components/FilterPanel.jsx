@@ -43,54 +43,50 @@ class FilterPanel extends React.Component {
 
     render() { 
 
-        if (this.props.visible) {
+        let genButtons = [];
 
-            let genButtons = [];
+        for (let i = 1; i <= Constants.MAX_GEN; i++) {
 
-            for (let i = 1; i <= Constants.MAX_GEN; i++) {
-
-                let clazz = (i === 1) ? 'gen-button-left' : (i === Constants.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
-                if (i === this.state.selectedGen) {
-                    clazz += ' selected';
-                }
-
-                genButtons.push(
-                    <label key={ i }
-                        className={ "gen-button " + clazz } 
-                        onClick={(e) => { this.onGenClicked(i) }}>
-                        {i}
-                    </label>);
+            let clazz = (i === 1) ? 'gen-button-left' : (i === Constants.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
+            if (i === this.state.selectedGen) {
+                clazz += ' selected';
             }
 
-			let types = PokedexHelper.getAllSpecies().map((type) => {
-                let clazz = 'filter-type-toggle';
-                if (this.state.selectedTypes.indexOf(type.id) !== -1) {
-                    clazz += ' selected';
-                }
-				return (
-                    <div key={ type.id }
-                        className={ clazz }
-                        onClick={(e) => { this.onTypeClicked(type.id) }}>
-                        {type.name}
-                    </div>
-                );
-			});
-
-            return (
-                <div className="filters-container">
-                    <div id="gen-table-container" className="gen-table-container">
-                        {genButtons}
-                        <div onClick={ () => this.onToggleLeg() } className={ 'gen-button gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }>Lég</div>
-                    </div>
-                    <div id="type-table-container" className="type-table-container">
-                        {types}
-                    </div>
-                </div>
-            )
-
-        } else {
-            return null;
+            genButtons.push(
+                <label key={ i }
+                    className={ "gen-button " + clazz } 
+                    onClick={(e) => { this.onGenClicked(i) }}>
+                    {i}
+                </label>);
         }
+
+        let types = PokedexHelper.getAllSpecies().map((type) => {
+            let clazz = 'filter-type-toggle';
+            if (this.state.selectedTypes.indexOf(type.id) !== -1) {
+                clazz += ' selected';
+            }
+            return (
+                <div key={ type.id }
+                    className={ clazz }
+                    onClick={(e) => { this.onTypeClicked(type.id) }}>
+                    {type.name}
+                </div>
+            );
+        });
+
+        let filterContainerCls = 'filters-container ' + (this.props.visible ? 'filters-container-open' : 'filters-container-closed')
+        return (
+            <div className={ filterContainerCls }>
+                <div id="gen-table-container" className="gen-table-container">
+                    {genButtons}
+                    <div onClick={ () => this.onToggleLeg() } className={ 'gen-button gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }>LEG</div>
+                </div>
+                <div id="type-table-container" className="type-table-container">
+                    {types}
+                </div>
+            </div>
+        )
+
     }
 }
 
