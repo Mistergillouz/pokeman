@@ -8,9 +8,14 @@ import ComparePage from 'components/ComparePage'
 import Constants from 'data/Constants'
 import SpeciesTooltip from 'components/SpeciesTooltip'
 import EvolutionPage from 'components/EvolutionPage'
+import BabiesPage from 'components/BabiesPage'
 
 
-const PAGES = { MainPage: 'MainPage', ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', ComparePage: 'ComparePage', EvolutionPage: 'EvolutionPage' }
+const PAGES = { 
+    MainPage: 'MainPage', 
+    ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', 
+    ComparePage: 'ComparePage', EvolutionPage: 'EvolutionPage', BabisPage: 'BabiesPage'
+}
 
 class App extends React.Component {
    constructor() {
@@ -91,6 +96,10 @@ class App extends React.Component {
             case Constants.EVENT.EvolutionPage:
                 this.pushPage(PAGES.EvolutionPage, args)
                 break
+
+                case Constants.EVENT.BabiesPage:
+                this.pushPage(PAGES.BabiesPage, args)
+                break
         }
     }
 
@@ -105,7 +114,7 @@ class App extends React.Component {
                 <ComparePage visible={ pageId === PAGES.ComparePage } pokemons={ page.args.pokemons } eventHandler = { this.eventHandler.bind(this) }/>
                 <SpeciesTooltip visible={ page.tooltipArgs } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
                 <EvolutionPage visible={ pageId === PAGES.EvolutionPage } eventHandler = { this.eventHandler.bind(this)} />
-
+                <BabiesPage visible={ pageId === PAGES.BabiesPage } eventHandler = { this.eventHandler.bind(this)} />
             </div>
         )
     }

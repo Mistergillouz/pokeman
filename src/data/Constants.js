@@ -10,7 +10,8 @@ const Constants = {
         LocaleSelected: 'LocaleSelected',
         Back: 'Back',
         EggPage: 'EggPage',
-        EvolutionPage: 'EvolutionPage'
+        EvolutionPage: 'EvolutionPage',
+        BabiesPage: 'BabiesPage'
     },
 
     MAX_GEN: 7,

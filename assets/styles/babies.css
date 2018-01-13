@@ -1,0 +1,17 @@
+.baby-container {
+    background-color: white;
+    width: 100%;
+}
+
+.baby-results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.baby-results.egg-pokemon {
+    padding-left: 10px;
+    padding-top: 10px;
+}

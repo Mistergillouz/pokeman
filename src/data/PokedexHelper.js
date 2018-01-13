@@ -23,6 +23,18 @@ class PokedexHelper {
         }
     }
 
+    getBabies() {
+        
+        let babies = []
+        Object.keys(Pokedex.pokemons).forEach(pokemonId => {
+            if (Pokedex.pokemons[pokemonId].baby) {
+                babies.push(pokemonId)
+            }
+        })
+
+        return babies
+    }
+
     getEggs() {
         
         return Eggs;        
