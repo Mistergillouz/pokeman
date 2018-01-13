@@ -23,7 +23,7 @@ class SmallPokemon extends React.Component {
                 <Lazimage className="egg-pokemon-img"
                     key={ this.props.id } 
                     src='../assets/images/wait.gif'
-                    target={ 'https://www.serebii.net/art/th/' + this.props.id + '.png' }/>
+                    target={ '../assets/pokemons/' + this.props.id + '.png' }/>
                 <label className="egg-pokemon-img-text">{ PokedexHelper.loc(pokemon) }</label>
                 <span className={ genSpanClasses }>{ pokemon.gen }</span>
             </div>

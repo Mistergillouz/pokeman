@@ -122,7 +122,7 @@ class CombatPanel extends React.Component {
             let typeKey = PokedexHelper.getSpeciesKey(species)
             let attacks = PokedexHelper.getAttacks(this.props.id)
             let styles = {
-                backgroundImage: 'url(https://www.serebii.net/art/th/' + this.props.id + '.png)'
+                backgroundImage: 'url(../assets/pokemons/' + this.props.id + '.png)'
             }
 
             return (
