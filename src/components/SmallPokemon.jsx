@@ -16,7 +16,7 @@ class SmallPokemon extends React.Component {
 
         let clazz = this.props.selected ? 'egg-pokemon-selected' : ''
         let genSpanClasses = this.props.showGen ? 'egg-pokemon-gen' : 'hidden'
-        let pokemon = PokedexHelper.pokemon(this.props.id)
+        let pokemon = PokedexHelper.getPokemon(this.props.id)
 
         return (
             <div className={ 'egg-pokemon ' + clazz } onClick={ () => this.onClick() }>

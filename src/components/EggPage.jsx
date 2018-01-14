@@ -52,7 +52,7 @@ class EggPage extends React.Component {
 
         Object.keys(eggs).forEach(distance => {
             eggs[distance].forEach(pokemonId => {
-                callback(distance, PokedexHelper.pokemon(pokemonId))
+                callback(distance, PokedexHelper.getPokemon(pokemonId))
             })
         })
     }

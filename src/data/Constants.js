@@ -11,7 +11,8 @@ const Constants = {
         Back: 'Back',
         EggPage: 'EggPage',
         EvolutionPage: 'EvolutionPage',
-        BabiesPage: 'BabiesPage'
+        BabiesPage: 'BabiesPage',
+        CalculationPage: 'CalculationPage'
     },
 
     MAX_GEN: 7,

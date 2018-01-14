@@ -726,6 +726,7 @@ h2, .inactive-h2 {
     color: #44696C;
     box-shadow: 2px 2px 5px 0px #cfcfcf;
     border-radius: 3px;
+    position: relative;
 }
 
 .info-cp-circle {
@@ -734,6 +735,21 @@ h2, .inactive-h2 {
     background-position: center;
     background-size: 210px;
     margin-bottom: 20px;
+}
+
+.info-cp-calc-action {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url(../images/combat.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: 4px 5px;
+    background-color: white;
 }
 
 .info-cp-label {

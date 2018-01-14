@@ -47,4 +47,41 @@ export default class Utils {
     static arrayfy(a) {
         return a.length === undefined ? [a] : a
     }
+
+    
+    static normalizeText(text) {
+        
+        const subs = [
+            [ 'é', 'e' ],
+            [ 'è', 'e' ],
+            [ 'ê', 'e' ],
+            [ 'ë', 'e' ],
+            [ 'à', 'a' ],
+            [ 'â', 'a' ],
+            [ 'ä', 'a' ]
+        ];
+        
+        let string = text = text.trim().toLowerCase();
+        subs.forEach((sub) => {
+            string = Utils.replaceAll(string, sub[0], sub[1]);
+        });
+    
+        return string;
+    }
+
+    
+    static replaceAll(str, find, replace) {
+        return str.replace(new RegExp(find, 'g'), replace);
+    }
+
+    
+    static round(num, decimals) {
+        var n = Math.pow(10, decimals);
+        return Math.round( (n * num).toFixed(decimals) )  / n;
+    }
+
+    static match(str, rule) {
+        let regex = new RegExp("^" + rule.split("*").join(".*") + "$")
+        return regex.test(str) || str.indexOf(rule) !== -1
+    }
 }

@@ -1,0 +1,51 @@
+.calc-container {
+    overflow: hidden;
+}
+
+.calc-results {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.calc-results .calc-pokemon-container:nth-child(even) {
+    background-color: #f0f8fd;
+    border-radius: 0 0 10px 0;
+}
+
+.calc-pokemon-container {
+    display: flex;
+    align-items: center;
+    width: 75%;
+    margin: 0 auto;
+    padding-left: 10px;
+}
+
+.calc-pokemon-rank {
+    font-size: 10pt;
+}
+
+.calc-pokemon-types {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.calc-pokemon-attacks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.calc-pokemon-attack {
+    display: flex;
+    align-items: center;
+}
+
+.calc-pokemon-attack div {
+    transform: scale(0.7);
+}
+
+.calc-pokemon-attack span {
+    font-size: 8pt;
+}

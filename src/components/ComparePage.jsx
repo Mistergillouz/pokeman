@@ -18,7 +18,7 @@ class ComparePage extends React.Component {
         let pokemon = PokedexHelper.getPokemon(pokemonId)
         let name = PokedexHelper.loc(pokemon)
         let typeIcons = pokemon.species.map(specie => {
-            let type = PokedexHelper.species(specie)
+            let type = PokedexHelper.getSpecies(specie)
             let key = PokedexHelper.getSpeciesKey(type)   
             return <div className={ 'icon-type-' + key + ' icon-type-small'}/> 
         });

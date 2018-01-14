@@ -13,24 +13,32 @@ class SpeciesTooltip extends React.Component {
     buildStrengthWeaknessTr(id) {
         let rows = [];
         
-        let data = PokedexHelper.getStrengthWeakness(id);
-        let max = Math.max(data.strong.length, data.weak.length);
-        for (let i = 0; i < max; i++) {
+        let [damageStrengths, _] = PokedexHelper.getDamageStrengthWeakness(id)
+        let strength = [], weak = []
+        Object.keys(damageStrengths).forEach(id => {
+            let percent = damageStrengths[id]
+            if (percent > 100) {
+                strength.push(id)
+            } else if (percent < 100) {
+                weak.push(id)
+            }
+        })
 
+        for (let i = 0; i < Math.max(strength.length, weak.length); i++) {
             rows.push(
                 <tr>
-                    { this.createAmountHtml(data.strong[i]) }
-                    { this.createAmountHtml(data.weak[i]) }
+                    { this.createAmountHtml(strength[i], damageStrengths[strength[i]]) }
+                    { this.createAmountHtml(weak[i], damageStrengths[weak[i]]) }
                 </tr>
-            );
+            )
         }
 
         return rows;
     };
 
-    createAmountHtml(amountData) {
-        if (amountData) {
-            return (<td align="center"><Species id={amountData.id}/></td>);
+    createAmountHtml(id, percent) {
+        if (id) {
+            return (<td align="center"><Species id={ id }/></td>);
         }
 
         return <td></td>

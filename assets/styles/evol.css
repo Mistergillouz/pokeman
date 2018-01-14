@@ -38,7 +38,7 @@
 
 .evol-results .zoom-container:nth-child(even) {
     background-color: #f0f8fd;
-    border-radius: 5px;
+    border-radius: 0 0 10px 0;
 }
 
 .evol-right-arrow {

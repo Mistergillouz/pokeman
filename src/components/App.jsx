@@ -9,12 +9,14 @@ import Constants from 'data/Constants'
 import SpeciesTooltip from 'components/SpeciesTooltip'
 import EvolutionPage from 'components/EvolutionPage'
 import BabiesPage from 'components/BabiesPage'
+import CalculationPage from 'components/CalculationPage'
 
 
 const PAGES = { 
     MainPage: 'MainPage', 
     ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', 
-    ComparePage: 'ComparePage', EvolutionPage: 'EvolutionPage', BabisPage: 'BabiesPage'
+    ComparePage: 'ComparePage', EvolutionPage: 'EvolutionPage', BabisPage: 'BabiesPage',
+    CalculationPage: 'CalculationPage'
 }
 
 class App extends React.Component {
@@ -24,6 +26,7 @@ class App extends React.Component {
         this.state = {
             selected: [],
             pages: [_pageEntry(PAGES.MainPage)]
+            
         }
     }
 
@@ -97,9 +100,12 @@ class App extends React.Component {
                 this.pushPage(PAGES.EvolutionPage, args)
                 break
 
-                case Constants.EVENT.BabiesPage:
+            case Constants.EVENT.BabiesPage:
                 this.pushPage(PAGES.BabiesPage, args)
                 break
+            case Constants.EVENT.CalculationPage:
+            this.pushPage(PAGES.CalculationPage, args)
+            break
         }
     }
 
@@ -115,6 +121,7 @@ class App extends React.Component {
                 <SpeciesTooltip visible={ page.tooltipArgs } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
                 <EvolutionPage visible={ pageId === PAGES.EvolutionPage } eventHandler = { this.eventHandler.bind(this)} />
                 <BabiesPage visible={ pageId === PAGES.BabiesPage } eventHandler = { this.eventHandler.bind(this)} />
+                <CalculationPage visible={ pageId === PAGES.CalculationPage } id={ page.args.id } eventHandler = { this.eventHandler.bind(this)} />
             </div>
         )
     }

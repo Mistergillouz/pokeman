@@ -26,10 +26,7 @@ class ZoomPage extends React.Component {
     }
 
     onBack() {
-
-        this.props.eventHandler({
-            eventType: Constants.EVENT.Back
-        });
+        this.props.eventHandler({ eventType: Constants.EVENT.Back })
     }
     
     render() { 
@@ -52,7 +49,7 @@ class ZoomPage extends React.Component {
                 </div>
                 <div className="pokemon-zoom">
                     <EvolutionPanel id={ this.selectedId() } evolves={ evolves } onClick={ id => this.onPokemonClicked(id) }/>
-                    <CombatPanel id={ this.selectedId() } onClose={() => this.onBack() }/>
+                    <CombatPanel id={ this.selectedId() } eventHandler={ this.props.eventHandler }/>
                 </div>
 		    </div>
         )

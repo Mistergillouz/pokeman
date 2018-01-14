@@ -1,6 +1,7 @@
 import Pokedex from 'data/pokedex.json'
 import Eggs from 'data/eggs.json'
 import Constants from 'data/Constants'
+import Utils from 'data/Utils'
 
 class PokedexHelper {
    
@@ -11,7 +12,7 @@ class PokedexHelper {
 
     getAttacks(pokemonId) {
         
-        let pokemon = this.pokemon(pokemonId), fast = [], charged = []
+        let pokemon = this.getPokemon(pokemonId), fast = [], charged = []
         if (pokemon.attacks) {
             charged = this._getAttacks(pokemon, pokemon.attacks.charged)
             fast = this._getAttacks(pokemon, pokemon.attacks.fast)
@@ -55,7 +56,7 @@ class PokedexHelper {
                     }
                 });
     
-                let dps = _round((attack.dmg / attack.duration) * bonus, 1) ;
+                let dps = Utils.round((attack.dmg / attack.duration) * bonus, 1) ;
                 let entry = Object.assign({}, attack, {
                     name:  this.loc(attack),
                     dps: dps
@@ -78,7 +79,7 @@ class PokedexHelper {
                 return
             }
 
-            let pokemon = this.pokemon(pokemonId)
+            let pokemon = this.getPokemon(pokemonId)
             if (from.indexOf(pokemon.gen) === -1) {
                 return;
             }
@@ -119,12 +120,12 @@ class PokedexHelper {
     
     _getEvolves(pokemonId, gens) {
         let children = [];
-        let pokemon = this.pokemon(pokemonId);
+        let pokemon = this.getPokemon(pokemonId);
         if (pokemon.evolves) {
             pokemon.evolves.forEach((id) => {
                 
                 if (gens) {
-                    let targetPokemon = this.pokemon(id)
+                    let targetPokemon = this.getPokemon(id)
                     if (gens.indexOf(targetPokemon.gen) === -1) {
                         return
                     }
@@ -162,35 +163,64 @@ class PokedexHelper {
         }
     };
 
-    
-    getStrengthWeakness(typeId) {
-        let species = this.species(typeId), strong = [], weak = [];
-        for (let targetId in species.dmg) {
-            let value = species.dmg[targetId];
-            if (value !== 100) {
-                var against = {
-                    id: targetId,
-                    amount: value,
-                    text: this.loc(this.species(targetId))
-                };
-                if (value > 100) {
-                    strong.push(against);
-                } else {
-                    weak.push(against);
+    getStrengthWeakness(pokemonId) {
+        
+        let strength, weakness
+        let pokemon = this.getPokemon(pokemonId)
+        pokemon.species.forEach(damageType => {
+            let [str, weak] = this.getDamageStrengthWeakness(damageType)
+            if (!strength) {
+                strength = str
+                weakness = weak
+            } else {
+                for (let type in strength) {
+                    strength[type] *= str[type] / 100
+                    weakness[type] *= weak[type] / 100
                 }
             }
-        }
-    
-        return {
-            strong: strong,
-            weak: weak
-        };
+        })
+
+        return [strength, weakness]
     }
+
+    getDamageStrengthWeakness(damageType) {
+        let species = this.getSpecies(damageType), strength = {}
+        Object.keys(species.dmg).forEach(id => strength[id] = species.dmg[id])
+        
+        let damageTypes = this.species(), weakness = {}
+        Object.keys(damageTypes).forEach(id => weakness[id] = damageTypes[id].dmg[damageType])
+
+        return [strength, weakness]
+    }
+
+    // getStrengthWeakness(typeId) {
+    //     let species = this.getSpecies(typeId), strong = [], weak = [];
+    //     for (let targetId in species.dmg) {
+    //         let value = species.dmg[targetId];
+    //         if (value !== 100) {
+    //             var against = {
+    //                 id: targetId,
+    //                 amount: value,
+    //                 text: this.loc(this.getSpecies(targetId))
+    //             };
+    //             if (value > 100) {
+    //                 strong.push(against);
+    //             } else {
+    //                 weak.push(against);
+    //             }
+    //         }
+    //     }
+    
+    //     return {
+    //         strong: strong,
+    //         weak: weak
+    //     };
+    // }
 
     search(query) {
             
         let ids = [];
-        let textParts = this.normalizeText(query.text.trim().toLowerCase()).split(' ')
+        let textParts = Utils.normalizeText(query.text.trim().toLowerCase()).split(' ')
         function matchRuleShort(str, rule) {
             return new RegExp("^" + rule.split("*").join(".*") + "$").test(str);
           }
@@ -206,7 +236,7 @@ class PokedexHelper {
                 return
             }
 
-            let name = this.normalizeText(this.loc(pokemon) || '').toLowerCase();
+            let name = Utils.normalizeText(this.loc(pokemon) || '').toLowerCase();
             if (!name.length) {
                 return;
             }
@@ -218,7 +248,7 @@ class PokedexHelper {
                         pokemonId = text
                         found = true
                     }
-                    else if (_match(name, text)) {
+                    else if (Utils.match(name, text)) {
                         found = true
                     }
                 })
@@ -252,10 +282,15 @@ class PokedexHelper {
         }
     }
 
+    species() {
+        return Pokedex.species
+    }
+    
     getAllSpecies() {
         let types = [];
         for (let id in Pokedex.species) {
-            types.push({ id: Number(id), name: this.loc(this.species(id)), key: this.getSpeciesKey(this.species(id)) });
+            let species = this.getSpecies(id)
+            types.push({ id: Number(id), name: this.loc(species), key: this.getSpeciesKey(species), dmg: species.dmg });
         }
     
         types.sort((a, b) => {
@@ -277,12 +312,8 @@ class PokedexHelper {
         return Pokedex.species[speciesId];
     }
 
-    species(speciesId) {
+    getSpecies(speciesId) {
         return Pokedex.species[speciesId];
-    }
-
-    pokemon(id) {
-        return Pokedex.pokemons[id];
     }
 
     loc(object, locale) {
@@ -291,30 +322,6 @@ class PokedexHelper {
 
     getLocaleCountry() {
         return this.locale.country
-    }
-
-    normalizeText(text) {
-        
-        const subs = [
-            [ 'é', 'e' ],
-            [ 'è', 'e' ],
-            [ 'ê', 'e' ],
-            [ 'ë', 'e' ],
-            [ 'à', 'a' ],
-            [ 'â', 'a' ],
-            [ 'ä', 'a' ]
-        ];
-        
-        let string = text = text.trim().toLowerCase();
-        subs.forEach((sub) => {
-            string = this.replaceAll(string, sub[0], sub[1]);
-        });
-    
-        return string;
-    }
-
-    replaceAll(str, find, replace) {
-        return str.replace(new RegExp(find, 'g'), replace);
     }
     
     getLocales() {
@@ -330,17 +337,14 @@ class PokedexHelper {
         return this.loc(species, Constants.LOCALES.ENGLISH).toUpperCase()
     }
 
+    enumPokemons(callback) {
+        Object.keys(Pokedex.pokemons).forEach(pokemonId => {
+            return callback(Pokedex.pokemons[pokemonId], pokemonId)
+        })
+    }
+
 }
 
-function _round(num, decimals) {
-    var n = Math.pow(10, decimals);
-    return Math.round( (n * num).toFixed(decimals) )  / n;
-}
-
-function _match(str, rule) {
-    let regex = new RegExp("^" + rule.split("*").join(".*") + "$")
-    return regex.test(str) || str.indexOf(rule) !== -1
-}
 
 const LEGENDARY = [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 480, 481, 482, 483, 484, 485, 486, 487, 488, 491, 492, 493, 494, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649]
 
