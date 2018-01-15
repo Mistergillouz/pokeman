@@ -20,10 +20,10 @@ export default class CalculationPage extends PokemanPage {
             }
             
             let attacks = PokedexHelper.getAttacks(currentPokemon.id).charged, entry = null
-            attacks.forEach(attack => {
+            for (let attack of attacks) {
                 let percent = weaknesses[attack.type]
                 if (percent <= 100) {
-                    return
+                    continue
                 }
 
                 // STAB
@@ -35,7 +35,7 @@ export default class CalculationPage extends PokemanPage {
                     entry = { pokemon: currentPokemon, attacks: [], against: [] }
                 }
                 entry.attacks.push({ attack, percent })
-            })
+            }
 
             if (entry) {
                 results.push(entry)

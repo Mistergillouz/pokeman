@@ -51,9 +51,9 @@ class EggPage extends React.Component {
     iterator(eggs, callback) {
 
         Object.keys(eggs).forEach(distance => {
-            eggs[distance].forEach(pokemonId => {
+            for (let pokemonId of eggs[distance]) {
                 callback(distance, PokedexHelper.getPokemon(pokemonId))
-            })
+            }
         })
     }
 
@@ -91,9 +91,9 @@ class EggPage extends React.Component {
         let distances = Object.keys(eggs) 
 
         let sections = [];
-        distances.forEach(distance => {
+        for (let distance of distances) {
             sections.push(this.generateSection(eggs[distance], distance, eggs.length > 0));
-        });
+        }
 
         return sections;
     }

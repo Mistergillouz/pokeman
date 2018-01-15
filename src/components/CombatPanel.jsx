@@ -77,14 +77,14 @@ class CombatPanel extends React.Component {
         let rows = []
 
         rows.push(this.generateSection('Attaques rapides', true))
-        attacks.fast.forEach(attack => {
+        for (let attack of attacks.fast) {
             rows.push(this.generateAttackRow(attack, false))
-        });
+        }
 
         rows.push(this.generateSection('Attaques Chargées'));
-        attacks.charged.forEach(attack => {
+        for (let attack of attacks.charged) {
             rows.push(this.generateAttackRow(attack, false))
-        });
+        }
 
         return (
             this.generateTable('Toutes les attaques', rows)
