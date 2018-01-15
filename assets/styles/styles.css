@@ -39,7 +39,7 @@ body {
     user-select: none;
 }
 
-.ui-borders, .ui-styles, .popover, .strength-table-container {
+.ui-borders, .ui-styles, .popover {
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
 }
@@ -385,26 +385,6 @@ input {
     margin-right: 5px;
 }
 
-.strength-table-container {
-    background-color: white;
-    position: absolute;
-    z-index: 50;
-    padding: 0.25em;
-    user-select: none;
-}
-
-.strength-table td {
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
-.strength-table thead tr th {
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-bottom: 0.25em;
-    font-weight: 700;
-    font-size: 14px;
-}
 
 .strong-text {
     color: green;

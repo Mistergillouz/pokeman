@@ -1,0 +1,61 @@
+.species-tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: stretch;
+}
+
+/* Style the buttons inside the tab */
+.species-tab div {
+    float: left;
+    flex-grow: 1;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: 3px solid transparent;
+    font-size: 10pt;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Change background color of buttons on hover */
+.species-tab div:hover {
+    background-color: #ddd;
+}
+
+.species-tab div.active {
+    background-color: #ccc;
+    border-bottom: 3px solid orange;
+}
+
+/* Style the tab content */
+.species-tab-content {
+    display: none;
+    padding: 6px 12px;
+}
+
+.species-container {
+    position: absolute;
+    border: 1px solid #ccc;
+    width: 220px;
+    outline: none;
+}
+
+.tooltip-table-container {
+    background-color: white;
+    z-index: 50;
+    padding: 0.25em;
+    user-select: none;
+}
+
+.tooltip-table td {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.tooltip-table thead tr th {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.25em;
+    font-weight: 700;
+    font-size: 14px;
+}

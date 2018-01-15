@@ -118,7 +118,7 @@ class App extends React.Component {
                 <ZoomPage visible={ pageId === PAGES.ZoomPage } args={ page.args } eventHandler = { this.eventHandler.bind(this) }/>
                 <EggPage visible={ pageId === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
                 <ComparePage visible={ pageId === PAGES.ComparePage } pokemons={ page.args.pokemons } eventHandler = { this.eventHandler.bind(this) }/>
-                <SpeciesTooltip visible={ page.tooltipArgs } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
+                <SpeciesTooltip visible={ page.tooltipArgs ? true : false } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
                 <EvolutionPage visible={ pageId === PAGES.EvolutionPage } eventHandler = { this.eventHandler.bind(this)} />
                 <BabiesPage visible={ pageId === PAGES.BabiesPage } eventHandler = { this.eventHandler.bind(this)} />
                 <CalculationPage visible={ pageId === PAGES.CalculationPage } id={ page.args.id } eventHandler = { this.eventHandler.bind(this)} />

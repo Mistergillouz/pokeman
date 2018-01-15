@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 import PokedexHelper from 'data/PokedexHelper'
 import Species from 'components/Species'
 import Constants from 'data/Constants'
+import '../../assets/styles/speciestt.css'
 
 class SpeciesTooltip extends React.Component {
    constructor() {
         super(...arguments)
+        this.state = {
+            tabId: 'atk'
+        }
     }
 
-
-    buildStrengthWeaknessTr(id) {
-        let rows = [];
-        
-        let [damageStrengths, _] = PokedexHelper.getDamageStrengthWeakness(id)
-        let strength = [], weak = []
-        Object.keys(damageStrengths).forEach(id => {
-            let percent = damageStrengths[id]
+    buildRows(data) {
+        let rows = [], strength = [], weak = []
+        Object.keys(data).forEach(id => {
+            let percent = data[id]
             if (percent > 100) {
                 strength.push(id)
             } else if (percent < 100) {
@@ -27,14 +27,25 @@ class SpeciesTooltip extends React.Component {
         for (let i = 0; i < Math.max(strength.length, weak.length); i++) {
             rows.push(
                 <tr>
-                    { this.createAmountHtml(strength[i], damageStrengths[strength[i]]) }
-                    { this.createAmountHtml(weak[i], damageStrengths[weak[i]]) }
+                    { this.createAmountHtml(strength[i], data[strength[i]]) }
+                    { this.createAmountHtml(weak[i], data[weak[i]]) }
                 </tr>
             )
         }
 
         return rows;
-    };
+    }
+
+    buildAttacksRows(id) {
+        let [data, _] = PokedexHelper.getDamageStrengthWeakness(id)
+        return this.buildRows(data, false)
+    }
+
+    buildResistanceRows(id) {
+        let [_, data] = PokedexHelper.getDamageStrengthWeakness(id)
+        return this.buildRows(data, true)
+    }
+
 
     createAmountHtml(id, percent) {
         if (id) {
@@ -63,7 +74,34 @@ class SpeciesTooltip extends React.Component {
             node.style.left = x + 'px';
 
             node.focus();
+            this.updateVisibility()
         }
+    }
+
+    componentDidMount() {
+        this.updateVisibility()
+    }
+
+    updateVisibility() {
+        if (this.props.visible) {
+            SpeciesTooltip.TABS.forEach(tab => {
+                let visible = this.state.tabId === tab.id
+                let element = document.getElementById(tab.target)
+                element.style.display = visible ? 'block' : 'none'
+            })
+        }
+    }
+
+    show(tabId) {
+        this.setState({ tabId: tabId })
+    }
+
+    generateTabLink(tab) {
+        let classes = 'species-tab-links'
+        if (this.state.tabId === tab.id) {
+            classes += ' active'
+        }
+        return <div className={ classes }  onClick={ () => this.show(tab.id) }>{ tab.text }</div>
     }
 
     render() { 
@@ -74,15 +112,28 @@ class SpeciesTooltip extends React.Component {
 
         let id = this.props.args.id;
         if (id !== -1) {
-            let rows = this.buildStrengthWeaknessTr(id);
+            let atkRows = this.buildAttacksRows(id)
+            let resRows = this.buildResistanceRows(id)
             return (
-                <div className="strength-table-container" tabIndex="-1" onBlur={() => this.onBlur() } onClick={ () => this.onBlur() }>
-                    <table className="strength-table">
-                        <thead><tr><th>Fort vs</th><th>Faible vs</th></tr></thead>
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
+                <div className="species-container" tabIndex="-1" onBlur={() => this.onBlur() } >
+                    <div className="species-tab">
+                        { SpeciesTooltip.TABS.map(tab => this.generateTabLink(tab)) }
+                    </div>
+
+                    <div className="tooltip-table-container" onClick={ () => this.onBlur() }>
+                        <table id="strength-table" className="tooltip-table">
+                            <thead><tr><th>Fort vs</th><th>Faible vs</th></tr></thead>
+                            <tbody>
+                                { atkRows }
+                            </tbody>
+                        </table>
+                        <table id="defense-table" className="tooltip-table">
+                            <thead><tr><th>Faible vs</th><th>Fort vs</th></tr></thead>
+                            <tbody>
+                                { resRows }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )
         } else {
@@ -90,5 +141,10 @@ class SpeciesTooltip extends React.Component {
         }
     }
 }
+
+SpeciesTooltip.TABS = [
+    { id: 'atk', text: 'Attaques', target: 'strength-table' },
+    { id: 'def', text: 'Résistances', target: 'defense-table' }
+]
 
 export default SpeciesTooltip; 
