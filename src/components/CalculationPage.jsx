@@ -7,12 +7,6 @@ import '../../assets/styles/calc.css'
 
 export default class CalculationPage extends PokemanPage {
     
-    // constructor() {
-    //     super(...arguments)
-
-    //     this.state = {}
-    // }
-    
     calculate(pokemonId) {
 
         let pokemon = PokedexHelper.getPokemon(pokemonId)
@@ -25,26 +19,23 @@ export default class CalculationPage extends PokemanPage {
                 return
             }
             
-            let [strs, weaks] = PokedexHelper.getStrengthWeakness(currentPokemon.id), entry = null
-            for (let i = 0; i < currentPokemon.species.length; i++) {
-                if (weaknesses[currentPokemon.species[i]] > 100) {
-                    let attacks = PokedexHelper.getAttacks(currentPokemon.id).charged;
-                    attacks.forEach(attack => {
-                        let percent = weaknesses[attack.type]
-                        if (percent > 100) {
-                            if (currentPokemon.species.indexOf(attack.type) !== -1) {
-                                percent *= 1.25
-                            }
-                            if (!entry) {
-                                entry = { pokemon: currentPokemon, attacks: [], against: [] }
-                            }
-                            entry.attacks.push({ attack, percent })
-                        }
-                    })
-
-                    break
+            let attacks = PokedexHelper.getAttacks(currentPokemon.id).charged, entry = null
+            attacks.forEach(attack => {
+                let percent = weaknesses[attack.type]
+                if (percent <= 100) {
+                    return
                 }
-            }
+
+                // STAB
+                if (currentPokemon.species.indexOf(attack.type) !== -1) {
+                    percent *= 1.5
+                }
+
+                if (!entry) {
+                    entry = { pokemon: currentPokemon, attacks: [], against: [] }
+                }
+                entry.attacks.push({ attack, percent })
+            })
 
             if (entry) {
                 results.push(entry)
@@ -66,7 +57,16 @@ export default class CalculationPage extends PokemanPage {
     }
 
     generateBestAttackers(results) {
-        results.sort((a, b) => b.pokemon.cpmax - a.pokemon.cpmax)
+        results.sort((a, b) => {
+            let ma = a.attacks.reduce((max, attack) => Math.max(max, attack.percent), 0)
+            let mb = b.attacks.reduce((max, attack) => Math.max(max, attack.percent), 0)
+
+            ma = 1 + ma / 1000
+            mb = 1 + mb / 1000
+
+            return (b.pokemon.cpmax * mb) - (a.pokemon.cpmax * ma)
+        })
+
         results.length = Math.min(MAX_RESULT, results.length)
         return results.map((entry, index) => {
             entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
