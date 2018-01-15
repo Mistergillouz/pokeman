@@ -32,16 +32,8 @@ class App extends React.Component {
 
     showTooltip(show, args) {
 
-        let tooltipArgs
-        if (args.event)
-            tooltipArgs = { 
-                x: args.event.clientX,
-                y: args.event.clientY,
-                id: args.id
-        }
-
         let pages = this.state.pages.slice()
-        pages[pages.length - 1].tooltipArgs = tooltipArgs
+        pages[pages.length - 1].tooltipArgs = show ? args : null
         this.setState({ pages: pages })
     }
 

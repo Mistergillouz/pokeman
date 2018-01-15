@@ -62,9 +62,9 @@ export default class Utils {
         ];
         
         let string = text = text.trim().toLowerCase();
-        subs.forEach((sub) => {
+        for (let sub of subs) {
             string = Utils.replaceAll(string, sub[0], sub[1]);
-        });
+        }
     
         return string;
     }

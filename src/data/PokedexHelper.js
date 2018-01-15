@@ -46,15 +46,15 @@ class PokedexHelper {
         let result = [];
 
         if (attacks) {
-            attacks.forEach(attackId => {
+            for (let attackId of attacks) {
                 let attack = Pokedex.attacks[attackId];
                         
                 let bonus = 1;
-                pokemon.species.forEach(type => {
+                for (let type of pokemon.species) {
                     if (type === attack.type) {
                         bonus = 1.2;
                     }
-                });
+                }
     
                 let dps = Utils.round((attack.dmg / attack.duration) * bonus, 1) ;
                 let entry = Object.assign({}, attack, {
@@ -63,7 +63,7 @@ class PokedexHelper {
                 });
     
                 result.push(entry);
-            });
+            }
         }
     
         result.sort((a, b) => { return b.dps - a.dps; });
@@ -90,7 +90,7 @@ class PokedexHelper {
                 children: this._getEvolves(pokemonId, to)
             }];
 
-            if (evolves[0].children.length) {
+            if (evolves[0].children && evolves[0].children.length) {
                 result[pokemonId] = evolves
                 this._gatherEvolveIds(evolves[0], done)
             }
@@ -101,10 +101,12 @@ class PokedexHelper {
     }
 
     _gatherEvolveIds(evolves, done) {
-        evolves.children.forEach(evolve => {
-            done[evolve.id] = true
-            this._gatherEvolveIds(evolve, done)
-        })
+        if (evolves.children) {
+            for (let evolve of evolves.children) {
+                done[evolve.id] = true
+                this._gatherEvolveIds(evolve, done)
+            }
+        }
     }
         
     getEvolvesList(pokemonId) {
@@ -122,7 +124,7 @@ class PokedexHelper {
         let children = [];
         let pokemon = this.getPokemon(pokemonId);
         if (pokemon.evolves) {
-            pokemon.evolves.forEach((id) => {
+            for (let id of pokemon.evolves) {
                 
                 if (gens) {
                     let targetPokemon = this.getPokemon(id)
@@ -138,7 +140,7 @@ class PokedexHelper {
     
                 children.push(evolutions)
     
-            });
+            }
         }
     
         return children;
@@ -148,7 +150,7 @@ class PokedexHelper {
         for (let id in Pokedex.pokemons) {
             let pokemon = Pokedex.pokemons[id];
             if (pokemon.evolves) {
-                pokemon.evolves.forEach((aid) => {
+                for (let aid of pokemon.evolves) {
                     if (Number(aid) === Number(pokemonId)) {
                         evolves.push( {
                             id: pokemon.id,
@@ -157,8 +159,7 @@ class PokedexHelper {
     
                         this._getParents(pokemon.id, evolves);
                     }
-    
-                });
+                }
             }
         }
     };
@@ -167,7 +168,7 @@ class PokedexHelper {
         
         let strength, weakness
         let pokemon = this.getPokemon(pokemonId)
-        pokemon.species.forEach(damageType => {
+        for (let damageType of pokemon.species) {
             let [str, weak] = this.getDamageStrengthWeakness(damageType)
             if (!strength) {
                 strength = str
@@ -178,7 +179,7 @@ class PokedexHelper {
                     weakness[type] *= weak[type] / 100
                 }
             }
-        })
+        }
 
         return [strength, weakness]
     }
@@ -225,25 +226,25 @@ class PokedexHelper {
             return new RegExp("^" + rule.split("*").join(".*") + "$").test(str);
           }
         let keys = Object.keys(Pokedex.pokemons)
-        keys.forEach(pokemonId => {
+        for (let pokemonId of keys) {
 
             let pokemon = Pokedex.pokemons[pokemonId];
             if (query.genId && pokemon.gen !== query.genId) {
-                return;
+                continue
             }
 
             if (query.rarity === true && LEGENDARY.indexOf(Number(pokemonId)) === -1) {
-                return
+                continue
             }
 
             let name = Utils.normalizeText(this.loc(pokemon) || '').toLowerCase();
             if (!name.length) {
-                return;
+                continue
             }
     
             if (textParts.length) {
                 let found = false
-                textParts.forEach(text => {
+                for (let text of textParts) {
                     if (keys[text]) {
                         pokemonId = text
                         found = true
@@ -251,24 +252,24 @@ class PokedexHelper {
                     else if (Utils.match(name, text)) {
                         found = true
                     }
-                })
+                }
 
                 if (!found) {
-                    return
+                    continue
                 }
             }
     
             var rejected = false;
-            query.types.forEach((typeId)=> {
+            for (let typeId of query.types) {
                 if (pokemon.species.indexOf(typeId) === -1) {
                     rejected = true;
                 } 
-            });
+            }
     
             if (!rejected && ids.indexOf(pokemonId) === -1) {
                 ids.push(pokemonId);
             }
-        });
+        }
 
         return ids;
     }

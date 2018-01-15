@@ -15,24 +15,26 @@ export default class EvolutionPanel extends React.Component {
 
     createEvolvesGrid(evolutions, grid, level) {
 
-        let gridRow = (level === 0) ? _addGridRow(grid) : grid[grid.length - 1]
-        evolutions.forEach((evolution, index) => {
-            if (index > 0) {
-                gridRow = _addGridRow(grid)
-            }
-            gridRow[level] = evolution.id
-            this.createEvolvesGrid(evolution.children, grid, level + 1)
-        })
+        if (evolutions) {
+            let gridRow = (level === 0) ? _addGridRow(grid) : grid[grid.length - 1]
+            evolutions.forEach((evolution, index) => {
+                if (index > 0) {
+                    gridRow = _addGridRow(grid)
+                }
+                gridRow[level] = evolution.id
+                this.createEvolvesGrid(evolution.children, grid, level + 1)
+            })
+        }
     }
 
     generateEvolvesRows(evolutions) {    
         
         let grid = [], trs = []
         this.createEvolvesGrid(evolutions, grid, 0)
-        grid.forEach(row => {
+        for (let row of grid) {
 
             let tds = []
-            row.forEach(id => {
+            for (let id of row) {
                 let pokemonId = Number(id)
                 if (pokemonId) {
                     let name = PokedexHelper.getPokemonName(pokemonId)
@@ -44,10 +46,10 @@ export default class EvolutionPanel extends React.Component {
                 } else {
                     tds.push(<td></td>)
                 }
-            })
+            }
 
             trs.push(<tr>{ tds }</tr>)
-        })
+        }
 
         return trs
     }

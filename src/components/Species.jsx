@@ -12,10 +12,12 @@ class Species extends React.Component {
     onTypeClicked(event) {
 
         if (this.props.eventHandler) {
+            let rect = event.target.getBoundingClientRect()
             this.props.eventHandler({
                 eventType: Constants.EVENT.ShowTooltip,
                 id: this.props.id,
-                event: event
+                x: rect.left + rect.width / 2,
+                y: rect.top + rect.height / 2
             });
             
             event.stopPropagation();

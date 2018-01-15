@@ -26,7 +26,7 @@ class PokemonList extends React.Component {
 
     generateList() {
 
-        if (this.props.pokemons.length) {
+        if (this.props.pokemons && this.props.pokemons.length) {
             return this.props.pokemons.map((id) => this.buildPokemon(id))
         }
 

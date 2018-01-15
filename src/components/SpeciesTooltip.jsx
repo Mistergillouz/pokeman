@@ -66,13 +66,12 @@ class SpeciesTooltip extends React.Component {
             // Reposition tooltip within screen
 
             let node = ReactDOM.findDOMNode(this);
-            let px = this.props.args.x + 5, py = this.props.args.y + 10;
+            let px = this.props.args.x, py = this.props.args.y
             let ttw = node.scrollWidth, tth = node.scrollHeight;
             let scw = document.body.clientWidth - 20, sch = document.documentElement.clientHeight - 20;
             let x = ((px + ttw) > scw) ? scw - ttw : px, y = ((py + tth) > sch) ? sch - tth : py;
             node.style.top = y + 'px';
             node.style.left = x + 'px';
-
             node.focus();
             this.updateVisibility()
         }
@@ -84,11 +83,11 @@ class SpeciesTooltip extends React.Component {
 
     updateVisibility() {
         if (this.props.visible) {
-            SpeciesTooltip.TABS.forEach(tab => {
+            for (let tab of SpeciesTooltip.TABS) {
                 let visible = this.state.tabId === tab.id
                 let element = document.getElementById(tab.target)
                 element.style.display = visible ? 'block' : 'none'
-            })
+            }
         }
     }
 
@@ -115,7 +114,7 @@ class SpeciesTooltip extends React.Component {
             let atkRows = this.buildAttacksRows(id)
             let resRows = this.buildResistanceRows(id)
             return (
-                <div className="species-container" tabIndex="-1" onBlur={() => this.onBlur() } >
+                <div className="species-container" key={ id } tabIndex="-1" onBlur={() => this.onBlur() } >
                     <div className="species-tab">
                         { SpeciesTooltip.TABS.map(tab => this.generateTabLink(tab)) }
                     </div>
