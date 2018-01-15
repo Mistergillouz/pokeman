@@ -90,7 +90,7 @@ class SortTable extends React.Component {
 
     _sort(sortIndex, ascending) {
         this.getIndices().sort((a, b) => {
-            let v0 = this.props.datas[a][sortIndex], v1 = this.props.datas[b][sortIndex]
+            let v0 = this.props.datas[a][sortIndex] || 0, v1 = this.props.datas[b][sortIndex] || 0
             if (v0 === undefined && v1 != undefined) {
                 return 1
             }  else if (v0 === undefined && v1 !== undefined) {

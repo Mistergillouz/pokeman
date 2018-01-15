@@ -1,4 +1,5 @@
 import React from 'react'
+import PokemanPage from './PokemanPage';
 import EvolutionPanel from './EvolutionPanel'
 import NotFound from './NotFound'
 import PokedexHelper from 'data/PokedexHelper'
@@ -6,15 +7,15 @@ import Constants from 'data/Constants'
 import Utils from 'data/Utils'
 import '../../assets/styles/evol.css'
 
-class EvolutionPage extends React.Component {
+class EvolutionPage extends PokemanPage {
    
     constructor() {
         super(...arguments)
 
-        this.state = {
-            fromGens: [3],
-            toGens: [3]
-        }
+        Object.assign(this.state, {
+            fromGens: [Constants.CURRENT_GEN],
+            toGens: [Constants.CURRENT_GEN]
+        })
     }
 
     onGenFromClicked(gen) {
@@ -28,26 +29,15 @@ class EvolutionPage extends React.Component {
 
     }
 
-    onPokemonClick(pokemonId) {
-        this.props.eventHandler({
-            eventType: Constants.EVENT.PokemonClicked,
-            id: pokemonId
-        });
-    }
-
     resolve() {
         let evolves = PokedexHelper.getEvolveFromTo(this.state.fromGens, this.state.toGens)
         let showGen = this.state.fromGens.length !== 1 || this.state.toGens.length !== 1 || this.state.toGens[0] !== this.state.fromGens[0]
-        let rows = Object.keys(evolves).map(pokemonId => <EvolutionPanel evolves={ evolves[pokemonId] } showGen={ showGen } onClick={ id => this.onPokemonClick(id) }/>)
+        let rows = Object.keys(evolves).map(pokemonId => <EvolutionPanel evolves={ evolves[pokemonId] } showGen={ showGen } onClick={ id => this.onPokemonSelected(id) }/>)
         return (
             rows.length ? rows : <NotFound text="Désolé. Pas de resultats correspond aux critéres d'évolutions séléctionnés"/>
         )
     }
        
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-
     render() { 
 
         if (!this.props.visible) {

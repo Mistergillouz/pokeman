@@ -1,15 +1,12 @@
 import React from 'react'
+import PokemanPage from './PokemanPage';
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
 import CombatPanel from 'components/CombatPanel'
 import SmallPokemon from 'components/SmallPokemon'
 import EvolutionPanel from 'components/EvolutionPanel'
 
-class ZoomPage extends React.Component {
-   constructor() {
-        super(...arguments)
-        this.state = {}
-    }
+export default class ZoomPage extends PokemanPage {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.args) {
@@ -25,10 +22,6 @@ class ZoomPage extends React.Component {
         return Number(this.state.highlightedId)
     }
 
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-    
     render() { 
 
         if (!this.props.visible) {
@@ -57,4 +50,3 @@ class ZoomPage extends React.Component {
 }
 
 
-export default ZoomPage; 

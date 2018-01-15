@@ -1,28 +1,12 @@
 import React from 'react'
+import PokemanPage from './PokemanPage';
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon';
 import '../../assets/styles/babies.css'
 
-export default class BabiesPage extends React.Component {
+export default class BabiesPage extends PokemanPage {
    
-    constructor() {
-        super(...arguments)
-
-        this.state = {}
-    }
-
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-
-    onPokemonClick(pokemonId) {
-        this.props.eventHandler({
-            eventType: Constants.EVENT.PokemonClicked,
-            id: pokemonId
-        })
-    }
-
     render() { 
 
         if (!this.props.visible) {
@@ -40,7 +24,7 @@ export default class BabiesPage extends React.Component {
                 </div>
 
                 <div className="baby-results">
-                    { PokedexHelper.getBabies().map(pokemonId => <SmallPokemon id={ pokemonId } onClick={ id => this.onPokemonClick(id) } showGen='true'/>) }
+                    { PokedexHelper.getBabies().map(pokemonId => <SmallPokemon id={ pokemonId } onClick={ id => this.onPokemonSelected(id) } showGen='true'/>) }
                 </div>
             </div>
         )

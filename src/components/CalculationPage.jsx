@@ -1,21 +1,18 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
+import PokemanPage from './PokemanPage';
 import SmallPokemon from './SmallPokemon';
 import '../../assets/styles/calc.css'
 
-export default class CalculationPage extends React.Component {
+export default class CalculationPage extends PokemanPage {
     
-    constructor() {
-        super(...arguments)
+    // constructor() {
+    //     super(...arguments)
 
-        this.state = {}
-    }
+    //     this.state = {}
+    // }
     
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-
     calculate(pokemonId) {
 
         let pokemon = PokedexHelper.getPokemon(pokemonId)
@@ -24,7 +21,7 @@ export default class CalculationPage extends React.Component {
         let results = []
         PokedexHelper.enumPokemons(currentPokemon => {
 
-            if (currentPokemon.gen > 3 || currentPokemon.cpmax < 2000 || currentPokemon.evolves) {
+            if (currentPokemon.gen > Constants.CURRENT_GEN || currentPokemon.cpmax < 2000 || currentPokemon.evolves) {
                 return
             }
             
@@ -88,12 +85,6 @@ export default class CalculationPage extends React.Component {
         })
     }
 
-    onPokemonSelected(id) {
-        this.props.eventHandler({
-            eventType: Constants.EVENT.PokemonClicked,
-            id: id
-        })
-    }
 
     render() { 
 
