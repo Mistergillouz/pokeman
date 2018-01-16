@@ -7,6 +7,15 @@ import '../../assets/styles/calc.css'
 
 export default class CalculationPage extends PokemanPage {
     
+    constructor() {
+        super(...arguments)
+
+        Object.assign(this.state, {
+            showLegendary: true
+        })
+
+    }
+
     calculate(pokemonId) {
 
         let pokemon = PokedexHelper.getPokemon(pokemonId)
@@ -52,35 +61,6 @@ export default class CalculationPage extends PokemanPage {
             }
         })
 
-        return results
-    }
-
-    generateAttacks(entry) {
-
-        entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
-
-        let attacks = []
-        attacks.push(this.generateAttack(entry.fastAttack, true))
-        for (let attackEntry of entry.attacks) {
-            attacks.push(this.generateAttack(attackEntry.attack))
-        }
-
-        return attacks
-    }
-
-    generateAttack(attack, isFastAttack) {
-        let species = PokedexHelper.getSpecies(attack.type)
-        let key = PokedexHelper.getSpeciesKey(species)
-        let classes = "calc-pokemon-attack" + (isFastAttack ? ' calc-fast-attack' : '')
-        return (
-            <div className={ classes }>
-                <div className={ 'icon-type-' + key }/>
-                <span>{ PokedexHelper.loc(attack) }</span>
-            </div>
-        )
-    }
-
-    generateBestAttackers(results) {
         results.sort((a, b) => {
             let ma = a.attacks.reduce((max, attack) => Math.max(max, attack.percent), 0)
             let mb = b.attacks.reduce((max, attack) => Math.max(max, attack.percent), 0)
@@ -91,23 +71,82 @@ export default class CalculationPage extends PokemanPage {
             return (b.pokemon.cpmax * mb) - (a.pokemon.cpmax * ma)
         })
 
-        results.length = Math.min(MAX_RESULT, results.length)
-        return results.map((entry, index) => {
-            let pokemon = entry.pokemon
-            return (
-                <div className="calc-pokemon-container" onClick={ () => this.onPokemonSelected(pokemon.id) }>
-                    <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
-                    <div className="calc-pokemon-img">
-                        <SmallPokemon id={ pokemon.id }/>
-                    </div>
-                    <div className="calc-pokemon-attacks">
-                        { this.generateAttacks(entry) }
-                    </div>
-                </div>
-            )
-        })
+        return results
     }
 
+    generateAttacks(entry) {
+
+        entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
+
+        let attacks = []
+        attacks.push(this.generateAttack(entry.fastAttack, 0, true))
+        for (let attackEntry of entry.attacks) {
+            attacks.push(this.generateAttack(attackEntry.attack, attackEntry.percent))
+        }
+
+        return attacks
+    }
+
+    generateAttack(attack, percent, isFastAttack) {
+        let species = PokedexHelper.getSpecies(attack.type)
+        let key = PokedexHelper.getSpeciesKey(species)
+        let classes = "calc-pokemon-attack" + (isFastAttack ? ' calc-fast-attack' : '')
+        return (
+            <div className={ classes }>
+                <div className={ 'calc-pokemon-attack-type-icon icon-type-' + key }/>
+                <div>
+                    <span>{ PokedexHelper.loc(attack) }</span>
+                    { this.generateRating(percent, isFastAttack) }
+                </div>
+            </div>
+        )
+    }
+
+    generateRating(percent, isFastAttack) {
+
+        if (isFastAttack) {
+            return null
+        }
+
+        let stars = Math.round((percent + 50) / 100)
+        stars = Math.max(1, Math.min(5, stars))
+        let styles = {
+            width: (stars * 20) + '%'
+        }
+        return (
+            <div className="star-ratings-css">
+                <div className="star-ratings-css-top" style={ styles }><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <div className="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            </div>
+        )
+    }
+
+    
+    generateBestAttackers(allResults) {
+
+        return allResults
+            .filter(entry => this.state.showLegendary || !PokedexHelper.isLegendary(entry.pokemon.id))
+            .slice(0, MAX_RESULT)
+            .map((entry, index) => {
+                let pokemon = entry.pokemon
+                return (
+                    <div className="calc-pokemon-container" key={ pokemon.id } onClick={ () => this.onPokemonSelected(pokemon.id) }>
+                        <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
+                        <div className="calc-pokemon-img">
+                            <SmallPokemon id={ pokemon.id }/>
+                        </div>
+                        <div className="calc-pokemon-attacks">
+                            { this.generateAttacks(entry) }
+                        </div>
+                    </div>
+                )
+            })
+    }
+
+
+    onToggleLeg() {
+        this.setState({ showLegendary: !this.state.showLegendary })
+    }
 
     render() { 
 
@@ -122,6 +161,9 @@ export default class CalculationPage extends PokemanPage {
         return (
             <div className="calc-container">
                 <div className="navbar">
+                    <div className="right-panel">
+                        <div onClick={ () => this.onToggleLeg() } className={ 'gen-button gen-button-right gen-button-left' + (this.state.showLegendary ? ' selected': '') }>LEG</div>
+                    </div>
                     <div className="left-panel">
                         <button className="back-button" onClick= {() => this.onBack() }></button>
                         <sup className='title-text'>{ 'Meilleurs attaquants vs ' + name }</sup>

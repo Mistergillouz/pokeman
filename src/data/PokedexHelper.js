@@ -233,7 +233,7 @@ class PokedexHelper {
                 continue
             }
 
-            if (query.rarity === true && LEGENDARY.indexOf(Number(pokemonId)) === -1) {
+            if (query.rarity === true && !this.isLegendary(pokemonId)) {
                 continue
             }
 
@@ -342,6 +342,10 @@ class PokedexHelper {
         Object.keys(Pokedex.pokemons).forEach(pokemonId => {
             return callback(Pokedex.pokemons[pokemonId], pokemonId)
         })
+    }
+
+    isLegendary(pokemonId) {
+        return LEGENDARY.indexOf(Number(pokemonId)) !== -1
     }
 
 }
