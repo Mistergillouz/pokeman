@@ -19,39 +19,63 @@ export default class CalculationPage extends PokemanPage {
                 return
             }
             
-            let attacks = PokedexHelper.getAttacks(currentPokemon.id).charged, entry = null
-            for (let attack of attacks) {
-                let percent = weaknesses[attack.type]
-                if (percent <= 100) {
-                    continue
+            let attacks = PokedexHelper.getAttacks(currentPokemon.id), entry = null
+            for (let chargedAttack of attacks.charged) {
+                let percent = weaknesses[chargedAttack.type]
+                if (percent > 100) {
+                    // STAB
+                    if (currentPokemon.species.indexOf(chargedAttack.type) !== -1) {
+                        percent *= 1.5
+                    }
+    
+                    if (!entry) {
+                        entry = { pokemon: currentPokemon, attacks: [], against: [] }
+                    }
+                    entry.attacks.push({ attack: chargedAttack, percent })
                 }
-
-                // STAB
-                if (currentPokemon.species.indexOf(attack.type) !== -1) {
-                    percent *= 1.5
-                }
-
-                if (!entry) {
-                    entry = { pokemon: currentPokemon, attacks: [], against: [] }
-                }
-                entry.attacks.push({ attack, percent })
             }
 
             if (entry) {
-                results.push(entry)
+
+                let bestAttack = { dps: 0, attack: null }
+                for (let attack of attacks.fast) {
+                    let dps = attack.dps * weaknesses[attack.type] / 100
+                    if (dps > bestAttack.dps) {
+                        bestAttack = { attack, dps }
+                    }
+                }
+
+                if (bestAttack.dps) {
+                    entry.fastAttack = bestAttack.attack
+                    results.push(entry)
+                }
             }
         })
 
         return results
     }
 
-    generateAttack(attackEntry) {
-        let species = PokedexHelper.getSpecies(attackEntry.attack.type)
+    generateAttacks(entry) {
+
+        entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
+
+        let attacks = []
+        attacks.push(this.generateAttack(entry.fastAttack, true))
+        for (let attackEntry of entry.attacks) {
+            attacks.push(this.generateAttack(attackEntry.attack))
+        }
+
+        return attacks
+    }
+
+    generateAttack(attack, isFastAttack) {
+        let species = PokedexHelper.getSpecies(attack.type)
         let key = PokedexHelper.getSpeciesKey(species)
+        let classes = "calc-pokemon-attack" + (isFastAttack ? ' calc-fast-attack' : '')
         return (
-            <div className="calc-pokemon-attack">
+            <div className={ classes }>
                 <div className={ 'icon-type-' + key }/>
-                <span>{ PokedexHelper.loc(attackEntry.attack) }</span>
+                <span>{ PokedexHelper.loc(attack) }</span>
             </div>
         )
     }
@@ -69,7 +93,6 @@ export default class CalculationPage extends PokemanPage {
 
         results.length = Math.min(MAX_RESULT, results.length)
         return results.map((entry, index) => {
-            entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
             let pokemon = entry.pokemon
             return (
                 <div className="calc-pokemon-container" onClick={ () => this.onPokemonSelected(pokemon.id) }>
@@ -78,7 +101,7 @@ export default class CalculationPage extends PokemanPage {
                         <SmallPokemon id={ pokemon.id }/>
                     </div>
                     <div className="calc-pokemon-attacks">
-                        { entry.attacks.map(entry => this.generateAttack(entry)) }
+                        { this.generateAttacks(entry) }
                     </div>
                 </div>
             )

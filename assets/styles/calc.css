@@ -22,7 +22,7 @@
     align-items: center;
     width: 75%;
     margin: 0 auto;
-    padding-left: 10px;
+    padding: 5px;
 }
 
 .calc-pokemon-rank {
@@ -46,6 +46,9 @@
     align-items: center;
 }
 
+.calc-fast-attack {
+    border-bottom: 1px dotted darkgray;
+}
 .calc-pokemon-attack div {
     transform: scale(0.7);
 }
