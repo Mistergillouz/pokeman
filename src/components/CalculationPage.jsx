@@ -110,14 +110,9 @@ export default class CalculationPage extends PokemanPage {
 
         let stars = Math.round((percent + 50) / 100)
         stars = Math.max(1, Math.min(5, stars))
-        let styles = {
-            width: (stars * 20) + '%'
-        }
+        let classes = 'rating calc-rating rating-' + stars
         return (
-            <div className="star-ratings-css">
-                <div className="star-ratings-css-top" style={ styles }><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                <div className="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            </div>
+            <div className={ classes }/>
         )
     }
 

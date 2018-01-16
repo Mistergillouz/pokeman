@@ -809,6 +809,22 @@ h2, .inactive-h2 {
 .info-back-STEEL { background-image: url(../images/STEEL.png); background-color: #1A2B33; }
 .info-back-WATER { background-image: url(../images/WATER.png); background-color: #0485a2; }
 
+/*---------------------------------------------------------------------*/
+/*  RATING STARS
+/*---------------------------------------------------------------------*/
+
+.rating {
+    height: 12px;
+    width: 50px;
+    background-size: 50px;
+    background-repeat: no-repeat;
+}
+
+.rating-1 { background-image: url(../images/rating1.png); }
+.rating-2 { background-image: url(../images/rating2.png); }
+.rating-3 { background-image: url(../images/rating3.png); }
+.rating-4 { background-image: url(../images/rating4.png); }
+.rating-5 { background-image: url(../images/rating5.png); }
 
 /*---------------------------------------------------------------------*/
 /*  CONST
