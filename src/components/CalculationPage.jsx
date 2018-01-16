@@ -71,6 +71,15 @@ export default class CalculationPage extends PokemanPage {
             return (b.pokemon.cpmax * mb) - (a.pokemon.cpmax * ma)
         })
 
+        // Sort by rating
+        //
+        // results.sort((a, b) => {
+        //     let ma = a.attacks.reduce((max, attack) => Math.max(max, attack.percent), 0)
+        //     let mb = b.attacks.reduce((max, attack) => Math.max(max, attack.percent), 0)
+
+        //     return (ma === mb) ? b.pokemon.cpmax - a.pokemon.cpmax : mb - ma
+        // })
+
         return results
     }
 
@@ -108,8 +117,14 @@ export default class CalculationPage extends PokemanPage {
             return null
         }
 
-        let stars = Math.round((percent + 50) / 100)
-        stars = Math.max(1, Math.min(5, stars))
+        let ratings = [0, 200, 300, 400, Infinity], stars = 1
+        for (let i = 0; i < ratings.length; i++) {
+            if (percent <= ratings[i]) {
+                stars = i + 1;
+                break;
+            }
+        }
+        
         let classes = 'rating calc-rating rating-' + stars
         return (
             <div className={ classes }/>
