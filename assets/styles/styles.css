@@ -179,6 +179,7 @@ input {
     border-radius: 50%;
     background-color: rgb(67, 49, 77);
     border: 0;
+    margin-left: 0.5em;
 }
 
 
@@ -405,7 +406,7 @@ input {
 }
 
 .leg-button {
-    background-image: url(../images/leg.png);
+    /* background-image: url(../images/leg.png);
     background-repeat: no-repeat;
     background-size: 24px;
     background-repeat: no-repeat;
@@ -413,7 +414,7 @@ input {
     width: 32px;
     background-position: center;
     border-radius: 50%;
-    border: 1px solid darkgrey;
+    border: 1px solid darkgrey; */
 }
 
 /*---------------------------------------------------------------------*/

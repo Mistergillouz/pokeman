@@ -38,12 +38,23 @@ class App extends React.Component {
     }
 
     pushPage(pageId, args) {
-        let pages = this.state.pages.slice(), entry = _pageEntry(pageId, args)
-        if (!args || !args.noPageStack) {
-            pages.push(entry)
-        } else {
-            pages[pages.length - 1] = entry
-        }this.setState({ pages: pages })
+        let entry = _pageEntry(pageId, args)
+        let pages = this.state.pages.slice()
+
+        let last = -1
+        pages.forEach((page, index) => {
+            if (page.pageId === pageId) {
+                last = index
+            }
+        });
+
+        if (last !== -1) {
+            pages.splice(last)
+        }
+
+        pages.push(entry)
+        
+        this.setState({ pages: pages })
     }
 
     popPage() {
