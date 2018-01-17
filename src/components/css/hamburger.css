@@ -1,18 +1,18 @@
 
 .navigation {
     position: fixed;
-    right: 0;
+    left: 0;
     padding: 0 50px 0 0;
     background-color: white;
-    border-left: 1px solid darkgrey;
+    border-right: 1px solid darkgrey;
     width: 15%;
     z-index: 150;
     height: 100%;
 
     transition: transform 0.25s ease-in-out;
     -webkit-transition: transform 0.25s ease-in-out;
-    transform: translateX(100%);
-    -webkit-transform: translateX(100%);
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
 }
 
 
@@ -57,7 +57,7 @@
 }
 
 .btn-navigation {
-    float: right;
+    float: left;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -114,11 +114,4 @@ i {
 }
 .navigation-scale-anim {
     transform: scale(1.5) perspective(1px);
-}
-
-.navigation-title {
-    position: relative;
-    top: 14px;
-    left: 17px;
-    font-size: 14pt;
 }

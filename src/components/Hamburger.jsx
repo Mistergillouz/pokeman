@@ -92,7 +92,6 @@ class Hamburger extends React.Component {
                     <div className="btn-navigation-barre"></div>
                 </div>
                 <div key="nav-pan" className="navigation" ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
-                    <span className="navigation-title">POKEMAN</span>
                     <ul>
                         <li className="menu-section">Langues</li>
                         { this.generateLangRadio() }

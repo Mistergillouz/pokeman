@@ -111,13 +111,11 @@ input {
 
 .search-input {
     width: 100%;
-    background-image: url(../images/searchicon.png);
-    background-position: center;
-    background-position-x: 4px;
-    background-repeat: no-repeat;
     background-size: 14px;
-    padding: 0.4rem 0px 0.25em 1.5em !important;
-    font-size: 11pt !important;}
+    margin-right: 1em;
+    padding: 0.4rem 0px 0.25em 0.5em !important;
+    font-size: 11pt !important;
+}
 
 .page {
     display: flex;
@@ -138,7 +136,6 @@ input {
 }
 
 .left-panel {
-    padding-left: 5px;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -184,13 +181,44 @@ input {
     border: 0;
 }
 
+
+.back-button-2 {
+    background-image: url('../images/back2.png');
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 2em;
+    width: 2em;
+    border: 0;
+}
+
 .compare-button {
     background-image: url('../images/compare.png');
 }
 
+.search-icon {
+    background-image: url('../images/search.png');   
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    right: 1em;
+}
+
+
+.pokeman-title {
+    font-size: 15pt;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    pointer-events: none;
+}
 .filter-toggle {
     background-image: url('../images/filteron.png');
-    opacity: 0.57;
+    opacity: 0.7;
 }
 
 .filter-toggle-off {
@@ -374,6 +402,18 @@ input {
 
 .weak-text {
     color: red;
+}
+
+.leg-button {
+    background-image: url(../images/leg.png);
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-repeat: no-repeat;
+    height: 32px;
+    width: 32px;
+    background-position: center;
+    border-radius: 50%;
+    border: 1px solid darkgrey;
 }
 
 /*---------------------------------------------------------------------*/

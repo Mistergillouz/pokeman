@@ -21,7 +21,7 @@ class MainPage extends React.Component {
             visible: true,
             country: country,
             filterVisible: false,
-            
+            searchEnabled: false,
             tooltipTypeId: -1,
             selected: Store.get('selected', []),
             searchSettings: { 
@@ -30,8 +30,6 @@ class MainPage extends React.Component {
                 types: [] 
             }
         }
-        
-        this.tooltip = { x: 0, y: 0};
         
         this.pokemons = []
         for (let i = 1; i < 151; i++) {
@@ -133,6 +131,48 @@ class MainPage extends React.Component {
         Store.set('selected', selected)
     }
 
+    onActivateSearch (active) {
+        this.setState({ searchEnabled: active })
+        this.setInputFocus = active
+
+    }
+
+    generateToolbar() {
+        let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
+        if (this.state.searchEnabled) {
+
+            return (
+                <div className="left-panel">
+                    <div className="back-button-2" onClick= {() => this.onActivateSearch(false) }></div>
+                    <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
+                    <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
+                        placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
+                </div>
+            )
+
+        } else {
+
+            return (
+                <div>
+                    <Hamburger eventHandler={ args => this.eventHandler(args) }/>
+                    <div className="left-panel">
+                        <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
+                        <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
+                        <span className="pokeman-title">Pokéman</span>
+                        <div className="search-icon" onClick={ () => this.onActivateSearch(true) }/>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.state.searchEnabled && this.setInputFocus) {
+            this.setInputFocus = false
+            setTimeout(() => this.refs.search.focus(), 0)
+        }
+    }
+
     render() { 
 
         if (!this.props.visible) {
@@ -143,20 +183,7 @@ class MainPage extends React.Component {
         return (
             <div className="page" data-content-id="tiles-container">
                 <div className="navbar">
-
-                    <Hamburger eventHandler={ args => this.eventHandler(args) }/>
-
-                    <div className="left-panel">
-                        <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                        <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
-                        <input key="search-input" type="search" ref="search"
-                            className="search-input ui-styles" 
-                            placeholder="Rechercher un Pokémon" 
-                            onChange={ e => this.onFilterTextChanged(e) }>
-                        </input>
-                    </div>
-
-                    
+                    { this.generateToolbar() }
                 </div> 
 
                 <FilterPanel 
