@@ -1,4 +1,5 @@
 import React from 'react'
+import './css/notfound.css'
 
 class NotFound extends React.Component {
    
@@ -10,7 +11,7 @@ class NotFound extends React.Component {
 
         return (
             <div className="not-found-container">
-                <img className="not-found-image" src="assets/images/notfound.png"/>
+                <div className="not-found-image"/>
                 <span className="not-found-text">{ this.props.text }</span>
             </div>
         )

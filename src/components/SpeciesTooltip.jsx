@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PokedexHelper from 'data/PokedexHelper'
 import Species from 'components/Species'
 import Constants from 'data/Constants'
-import '../../assets/styles/speciestt.css'
+import './css/speciestt.css'
 
 class SpeciesTooltip extends React.Component {
    constructor() {

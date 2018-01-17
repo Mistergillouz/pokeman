@@ -1,7 +1,7 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
-import '../../assets/styles/hamburger.css'
+import './css/hamburger.css'
 
 class Hamburger extends React.Component {
     constructor() {
@@ -98,25 +98,25 @@ class Hamburger extends React.Component {
                         { this.generateLangRadio() }
                         <li className="nav-separator"></li>
                         <li onClick={ () => this.onShowEggPanel() }>
-                            <img className='nav-icon' src='../assets/images/egg.png'/>
+                            <div className='nav-icon-egg'/>
                             <span>Voir les oeufs</span>
                         </li>
                         <li onClick={ () => this.onShowEvolutionPanel() }>
-                            <img className='nav-icon' src='../assets/images/evolves.png'/>
+                            <div className='nav-icon-evolves'/>
                             <span>Evolutions explorer</span>
                         </li>
                         <li onClick={ () => this.onShowBabiesPanel() }>
-                            <img className='nav-icon' src='../assets/images/baby.png'/>
+                            <div className='nav-icon-baby'/>
                             <span>Maternelle</span>
                         </li>
                         <li className="nav-separator"></li>
                         <li className="menu-section">Tout</li>
                         <li onClick={ () => this.onSelect(Constants.SELECT.SELECT_ALL) }>
-                            <img className='nav-icon' src='../assets/images/checked.png'/>
+                            <div className='nav-icon-checked'/>
                             <span>Selectionner</span>
                         </li>
                         <li onClick={ () => this.onSelect(Constants.SELECT.UNSELECT_ALL) }>
-                            <img className='nav-icon' src='../assets/images/unselect.png'/>
+                            <div className='nav-icon-unselect' src='../assets/images/unselect.png'/>
                             <span>Déselectionner</span>
                         </li>
                     </ul>

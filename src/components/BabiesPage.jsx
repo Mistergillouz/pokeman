@@ -3,7 +3,7 @@ import PokemanPage from './PokemanPage';
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon';
-import '../../assets/styles/babies.css'
+import './css/babies.css'
 
 export default class BabiesPage extends PokemanPage {
    

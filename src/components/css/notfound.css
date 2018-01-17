@@ -1,0 +1,28 @@
+
+
+/*---------------------------------------------------------------------*/
+/*  NOT FOUND
+/*---------------------------------------------------------------------*/
+
+.not-found-container {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    max-width: 65%;
+    border-left: 4px solid lightsalmon;
+    border-radius: 0 0 10px 0;
+    padding: 0.25em;
+}
+
+.not-found-image {
+    background-image: url(../../../assets/images/notfound.png);
+    background-size: 70px;
+    min-width: 70px;
+    min-height: 70px;
+}
+.not-found-text {
+    font-size: 10pt;
+    padding: 5px;
+}
+

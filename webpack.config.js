@@ -49,8 +49,13 @@ module.exports = {
                 loader: 'style-loader!css-loader'
             },
             { 
-                test: /\.(png|jpg)$/, 
-                loader: 'file-loader?name=images/[name].[ext]'
+                test: /\.(png|jpg|gif)$/, 
+                loader: 'file-loader?name=images/[name].[ext]',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'assets/images/', 
+                    publicPath: '../'
+                }
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 

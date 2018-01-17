@@ -83,7 +83,7 @@ i {
     border-radius: 50%;
     margin-right: 5px;
     vertical-align: middle;
-    border: 2px solid #1E88E5;
+    border: 2px solid #1E88E5 !important;
     box-shadow: inset 0 0 0 4px white;
     transition: .25s;
 }
@@ -96,9 +96,18 @@ i {
     color: darkgray;
 }
 
-.nav-icon {
-    max-width: 24px;
+.nav-icon-egg, .nav-icon-evolves, .nav-icon-baby, .nav-icon-checked, .nav-icon-unselect {
+    background-repeat: no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
 }
+
+.nav-icon-egg { background-image: url(../../../assets/images/egg.png) }
+.nav-icon-evolves { background-image: url(../../../assets/images/evolves.png) }
+.nav-icon-baby { background-image: url(../../../assets/images/baby.png) }
+.nav-icon-checked { background-image: url(../../../assets/images/checked.png) }
+.nav-icon-unselect { background-image: url(../../../assets/images/unselect.png) }
 
 .navigation-scale-anim-end, .navigation-scale-anim {
     transition: all 0.5s ease;

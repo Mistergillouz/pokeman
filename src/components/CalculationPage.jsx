@@ -3,7 +3,7 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import PokemanPage from './PokemanPage';
 import SmallPokemon from './SmallPokemon';
-import '../../assets/styles/calc.css'
+import './css/calc.css'
 
 export default class CalculationPage extends PokemanPage {
     
@@ -154,6 +154,14 @@ export default class CalculationPage extends PokemanPage {
     }
 
 
+    generateMeteoButtons() {
+        let buttons = []
+        for (let i =0, keys = Object.keys(Constants.METEO); i < keys.length; i++) {
+            buttons.push(<div className={ "calc-meteo-button meteo-button-" + keys[i] }/>)
+        }
+        return null
+    }
+
     onToggleLeg() {
         this.setState({ showLegendary: !this.state.showLegendary })
     }
@@ -178,6 +186,9 @@ export default class CalculationPage extends PokemanPage {
                         <button className="back-button" onClick= {() => this.onBack() }></button>
                         <sup className='title-text'>{ 'Meilleurs attaquants vs ' + name }</sup>
                     </div>
+                </div>
+                <div className="calc-options-container">
+                    { this.generateMeteoButtons() }
                 </div>
 
                 <div className="calc-results" key={ this.props.id }>

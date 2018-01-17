@@ -48,27 +48,9 @@ input {
     padding: .5rem .75rem;
 }
 
-/*---------------------------------------------------------------------*/
-/*  NOT FOUND
-/*---------------------------------------------------------------------*/
-
-.not-found-container {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    max-width: 65%;
-    border-left: 4px solid lightsalmon;
-    border-radius: 0 0 10px 0;
-    padding: 0.25em;
-}
-
-.not-found-image {
-    max-width: 70px;
-}
-.not-found-text {
-    font-size: 10pt;
-    padding: 5px;
+.just-to-be-exported-in-assets-images-folder {
+    background-image: url(../images/wait.gif);
+    background-image: url(../images/favicon.png);
 }
 
 /*---------------------------------------------------------------------*/
@@ -825,6 +807,25 @@ h2, .inactive-h2 {
 .rating-3 { background-image: url(../images/rating3.png); }
 .rating-4 { background-image: url(../images/rating4.png); }
 .rating-5 { background-image: url(../images/rating5.png); }
+
+/*---------------------------------------------------------------------*/
+/*  METEO ICONS
+/*---------------------------------------------------------------------*/
+
+.meteo-button-SUNNY, .meteo-button-PARTLY_CLOUDY, .meteo-button-CLOUDY, .meteo-button-RAIN, .meteo-button-SNOW, .meteo-button-FOG, .meteo-button-WINDY {
+    background-image: url(../images/meteo.png); 
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+.meteo-button-SUNNY { background-position: 0px 0px; }
+.meteo-button-PARTLY_CLOUDY { background-position: -32px 0px; }
+.meteo-button-CLOUDY { background-position: -64px 0px; }
+.meteo-button-RAIN { background-position: -96px 0px; }
+.meteo-button-SNOW { background-position: -128px 0px; }
+.meteo-button-FOG { background-position: -160px 0px; }
+.meteo-button-WINDY { background-position: -196px 0px; }
 
 /*---------------------------------------------------------------------*/
 /*  CONST

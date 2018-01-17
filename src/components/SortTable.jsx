@@ -1,6 +1,6 @@
 import React from 'react'
 import Store from '../data/Store'
-import '../../assets/styles/table.css'
+import './css/table.css'
 
 class SortTable extends React.Component {
    constructor(props) {

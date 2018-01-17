@@ -5,7 +5,7 @@ import NotFound from './NotFound'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Utils from 'data/Utils'
-import '../../assets/styles/evol.css'
+import './css/evol.css'
 
 class EvolutionPage extends PokemanPage {
    

@@ -62,3 +62,12 @@
     height: 10px;
     background-size: 40px;
 }
+
+.calc-options-container {
+    display: flex;
+    justify-content: center;
+}
+
+.calc-meteo-button {
+
+}
