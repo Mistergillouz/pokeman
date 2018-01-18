@@ -153,17 +153,17 @@ export default class CalculationPage extends PokemanPage {
             .map((entry, index) => {
                 let pokemon = entry.pokemon
                 return (
-                    <Link to={{ pathname: '/pokemon/' + pokemon.id }}>
-                        <div className="calc-pokemon-container" key={ pokemon.id }>
+                    <div className="calc-pokemon-container" key={ pokemon.id }>
                             <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
-                            <div className="calc-pokemon-img">
-                                <SmallPokemon id={ pokemon.id }/>
-                            </div>
+                            <Link to={{ pathname: '/pokemon/' + pokemon.id }}>
+                                <div className="calc-pokemon-img">
+                                    <SmallPokemon id={ pokemon.id }/>
+                                </div>
+                            </Link>
                             <div className="calc-pokemon-attacks">
                                 { this.generateAttacks(entry) }
                             </div>
                         </div>
-                    </Link>
                 )
             })
     }
