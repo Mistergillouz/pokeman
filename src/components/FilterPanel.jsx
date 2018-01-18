@@ -46,10 +46,14 @@ class FilterPanel extends React.Component {
 
         let genButtons = Utils.generateGenButtons(this.state.selectedGen, this.onGenClicked.bind(this))
         let types = PokedexHelper.getAllSpecies().map((type) => {
-            let clazz = 'filter-type-toggle';
+            let clazz = 'filter-type-toggle POKEMON_TYPE_' + type.key;
             if (this.state.selectedTypes.indexOf(type.id) !== -1) {
-                clazz += ' selected';
+                    clazz += ' filter-type-active';
+                }
+            if (this.state.selectedTypes.length === 0) {
+                clazz += ' filter-type-inactive';
             }
+
             return (
                 <div key={ type.id }
                     className={ clazz }
