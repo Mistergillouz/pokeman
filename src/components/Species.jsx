@@ -9,21 +9,6 @@ class Species extends React.Component {
         super(...arguments)
     }
 
-    onTypeClicked(event) {
-
-        if (this.props.eventHandler) {
-            let rect = event.target.getBoundingClientRect()
-            this.props.eventHandler({
-                eventType: Constants.EVENT.ShowTooltip,
-                id: this.props.id,
-                x: rect.left + rect.width / 2,
-                y: rect.top + rect.height / 2
-            });
-            
-            event.stopPropagation();
-        }
-    }
-
     render() { 
 
         let species = PokedexHelper.getTypeInfos(this.props.id);
@@ -31,11 +16,7 @@ class Species extends React.Component {
         var speciesCss = PokedexHelper.getSpeciesKey(species);
         
         return (
-            <div key={ speciesCss } className={ 'type POKEMON_TYPE_' + speciesCss } type-id={ species.id } 
-                onMouseDown={ e => e.stopPropagation() }
-                onTouchStart={ e => e.stopPropagation() }
-                onMouseUp={ e => this.onTypeClicked(e) }
-                onTouchEnd={ e => this.onTypeClicked(e) }>{ speciesName }
+            <div key={ speciesCss } className={ 'type POKEMON_TYPE_' + speciesCss } type-id={ species.id }>{ speciesName }
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
@@ -21,7 +21,13 @@ class Pokemon extends React.Component {
     }
 
     onPokemonClicked() {
-        this.setState({ redirect: true })
+
+        if (this.props.eventHandler) {
+            this.props.eventHandler({
+                eventType: Constants.EVENT.PokemonClicked,
+                id: this.props.id
+            });
+        }
     }
 
     _onMouseDown(e) {
@@ -65,10 +71,6 @@ class Pokemon extends React.Component {
     }
 
     render() { 
-
-        if (this.state.redirect) {
-            return <Redirect push="true" to={ '/pokemon/' + this.props.id }/>
-        }
 
         let pokemon = PokedexHelper.getPokemon(this.props.id);
         let name = PokedexHelper.loc(pokemon);

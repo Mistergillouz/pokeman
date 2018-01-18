@@ -60,13 +60,6 @@ class EggPage extends React.Component {
         })
     }
 
-    onPokemonClicked(id) {
-        this.props.eventHandler({
-            eventType: Constants.EVENT.PokemonClicked,
-            id: id
-        });
-    }
-    
     generatePokemons(pokemons) {
         let tiles = pokemons.map(pokemon => {
             return (

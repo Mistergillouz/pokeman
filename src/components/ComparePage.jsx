@@ -1,20 +1,25 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SortTable from 'components/SortTable'
+import BackButton from 'components/BackButton'
 
 class ComparePage extends React.Component {
    
     constructor() {
         super(...arguments)
-    }
 
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
+        this.state = {}
+        let params = new URLSearchParams(this.props.location.search)
+        if (params.has('ids')) {
+            this.ids = params.get('ids').split(',')
+        }
     }
 
     getColumnName(rowIndex) {
-        let pokemonId = this.props.pokemons[rowIndex]
+        let pokemonId = this.ids[rowIndex]
         let pokemon = PokedexHelper.getPokemon(pokemonId)
         let name = PokedexHelper.loc(pokemon)
         let typeIcons = pokemon.species.map(specie => {
@@ -44,7 +49,7 @@ class ComparePage extends React.Component {
     }
 
     getDatas() {
-        return this.props.pokemons.map(pokemonId => {
+        return this.ids.map(pokemonId => {
             let pokemon = PokedexHelper.getPokemon(pokemonId)
             return [
                 PokedexHelper.loc(pokemon),
@@ -57,18 +62,24 @@ class ComparePage extends React.Component {
     }
 
     onCellClicked(rowIndex) {
-        this.props.eventHandler({ eventType: Constants.EVENT.PokemonClicked, id: this.props.pokemons[rowIndex] })
+        let pokemonId = this.ids[rowIndex]
+        this.setState({ redirect: true, to: '/pokemon/' + pokemonId })
     }
     
     render() { 
-        if (!this.props.visible) {
+
+        if (!this.ids) {
             return null
+        }
+
+        if (this.state.redirect) {
+            return <Redirect to={ this.state.to }/>
         }
 
         return <div className="page">
             <div className="navbar">
                 <div className="left-panel">
-                    <button className="back-button" onClick= {() => this.onBack() }></button>
+                    <BackButton history={ this.props.history }/>
                     <sup className='title-text'>Comparaisons</sup>
                 </div>
             </div>

@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
-import PokemanPage from './PokemanPage';
-import SmallPokemon from './SmallPokemon';
+import SmallPokemon from './SmallPokemon'
+import BackButton from './BackButton'
+
 import './css/calc.css'
 
-export default class CalculationPage extends PokemanPage {
+export default class CalculationPage extends React.Component {
     
     constructor() {
         super(...arguments)
@@ -155,7 +156,7 @@ export default class CalculationPage extends PokemanPage {
                 return (
                     <div className="calc-pokemon-container" key={ pokemon.id }>
                             <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
-                            <Link to={{ pathname: '/pokemon/' + pokemon.id }}>
+                            <Link replace to={{ pathname: '/pokemon/' + pokemon.id, search: '?back=true' }}>
                                 <div className="calc-pokemon-img">
                                     <SmallPokemon id={ pokemon.id }/>
                                 </div>
@@ -195,7 +196,7 @@ export default class CalculationPage extends PokemanPage {
                         </Link>
                     </div>
                     <div className="left-panel">
-                        <button className="back-button" onClick= {() => this.onBack() }></button>
+                        <BackButton/>
                         <sup className='title-text'>{ 'Meilleurs attaquants vs ' + name }</sup>
                     </div>
                 </div>

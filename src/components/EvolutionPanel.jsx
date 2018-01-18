@@ -40,7 +40,7 @@ export default class EvolutionPanel extends React.Component {
                     let name = PokedexHelper.getPokemonName(pokemonId)
                     tds.push(<td><SmallPokemon key={ pokemonId } 
                         id={ pokemonId } 
-                        selected={ pokemonId === this.state.selectedId }
+                        selected={ pokemonId === Number(this.state.selectedId) }
                         showGen={ this.props.showGen }
                         onClick={ id => this.onPokemonClicked(id) }/></td>)
                 } else {

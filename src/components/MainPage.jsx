@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, Redirect } from 'react-router-dom'
 
 import PokemonList from 'components/PokemonList'
 import PokedexHelper from 'data/PokedexHelper'
@@ -41,25 +42,17 @@ class MainPage extends React.Component {
     eventHandler(args) {
 
         switch (args.eventType) {
-
-            case Constants.EVENT.LocaleSelected:
-                this.onLocaleSelected(args.country);
-                break;
+            case Constants.EVENT.PokemonClicked:
+                if (this.state.selected.length) {
+                    this.toggleSelected(args.id)
+                } else {
+                    this.setState({ redirect: true, to: '/pokemon/' +  args.id })
+                }
+                break
 
             case Constants.EVENT.PokemonSelected:
                 this.toggleSelected(args.id)
                 break;
-
-            case Constants.EVENT.PokemonClicked:
-                if (this.state.selected.length) {
-                    this.toggleSelected(args.id)
-                    break;
-                }
-
-                // Fall thru
-
-            default:
-                this.props.eventHandler(args)
         }
     }
 
@@ -94,13 +87,6 @@ class MainPage extends React.Component {
             this.pokemons = PokedexHelper.search(searchSettings);
             this.setState({ searchSettings: searchSettings });
         }
-    }
-
-    onCompare() {
-        this.props.eventHandler({ 
-            eventType: Constants.EVENT.ComparePage,
-            pokemons: this.state.selected
-        })
     }
 
     componentDidUpdate() {
@@ -158,7 +144,9 @@ class MainPage extends React.Component {
                     <Hamburger eventHandler={ args => this.eventHandler(args) }/>
                     <div className="left-panel">
                         <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                        <div className={ 'compare-button ' + compareButtonClass } onClick={ () => this.onCompare() }></div>
+                        <Link to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
+                            <div className={ 'compare-button ' + compareButtonClass }></div>
+                        </Link>
                         <span className="pokeman-title">Pokéman</span>
                         <div className="search-icon" onClick={ () => this.onActivateSearch(true) }/>
                     </div>
@@ -175,6 +163,10 @@ class MainPage extends React.Component {
     }
 
     render() { 
+
+        if (this.state.redirect) {
+            return <Redirect to={ this.state.to }/>
+        }
 
         let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
         return (

@@ -17,10 +17,6 @@ import CalculationPage from 'components/CalculationPage'
 export default class App extends React.Component {
    constructor() {
         super(...arguments)
-
-        this.state = {
-            selected: []
-        }
     }
 
     // showTooltip(show, args) {
@@ -41,7 +37,7 @@ export default class App extends React.Component {
                     <Route path="/eggs" component={EggPage}/>
                     <Route path="/evolutions" component={EvolutionPage}/>
                     <Route path="/babies" component={BabiesPage}/>
-                    <Route path="/pokemon/compare" component={ComparePage}/>
+                    <Route path="/compare" component={ComparePage}/>
                 </Switch>
             </Router>
         )

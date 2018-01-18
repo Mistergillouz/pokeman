@@ -19,7 +19,7 @@ class PokemonList extends React.Component {
         this.refs['pokemon-list'].scrollTop = PokemonList.scrollTop
     }
 
-    buildPokemon(pokemonId) {
+    generatePokemon(pokemonId) {
         let selected = (this.props.selected || []).indexOf(pokemonId) !== -1
         return (<Pokemon key={ pokemonId } id={ pokemonId } selected={ selected } eventHandler={ args => this.props.eventHandler(args) }/>);
     }
@@ -27,7 +27,7 @@ class PokemonList extends React.Component {
     generateList() {
 
         if (this.props.pokemons && this.props.pokemons.length) {
-            return this.props.pokemons.map((id) => this.buildPokemon(id))
+            return this.props.pokemons.map((id) => this.generatePokemon(id))
         }
 
         return <NotFound text='Pas de pokémons retournés par votre recherche...'/>

@@ -114,14 +114,6 @@ class CombatPanel extends React.Component {
         )
     }
 
-    onShowCalculationPage() {
-        this.props.eventHandler({ eventType: Constants.EVENT.CalculationPage, id: this.props.id })
-    }
-
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-
     render() { 
 
         let pokemon = PokedexHelper.getPokemon(this.props.id)
