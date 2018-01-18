@@ -17,10 +17,6 @@ export default class ZoomPage extends PokemanPage {
         Object.assign(this.state, {
             id: this.props.match.params.id
         })
-
-        let params = new URLSearchParams(this.props.location.search)
-        this.navigateBack = params.has('back')
-
     }
     
     onPokemonClicked(pokemonId) {
@@ -42,7 +38,7 @@ export default class ZoomPage extends PokemanPage {
             <div className="page">
                 <div className="navbar">
                     <div className="left-panel">
-                        <BackButton history={ this.navigateBack ? this.props.history : null }/>
+                        <BackButton history={ this.props.history }/>
                         <sup className='title-text'>{ label }</sup>
                     </div>
                 </div>

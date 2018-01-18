@@ -196,7 +196,7 @@ export default class CalculationPage extends React.Component {
                         </Link>
                     </div>
                     <div className="left-panel">
-                        <BackButton/>
+                        <BackButton history={ this.props.history }/>
                         <sup className='title-text'>{ 'Meilleurs attaquants vs ' + name }</sup>
                     </div>
                 </div>

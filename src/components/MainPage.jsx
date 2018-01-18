@@ -46,7 +46,7 @@ class MainPage extends React.Component {
                 if (this.state.selected.length) {
                     this.toggleSelected(args.id)
                 } else {
-                    this.setState({ redirect: true, to: '/pokemon/' +  args.id })
+                    this.setState({ redirect: true, push: true, to: '/pokemon/' +  args.id })
                 }
                 break
 
@@ -165,7 +165,7 @@ class MainPage extends React.Component {
     render() { 
 
         if (this.state.redirect) {
-            return <Redirect to={ this.state.to }/>
+            return <Redirect push={ this.state.push } to={ this.state.to }/>
         }
 
         let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''

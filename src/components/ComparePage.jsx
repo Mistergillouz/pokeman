@@ -73,7 +73,7 @@ class ComparePage extends React.Component {
         }
 
         if (this.state.redirect) {
-            return <Redirect to={ this.state.to }/>
+            return <Redirect push to={ this.state.to }/>
         }
 
         return <div className="page">
