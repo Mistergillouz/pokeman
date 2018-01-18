@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
 import Utils from 'data/Utils'
 import SmallPokemon from 'components/SmallPokemon'
+import BackButton from 'components/BackButton'
 
 class EggPage extends React.Component {
    constructor() {
@@ -141,15 +144,7 @@ class EggPage extends React.Component {
         this.setState({ gens: gens })
     }
     
-    onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-
     render() { 
-
-        if (!this.props.visible) {
-            return null
-        }
 
         return (
             <div className="page">
@@ -159,7 +154,7 @@ class EggPage extends React.Component {
                 </div>
 
                 <div className="left-panel">
-                    <button className="back-button" onClick= {() => this.onBack() }></button>
+                    <BackButton/>
                     { this.generateDistancesFilter() }
                     <sup className='title-text'>Oeufs</sup>
                 </div>

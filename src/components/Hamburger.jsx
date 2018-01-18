@@ -1,4 +1,6 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import './css/hamburger.css'
@@ -12,9 +14,17 @@ class Hamburger extends React.Component {
     }
 
     onShowEggPanel() {
-        this.onToggleMenuVisibilityAsync()
-        this.props.eventHandler({ eventType: Constants.EVENT.EggPage })
+        this.setState({ redirect: true, to: '/eggs' })
     }
+
+    onShowEvolutionPanel() {
+        this.setState({ redirect: true, to: '/evolutions' })
+    }
+
+    onShowBabiesPanel() {
+        this.setState({ redirect: true, to: '/babies' })
+    }
+
 
     onToggleMenuVisibilityAsync() {
         setTimeout(() => this.onToggleMenuVisibility() , 150)
@@ -67,14 +77,6 @@ class Hamburger extends React.Component {
         this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: select })
     }
 
-    onShowEvolutionPanel() {
-        this.props.eventHandler({ eventType: Constants.EVENT.EvolutionPage })
-    }
-
-    onShowBabiesPanel() {
-        this.props.eventHandler({ eventType: Constants.EVENT.BabiesPage })
-    }
-
     componentWillMount() {
         if (!Hamburger.ANIM_DONE) {
             Hamburger.ANIM_DONE = true
@@ -83,6 +85,10 @@ class Hamburger extends React.Component {
     }
 
     render() { 
+
+        if (this.state.redirect) {
+            return <Redirect to={ this.state.to }/>
+        }
 
         return (
             <div>

@@ -7,6 +7,7 @@ import PokedexHelper from 'data/PokedexHelper'
 import CombatPanel from 'components/CombatPanel'
 import SmallPokemon from 'components/SmallPokemon'
 import EvolutionPanel from 'components/EvolutionPanel'
+import BackButton from 'components/BackButton'
 
 export default class ZoomPage extends PokemanPage {
 
@@ -37,9 +38,7 @@ export default class ZoomPage extends PokemanPage {
             <div className="page">
                 <div className="navbar">
                     <div className="left-panel">
-                        <Link to={ { pathname: '/' } }> 
-                            <button className="back-button" onClick= {() => this.onBack() }></button>
-                        </Link>
+                        <BackButton/>
                         <sup className='title-text'>{ label }</sup>
                     </div>
                 </div>

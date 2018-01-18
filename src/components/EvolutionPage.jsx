@@ -1,21 +1,24 @@
 import React from 'react'
-import PokemanPage from './PokemanPage';
+import { Link } from 'react-router-dom'
+
 import EvolutionPanel from './EvolutionPanel'
 import NotFound from './NotFound'
+import BackButton from './BackButton'
+
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Utils from 'data/Utils'
 import './css/evol.css'
 
-class EvolutionPage extends PokemanPage {
+class EvolutionPage extends React.Component {
    
     constructor() {
         super(...arguments)
 
-        Object.assign(this.state, {
+        this.state = {
             fromGens: [Constants.CURRENT_GEN],
             toGens: [Constants.CURRENT_GEN]
-        })
+        }
     }
 
     onGenFromClicked(gen) {
@@ -40,10 +43,6 @@ class EvolutionPage extends PokemanPage {
        
     render() { 
 
-        if (!this.props.visible) {
-            return null
-        }
-
         let genFromButtons = Utils.generateGenButtons(this.state.fromGens, this.onGenFromClicked.bind(this))
         let genToButtons = Utils.generateGenButtons(this.state.toGens, this.onGenToClicked.bind(this))
         let rows = this.resolve()
@@ -52,7 +51,7 @@ class EvolutionPage extends PokemanPage {
             <div className="evol-container">
                 <div className="navbar">
                     <div className="left-panel">
-                        <button className="back-button" onClick= {() => this.onBack() }></button>
+                        <BackButton/>
                         <sup className='title-text'>Evolutions Explorer</sup>
                     </div>
                 </div>

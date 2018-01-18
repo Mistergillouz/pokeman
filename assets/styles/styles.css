@@ -385,7 +385,7 @@ input {
     justify-content: center
 }
 
-.filter-type-inactive{
+.filter-type-inactive {
     opacity: 1;
 }
 .filter-type-active {
@@ -393,7 +393,9 @@ input {
     opacity: 1;
 }
 
-
+.selected {
+    background-color: #A5DC86;
+}
 
 .gen-button-left {
     border-radius: 10px 0 0 10px;

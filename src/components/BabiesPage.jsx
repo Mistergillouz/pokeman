@@ -1,24 +1,22 @@
 import React from 'react'
-import PokemanPage from './PokemanPage';
+import { Link } from 'react-router-dom'
+
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon';
+import BackButton from './BackButton'
 import './css/babies.css'
 
-export default class BabiesPage extends PokemanPage {
+export default class BabiesPage extends React.Component {
    
     render() { 
-
-        if (!this.props.visible) {
-            return null
-        }
 
         let rows = null
         return (
             <div className="baby-container">
                 <div className="navbar">
                     <div className="left-panel">
-                        <button className="back-button" onClick= {() => this.onBack() }></button>
+                        <BackButton/>
                         <sup className='title-text'>Maternelle</sup>
                     </div>
                 </div>
