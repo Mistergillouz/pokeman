@@ -1,4 +1,6 @@
 import React from 'react'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+
 import PokedexHelper from 'data/PokedexHelper'
 
 import MainPage from 'components/MainPage'
@@ -12,129 +14,36 @@ import BabiesPage from 'components/BabiesPage'
 import CalculationPage from 'components/CalculationPage'
 
 
-const PAGES = { 
-    MainPage: 'MainPage', 
-    ZoomPage: 'ZoomPage', EggPage: 'EggPage', TooltipType: 'TooltipType', 
-    ComparePage: 'ComparePage', EvolutionPage: 'EvolutionPage', BabisPage: 'BabiesPage',
-    CalculationPage: 'CalculationPage'
-}
-
-class App extends React.Component {
+export default class App extends React.Component {
    constructor() {
         super(...arguments)
 
         this.state = {
-            selected: [],
-            pages: [_pageEntry(PAGES.MainPage)]
-            
+            selected: []
         }
     }
 
-    showTooltip(show, args) {
+    // showTooltip(show, args) {
 
-        let pages = this.state.pages.slice()
-        pages[pages.length - 1].tooltipArgs = show ? args : null
-        this.setState({ pages: pages })
-    }
-
-    pushPage(pageId, args) {
-        let entry = _pageEntry(pageId, args)
-        let pages = this.state.pages.slice()
-
-        let last = -1
-        pages.forEach((page, index) => {
-            if (page.pageId === pageId) {
-                last = index
-            }
-        });
-
-        if (last !== -1) {
-            pages.splice(last)
-        }
-
-        pages.push(entry)
-        
-        this.setState({ pages: pages })
-    }
-
-    popPage() {
-        let pages = this.state.pages.slice().splice(0, this.state.pages.length - 1)
-        this.setState({ pages: pages })
-    }
-
-    currentPage() {
-        return this.state.pages[this.state.pages.length - 1] || { args: {}}
-    }
-
-    eventHandler(args) {
-
-        switch (args.eventType) {
-
-            case Constants.EVENT.EggPage: 
-                this.pushPage(PAGES.EggPage)
-                break
-        
-            case Constants.EVENT.ShowTooltip: 
-            case Constants.EVENT.HideTooltip: 
-                this.showTooltip(args.eventType === Constants.EVENT.ShowTooltip, args)
-                break
-
-            case Constants.EVENT.PokemonSelected:
-                this.toggleSelected(args.id)
-                break;
-
-            case Constants.EVENT.PokemonClicked:
-                if (this.state.selected.length) {
-                    this.toggleSelected(args.id)
-                } else {
-                    this.pushPage(PAGES.ZoomPage, args)
-                }
-                break;
-
-            case Constants.EVENT.ComparePage:
-                this.pushPage(PAGES.ComparePage, args)
-                break
-
-            case Constants.EVENT.Back:
-                this.popPage()
-                break
-            
-            case Constants.EVENT.EvolutionPage:
-                this.pushPage(PAGES.EvolutionPage, args)
-                break
-
-            case Constants.EVENT.BabiesPage:
-                this.pushPage(PAGES.BabiesPage, args)
-                break
-            case Constants.EVENT.CalculationPage:
-            this.pushPage(PAGES.CalculationPage, args)
-            break
-        }
-    }
+    //     let pages = this.state.pages.slice()
+    //     pages[pages.length - 1].tooltipArgs = show ? args : null
+    //     this.setState({ pages: pages })
+    // }
 
     render() { 
 
-        let page = this.currentPage(), pageId = page.pageId
         return (
-            <div className='app'>
-                <MainPage visible={ pageId === PAGES.MainPage } eventHandler = { this.eventHandler.bind(this) }/>
-                <ZoomPage visible={ pageId === PAGES.ZoomPage } args={ page.args } eventHandler = { this.eventHandler.bind(this) }/>
-                <EggPage visible={ pageId === PAGES.EggPage }  eventHandler = { this.eventHandler.bind(this) }/>
-                <ComparePage visible={ pageId === PAGES.ComparePage } pokemons={ page.args.pokemons } eventHandler = { this.eventHandler.bind(this) }/>
-                <SpeciesTooltip visible={ page.tooltipArgs ? true : false } args={ page.tooltipArgs } eventHandler={ (args) => this.eventHandler(args)}/>
-                <EvolutionPage visible={ pageId === PAGES.EvolutionPage } eventHandler = { this.eventHandler.bind(this)} />
-                <BabiesPage visible={ pageId === PAGES.BabiesPage } eventHandler = { this.eventHandler.bind(this)} />
-                <CalculationPage visible={ pageId === PAGES.CalculationPage } id={ page.args.id } eventHandler = { this.eventHandler.bind(this)} />
-            </div>
+            <Router>
+                <Switch>
+                    <Route path="/" exact={ true } component={MainPage}/>
+                    <Route path="/pokemon/:id" exact={ true } component={ZoomPage}/>
+                    <Route path="/pokemon/:id/calc" exact={ true } component={CalculationPage}/>
+                    <Route path="/pokemon/eggs" component={EggPage}/>
+                    <Route path="/pokemon/evolutions" component={EvolutionPage}/>
+                    <Route path="/pokemon/babies" component={BabiesPage}/>
+                    <Route path="/pokemon/compare" component={ComparePage}/>
+                </Switch>
+            </Router>
         )
     }
 }
-
-function _pageEntry(pageId, args) {
-    return {
-        pageId: pageId,
-        args: args || {}
-    }
-}
-
-export default App

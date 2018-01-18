@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import PokemanPage from './PokemanPage';
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
@@ -8,10 +10,12 @@ import EvolutionPanel from 'components/EvolutionPanel'
 
 export default class ZoomPage extends PokemanPage {
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.args) {
-            this.setState({ highlightedId: nextProps.args.id })
-        }
+    constructor(args) {
+        super(args)
+
+        Object.assign(this.state, {
+            highlightedId: this.props.match.params.id
+        })
     }
     
     onPokemonClicked(pokemonId) {
@@ -24,19 +28,18 @@ export default class ZoomPage extends PokemanPage {
 
     render() { 
 
-        if (!this.props.visible) {
-            return null;
-        }
-
-        let label = PokedexHelper.getPokemonName(this.props.args.id)
-        let evolves = PokedexHelper.getEvolvesList(this.props.args.id)
+        let id = this.props.match.params.id
+        let label = PokedexHelper.getPokemonName(id)
+        let evolves = PokedexHelper.getEvolvesList(id)
 
         return (
 
             <div className="page">
                 <div className="navbar">
                     <div className="left-panel">
-                        <button className="back-button" onClick= {() => this.onBack() }></button>
+                        <Link to={ { pathname: '/' } }> 
+                            <button className="back-button" onClick= {() => this.onBack() }></button>
+                        </Link>
                         <sup className='title-text'>{ label }</sup>
                     </div>
                 </div>

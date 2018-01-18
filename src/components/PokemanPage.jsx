@@ -10,13 +10,6 @@ export default class PokemanPage extends React.Component {
     }
 
     onBack() {
-        this.props.eventHandler({ eventType: Constants.EVENT.Back })
-    }
-
-    onPokemonSelected(id) {
-        this.props.eventHandler({
-            eventType: Constants.EVENT.PokemonClicked,
-            id: id
-        })
+        this.props.history.goBack()
     }
 }

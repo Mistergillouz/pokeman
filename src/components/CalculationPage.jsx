@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link, Redirect } from 'react-router-dom'
+
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import PokemanPage from './PokemanPage';
@@ -9,12 +11,23 @@ export default class CalculationPage extends PokemanPage {
     
     constructor() {
         super(...arguments)
-
-        Object.assign(this.state, {
-            showLegendary: true
-        })
-
+        this.parseQueryString(this.props.location.search)
     }
+    
+    componentWillReceiveProps(newProps) {
+        this.parseQueryString(newProps.location.search)
+    }
+
+    parseQueryString(queryString) {
+        let params = new URLSearchParams(queryString)
+        this.showLegendary = params.has('leg') ? params.get('leg') === 'true': true
+    }
+
+    buildQueryString() {
+        let args = [ 'leg=' + !this.showLegendary ]
+        return '?' + args.join('&')
+    }
+
 
     calculate(pokemonId) {
 
@@ -135,20 +148,22 @@ export default class CalculationPage extends PokemanPage {
     generateBestAttackers(allResults) {
 
         return allResults
-            .filter(entry => this.state.showLegendary || !PokedexHelper.isLegendary(entry.pokemon.id))
+            .filter(entry => this.showLegendary || !PokedexHelper.isLegendary(entry.pokemon.id))
             .slice(0, MAX_RESULT)
             .map((entry, index) => {
                 let pokemon = entry.pokemon
                 return (
-                    <div className="calc-pokemon-container" key={ pokemon.id } onClick={ () => this.onPokemonSelected(pokemon.id) }>
-                        <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
-                        <div className="calc-pokemon-img">
-                            <SmallPokemon id={ pokemon.id }/>
+                    <Link to={{ pathname: '/pokemon/' + pokemon.id }}>
+                        <div className="calc-pokemon-container" key={ pokemon.id }>
+                            <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
+                            <div className="calc-pokemon-img">
+                                <SmallPokemon id={ pokemon.id }/>
+                            </div>
+                            <div className="calc-pokemon-attacks">
+                                { this.generateAttacks(entry) }
+                            </div>
                         </div>
-                        <div className="calc-pokemon-attacks">
-                            { this.generateAttacks(entry) }
-                        </div>
-                    </div>
+                    </Link>
                 )
             })
     }
@@ -162,25 +177,22 @@ export default class CalculationPage extends PokemanPage {
         return null
     }
 
-    onToggleLeg() {
-        this.setState({ showLegendary: !this.state.showLegendary })
-    }
 
     render() { 
 
-        if (!this.props.visible) {
-            return null
-        }
+        let id = this.props.match.params.id
 
-        let results = this.calculate(Number(this.props.id))
+        let results = this.calculate(Number(id))
         let rows = this.generateBestAttackers(results)
-        let name = PokedexHelper.loc(PokedexHelper.getPokemon(this.props.id))
+        let name = PokedexHelper.loc(PokedexHelper.getPokemon(id))
 
         return (
             <div className="calc-container">
                 <div className="navbar">
                     <div className="right-panel">
-                        <div onClick={ () => this.onToggleLeg() } className={ 'gen-button gen-button-right gen-button-left' + (this.state.showLegendary ? ' selected': '') }>LEG</div>
+                        <Link replace to={{ pathname: this.props.location.pathname, search: this.buildQueryString() }}>
+                            <div className={ 'gen-button gen-button-right gen-button-left' + (this.showLegendary ? ' selected': '') }>LEG</div>
+                        </Link>
                     </div>
                     <div className="left-panel">
                         <button className="back-button" onClick= {() => this.onBack() }></button>
@@ -191,7 +203,7 @@ export default class CalculationPage extends PokemanPage {
                     { this.generateMeteoButtons() }
                 </div>
 
-                <div className="calc-results" key={ this.props.id }>
+                <div className="calc-results" key={ id }>
                     { rows }
                 </div>
             </div>

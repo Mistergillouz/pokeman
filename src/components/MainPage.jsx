@@ -1,4 +1,5 @@
 import React from 'react'
+
 import PokemonList from 'components/PokemonList'
 import PokedexHelper from 'data/PokedexHelper'
 import FilterPanel from 'components/FilterPanel'
@@ -174,10 +175,6 @@ class MainPage extends React.Component {
     }
 
     render() { 
-
-        if (!this.props.visible) {
-            return null;
-        }
 
         let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
         return (
