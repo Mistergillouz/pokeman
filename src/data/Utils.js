@@ -84,4 +84,8 @@ export default class Utils {
         let regex = new RegExp("^" + rule.split("*").join(".*") + "$")
         return regex.test(str) || str.indexOf(rule) !== -1
     }
+
+    static isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
+    }
 }

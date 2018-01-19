@@ -2,6 +2,7 @@
 import React from 'react'
 import './css/pokeman.css'
 import PokemanLink from './PokemanLink';
+import Utils from '../data/Utils';
 
 export default class PokemanPage extends React.Component {
 
@@ -12,7 +13,7 @@ export default class PokemanPage extends React.Component {
 
     render() {
 
-        if (this.props.share === 'false') {
+        if (!Utils.isMobileDevice()) {
             return null
         }
 
