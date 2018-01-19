@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import PokemanLink from './PokemanLink'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import NotFound from 'components/NotFound'
@@ -130,9 +129,9 @@ class CombatPanel extends React.Component {
             return (
                 <div className={ 'info-container info-back-' + typeKey }>
                     <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</span></div>
-                    <Link to={ { pathname: '/pokemon/' + this.props.id + '/calc' } }> 
+                    <PokemanLink to={ '/pokemon/' + this.props.id + '/calc' }> 
                         <div className="info-cp-calc-action"/>
-                    </Link>
+                    </PokemanLink>
                     <div className='info-cp-circle'>
                         <div className='info-pokemon-img' style={ styles }/>
                     </div>

@@ -79,7 +79,7 @@ class ComparePage extends React.Component {
         return <div className="page">
             <div className="navbar">
                 <div className="left-panel">
-                    <BackButton history={ this.props.history }/>
+                    <BackButton/>
                     <sup className='title-text'>Comparaisons</sup>
                 </div>
             </div>

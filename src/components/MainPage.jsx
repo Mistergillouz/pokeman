@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
+import PokemanLink from './PokemanLink'
 import PokemonList from 'components/PokemonList'
 import PokedexHelper from 'data/PokedexHelper'
 import FilterPanel from 'components/FilterPanel'
@@ -144,9 +145,9 @@ class MainPage extends React.Component {
                     <Hamburger eventHandler={ args => this.eventHandler(args) }/>
                     <div className="left-panel">
                         <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                        <Link to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
+                        <PokemanLink to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
                             <div className={ 'compare-button ' + compareButtonClass }></div>
-                        </Link>
+                        </PokemanLink>
                         <span className="pokeman-title">Pokéman</span>
                         <div className="search-icon" onClick={ () => this.onActivateSearch(true) }/>
                     </div>

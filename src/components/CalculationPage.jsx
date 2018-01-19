@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import PokemanLink from './PokemanLink'
 
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
@@ -156,11 +156,11 @@ export default class CalculationPage extends React.Component {
                 return (
                     <div className="calc-pokemon-container" key={ pokemon.id }>
                             <div className="calc-pokemon-rank">{ '#' + (index + 1) }</div>
-                            <Link replace to={{ pathname: '/pokemon/' + pokemon.id, search: '?back=true' }}>
+                            <PokemanLink to={{ pathname: '/pokemon/' + pokemon.id, search: '?back=true' }}>
                                 <div className="calc-pokemon-img">
                                     <SmallPokemon id={ pokemon.id }/>
                                 </div>
-                            </Link>
+                            </PokemanLink>
                             <div className="calc-pokemon-attacks">
                                 { this.generateAttacks(entry) }
                             </div>
@@ -191,9 +191,9 @@ export default class CalculationPage extends React.Component {
             <div className="calc-container">
                 <div className="navbar">
                     <div className="right-panel">
-                        <Link replace to={{ pathname: this.props.location.pathname, search: this.buildQueryString() }}>
+                        <PokemanLink to={{ pathname: this.props.location.pathname, search: this.buildQueryString() }}>
                             <div className={ 'gen-button gen-button-right gen-button-left' + (this.showLegendary ? ' selected': '') }>LEG</div>
-                        </Link>
+                        </PokemanLink>
                     </div>
                     <div className="left-panel">
                         <BackButton history={ this.props.history }/>

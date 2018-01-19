@@ -38,7 +38,7 @@ export default class ZoomPage extends PokemanPage {
             <div className="page">
                 <div className="navbar">
                     <div className="left-panel">
-                        <BackButton history={ this.props.history }/>
+                        <BackButton/>
                         <sup className='title-text'>{ label }</sup>
                     </div>
                 </div>

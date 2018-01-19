@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, browserHistory } from 'react-router-dom'
 
 import PokedexHelper from 'data/PokedexHelper'
 

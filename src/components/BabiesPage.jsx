@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon';
 import BackButton from './BackButton'
+
 import './css/babies.css'
 
 export default class BabiesPage extends React.Component {

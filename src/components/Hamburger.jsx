@@ -1,6 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
-
+import PokemanLink from './PokemanLink'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import './css/hamburger.css'
@@ -12,19 +11,6 @@ class Hamburger extends React.Component {
             country: PokedexHelper.getLocaleCountry()
         }
     }
-
-    onShowEggPanel() {
-        this.setState({ redirect: true, to: '/eggs' })
-    }
-
-    onShowEvolutionPanel() {
-        this.setState({ redirect: true, to: '/evolutions' })
-    }
-
-    onShowBabiesPanel() {
-        this.setState({ redirect: true, to: '/babies' })
-    }
-
 
     onToggleMenuVisibilityAsync() {
         setTimeout(() => this.onToggleMenuVisibility() , 150)
@@ -102,18 +88,28 @@ class Hamburger extends React.Component {
                         <li className="menu-section">Langues</li>
                         { this.generateLangRadio() }
                         <li className="nav-separator"></li>
-                        <li onClick={ () => this.onShowEggPanel() }>
-                            <div className='nav-icon-egg'/>
-                            <span>Voir les oeufs</span>
-                        </li>
-                        <li onClick={ () => this.onShowEvolutionPanel() }>
-                            <div className='nav-icon-evolves'/>
-                            <span>Evolutions explorer</span>
-                        </li>
-                        <li onClick={ () => this.onShowBabiesPanel() }>
-                            <div className='nav-icon-baby'/>
-                            <span>Maternelle</span>
-                        </li>
+
+                        <PokemanLink to='/eggs'>
+                            <li>
+                                <div className='nav-icon-egg'/>
+                                <span>Voir les oeufs</span>
+                            </li>
+                        </PokemanLink>
+
+                        <PokemanLink to='/evolutions'>
+                            <li>
+                                <div className='nav-icon-evolves'/>
+                                <span>Evolutions explorer</span>
+                            </li>
+                        </PokemanLink>
+
+                        <PokemanLink to='/babies'>
+                            <li>
+                                <div className='nav-icon-baby'/>
+                                <span>Maternelle</span>
+                            </li>
+                        </PokemanLink>
+                        
                         <li className="nav-separator"></li>
                         <li className="menu-section">Tout</li>
                         <li onClick={ () => this.onSelect(Constants.SELECT.SELECT_ALL) }>

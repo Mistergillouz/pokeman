@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import PokemanLink from './PokemanLink'
 
 export default class BackButton extends React.Component {
 
@@ -8,14 +8,10 @@ export default class BackButton extends React.Component {
     }
 
     render() {
-        if (this.props.history) {
-            return <button className="back-button" onClick={ () => this.props.history.goBack() }/>
-        } else {
-            return (
-                <Link to={{ pathname: '/' }}>
-                    <button className="back-button"/>
-                </Link>
-            )
-        }
+        return (
+            <PokemanLink back>
+                <button className="back-button"/>
+            </PokemanLink>
+        )
     }
 }
