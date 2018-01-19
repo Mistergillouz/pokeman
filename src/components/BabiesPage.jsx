@@ -4,6 +4,7 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon';
 import BackButton from './BackButton'
+import PokemanLink from './PokemanLink';
 
 import './css/babies.css'
 
@@ -22,7 +23,13 @@ export default class BabiesPage extends React.Component {
                 </div>
 
                 <div className="baby-results">
-                    { PokedexHelper.getBabies().map(pokemonId => <SmallPokemon id={ pokemonId } onClick={ id => this.onPokemonSelected(id) } showGen='true'/>) }
+                    { PokedexHelper.getBabies().map(pokemonId => {
+                        return (
+                            <PokemanLink to={ '/pokemon/' + pokemonId }>
+                                <SmallPokemon id={ pokemonId } showGen='true'/>
+                            </PokemanLink>
+                        )
+                    })}
                 </div>
             </div>
         )

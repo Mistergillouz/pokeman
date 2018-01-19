@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
 import Utils from 'data/Utils'
 import SmallPokemon from 'components/SmallPokemon'
 import BackButton from 'components/BackButton'
+import PokemanLink from './PokemanLink';
 
 class EggPage extends React.Component {
    constructor() {
@@ -63,7 +63,9 @@ class EggPage extends React.Component {
     generatePokemons(pokemons) {
         let tiles = pokemons.map(pokemon => {
             return (
-                <SmallPokemon id={ pokemon.id } onClick = { () => this.onPokemonClicked(pokemon.id) }/>
+                <PokemanLink to={ '/pokemon/' + pokemon.id }>
+                    <SmallPokemon id={ pokemon.id }/>
+                </PokemanLink>
             )
         })
 

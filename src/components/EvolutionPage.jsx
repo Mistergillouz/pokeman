@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import EvolutionPanel from './EvolutionPanel'
 import NotFound from './NotFound'
@@ -29,7 +29,10 @@ class EvolutionPage extends React.Component {
     onGenToClicked(gen) {
         let array = Utils.toggle(this.state.toGens, gen, false)
         this.setState({ toGens: array })
+    }
 
+    onPokemonSelected(pokemonId) {
+        this.setState({ redirect: true, to: '/pokemon/' + pokemonId })
     }
 
     resolve() {
@@ -42,6 +45,10 @@ class EvolutionPage extends React.Component {
     }
        
     render() { 
+
+        if (this.state.redirect) {
+            return <Redirect push to={ this.state.to }/>
+        }
 
         let genFromButtons = Utils.generateGenButtons(this.state.fromGens, this.onGenFromClicked.bind(this))
         let genToButtons = Utils.generateGenButtons(this.state.toGens, this.onGenToClicked.bind(this))
