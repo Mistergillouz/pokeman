@@ -1,6 +1,7 @@
 
 import React from 'react'
-import Constants from 'data/Constants'
+import './css/pokeman.css'
+import PokemanLink from './PokemanLink';
 
 export default class PokemanPage extends React.Component {
 
@@ -9,7 +10,16 @@ export default class PokemanPage extends React.Component {
         this.state = {}
     }
 
-    onBack() {
-        this.props.history.goBack()
+    render() {
+
+        if (this.props.share === 'false') {
+            return null
+        }
+
+        return (
+            <a href={ "whatsapp://send?text=Pokeman - " + encodeURIComponent(window.location.href) }>
+                <div className='pokeman-button'/>
+            </a>
+        )
     }
 }

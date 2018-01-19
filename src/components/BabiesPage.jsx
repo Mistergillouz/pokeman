@@ -4,11 +4,12 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon';
 import BackButton from './BackButton'
-import PokemanLink from './PokemanLink';
+import PokemanLink from './PokemanLink'
+import PokemanPage from './PokemanPage'
 
 import './css/babies.css'
 
-export default class BabiesPage extends React.Component {
+export default class BabiesPage extends PokemanPage {
    
     render() { 
 
@@ -31,6 +32,9 @@ export default class BabiesPage extends React.Component {
                         )
                     })}
                 </div>
+
+                { super.render() }
+                
             </div>
         )
     }

@@ -29,7 +29,7 @@ export default class App extends React.Component {
     render() { 
 
         return (
-            <Router>
+            <Router hashType="noslash">
                 <Switch>
                     <Route path="/" exact={ true } component={MainPage}/>
                     <Route path="/pokemon/:id" exact={ true } component={ZoomPage}/>

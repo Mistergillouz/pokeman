@@ -5,8 +5,9 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SortTable from 'components/SortTable'
 import BackButton from 'components/BackButton'
+import PokemanPage from 'components/PokemanPage'
 
-class ComparePage extends React.Component {
+class ComparePage extends PokemanPage {
    
     constructor() {
         super(...arguments)
@@ -86,6 +87,8 @@ class ComparePage extends React.Component {
             <div className="compare-container">
                 <SortTable columns={ this.getColumns() } datas={ this.getDatas() } onCellClicked={ (row, col) => this.onCellClicked(row, col) }/>
             </div>
+
+            { super.render() }
         </div>
     }
 }

@@ -5,10 +5,11 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import SmallPokemon from './SmallPokemon'
 import BackButton from './BackButton'
+import PokemanPage from './PokemanPage'
 
 import './css/calc.css'
 
-export default class CalculationPage extends React.Component {
+export default class CalculationPage extends PokemanPage {
     
     constructor() {
         super(...arguments)
@@ -207,6 +208,8 @@ export default class CalculationPage extends React.Component {
                 <div className="calc-results" key={ id }>
                     { rows }
                 </div>
+
+                { super.render() }
             </div>
         )
     }

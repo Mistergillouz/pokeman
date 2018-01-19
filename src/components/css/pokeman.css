@@ -1,0 +1,12 @@
+.pokeman-button {
+    background-image: url(../../../assets/images/whatsapp.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 2em;
+    width: 32px;
+    height: 32px;
+    position: fixed;
+    bottom: 0.5em;
+    right: 0.5em;
+    opacity: 0.5;
+}

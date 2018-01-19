@@ -46,6 +46,7 @@ export default class ZoomPage extends PokemanPage {
                     <EvolutionPanel id={ id } evolves={ evolves } onClick={ id => this.onPokemonClicked(id) }/>
                     <CombatPanel id={ id } eventHandler={ this.props.eventHandler }/>
                 </div>
+                { super.render() }
 		    </div>
         )
     }

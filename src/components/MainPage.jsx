@@ -1,17 +1,18 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-import PokemanLink from './PokemanLink'
+import PokemanPage from 'components/PokemanPage'
+import PokemanLink from 'components/PokemanLink'
 import PokemonList from 'components/PokemonList'
-import PokedexHelper from 'data/PokedexHelper'
 import FilterPanel from 'components/FilterPanel'
 import Hamburger from 'components/Hamburger'
+import EvolutionPage from 'components/EvolutionPage';
+import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Store from 'data/Store'
-import EvolutionPage from './EvolutionPage';
 
 
-class MainPage extends React.Component {
+class MainPage extends PokemanPage {
    
     constructor() {
         super(...arguments)
@@ -183,6 +184,9 @@ class MainPage extends React.Component {
                     pokemons={ this.pokemons } 
                     selected={ this.state.selected }
                     eventHandler={ args => this.eventHandler(args) }/>
+
+                { super.render() }
+                
             </div>
         )
     }

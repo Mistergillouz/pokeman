@@ -5,9 +5,10 @@ import PokedexHelper from 'data/PokedexHelper'
 import Utils from 'data/Utils'
 import SmallPokemon from 'components/SmallPokemon'
 import BackButton from 'components/BackButton'
-import PokemanLink from './PokemanLink';
+import PokemanLink from 'components/PokemanLink'
+import PokemanPage from 'components/PokemanPage'
 
-class EggPage extends React.Component {
+class EggPage extends PokemanPage {
    constructor() {
         super(...arguments)
 
@@ -151,13 +152,15 @@ class EggPage extends React.Component {
                 <div className="left-panel">
                     <BackButton/>
                     { this.generateDistancesFilter() }
-                    <sup className='title-text'>Oeufs</sup>
+                    <sup>Oeufs</sup>
                 </div>
                 
                 </div>
                 <div className="eggs-container">
                     { this.generatePage() }
     		    </div>
+
+                { super.render() }
 		    </div>
         )
     }

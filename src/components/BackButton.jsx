@@ -1,13 +1,18 @@
 import React from 'react'
 import PokemanLink from './PokemanLink'
+import { withRouter } from 'react-router-dom'
 
-export default class BackButton extends React.Component {
+class BackButton extends React.Component {
 
     constructor() {
         super(...arguments)
     }
 
     render() {
+        if (this.props.history.length <= 2) {
+            return null;
+        }
+
         return (
             <PokemanLink back>
                 <button className="back-button"/>
@@ -15,3 +20,5 @@ export default class BackButton extends React.Component {
         )
     }
 }
+
+export default withRouter(BackButton)

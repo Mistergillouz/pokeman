@@ -1,16 +1,18 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 
-import EvolutionPanel from './EvolutionPanel'
-import NotFound from './NotFound'
-import BackButton from './BackButton'
+import EvolutionPanel from 'components/EvolutionPanel'
+import NotFound from 'components/NotFound'
+import BackButton from 'components/BackButton'
+import PokemanPage from 'components/PokemanPage'
 
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Utils from 'data/Utils'
+
 import './css/evol.css'
 
-class EvolutionPage extends React.Component {
+class EvolutionPage extends PokemanPage {
    
     constructor() {
         super(...arguments)
@@ -78,6 +80,9 @@ class EvolutionPage extends React.Component {
                 <div className="evol-results">
                     { rows }
                 </div>
+
+                { super.render() }
+
             </div>
         )
     }
