@@ -3,6 +3,7 @@ import PokemanLink from './PokemanLink'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import NotFound from 'components/NotFound'
+import BackButton from 'components/BackButton'
 
 class CombatPanel extends React.Component {
    
@@ -141,7 +142,7 @@ class CombatPanel extends React.Component {
                         { this.generateSummaryTable(attacks) }
                         { this.generateDetailsTable(attacks) }
                         { this.generateInfoTable(pokemon) }
-                        <div className='close-button' onClick={() => this.onBack() }/>
+                        <BackButton className='close-button'/>
                     </div>
                 </div>
             )

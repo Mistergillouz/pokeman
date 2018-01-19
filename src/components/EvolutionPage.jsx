@@ -15,7 +15,7 @@ import './css/evol.css'
 class EvolutionPage extends PokemanPage {
    
     constructor() {
-        super(...arguments)
+        super('Evolutions Explorer', arguments)
 
         this.state = {
             fromGens: [Constants.CURRENT_GEN],
@@ -61,7 +61,7 @@ class EvolutionPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
-                        <sup className='title-text'>Evolutions Explorer</sup>
+                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
                 </div>
 

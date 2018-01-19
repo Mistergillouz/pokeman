@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import PokemanPage from './PokemanPage';
 import Constants from 'data/Constants'
@@ -8,42 +8,36 @@ import CombatPanel from 'components/CombatPanel'
 import SmallPokemon from 'components/SmallPokemon'
 import EvolutionPanel from 'components/EvolutionPanel'
 import BackButton from 'components/BackButton'
+import PokemanLink from './PokemanLink';
 
 export default class ZoomPage extends PokemanPage {
 
-    constructor(args) {
-        super(args)
-
-        Object.assign(this.state, {
-            id: this.props.match.params.id
-        })
+    constructor() {
+        super(null, arguments)
     }
     
-    onPokemonClicked(pokemonId) {
-        this.setState({ id: pokemonId })
-    }
-
-    componentWillReceiveProps(newProps) {
-        this.setState({ id: newProps.match.params.id })
-    }
-
     render() { 
 
-        let id = this.state.id
-        let label = PokedexHelper.getPokemonName(id)
+        let id = Number(this.props.match.params.id)
         let evolves = PokedexHelper.getEvolvesList(id)
+        
+        let label = PokedexHelper.getPokemonName(id)
+        this.setPageCaption(label)
+
 
         return (
 
             <div className="page">
                 <div className="navbar">
                     <div className="left-panel">
-                        <BackButton/>
+                        <PokemanLink to='/'>
+                            <div className="back-button"/>
+                        </PokemanLink>
                         <sup className='title-text'>{ label }</sup>
                     </div>
                 </div>
                 <div className="pokemon-zoom">
-                    <EvolutionPanel id={ id } evolves={ evolves } onClick={ id => this.onPokemonClicked(id) }/>
+                    <EvolutionPanel id={ id } evolves={ evolves }/>
                     <CombatPanel id={ id } eventHandler={ this.props.eventHandler }/>
                 </div>
                 { super.render() }

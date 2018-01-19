@@ -3,14 +3,11 @@ import Constants from 'data/Constants'
 import PokedexHelper from 'data/PokedexHelper'
 import CombatPanel from 'components/CombatPanel'
 import SmallPokemon from 'components/SmallPokemon'
+import PokemanLink from './PokemanLink';
 
 export default class EvolutionPanel extends React.Component {
     constructor(...args) {
         super(...args)
-
-        this.state = {
-            selectedId: this.props.id
-        }
     }
 
     createEvolvesGrid(evolutions, grid, level) {
@@ -38,11 +35,11 @@ export default class EvolutionPanel extends React.Component {
                 let pokemonId = Number(id)
                 if (pokemonId) {
                     let name = PokedexHelper.getPokemonName(pokemonId)
-                    tds.push(<td><SmallPokemon key={ pokemonId } 
-                        id={ pokemonId } 
-                        selected={ pokemonId === Number(this.state.selectedId) }
-                        showGen={ this.props.showGen }
-                        onClick={ id => this.onPokemonClicked(id) }/></td>)
+                    tds.push(
+                        <td><PokemanLink push='false' to={ '/pokemon/' + pokemonId }>
+                            <SmallPokemon key={ pokemonId } id={ pokemonId } selected={ pokemonId === Number(this.props.id) } showGen={ this.props.showGen }/>
+                        </PokemanLink></td>
+                    )
                 } else {
                     tds.push(<td></td>)
                 }
@@ -57,7 +54,6 @@ export default class EvolutionPanel extends React.Component {
     onPokemonClicked(pokemonId) {
         if (this.props.onClick) {
             this.props.onClick(pokemonId)
-            this.setState({ selectedId: pokemonId })
         }
     }
 

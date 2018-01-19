@@ -10,8 +10,7 @@ import PokemanPage from 'components/PokemanPage'
 
 class EggPage extends PokemanPage {
    constructor() {
-        super(...arguments)
-
+        super('Oeufs', arguments)
         
         this.eggs = PokedexHelper.getEggs()
 
@@ -24,6 +23,7 @@ class EggPage extends PokemanPage {
             distances: [],
             gens: [ this.maxGen ]
         }
+
     }
 
 
@@ -152,7 +152,7 @@ class EggPage extends PokemanPage {
                 <div className="left-panel">
                     <BackButton/>
                     { this.generateDistancesFilter() }
-                    <sup>Oeufs</sup>
+                    <sup className='centered-text'>{ this.getPageCaption() }</sup>
                 </div>
                 
                 </div>

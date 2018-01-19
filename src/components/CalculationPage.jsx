@@ -12,8 +12,12 @@ import './css/calc.css'
 export default class CalculationPage extends PokemanPage {
     
     constructor() {
-        super(...arguments)
+        super(null, arguments)
         this.parseQueryString(this.props.location.search)
+        
+        this.pokemonId = Number(this.props.match.params.id)
+        let name = PokedexHelper.loc(PokedexHelper.getPokemon(this.pokemonId))
+        this.setPageCaption('Meilleurs attaquants vs ' + name)
     }
     
     componentWillReceiveProps(newProps) {
@@ -182,11 +186,8 @@ export default class CalculationPage extends PokemanPage {
 
     render() { 
 
-        let id = this.props.match.params.id
-
-        let results = this.calculate(Number(id))
+        let results = this.calculate(this.pokemonId)
         let rows = this.generateBestAttackers(results)
-        let name = PokedexHelper.loc(PokedexHelper.getPokemon(id))
 
         return (
             <div className="calc-container">
@@ -198,14 +199,14 @@ export default class CalculationPage extends PokemanPage {
                     </div>
                     <div className="left-panel">
                         <BackButton history={ this.props.history }/>
-                        <sup className='title-text'>{ 'Meilleurs attaquants vs ' + name }</sup>
+                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
                 </div>
                 <div className="calc-options-container">
                     { this.generateMeteoButtons() }
                 </div>
 
-                <div className="calc-results" key={ id }>
+                <div className="calc-results" key={ this.pokemonId }>
                     { rows }
                 </div>
 

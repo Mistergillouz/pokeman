@@ -10,7 +10,7 @@ import PokemanPage from 'components/PokemanPage'
 class ComparePage extends PokemanPage {
    
     constructor() {
-        super(...arguments)
+        super('Comparaisons', arguments)
 
         this.state = {}
         let params = new URLSearchParams(this.props.location.search)
@@ -81,7 +81,7 @@ class ComparePage extends PokemanPage {
             <div className="navbar">
                 <div className="left-panel">
                     <BackButton/>
-                    <sup className='title-text'>Comparaisons</sup>
+                    <sup className='title-text'>{ this.getPageCaption() }</sup>
                 </div>
             </div>
             <div className="compare-container">

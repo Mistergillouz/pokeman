@@ -15,7 +15,7 @@ import Store from 'data/Store'
 class MainPage extends PokemanPage {
    
     constructor() {
-        super(...arguments)
+        super(null, arguments)
 
         let storage = getStorageData()
         let country = storage.loc || 'fr'

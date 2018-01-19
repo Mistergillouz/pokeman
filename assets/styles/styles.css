@@ -168,9 +168,8 @@ input {
     background-position: center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
-    min-width: 2.5em;
-    min-height: 2.5em;
-    width: 2.5em;
+    width: 2em;
+    height: 2em;
 }
 
 
@@ -247,11 +246,14 @@ input {
     text-align: center;
 }
 
-.title-text {
+.centered-text, .title-text {
     width: 100%;
     text-align: center;
-    position: absolute;
     pointer-events: none;
+}
+
+.title-text {
+    position: absolute;
 }
 
 .egg-section {

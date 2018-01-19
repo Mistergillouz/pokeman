@@ -11,6 +11,10 @@ import './css/babies.css'
 
 export default class BabiesPage extends PokemanPage {
    
+    constructor() {
+        super('Maternelle', arguments)
+    }
+
     render() { 
 
         let rows = null
@@ -19,7 +23,7 @@ export default class BabiesPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
-                        <sup className='title-text'>Maternelle</sup>
+                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
                 </div>
 

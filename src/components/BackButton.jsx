@@ -13,9 +13,10 @@ class BackButton extends React.Component {
             return null;
         }
 
+        let className = this.props.className || 'back-button'
         return (
             <PokemanLink back>
-                <button className="back-button"/>
+                <div className={ className }/>
             </PokemanLink>
         )
     }
