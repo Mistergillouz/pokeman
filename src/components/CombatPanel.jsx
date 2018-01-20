@@ -142,7 +142,7 @@ class CombatPanel extends React.Component {
                         { this.generateSummaryTable(attacks) }
                         { this.generateDetailsTable(attacks) }
                         { this.generateInfoTable(pokemon) }
-                        <BackButton className='close-button'/>
+                        <BackButton image='close-button'/>
                     </div>
                 </div>
             )

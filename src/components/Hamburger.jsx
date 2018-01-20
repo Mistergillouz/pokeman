@@ -1,5 +1,6 @@
 import React from 'react'
-import PokemanLink from './PokemanLink'
+import PokemanLink from 'components/PokemanLink'
+import FontIcon from 'components/FontIcon'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import './css/hamburger.css'
@@ -44,30 +45,8 @@ class Hamburger extends React.Component {
         return radios
     }
 
-    startButtonAnimation() {
-        let navigation = this.refs['btn-navigation']
-        if (!navigation) {
-            return
-        }
-        let animationListener = () => {
-            navigation.removeEventListener('transitionend', animationListener)
-            navigation.classList.remove('navigation-scale-anim')
-            navigation.classList.add('navigation-scale-anim-end')
-        }
-        navigation.classList.add('navigation-scale-anim')
-        navigation.addEventListener('transitionend', animationListener, false)
-        
-    }
-
     onSelect(select) {
         this.props.eventHandler({ eventType: Constants.EVENT.PokemonSelected, id: select })
-    }
-
-    componentWillMount() {
-        if (!Hamburger.ANIM_DONE) {
-            Hamburger.ANIM_DONE = true
-            setTimeout(() => this.startButtonAnimation(), 1000)
-        }
     }
 
     render() { 
@@ -78,11 +57,7 @@ class Hamburger extends React.Component {
 
         return (
             <div>
-                <div key="btn-nav" className="btn-navigation" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }>
-                    <div className="btn-navigation-barre"></div>
-                    <div className="btn-navigation-barre"></div>
-                    <div className="btn-navigation-barre"></div>
-                </div>
+                <FontIcon key="nav" className="fa-bars btn-navigation" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }/>
                 <div key="nav-pan" className="navigation" ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
                     <ul>
                         <li className="menu-section">Langues</li>
@@ -115,7 +90,5 @@ class Hamburger extends React.Component {
         )
     }
 }
-
-Hamburger.ANIM_DONE = false
 
 export default Hamburger

@@ -6,7 +6,8 @@ import PokemanLink from 'components/PokemanLink'
 import PokemonList from 'components/PokemonList'
 import FilterPanel from 'components/FilterPanel'
 import Hamburger from 'components/Hamburger'
-import EvolutionPage from 'components/EvolutionPage';
+import EvolutionPage from 'components/EvolutionPage'
+import FontIcon from 'components/FontIcon'
 import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Store from 'data/Store'
@@ -55,7 +56,7 @@ class MainPage extends PokemanPage {
 
         switch (args.eventType) {
             case Constants.EVENT.PokemonClicked:
-                if (this.state.selected.length) {
+                if (this.state.viewMode === ViewMode.SELECTIONS) {
                     this.toggleSelected(args.id)
                 } else {
                     this.setState({ redirect: true, push: true, to: '/pokemon/' +  args.id }, true)
@@ -69,7 +70,6 @@ class MainPage extends PokemanPage {
     }
 
     onToggleFilterPanel() {
-        this.refs.filterToggle.classList.toggle('filter-toggle-off')
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
@@ -95,6 +95,10 @@ class MainPage extends PokemanPage {
     componentDidUpdate() {
         if (this.refs.search) {
             this.refs.search.value = this.state.searchSettings.text
+            if (this._focusInput) {
+                delete this._focusInput
+                setTimeout(() => this.refs.search.focus(), 0)
+            }
         }
     }
 
@@ -127,8 +131,7 @@ class MainPage extends PokemanPage {
 
     onActivateSearch (active) {
         this.setState({ viewMode: active ? ViewMode.SEARCH : ViewMode.DEFAULT })
-        this.setInputFocus = active
-
+        this._focusInput = true
     }
 
     leaveSelection() {
@@ -147,10 +150,11 @@ class MainPage extends PokemanPage {
 
             case ViewMode.SEARCH:
 
+
                 return (
                     <div className="left-panel">
-                        <div className="back-button-2" onClick= {() => this.onActivateSearch(false) }></div>
-                        <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
+                        <FontIcon className="fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
+                        <FontIcon className="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
                         <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
                             placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
                     </div>
@@ -159,15 +163,14 @@ class MainPage extends PokemanPage {
             case ViewMode.SELECTIONS:
 
                 let compareVisibility = this.state.selected.length < 2 ? 'hidden' : ''
-                let selectIcon = (this.state.selected.length === this.state.pokemons.length) ? 'checked-icon' : 'unchecked-icon'
+                let selectIcon = (this.state.selected.length === this.state.pokemons.length) ? 'fa-check-circle text-selected' : 'fa-circle-thin'
         
                 return (
                     <div className="left-panel">
-                        <div className="back-button-2" onClick={ () => this.leaveSelection() }/>
-                        
+                        <FontIcon className="fa-arrow-left" onClick={ () => this.leaveSelection() }/>
                         <span className="title-text">Selections</span>
                         <div className="toolbar-button-text-group" onClick={ () => this.toggleSelectAll() }>
-                            <div className={ selectIcon }/>
+                            <FontIcon className={ selectIcon }/>
                             <span className="toolbar-button-text">Tout</span>
                         </div>
         
@@ -187,20 +190,12 @@ class MainPage extends PokemanPage {
                     <div>
                         <Hamburger eventHandler={ args => this.eventHandler(args) }/>
                         <div className="left-panel">
-                            <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                            
+                            <FontIcon className="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
                             <span className="pokeman-title">Pokéman</span>
-                            <div className="search-icon" onClick={ () => this.onActivateSearch(true) }/>
+                            <i className="fa fa-search fa-lg search-icon" aria-hidden="true" onClick={ () => this.onActivateSearch(true) }></i>
                         </div>
                     </div>
                 )
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.state.searchEnabled && this.setInputFocus) {
-            this.setInputFocus = false
-            setTimeout(() => this.refs.search.focus(), 0)
         }
     }
 

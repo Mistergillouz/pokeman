@@ -29,6 +29,16 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+.fa-pokeman-normal, .fa-pokeman-2x {
+    padding: 0 0.25em 0 0.25em;
+    font-size: 1.5em;
+    opacity: 0.8;
+}
+
+.fa-pokeman-2x {
+    font-size: 2em;
+}
+
 .hidden {
     opacity: 0 !important;
     display: none !important;
@@ -164,7 +174,7 @@ input {
 /*  EGG PANEL
 /*---------------------------------------------------------------------*/
 
-.compare-button, .filter-toggle, .back-button {
+.compare-button, .filter-toggle, .filter-toggle-off, .back-button {
     background-position: center;
     background-size: 24px 24px;
     background-repeat: no-repeat;
@@ -174,23 +184,11 @@ input {
 
 
 .back-button {
-    background-image: url('../images/back.png');
-    border-radius: 50%;
-    background-color: rgb(67, 49, 77);
-    border: 0;
     margin-left: 0.5em;
 }
 
 
 .back-button-2 {
-    background-image: url('../images/back2.png');
-    background-size: 24px;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 2em;
-    width: 2em;
-    margin-left: 0.5em;
-    border: 0;
 }
 
 .compare-button {
@@ -200,12 +198,6 @@ input {
 }
 
 .search-icon {
-    background-image: url('../images/search.png');   
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 20px;
-    width: 2em;
-    height: 2em;
     position: absolute;
     right: 1em;
 }
@@ -219,14 +211,7 @@ input {
     left: 0;
     pointer-events: none;
 }
-.filter-toggle {
-    background-image: url('../images/filteron.png');
-    opacity: 0.7;
-}
 
-.filter-toggle-off {
-    background-image: url('../images/filteroff.png') ! important;
-}
 
 .eggs-container {
     display: flex;
@@ -401,6 +386,10 @@ input {
     background-color: #A5DC86;
 }
 
+.text-selected {
+    color: mediumseagreen;
+}
+
 .gen-button-left {
     border-radius: 10px 0 0 10px;
     border-left-width: 1px;
@@ -531,29 +520,11 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px 0.5em 0 0.5em;
+    padding: 0 0.25em 0 0.25em;
 }
 
 .toolbar-button-text {
     font-size: 8pt;
-}
-
-.checked-icon, .pokemon-checked, .unchecked-icon {
-    background-image: url(../images/checked.png);
-    background-repeat: no-repeat;
-    background-size: 24px;
-    width: 24px;
-    height: 24px;
-}
-.unchecked-icon {
-    background-image: url(../images/unchecked.png);
-}
-
-.pokemon-checked {
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    z-index: 100;
 }
 
 .gen .pokemon .types {
@@ -562,7 +533,6 @@ input {
     flex-direction: row;
     align-items: flex-start;
 }
-
 
 @media all and (max-width: 1024px)
 {
@@ -639,14 +609,23 @@ h2, .inactive-h2 {
     background: white;
 }
 
-.gen .pokemon .id {
+.pokemon-checked {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    z-index: 1;
+}
+
+.pokemon-id {
     position: absolute;
     top: 1px;
     right: 4px;
     font-size: 11px;
     color: #bbb;
+    z-index: 1;
 }
-.gen .pokemon .id::before {
+
+.pokemon-id::before {
     content: "#";
     color: #ddd;
 }

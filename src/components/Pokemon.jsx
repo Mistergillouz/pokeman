@@ -5,7 +5,7 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import Species from 'components/Species'
 import Lazimage from 'components/Lazimage'
-
+import FontIcon from 'components/FontIcon'
 
 const LONG_PRESS_DURATION = 500
 
@@ -79,8 +79,7 @@ class Pokemon extends React.Component {
 
         return (
             <div className={ "gen " + (this.props.className || '') }>
-                <div onClick={ (e) => this.onSelect(false) } className={ this.props.selected ? 'pokemon-checked' : '' }/>
-                
+                { this.props.selected ? <FontIcon className="fa-check-circle text-selected pokemon-checked"/> : <div className="pokemon-id">{ this.props.id }</div> }
                 <a ref="pokemon" key={ 'gen' + this.props.id } className="pokemon g1" href="#" data-gen={ pokemon.gen }
                     onTouchStart={ e => this._onMouseDown(e) }
                     onTouchEnd={ e => this._onMouseUp(e) }
@@ -96,7 +95,7 @@ class Pokemon extends React.Component {
                     <div className="bar">
                         <div className={ valueClass }></div>
                     </div>
-                    <div className="id">{ this.props.id }</div>
+                    
                 </a>
             </div>
         )

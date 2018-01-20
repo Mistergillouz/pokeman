@@ -62,8 +62,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 15px;
-    width: 2.5em;
+    top: 14px;
+    width: 1.5em;
     z-index: 151;
     cursor: pointer;
 }
@@ -76,7 +76,7 @@
     border-radius: 5px;
 }
 
-i {
+.navigation i {
     display: inline-block;
     width: 15px;
     height: 15px;
@@ -96,7 +96,7 @@ i {
     color: darkgray;
 }
 
-.nav-icon-egg, .nav-icon-evolves, .nav-icon-baby, .nav-icon-checked, .nav-icon-unselect {
+.nav-icon-egg, .nav-icon-evolves, .nav-icon-baby {
     background-repeat: no-repeat;
     background-size: 24px;
     width: 24px;
@@ -106,12 +106,3 @@ i {
 .nav-icon-egg { background-image: url(../../../assets/images/egg.png) }
 .nav-icon-evolves { background-image: url(../../../assets/images/evolves.png) }
 .nav-icon-baby { background-image: url(../../../assets/images/baby.png) }
-.nav-icon-checked { background-image: url(../../../assets/images/checked.png) }
-.nav-icon-unselect { background-image: url(../../../assets/images/unselect.png) }
-
-.navigation-scale-anim-end, .navigation-scale-anim {
-    transition: all 0.5s ease;
-}
-.navigation-scale-anim {
-    transform: scale(1.5) perspective(1px);
-}

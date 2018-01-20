@@ -8,6 +8,7 @@ import CombatPanel from 'components/CombatPanel'
 import SmallPokemon from 'components/SmallPokemon'
 import EvolutionPanel from 'components/EvolutionPanel'
 import BackButton from 'components/BackButton'
+import FontIcon from 'components/FontIcon'
 import PokemanLink from './PokemanLink';
 
 export default class ZoomPage extends PokemanPage {
@@ -31,7 +32,7 @@ export default class ZoomPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <PokemanLink to='/'>
-                            <div className="back-button"/>
+                            <FontIcon x2 className={ BackButton.defaultIcon }/>
                         </PokemanLink>
                         <sup className='title-text'>{ label }</sup>
                     </div>
