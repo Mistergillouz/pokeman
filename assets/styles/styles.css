@@ -195,6 +195,8 @@ input {
 
 .compare-button {
     background-image: url('../images/compare.png');
+    width: 24px;
+    height: 24px;
 }
 
 .search-icon {
@@ -525,12 +527,29 @@ input {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.pokemon-checked {
+.toolbar-button-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 0.5em 0 0.5em;
+}
+
+.toolbar-button-text {
+    font-size: 8pt;
+}
+
+.checked-icon, .pokemon-checked, .unchecked-icon {
     background-image: url(../images/checked.png);
     background-repeat: no-repeat;
     background-size: 24px;
     width: 24px;
     height: 24px;
+}
+.unchecked-icon {
+    background-image: url(../images/unchecked.png);
+}
+
+.pokemon-checked {
     position: absolute;
     top: -1px;
     right: -1px;

@@ -21,24 +21,34 @@ class MainPage extends PokemanPage {
         let country = storage.loc || 'fr'
         PokedexHelper.setLocaleCountry(country)
 
-        this.state = {
-            visible: true,
-            country: country,
+        let pokemons = []
+        for (let i = 1; i < 151; i++) {
+            pokemons.push(i);
+        }
+
+        this.state = Store.get('mainpage', {
             filterVisible: false,
-            searchEnabled: false,
-            tooltipTypeId: -1,
-            selected: Store.get('selected', []),
+            viewMode: ViewMode.DEFAULT,
+            selected: [],
             searchSettings: { 
                 text: '', 
                 genId: null,
                 types: [] 
-            }
+            },
+            pokemons: pokemons
+        })
+        
+        
+    }
+
+    setState(state, ignore) {
+
+        if (!ignore) {
+            let currentState = Object.assign({}, this.state, state)
+            Store.set('mainpage', currentState)
         }
         
-        this.pokemons = []
-        for (let i = 1; i < 151; i++) {
-            this.pokemons.push(i);
-        }
+        super.setState(state)
     }
 
     eventHandler(args) {
@@ -48,7 +58,7 @@ class MainPage extends PokemanPage {
                 if (this.state.selected.length) {
                     this.toggleSelected(args.id)
                 } else {
-                    this.setState({ redirect: true, push: true, to: '/pokemon/' +  args.id })
+                    this.setState({ redirect: true, push: true, to: '/pokemon/' +  args.id }, true)
                 }
                 break
 
@@ -62,15 +72,6 @@ class MainPage extends PokemanPage {
         this.refs.filterToggle.classList.toggle('filter-toggle-off')
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
-
-    onLocaleSelected(country) {
-        PokedexHelper.setLocaleCountry(country);
-        this.setState({ country: country });
-
-        let data = getStorageData()
-        data.loc = country
-        setStorageData(data)
-    }
 
     onFilterTextChanged(event) {
         if (this.filterTimerId) {
@@ -86,8 +87,8 @@ class MainPage extends PokemanPage {
     applyFilter(args) {
         if (args) {
             let searchSettings = Object.assign({}, this.state.searchSettings, args)
-            this.pokemons = PokedexHelper.search(searchSettings);
-            this.setState({ searchSettings: searchSettings });
+            let pokemons = PokedexHelper.search(searchSettings);
+            this.setState({ searchSettings: searchSettings, pokemons: pokemons });
         }
     }
 
@@ -104,7 +105,7 @@ class MainPage extends PokemanPage {
                 selected = []
                 break;
             case Constants.SELECT.SELECT_ALL:
-                selected = this.pokemons.slice()
+                selected = this.state.pokemons.slice()
                 break;
             default:
                 selected = this.state.selected.slice()
@@ -116,44 +117,83 @@ class MainPage extends PokemanPage {
                 }
         }
 
-        this.setState({ selected: selected })
-        Store.set('selected', selected)
+        let state = { selected: selected }
+        if (this.state.selected.length === 0 && selected.length > 0) {
+            state.viewMode = ViewMode.SELECTIONS
+        } 
+
+        this.setState(state)
     }
 
     onActivateSearch (active) {
-        this.setState({ searchEnabled: active })
+        this.setState({ viewMode: active ? ViewMode.SEARCH : ViewMode.DEFAULT })
         this.setInputFocus = active
 
     }
 
+    leaveSelection() {
+        this.toggleSelected(Constants.SELECT.UNSELECT_ALL)
+        this.setState({ viewMode: ViewMode.DEFAULT })
+    }
+
+    toggleSelectAll() {
+        let id = (this.state.selected.length === this.state.pokemons.length) ? Constants.SELECT.UNSELECT_ALL : Constants.SELECT.SELECT_ALL
+        this.toggleSelected(id)
+    }
+
     generateToolbar() {
-        let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
-        if (this.state.searchEnabled) {
 
-            return (
-                <div className="left-panel">
-                    <div className="back-button-2" onClick= {() => this.onActivateSearch(false) }></div>
-                    <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                    <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
-                        placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
-                </div>
-            )
+        switch (this.state.viewMode) {
 
-        } else {
+            case ViewMode.SEARCH:
 
-            return (
-                <div>
-                    <Hamburger eventHandler={ args => this.eventHandler(args) }/>
+                return (
                     <div className="left-panel">
+                        <div className="back-button-2" onClick= {() => this.onActivateSearch(false) }></div>
                         <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
-                        <PokemanLink to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
-                            <div className={ 'compare-button ' + compareButtonClass }></div>
-                        </PokemanLink>
-                        <span className="pokeman-title">Pokéman</span>
-                        <div className="search-icon" onClick={ () => this.onActivateSearch(true) }/>
+                        <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
+                            placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
                     </div>
-                </div>
-            )
+                )
+
+            case ViewMode.SELECTIONS:
+
+                let compareVisibility = this.state.selected.length < 2 ? 'hidden' : ''
+                let selectIcon = (this.state.selected.length === this.state.pokemons.length) ? 'checked-icon' : 'unchecked-icon'
+        
+                return (
+                    <div className="left-panel">
+                        <div className="back-button-2" onClick={ () => this.leaveSelection() }/>
+                        
+                        <span className="title-text">Selections</span>
+                        <div className="toolbar-button-text-group" onClick={ () => this.toggleSelectAll() }>
+                            <div className={ selectIcon }/>
+                            <span className="toolbar-button-text">Tout</span>
+                        </div>
+        
+                        <PokemanLink to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
+                            <div className={ "toolbar-button-text-group " + compareVisibility }>
+                                <div className='compare-button '></div>
+                                <span className="toolbar-button-text">Comparer</span>
+                            </div>
+                        </PokemanLink>
+        
+                    </div>
+                )
+       
+            default:
+
+                return (
+                    <div>
+                        <Hamburger eventHandler={ args => this.eventHandler(args) }/>
+                        <div className="left-panel">
+                            <div key="filter-toggle" className="filter-toggle" ref="filterToggle" onClick={ (e) => this.onToggleFilterPanel(e) }></div>
+                            
+                            <span className="pokeman-title">Pokéman</span>
+                            <div className="search-icon" onClick={ () => this.onActivateSearch(true) }/>
+                        </div>
+                    </div>
+                )
         }
     }
 
@@ -181,7 +221,7 @@ class MainPage extends PokemanPage {
                     visible={ this.state.filterVisible } 
                     notifyChange={ this.onFilterChangeListener.bind(this) }/>
                 <PokemonList
-                    pokemons={ this.pokemons } 
+                    pokemons={ this.state.pokemons } 
                     selected={ this.state.selected }
                     eventHandler={ args => this.eventHandler(args) }/>
 
@@ -190,6 +230,11 @@ class MainPage extends PokemanPage {
             </div>
         )
     }
+}
+
+
+const ViewMode = {
+    DEFAULT: 0, SEARCH: 1, SELECTIONS: 2
 }
 
 function getStorageData() {

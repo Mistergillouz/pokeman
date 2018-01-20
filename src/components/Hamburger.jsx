@@ -109,17 +109,6 @@ class Hamburger extends React.Component {
                                 <span>Maternelle</span>
                             </li>
                         </PokemanLink>
-                        
-                        <li className="nav-separator"></li>
-                        <li className="menu-section">Tout</li>
-                        <li onClick={ () => this.onSelect(Constants.SELECT.SELECT_ALL) }>
-                            <div className='nav-icon-checked'/>
-                            <span>Selectionner</span>
-                        </li>
-                        <li onClick={ () => this.onSelect(Constants.SELECT.UNSELECT_ALL) }>
-                            <div className='nav-icon-unselect' src='../assets/images/unselect.png'/>
-                            <span>Déselectionner</span>
-                        </li>
                     </ul>
                 </div>
             </div>
