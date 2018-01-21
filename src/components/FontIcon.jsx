@@ -4,7 +4,18 @@ export default class FontIcon extends React.Component {
 
     render() {
 
-        let classes = 'fa ' + this.props.className + (this.props.x2 ? ' fa-pokeman-2x' : ' fa-pokeman-normal')
+        if (!this.props.icon) { debugger }
+        
+        let classes = 'fa ' + this.props.icon
+        if (this.props.className) {
+            classes += ' ' + this.props.className
+        }
+        if (this.props.x2) {
+            classes += ' fa-pokeman-2x'
+        } else {
+            classes += ' fa-pokeman-normal'
+        }
+
         return (
             <i className={ classes } aria-hidden="true" onClick={ this.props.onClick }/>
         )

@@ -45,8 +45,7 @@ class MainPage extends PokemanPage {
     setState(state, ignore) {
 
         if (!ignore) {
-            let currentState = Object.assign({}, this.state, state)
-            Store.set('mainpage', currentState)
+            Store.set('mainpage', state)
         }
         
         super.setState(state)
@@ -66,6 +65,11 @@ class MainPage extends PokemanPage {
             case Constants.EVENT.PokemonSelected:
                 this.toggleSelected(args.id)
                 break;
+
+            case Constants.EVENT.LocaleSelected:
+                PokedexHelper.setLocaleCountry(args.country)
+                this.forceUpdate()
+                break
         }
     }
 
@@ -153,8 +157,8 @@ class MainPage extends PokemanPage {
 
                 return (
                     <div className="left-panel">
-                        <FontIcon className="fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
-                        <FontIcon className="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
+                        <FontIcon icon="fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
+                        <FontIcon icon="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
                         <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
                             placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
                     </div>
@@ -167,10 +171,10 @@ class MainPage extends PokemanPage {
         
                 return (
                     <div className="left-panel">
-                        <FontIcon className="fa-arrow-left" onClick={ () => this.leaveSelection() }/>
+                        <FontIcon icon="fa-arrow-left" onClick={ () => this.leaveSelection() }/>
                         <span className="title-text">Selections</span>
                         <div className="toolbar-button-text-group" onClick={ () => this.toggleSelectAll() }>
-                            <FontIcon className={ selectIcon }/>
+                            <FontIcon icon={ selectIcon }/>
                             <span className="toolbar-button-text">Tout</span>
                         </div>
         
@@ -190,7 +194,7 @@ class MainPage extends PokemanPage {
                     <div>
                         <Hamburger eventHandler={ args => this.eventHandler(args) }/>
                         <div className="left-panel">
-                            <FontIcon className="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
+                            <FontIcon icon="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
                             <span className="pokeman-title">Pokéman</span>
                             <i className="fa fa-search fa-lg search-icon" aria-hidden="true" onClick={ () => this.onActivateSearch(true) }></i>
                         </div>

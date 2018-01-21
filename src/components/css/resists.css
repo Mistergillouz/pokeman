@@ -1,3 +1,41 @@
+
+.resist-container {
+}
+
+.resist-tables-container {
+    background-color: white;
+    padding: 0.5em 0em 0 0.5em;
+    user-select: none;
+}
+
+.resist-tables {
+    display: flex;
+    flex-direction: row;
+}
+
+.resist-table {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.5em;
+    padding: 5px;
+    width: 50%;
+}
+
+.resist-table div {
+    margin-bottom: 0.5em;
+}
+
+
+.resist-table-section {
+    font-weight: bold;
+    font-size: 10pt;
+    margin-bottom: 0.5em;
+}
+
+.resist-table-section:not(:first-child) {
+    margin-top: 0.75em;
+}
+    
 .species-tab {
     overflow: hidden;
     background-color: #f1f1f1;
@@ -33,19 +71,8 @@
     padding: 6px 12px;
 }
 
-.species-container {
-    position: absolute;
-    border: 1px solid #ccc;
-    width: 220px;
-    outline: none;
-}
 
-.tooltip-table-container {
-    background-color: white;
-    z-index: 50;
-    padding: 0.25em;
-    user-select: none;
-}
+
 
 .tooltip-table td {
     padding-left: 1em;

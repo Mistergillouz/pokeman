@@ -9,7 +9,7 @@ class Store {
     set(key, data) {
         let value = this.model[key]
         if (value !== void 0) {
-           if (_isObject(value) && _isObject(data)) {
+           if (_isObject(value)) {
                 return Object.assign(value, data)
             }
         }

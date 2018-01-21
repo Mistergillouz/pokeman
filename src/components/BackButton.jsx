@@ -20,7 +20,7 @@ class BackButton extends React.Component {
 
         return (
             <PokemanLink back>
-                { this.props.image ? <div className={ this.props.image }/> : <FontIcon x2 className={ BackButton.defaultIcon }/> }
+                { this.props.image ? <div className={ this.props.image }/> : <FontIcon x2 icon={ BackButton.defaultIcon }/> }
             </PokemanLink>
         )
     }

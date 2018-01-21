@@ -15,9 +15,11 @@ export default class CalculationPage extends PokemanPage {
         super(null, arguments)
         this.parseQueryString(this.props.location.search)
         
-        this.pokemonId = Number(this.props.match.params.id)
-        let name = PokedexHelper.loc(PokedexHelper.getPokemon(this.pokemonId))
-        this.setPageCaption('Meilleurs attaquants vs ' + name)
+        let pokemon = this.getPokemon()
+        if (pokemon) {
+            let name = PokedexHelper.loc(pokemon)
+            this.setPageCaption('Meilleurs attaquants vs ' + name)
+        }
     }
     
     componentWillReceiveProps(newProps) {
@@ -186,7 +188,12 @@ export default class CalculationPage extends PokemanPage {
 
     render() { 
 
-        let results = this.calculate(this.pokemonId)
+        let pokemon = this.getPokemon()
+        if (!pokemon) {
+            return this.generatePokemonFail()
+        }
+
+        let results = this.calculate(pokemon.id)
         let rows = this.generateBestAttackers(results)
 
         return (

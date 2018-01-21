@@ -79,7 +79,7 @@ class Pokemon extends React.Component {
 
         return (
             <div className={ "gen " + (this.props.className || '') }>
-                { this.props.selected ? <FontIcon className="fa-check-circle text-selected pokemon-checked"/> : <div className="pokemon-id">{ this.props.id }</div> }
+                { this.props.selected ? <FontIcon icon="fa-check-circle text-selected pokemon-checked"/> : <div className="pokemon-id">{ this.props.id }</div> }
                 <a ref="pokemon" key={ 'gen' + this.props.id } className="pokemon g1" href="#" data-gen={ pokemon.gen }
                     onTouchStart={ e => this._onMouseDown(e) }
                     onTouchEnd={ e => this._onMouseUp(e) }

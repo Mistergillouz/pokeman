@@ -130,9 +130,6 @@ class CombatPanel extends React.Component {
             return (
                 <div className={ 'info-container info-back-' + typeKey }>
                     <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</span></div>
-                    <PokemanLink to={ '/pokemon/' + this.props.id + '/calc' }> 
-                        <div className="info-cp-calc-action"/>
-                    </PokemanLink>
                     <div className='info-cp-circle'>
                         <div className='info-pokemon-img' style={ styles }/>
                     </div>
@@ -143,6 +140,14 @@ class CombatPanel extends React.Component {
                         { this.generateDetailsTable(attacks) }
                         { this.generateInfoTable(pokemon) }
                         <BackButton image='close-button'/>
+                    </div>
+                    <div className="info-cp-button-container">
+                        <PokemanLink to={ '/pokemon/' + this.props.id + '/calc' }> 
+                            <div className="info-cp-button info-cp-button-calc"/>
+                        </PokemanLink>
+                        <PokemanLink to={ '/pokemon/' + this.props.id + '/resist' }> 
+                            <div className="info-cp-button info-cp-button-shield"/>
+                        </PokemanLink>
                     </div>
                 </div>
             )

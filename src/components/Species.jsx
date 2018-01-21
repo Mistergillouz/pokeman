@@ -1,6 +1,5 @@
 import React from 'react'
 import PokedexHelper from 'data/PokedexHelper'
-import SpeciesTooltip from 'components/SpeciesTooltip'
 import Constants from 'data/Constants'
 
 class Species extends React.Component {

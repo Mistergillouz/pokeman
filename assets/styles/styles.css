@@ -328,7 +328,7 @@ input {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 0.5em 0.5em 0 0em;
+    margin: 0.5em 0.5em 0 0.5em;;
     padding-bottom: 5px;
     background-color: white;
 }
@@ -753,19 +753,33 @@ h2, .inactive-h2 {
     margin-bottom: 20px;
 }
 
-.info-cp-calc-action {
+.info-cp-button-container {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     right: 4px;
     top: 4px;
+}
+
+.info-cp-button {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    cursor: pointer;
-    background-image: url(../images/combat.png);
     background-size: 24px;
     background-repeat: no-repeat;
-    background-position: 4px 5px;
+    background-position: center;
     background-color: white;
+    margin-bottom: 0.25em;
+    cursor: pointer;
+}
+
+.info-cp-button-calc {
+    background-image: url(../images/combat.png);
+    background-position: 4px 5px;
+}
+
+.info-cp-button-shield {
+    background-image: url(../images/shield.png);
 }
 
 .info-cp-label {
