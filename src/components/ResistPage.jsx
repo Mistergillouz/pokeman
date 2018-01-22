@@ -15,15 +15,45 @@ export default class ResistPage extends PokemanPage {
     
     constructor() {
         super(null, arguments)
-        this.pokemonId = Number(this.props.match.params.id)
 
-        let pokemon = this.getPokemon()
+        let error = true
+        
+        let pokemon = this.getPokemon(), species = []
         if (pokemon) {
+
             let name = PokedexHelper.loc(pokemon)
             this.setPageCaption('Forces/résistances de ' + name)
+            species = pokemon.species.slice()
+            error = false
+
+        } else {
+            let ids = this.props.match.params.ids
+            if (ids) {
+
+                let parts = ids.split(','), speciesText = []
+                for (let speciesId of parts) {
+                    let id = Number(speciesId), speciesInfo = PokedexHelper.getSpecies(id)
+                    if (speciesInfo && species.indexOf(id) === -1) {
+                        error = false
+                        speciesText.push(PokedexHelper.loc(speciesInfo))
+                        species.push(id)
+                        if (species.length === 2) {
+                            break
+                        }
+                    }
+                }
+
+                if (!error) {
+                    this.setPageCaption('Forces/résistances pour ' + speciesText.join(' / '))
+                }
+            }
         }
-        
-        this.state = { tabId: ResistPage.TABS[0].id }
+
+        this.state = {
+            error: error,
+            species: species,
+            tabId: ResistPage.TABS[0].id
+        }
     }
     
     componentDidMount() {
@@ -35,9 +65,11 @@ export default class ResistPage extends PokemanPage {
     }
 
     updateVisibility() {
-        for (let tab of ResistPage.TABS) {
-            let element = document.getElementById(tab.target)
-            element.style.display = (this.state.tabId === tab.id) ? 'block' : 'none'
+        if (!this.state.error) {
+            for (let tab of ResistPage.TABS) {
+                let element = document.getElementById(tab.target)
+                element.style.display = (this.state.tabId === tab.id) ? 'block' : 'none'
+            }
         }
     }
 
@@ -64,7 +96,7 @@ export default class ResistPage extends PokemanPage {
     }
 
     generateTabLink(tab) {
-        let classes = 'species-tab-links'
+        let classes = 'resist-tab-links'
         if (this.state.tabId === tab.id) {
             classes += ' active'
         }
@@ -92,33 +124,54 @@ export default class ResistPage extends PokemanPage {
         )
     }
 
+    generateNoBonuses(data) {
+        if (!data.length) {
+            return null
+        }
+
+        return (
+            <div>
+                <i className="fa fa-info-circle fa-pokeman-normal resist-info-icon" aria-hidden="true"></i>
+                <span className='resist-table-section'>Sans bonus ni malus</span>
+                <div className="resist-nobonus-table">
+                    { data.map(id => <Species id={ id }/>) }
+                </div>
+            </div>
+        )
+    }
+
     buildRows(data, isAttack) {
-        let strength = [], weak = []
+        let strength = [], weak = [], noBonuses = []
         Object.keys(data).forEach(id => {
             let percent = data[id]
             if (percent > 100) {
                 strength.push(id)
             } else if (percent < 100) {
                 weak.push(id)
+            } else {
+                noBonuses.push(id)
             }
         })
         return (
-            <div className='resist-tables'>
-                { this.generate(data, strength, isAttack, true) }
-                { this.generate(data, weak, isAttack, false) }
+            <div>
+                <div className='resist-tables'>
+                    { this.generate(data, strength, isAttack, true) }
+                    { this.generate(data, weak, isAttack, false) }
+                </div>
+                { this.generateNoBonuses(noBonuses) }
             </div>
         )
     }
 
-    generatePage(pokemon) {
-        let id = pokemon.id
-        let [strengths, weaknesses] = PokedexHelper.getStrengthWeakness(id)
+    generatePage(species) {
+
+        let [strengths, weaknesses] = PokedexHelper.getSpeciesStrengthWeakness(species)
         let atkRows = this.buildRows(strengths, true)
         let resRows = this.buildRows(weaknesses, false)
 
         return (
-            <div className="species-container" key={ id }>
-                <div className="species-tab">
+            <div className="resist-container" key={ this.state.species.join('-') }>
+                <div className="resist-tab">
                     { ResistPage.TABS.map(tab => this.generateTabLink(tab)) }
                 </div>
 
@@ -135,20 +188,20 @@ export default class ResistPage extends PokemanPage {
     }
 
     render() { 
-        let pokemon = this.getPokemon()
-        if (!pokemon) {
+
+        if (this.state.error) {
             return this.generatePokemonFail()
         }
 
         return (
-            <div className="resist-container">
+            <div>
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
                         <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
                 </div>
-                { this.generatePage(pokemon) }
+                { this.generatePage(this.state.species) }
             </div>
         )
     }

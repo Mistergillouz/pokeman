@@ -35,6 +35,7 @@ export default class App extends React.Component {
                     <Route path="/pokemon/:id" exact={ true } component={ZoomPage}/>
                     <Route path="/pokemon/:id/calc" exact={ true } component={CalculationPage}/>
                     <Route path="/pokemon/:id/resist" exact={ true } component={ResistPage}/>
+                    <Route path="/resist/:ids" component={ResistPage}/>
                     <Route path="/eggs" component={EggPage}/>
                     <Route path="/evolutions" component={EvolutionPage}/>
                     <Route path="/babies" component={BabiesPage}/>

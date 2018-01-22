@@ -166,9 +166,15 @@ class PokedexHelper {
 
     getStrengthWeakness(pokemonId) {
         
-        let strength, weakness
         let pokemon = this.getPokemon(pokemonId)
-        for (let damageType of pokemon.species) {
+        if (pokemon) {
+            return this.getSpeciesStrengthWeakness(pokemon.species)
+        }
+    }
+
+    getSpeciesStrengthWeakness(species) {
+        let strength, weakness
+        for (let damageType of species) {
             let [str, weak] = this.getDamageStrengthWeakness(damageType)
             if (!strength) {
                 strength = str
@@ -183,7 +189,7 @@ class PokedexHelper {
 
         return [strength, weakness]
     }
-
+    
     getDamageStrengthWeakness(damageType) {
         let species = this.getSpecies(damageType), strength = {}
         Object.keys(species.dmg).forEach(id => strength[id] = species.dmg[id])

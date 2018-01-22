@@ -1,5 +1,14 @@
 
 .resist-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .resist-container {
+        width: 100%;
+        margin: 0;
+    }
 }
 
 .resist-tables-container {
@@ -23,8 +32,24 @@
 
 .resist-table div {
     margin-bottom: 0.5em;
+
 }
 
+.resist-nobonus-table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5em;
+}
+
+.resist-nobonus-table div {
+    margin-bottom: 0.5em;
+    margin-right: 0.5em;
+    width: 25%;
+    text-align: center;
+}
 
 .resist-table-section {
     font-weight: bold;
@@ -36,7 +61,7 @@
     margin-top: 0.75em;
 }
     
-.species-tab {
+.resist-tab {
     overflow: hidden;
     background-color: #f1f1f1;
     display: flex;
@@ -44,7 +69,7 @@
 }
 
 /* Style the buttons inside the tab */
-.species-tab div {
+.resist-tab div {
     float: left;
     flex-grow: 1;
     padding-top: 1em;
@@ -56,22 +81,26 @@
 }
 
 /* Change background color of buttons on hover */
-.species-tab div:hover {
+.resist-tab div:hover {
     background-color: #ddd;
 }
 
-.species-tab div.active {
+.resist-tab div.active {
     background-color: #ccc;
     border-bottom: 3px solid orange;
 }
 
 /* Style the tab content */
-.species-tab-content {
+.resist-tab-content {
     display: none;
     padding: 6px 12px;
 }
 
-
+.resist-info-icon {
+    font-size: 1em !important;
+    color: dodgerblue;
+    margin-top: 1em;
+}
 
 
 .tooltip-table td {
