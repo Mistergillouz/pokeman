@@ -202,6 +202,7 @@ export default class ResistPage extends PokemanPage {
                     </div>
                 </div>
                 { this.generatePage(this.state.species) }
+                { super.render() }
             </div>
         )
     }
