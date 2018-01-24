@@ -9,7 +9,8 @@ class Hamburger extends React.Component {
     constructor() {
         super(...arguments)
         this.state = {
-            country: PokedexHelper.getLocaleCountry()
+            country: PokedexHelper.getLocaleCountry(),
+            opened: false
         }
     }
 
@@ -18,11 +19,7 @@ class Hamburger extends React.Component {
     }
 
     onToggleMenuVisibility(e) {
-        
-        let navigation = this.refs.navigation;
-        if (navigation) {
-            navigation.classList.toggle('nav-opened')
-        }
+        this.setState({ opened: !this.state.opened })
     }
 
     onRadioCheck(country) {
@@ -55,10 +52,12 @@ class Hamburger extends React.Component {
             return <Redirect to={ this.state.to }/>
         }
 
+        let btnIcon = this.state.opened ? 'fa-close' : 'fa-bars'
+        let toggle = this.state.opened ? 'nav-opened' : ''
         return (
             <div>
-                <FontIcon key="nav" icon="fa-bars" className="btn-navigation" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }/>
-                <div key="nav-pan" className="navigation" ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
+                <FontIcon key="nav" icon={ btnIcon } className="btn-navigation" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }/>
+                <div key="nav-pan" className={ 'navigation '  + toggle } ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
                     <ul>
                         <li className="menu-section">Langues</li>
                         { this.generateLangRadio() }

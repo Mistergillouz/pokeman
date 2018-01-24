@@ -1,9 +1,8 @@
 import React from 'react'
 import PokemanLink from './PokemanLink'
 import FontIcon from './FontIcon'
-import { withRouter } from 'react-router-dom'
 
-class BackButton extends React.Component {
+export default class BackButton extends React.Component {
 
     constructor() {
         super(...arguments)
@@ -14,10 +13,6 @@ class BackButton extends React.Component {
     } 
 
     render() {
-        if (this.props.history.length <= 2) {
-            return null;
-        }
-
         return (
             <PokemanLink back>
                 { this.props.image ? <div className={ this.props.image }/> : <FontIcon x2 icon={ BackButton.defaultIcon }/> }
@@ -25,5 +20,3 @@ class BackButton extends React.Component {
         )
     }
 }
-
-export default withRouter(BackButton)

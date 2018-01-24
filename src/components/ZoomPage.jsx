@@ -31,9 +31,7 @@ export default class ZoomPage extends PokemanPage {
             <div className="page">
                 <div className="navbar">
                     <div className="left-panel">
-                        <PokemanLink to='/'>
-                            <FontIcon x2 icon={ BackButton.defaultIcon }/>
-                        </PokemanLink>
+                        <BackButton/>
                         <sup className='title-text'>{ label }</sup>
                     </div>
                 </div>
