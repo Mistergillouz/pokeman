@@ -9,8 +9,7 @@ export default class FontIcon extends React.Component {
         let classes = 'fa ' + this.props.icon
         if (this.props.className) {
             classes += ' ' + this.props.className
-        }
-        if (this.props.x2) {
+        } else if (this.props.x2) {
             classes += ' fa-pokeman-2x'
         } else {
             classes += ' fa-pokeman-normal'

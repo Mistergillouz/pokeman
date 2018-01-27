@@ -12,6 +12,7 @@ import EvolutionPage from 'components/EvolutionPage'
 import BabiesPage from 'components/BabiesPage'
 import CalculationPage from 'components/CalculationPage'
 import ResistPage from 'components/ResistPage'
+import RankingPage from 'components/RankingPage'
 
 
 export default class App extends React.Component {
@@ -35,6 +36,7 @@ export default class App extends React.Component {
                     <Route path="/pokemon/:id" exact={ true } component={ZoomPage}/>
                     <Route path="/pokemon/:id/calc" exact={ true } component={CalculationPage}/>
                     <Route path="/pokemon/:id/resist" exact={ true } component={ResistPage}/>
+                    <Route path="/pokemon/:id/ranking" exact={ true } component={RankingPage}/>
                     <Route path="/resist/:ids" component={ResistPage}/>
                     <Route path="/eggs" component={EggPage}/>
                     <Route path="/evolutions" component={EvolutionPage}/>

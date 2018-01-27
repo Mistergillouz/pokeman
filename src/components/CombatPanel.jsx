@@ -4,6 +4,8 @@ import PokedexHelper from 'data/PokedexHelper'
 import Constants from 'data/Constants'
 import NotFound from 'components/NotFound'
 import BackButton from 'components/BackButton'
+import FontIcon from 'components/FontIcon'
+import RankingPage from 'components/RankingPage'
 
 class CombatPanel extends React.Component {
    
@@ -117,43 +119,48 @@ class CombatPanel extends React.Component {
     render() { 
 
         let pokemon = PokedexHelper.getPokemon(this.props.id)
-
-        if (pokemon.gen < 4) {
-            let typesTable = this.generateTypesTable(pokemon.species)
-            let species = PokedexHelper.getSpecies(pokemon.species[0])
-            let typeKey = PokedexHelper.getSpeciesKey(species)
-            let attacks = PokedexHelper.getAttacks(this.props.id)
-            let styles = {
-                backgroundImage: 'url(../assets/pokemons/' + this.props.id + '.png)'
-            }
-
-            return (
-                <div className={ 'info-container info-back-' + typeKey }>
-                    <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.gen < 4 ? pokemon.cpmax : '???' }</span></div>
-                    <div className='info-cp-circle'>
-                        <div className='info-pokemon-img' style={ styles }/>
-                    </div>
-                    <div className="info-pokemon-details">
-                        <span className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</span>
-                        { typesTable }
-                        { this.generateSummaryTable(attacks) }
-                        { this.generateDetailsTable(attacks) }
-                        { this.generateInfoTable(pokemon) }
-                        <BackButton image='close-button'/>
-                    </div>
-                    <div className="info-cp-button-container">
-                        <PokemanLink to={ '/pokemon/' + this.props.id + '/calc' }> 
-                            <div className="info-cp-button info-cp-button-calc"/>
-                        </PokemanLink>
-                        <PokemanLink to={ '/pokemon/' + this.props.id + '/resist' }> 
-                            <div className="info-cp-button info-cp-button-shield"/>
-                        </PokemanLink>
-                    </div>
-                </div>
-            )
-        } else {
+        
+        if (pokemon.gen > Constants.CURRENT_GEN) {
             return <NotFound text="Désolé. Seules les informations sur les pokémons existants dans Pokemon-Go sont disponibles"/>
         }
+        
+        let rankings = PokedexHelper.getRankings(this.props.id)
+        let typesTable = this.generateTypesTable(pokemon.species)
+        let species = PokedexHelper.getSpecies(pokemon.species[0])
+        let typeKey = PokedexHelper.getSpeciesKey(species)
+        let attacks = PokedexHelper.getAttacks(this.props.id)
+        let styles = {
+            backgroundImage: 'url(../assets/pokemons/' + this.props.id + '.png)'
+        }
+
+        return (
+            <div className={ 'info-container info-back-' + typeKey }>
+                <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.cpmax }</span></div>
+                <div className='info-cp-circle'>
+                    <div className='info-pokemon-img' style={ styles }/>
+                </div>
+                <div className="info-pokemon-details">
+                    <span className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</span>
+                    { typesTable }
+                    { this.generateSummaryTable(attacks) }
+                    { this.generateDetailsTable(attacks) }
+                    { this.generateInfoTable(pokemon) }
+                    <BackButton image='close-button'/>
+                </div>
+                <div className="info-cp-button-container">
+                    <PokemanLink to={ '/pokemon/' + this.props.id + '/calc' }> 
+                        <div className="info-cp-button info-cp-button-calc"/>
+                    </PokemanLink>
+                    <PokemanLink to={ '/pokemon/' + this.props.id + '/resist' }> 
+                        <div className="info-cp-button info-cp-button-shield"/>
+                    </PokemanLink>
+                    <PokemanLink to={ '/pokemon/' + this.props.id + '/ranking'}>
+                        <FontIcon icon="fa-line-chart" className="info-cp-button"/>
+                    </PokemanLink>
+                    
+                </div>
+            </div>
+        )
     }
 }
 

@@ -19,7 +19,8 @@ class PokemanLink extends React.Component {
             return <Redirect push to={ this.props.to }/>
         }
         if (this.props.to) {
-            return <Link to={ this.props.to }>{ this.props.children }</Link>
+            let replace = (this.props.push === 'false')
+            return <Link replace={ replace } to={ this.props.to }>{ this.props.children }</Link>
         }
 
         return <a onClick={ () => this.onClick() }>{ this.props.children }</a>

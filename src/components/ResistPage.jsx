@@ -16,7 +16,7 @@ export default class ResistPage extends PokemanPage {
     constructor() {
         super(null, arguments)
 
-        let error = true
+        let error = true, mode = ResistPage.MODE.ShowPokemon
         
         let pokemon = this.getPokemon(), species = []
         if (pokemon) {
@@ -45,6 +45,7 @@ export default class ResistPage extends PokemanPage {
 
                 if (!error) {
                     this.setPageCaption('Forces/résistances pour ' + speciesText.join(' / '))
+                    mode = ResistPage.MODE.ShowResistSelect
                 }
             }
         }
@@ -52,7 +53,8 @@ export default class ResistPage extends PokemanPage {
         this.state = {
             error: error,
             species: species,
-            tabId: ResistPage.TABS[0].id
+            tabId: ResistPage.TABS[0].id,
+            mode: mode
         }
     }
     
@@ -100,7 +102,12 @@ export default class ResistPage extends PokemanPage {
         if (this.state.tabId === tab.id) {
             classes += ' active'
         }
-        return <div className={ classes }  onClick={ () => this.show(tab.id) }>{ tab.text }</div>
+        return (
+            <div className={ classes }  onClick={ () => this.show(tab.id) }>
+                <FontIcon icon={ tab.icon }/>
+                { tab.text }
+            </div>
+        )
     }
 
     generate(data, table, isAttack, isStrenght) {
@@ -187,6 +194,23 @@ export default class ResistPage extends PokemanPage {
         )
     }
 
+    generateSelects() {
+        
+          
+        return (
+            <div>
+            </div>
+        )
+    }
+
+    renderSelectItem(item) {
+        let styles = {
+            backgroundColor: item.value
+        }
+
+        return item.name
+    }
+
     render() { 
 
         if (this.state.error) {
@@ -199,6 +223,7 @@ export default class ResistPage extends PokemanPage {
                     <div className="left-panel">
                         <BackButton/>
                         <sup className='title-text'>{ this.getPageCaption() }</sup>
+                        { this.state.mode === ResistPage.MODE.ShowResistSelect ? this.generateSelects() : null }
                     </div>
                 </div>
                 { this.generatePage(this.state.species) }
@@ -209,9 +234,22 @@ export default class ResistPage extends PokemanPage {
 }
 
 ResistPage.TABS = [
-    { id: 'atk', text: 'Attaques', target: 'strength-table' },
-    { id: 'def', text: 'Résistances', target: 'defense-table' }
+    { id: 'atk', text: 'Attaques', target: 'strength-table', icon: 'fa-bolt' },
+    { id: 'def', text: 'Résistances', target: 'defense-table', icon: 'fa-shield' }
 ]
 
+ResistPage.MODE = {
+    ShowResistSelect: 1,
+    ShowPokemon: 0
+}
     
-    
+var colours = [{
+    name: "Red",
+    value: "#F21B1B"
+  }, {
+    name: "Blue",
+    value: "#1B66F2"
+  }, {
+    name: "Green",
+    value: "#07BA16"
+  }];

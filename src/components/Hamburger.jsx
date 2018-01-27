@@ -56,7 +56,7 @@ class Hamburger extends React.Component {
         let toggle = this.state.opened ? 'nav-opened' : ''
         return (
             <div>
-                <FontIcon key="nav" icon={ btnIcon } className="btn-navigation" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }/>
+                <FontIcon key="nav" icon={ btnIcon } className="btn-navigation fa-pokeman-normal" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }/>
                 <div key="nav-pan" className={ 'navigation '  + toggle } ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
                     <ul>
                         <li className="menu-section">Langues</li>

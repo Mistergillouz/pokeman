@@ -70,6 +70,9 @@
 
 /* Style the buttons inside the tab */
 .resist-tab div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     float: left;
     flex-grow: 1;
     padding-top: 1em;
@@ -88,6 +91,7 @@
 .resist-tab div.active {
     background-color: #ccc;
     border-bottom: 3px solid orange;
+    font-weight: bold;
 }
 
 /* Style the tab content */

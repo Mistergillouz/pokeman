@@ -8,6 +8,35 @@ class PokedexHelper {
     constructor() {
 
         this.locale = Constants.LOCALES.FRENCH;
+        this.rankings = null
+    }
+
+    getRankings(pokemonId) {
+
+        const attributes = [ 'cpmax', 'atk', 'def', 'sta' ]
+        let pokemon = this.getPokemon(pokemonId)
+        if (!pokemon || pokemon.gen > Constants.CURRENT_GEN) {
+            return null
+        }
+
+        if (!this.rankings) {
+            let rankings = {}, count = 0
+            attributes.forEach(attribute => rankings[attribute] = [])
+            this.enumPokemons(pokemon => {
+                if (pokemon.gen <= Constants.CURRENT_GEN) {
+                    attributes.forEach(attribute => rankings[attribute].push(pokemon[attribute]))
+                    count++
+                }
+            })
+
+            rankings.count = count
+            attributes.forEach(attribute => rankings[attribute].sort((a, b) => b - a))
+            this.rankings = rankings
+        }
+
+        let results = { count: this.rankings.count }
+        attributes.forEach(attribute => results[attribute] = _getRank(this.rankings[attribute], pokemon[attribute]))
+        return results
     }
 
     getAttacks(pokemonId) {
@@ -356,6 +385,15 @@ class PokedexHelper {
 
 }
 
+function _getRank(array, value) {
+    for (let i = 0; i < array.length; i++) {
+        if (value >= array[i]) {
+            return i
+        }
+    }
+
+    return -1
+}
 
 const LEGENDARY = [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 480, 481, 482, 483, 484, 485, 486, 487, 488, 491, 492, 493, 494, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649]
 

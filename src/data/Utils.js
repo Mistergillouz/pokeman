@@ -88,4 +88,9 @@ export default class Utils {
     static isMobileDevice() {
         return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
     }
+
+    static isChildOf(/*child node*/c, /*parent node*/p){ //returns boolean
+        while((c=c.parentNode)&&c!==p); 
+        return !!c; 
+      }
 }
