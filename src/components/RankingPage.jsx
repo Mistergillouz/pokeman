@@ -90,13 +90,14 @@ export default class RankingPage extends PokemanPage {
 
     createGaugeData(name, value, max) {
 
+        let cellValue = value + 1
         let gaugeData = new google.visualization.DataTable();
         gaugeData.addColumn('number', name)
         gaugeData.addRows(1)
-        gaugeData.setCell(0, 0, value)
+        gaugeData.setCell(0, 0, cellValue)
 
         var formatter = new google.visualization.NumberFormat(
-            {suffix: 'éme', pattern:'#'}
+            {suffix: cellValue === 1 ? 'er' : 'éme', pattern:'#'}
         )
 
         formatter.format(gaugeData, 0)
