@@ -102,6 +102,12 @@ class CombatPanel extends React.Component {
             rows.push(<tr><td colSpan="2" align="left">Bonbons par évolution</td><td align="right">{ pokemon.candy }</td></tr>)
         }
         rows.push(<tr><td colSpan="2" align="left">Distance copain</td><td align="right">{ pokemon.buddy }</td></tr>)
+
+        if (pokemon.gender.m && pokemon.gender.f) {
+            rows.push(<tr><td colSpan="2" align="left">Male</td><td align="right">{ (pokemon.gender.m * 100) + '%' }</td></tr>)
+            rows.push(<tr><td colSpan="2" align="left">Femelle</td><td align="right">{ (pokemon.gender.f * 100) + '%' }</td></tr>)
+        }
+
         return this.generateTable("Informations", rows)
     }
 
