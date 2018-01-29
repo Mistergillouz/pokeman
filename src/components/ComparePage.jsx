@@ -1,11 +1,11 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
-import SortTable from 'components/SortTable'
-import BackButton from 'components/BackButton'
-import PokemanPage from 'components/PokemanPage'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
+import SortTable from './SortTable'
+import BackButton from './BackButton'
+import PokemanPage from './PokemanPage'
 
 class ComparePage extends PokemanPage {
    

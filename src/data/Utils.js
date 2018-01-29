@@ -1,6 +1,6 @@
 import React from 'react'
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
+import PokedexHelper from './PokedexHelper'
+import Constants from './Constants'
 
 export default class Utils {
 

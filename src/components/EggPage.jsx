@@ -1,12 +1,12 @@
 import React from 'react'
 
-import Constants from 'data/Constants'
-import PokedexHelper from 'data/PokedexHelper'
-import Utils from 'data/Utils'
-import SmallPokemon from 'components/SmallPokemon'
-import BackButton from 'components/BackButton'
-import PokemanLink from 'components/PokemanLink'
-import PokemanPage from 'components/PokemanPage'
+import Constants from '../data/Constants'
+import PokedexHelper from '../data/PokedexHelper'
+import Utils from '../data/Utils'
+import SmallPokemon from './SmallPokemon'
+import BackButton from './BackButton'
+import PokemanLink from './PokemanLink'
+import PokemanPage from './PokemanPage'
 
 class EggPage extends PokemanPage {
    constructor() {

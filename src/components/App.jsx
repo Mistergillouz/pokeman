@@ -1,31 +1,24 @@
 import React from 'react'
 import { HashRouter as Router, Switch, Route, browserHistory } from 'react-router-dom'
 
-import PokedexHelper from 'data/PokedexHelper'
+import PokedexHelper from '../data/PokedexHelper'
 
-import MainPage from 'components/MainPage'
-import ZoomPage from 'components/ZoomPage'
-import EggPage from 'components/EggPage'
-import ComparePage from 'components/ComparePage'
-import Constants from 'data/Constants'
-import EvolutionPage from 'components/EvolutionPage'
-import BabiesPage from 'components/BabiesPage'
-import CalculationPage from 'components/CalculationPage'
-import ResistPage from 'components/ResistPage'
-import RankingPage from 'components/RankingPage'
+import MainPage from './MainPage'
+import ZoomPage from './ZoomPage'
+import EggPage from './EggPage'
+import ComparePage from './ComparePage'
+import Constants from '../data/Constants'
+import EvolutionPage from './EvolutionPage'
+import BabiesPage from './BabiesPage'
+import CalculationPage from './CalculationPage'
+import ResistPage from './ResistPage'
+import RankingPage from './RankingPage'
 
 
 export default class App extends React.Component {
    constructor() {
         super(...arguments)
     }
-
-    // showTooltip(show, args) {
-
-    //     let pages = this.state.pages.slice()
-    //     pages[pages.length - 1].tooltipArgs = show ? args : null
-    //     this.setState({ pages: pages })
-    // }
 
     render() { 
 

@@ -1,16 +1,16 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-import PokemanPage from 'components/PokemanPage'
-import PokemanLink from 'components/PokemanLink'
-import PokemonList from 'components/PokemonList'
-import FilterPanel from 'components/FilterPanel'
-import Hamburger from 'components/Hamburger'
-import EvolutionPage from 'components/EvolutionPage'
-import FontIcon from 'components/FontIcon'
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
-import Store from 'data/Store'
+import PokemanPage from './PokemanPage'
+import PokemanLink from './PokemanLink'
+import PokemonList from './PokemonList'
+import FilterPanel from './FilterPanel'
+import Hamburger from './Hamburger'
+import EvolutionPage from './EvolutionPage'
+import FontIcon from './FontIcon'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
+import Store from '../data/Store'
 
 
 class MainPage extends PokemanPage {

@@ -1,9 +1,9 @@
 import React from 'react'
 import ScriptJS from 'scriptjs'
 
-import BackButton from 'components/BackButton'
-import PokemanPage from 'components/PokemanPage'
-import PokedexHelper from 'data/PokedexHelper'
+import BackButton from './BackButton'
+import PokemanPage from './PokemanPage'
+import PokedexHelper from '../data/PokedexHelper'
 
 import './css/ranking.css'
 

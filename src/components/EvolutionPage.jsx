@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 
-import EvolutionPanel from 'components/EvolutionPanel'
-import NotFound from 'components/NotFound'
-import BackButton from 'components/BackButton'
-import PokemanPage from 'components/PokemanPage'
+import EvolutionPanel from './EvolutionPanel'
+import NotFound from './NotFound'
+import BackButton from './BackButton'
+import PokemanPage from './PokemanPage'
 
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
-import Utils from 'data/Utils'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
+import Utils from '../data/Utils'
 
 import './css/evol.css'
 

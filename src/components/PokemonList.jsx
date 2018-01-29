@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Pokemon from 'components/Pokemon'
-import NotFound from 'components/NotFound'
+import Pokemon from './Pokemon'
+import NotFound from './NotFound'
 import Constants from '../data/Constants';
 import Store from '../data/Store';
 

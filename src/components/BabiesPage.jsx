@@ -1,7 +1,7 @@
 import React from 'react'
 
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
 import SmallPokemon from './SmallPokemon';
 import BackButton from './BackButton'
 import PokemanLink from './PokemanLink'

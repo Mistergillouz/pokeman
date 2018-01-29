@@ -1,9 +1,9 @@
 
 import React from 'react'
-import PokedexHelper from 'data/PokedexHelper'
+import PokedexHelper from '../data/PokedexHelper'
 import PokemanLink from './PokemanLink'
 import NotFound from './NotFound'
-import Utils from 'data/Utils'
+import Utils from '../data/Utils'
 import './css/pokeman.css'
 
 export default class PokemanPage extends React.Component {

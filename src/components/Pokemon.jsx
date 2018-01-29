@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
-import Species from 'components/Species'
-import Lazimage from 'components/Lazimage'
-import FontIcon from 'components/FontIcon'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
+import Species from './Species'
+import Lazimage from './Lazimage'
+import FontIcon from './FontIcon'
 
 const LONG_PRESS_DURATION = 500
 

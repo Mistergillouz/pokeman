@@ -2,13 +2,13 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 
 import PokemanPage from './PokemanPage';
-import Constants from 'data/Constants'
-import PokedexHelper from 'data/PokedexHelper'
-import CombatPanel from 'components/CombatPanel'
-import SmallPokemon from 'components/SmallPokemon'
-import EvolutionPanel from 'components/EvolutionPanel'
-import BackButton from 'components/BackButton'
-import FontIcon from 'components/FontIcon'
+import Constants from '../data/Constants'
+import PokedexHelper from '../data/PokedexHelper'
+import CombatPanel from './CombatPanel'
+import SmallPokemon from './SmallPokemon'
+import EvolutionPanel from './EvolutionPanel'
+import BackButton from './BackButton'
+import FontIcon from './FontIcon'
 import PokemanLink from './PokemanLink';
 
 export default class ZoomPage extends PokemanPage {

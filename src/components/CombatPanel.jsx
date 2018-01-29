@@ -1,11 +1,11 @@
 import React from 'react'
 import PokemanLink from './PokemanLink'
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
-import NotFound from 'components/NotFound'
-import BackButton from 'components/BackButton'
-import FontIcon from 'components/FontIcon'
-import RankingPage from 'components/RankingPage'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
+import NotFound from './NotFound'
+import BackButton from './BackButton'
+import FontIcon from './FontIcon'
+import RankingPage from './RankingPage'
 
 class CombatPanel extends React.Component {
    

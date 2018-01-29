@@ -1,8 +1,8 @@
 import React from 'react'
-import Constants from 'data/Constants'
-import PokedexHelper from 'data/PokedexHelper'
-import CombatPanel from 'components/CombatPanel'
-import SmallPokemon from 'components/SmallPokemon'
+import Constants from '../data/Constants'
+import PokedexHelper from '../data/PokedexHelper'
+import CombatPanel from './CombatPanel'
+import SmallPokemon from './SmallPokemon'
 import PokemanLink from './PokemanLink';
 
 export default class EvolutionPanel extends React.Component {

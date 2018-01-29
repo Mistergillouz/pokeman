@@ -1,8 +1,8 @@
 import React from 'react'
 import PokemanLink from './PokemanLink'
 
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
 import BackButton from './BackButton'
 import NotFound from './NotFound'
 import PokemanPage from './PokemanPage'

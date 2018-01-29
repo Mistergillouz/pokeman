@@ -1,6 +1,6 @@
 import React from 'react'
-import Lazimage from 'components/Lazimage'
-import PokedexHelper from 'data/PokedexHelper'
+import Lazimage from './Lazimage'
+import PokedexHelper from '../data/PokedexHelper'
 
 class SmallPokemon extends React.Component {
    constructor() {

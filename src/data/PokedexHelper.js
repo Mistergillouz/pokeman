@@ -1,7 +1,7 @@
-import Pokedex from 'data/pokedex.json'
-import Eggs from 'data/eggs.json'
-import Constants from 'data/Constants'
-import Utils from 'data/Utils'
+import Pokedex from './pokedex.json'
+import Eggs from './eggs.json'
+import Constants from './Constants'
+import Utils from './Utils'
 
 class PokedexHelper {
    

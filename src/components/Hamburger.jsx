@@ -1,8 +1,8 @@
 import React from 'react'
-import PokemanLink from 'components/PokemanLink'
-import FontIcon from 'components/FontIcon'
-import PokedexHelper from 'data/PokedexHelper'
-import Constants from 'data/Constants'
+import PokemanLink from './PokemanLink'
+import FontIcon from './FontIcon'
+import PokedexHelper from '../data/PokedexHelper'
+import Constants from '../data/Constants'
 import './css/hamburger.css'
 
 class Hamburger extends React.Component {

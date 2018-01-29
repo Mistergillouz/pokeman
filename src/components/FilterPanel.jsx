@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PokedexHelper from 'data/PokedexHelper'
-import Store from 'data/Store'
-import Utils from 'data/Utils'
-import Constants from 'data/Constants'
+import PokedexHelper from '../data/PokedexHelper'
+import Store from '../data/Store'
+import Utils from '../data/Utils'
+import Constants from '../data/Constants'
 
 const KEY = 'filters'
 
