@@ -142,29 +142,43 @@ class PokedexHelper {
         let evolves = [{
             id: pokemonId,
             active: true,
-            children: this._getEvolves(pokemonId)
+            children: this._enumEvolves(pokemonId)
         }];
     
         this._getParents(pokemonId, evolves);
         return evolves;
     }
     
-    _getEvolves(pokemonId, gens) {
-        let children = [];
+    _getEvolves(pokemonId, to) {
+        let evolves = this._enumEvolves(pokemonId)
+        let inGens = this._evolvesInGen(evolves, to)
+        return inGens ? evolves : null
+    }
+
+    _evolvesInGen(evolves, gens) {
+        for (let evolve of evolves) {
+            let pokemon = this.getPokemon(evolve.id)
+            if (gens && gens.indexOf(pokemon.gen) !== -1) {
+                return true
+            }
+            for (let child of evolve.children) {
+                if (this._evolvesInGen([child], gens)) {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
+    _enumEvolves(pokemonId) {
+        let children = []
         let pokemon = this.getPokemon(pokemonId);
         if (pokemon.evolves) {
             for (let id of pokemon.evolves) {
-                
-                if (gens) {
-                    let targetPokemon = this.getPokemon(id)
-                    if (gens.indexOf(targetPokemon.gen) === -1) {
-                        return
-                    }
-                }
-
                 let evolutions = { 
                     id: id,
-                    children: this._getEvolves(id, gens)
+                    children: this._enumEvolves(id)
                 };
     
                 children.push(evolutions)
@@ -172,8 +186,8 @@ class PokedexHelper {
             }
         }
     
-        return children;
-    };
+        return children
+    }
     
     _getParents(pokemonId, evolves) {
         for (let id in Pokedex.pokemons) {
