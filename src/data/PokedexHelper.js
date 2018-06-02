@@ -11,6 +11,22 @@ class PokedexHelper {
         this.rankings = null
     }
 
+    getForms() {
+        let forms = {}
+        this.enumPokemons(pokemon => {
+            if (pokemon.form) {
+                const parent = pokemon.form.parent
+                if (!forms[parent]) {
+                    forms[parent] = []
+                }
+
+                forms[parent].push(pokemon)
+            }    
+        })
+
+        return forms
+    }
+
     getRankings(pokemonId) {
 
         const attributes = [ 'cpmax', 'atk', 'def', 'sta' ]

@@ -4,8 +4,6 @@ export default class FontIcon extends React.Component {
 
     render() {
 
-        if (!this.props.icon) { debugger }
-        
         let classes = 'fa ' + this.props.icon
         if (this.props.className) {
             classes += ' ' + this.props.className

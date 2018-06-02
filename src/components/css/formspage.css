@@ -1,0 +1,23 @@
+.forms-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    height: 100%;
+}
+
+.forms-pokemon-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-pokemon-forms {
+    display: flex;
+    flex-direction: row;
+}
+
+.forms-pokemon-parent:nth-child(even) {
+    background-color: #f0f8fd;
+    border-radius: 10px;
+  }

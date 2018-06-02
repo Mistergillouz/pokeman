@@ -12,6 +12,7 @@ class SmallPokemon extends React.Component {
             this.props.onClick(this.props.id)
         }
     }
+    
     render() {
 
         let clazz = this.props.selected ? 'egg-pokemon-selected' : ''
@@ -24,10 +25,14 @@ class SmallPokemon extends React.Component {
                     key={ this.props.id } 
                     src='../assets/images/wait.gif'
                     target={ '../assets/pokemons/' + this.props.id + '.png' }/>
-                <label className="egg-pokemon-img-text">{ PokedexHelper.loc(pokemon) }</label>
+                { this.generateName(pokemon) }
                 <span className={ genSpanClasses }>{ pokemon.gen }</span>
             </div>
         )
+    }
+
+    generateName(pokemon) {
+        return this.props.hideName ? null : <label className="egg-pokemon-img-text">{ PokedexHelper.loc(pokemon) }</label>
     }
 }
 

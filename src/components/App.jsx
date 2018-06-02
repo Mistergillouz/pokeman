@@ -1,18 +1,16 @@
 import React from 'react'
 import { HashRouter as Router, Switch, Route, browserHistory } from 'react-router-dom'
 
-import PokedexHelper from '../data/PokedexHelper'
-
 import MainPage from './MainPage'
 import ZoomPage from './ZoomPage'
 import EggPage from './EggPage'
 import ComparePage from './ComparePage'
-import Constants from '../data/Constants'
 import EvolutionPage from './EvolutionPage'
 import BabiesPage from './BabiesPage'
 import CalculationPage from './CalculationPage'
 import ResistPage from './ResistPage'
 import RankingPage from './RankingPage'
+import FormsPage from './FormsPage'
 
 
 export default class App extends React.Component {
@@ -35,6 +33,7 @@ export default class App extends React.Component {
                     <Route path="/evolutions" component={EvolutionPage}/>
                     <Route path="/babies" component={BabiesPage}/>
                     <Route path="/compare" component={ComparePage}/>
+                    <Route path="/forms" component={FormsPage}/>
                 </Switch>
             </Router>
         )
