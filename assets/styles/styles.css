@@ -837,7 +837,7 @@ h2, .inactive-h2 {
     border-bottom: 3px solid #6DEDB7;
     width: auto;
     margin: 0 auto;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
 }
 .info-pokemon-name {
     font-size: 15pt;
@@ -846,6 +846,7 @@ h2, .inactive-h2 {
 
 .info-pokemon-form-name {
     font-size: x-small;
+    padding-top: 0.10rem;
 }
 
 .close-button {
