@@ -33,7 +33,6 @@
   },
   "scripts": {
     "prod": "webpack -p",
-    "dist": "webpack",
     "watch": "webpack-dev-server --progress --colors --history-api-fallback",
     "lint": "eslint src/**/*.js*"
   }

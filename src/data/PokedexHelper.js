@@ -367,7 +367,7 @@ class PokedexHelper {
     }
 
     loc(object, locale) {
-        return object.loc[locale ? locale.id : this.locale.id];
+        return object.loc[locale ? locale.country : this.locale.country];
     }
 
     getLocaleCountry() {

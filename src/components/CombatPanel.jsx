@@ -122,6 +122,13 @@ class CombatPanel extends React.Component {
         )
     }
 
+    generateFormInfos(pokemon) {
+        if (!pokemon.form) {
+            return null
+        }
+
+        return <span className='info-pokemon-form-name'>{ 'Forme ' + PokedexHelper.loc(pokemon.form) }</span>
+    }
     render() { 
 
         let pokemon = PokedexHelper.getPokemon(this.props.id)
@@ -146,7 +153,10 @@ class CombatPanel extends React.Component {
                     <div className='info-pokemon-img' style={ styles }/>
                 </div>
                 <div className="info-pokemon-details">
-                    <span className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</span>
+                    <div className="info-pokemon-name-container">
+                        <span className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</span>
+                        { this.generateFormInfos(pokemon) }
+                    </div>
                     { typesTable }
                     { this.generateSummaryTable(attacks) }
                     { this.generateDetailsTable(attacks) }

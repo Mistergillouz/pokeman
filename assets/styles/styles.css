@@ -816,6 +816,8 @@ h2, .inactive-h2 {
 }
 
 .info-pokemon-details {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border-radius: 8px;
     margin-top: -20px;
@@ -829,9 +831,21 @@ h2, .inactive-h2 {
     border: none;
 }
 
+.info-pokemon-name-container {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 3px solid #6DEDB7;
+    width: auto;
+    margin: 0 auto;
+    padding-bottom: 0.5rem;
+}
 .info-pokemon-name {
     font-size: 15pt;
-    border-bottom: 3px solid #6DEDB7;
+    font-weight: bold;
+}
+
+.info-pokemon-form-name {
+    font-size: x-small;
 }
 
 .close-button {
