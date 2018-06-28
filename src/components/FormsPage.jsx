@@ -43,7 +43,7 @@ export default class FormsPage extends PokemanPage {
             return (
                 <div className="forms-pokemon-parent">
                     <SmallPokemon id={ pokemonId } onClick={ id => this.onClick(id) }/>
-                    <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                    <i className="fa fa-chevron-right" aria-hidden="true"></i>
                     <div className="form-pokemon-forms">
                         { forms[pokemonId].map(pokemon => <SmallPokemon id={ pokemon.id } hideName={ true } onClick={ id => this.onClick(id) }/>)}
                     </div>

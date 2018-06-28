@@ -1,7 +1,7 @@
 {
-  "name": "reactapp",
+  "name": "pokeman",
   "version": "1.0.0",
-  "description": "My 1st react app",
+  "description": "Pokeman react app",
   "__main": "index.js",
   "dependencies": {
     "less-loader": "^4.0.5",
