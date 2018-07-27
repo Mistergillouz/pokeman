@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js'
 import Pokedex from './pokedex.json'
 import Eggs from './eggs.json'
 import Constants from './Constants'
@@ -9,6 +10,7 @@ class PokedexHelper {
 
         this.locale = Constants.LOCALES.FRENCH;
         this.rankings = null
+        this.fuseDatas = null
     }
 
     getForms() {
@@ -285,13 +287,26 @@ class PokedexHelper {
 
     search(query) {
             
-        let ids = [];
-        let textParts = Utils.normalizeText(query.text.trim().toLowerCase()).split(' ')
-        function matchRuleShort(str, rule) {
-            return new RegExp("^" + rule.split("*").join(".*") + "$").test(str);
-          }
-        let keys = Object.keys(Pokedex.pokemons)
-        for (let pokemonId of keys) {
+        let ids = [], text = query.text.trim()
+        if (text.length) {
+            const fuse = new Fuse(this.getFuseDatas(), {
+                keys: [ 'name', 'form' ],
+                threshold: 0.4,
+                id: 'id'
+            })
+            text.split(' ').forEach(part => {
+                if (isNaN(part)) {
+                    ids = ids.concat(fuse.search(part))
+                } else {
+                    ids.push(part)
+                }
+            })
+        } else {
+            ids = Object.keys(Pokedex.pokemons)
+        }
+        
+        let result = []
+        for (let pokemonId of ids) {
 
             let pokemon = Pokedex.pokemons[pokemonId];
             if (query.genId && pokemon.gen !== query.genId) {
@@ -302,28 +317,6 @@ class PokedexHelper {
                 continue
             }
 
-            let name = Utils.normalizeText(this.loc(pokemon) || '').toLowerCase();
-            if (!name.length) {
-                continue
-            }
-    
-            if (textParts.length) {
-                let found = false
-                for (let text of textParts) {
-                    if (keys[text]) {
-                        pokemonId = text
-                        found = true
-                    }
-                    else if (Utils.match(name, text)) {
-                        found = true
-                    }
-                }
-
-                if (!found) {
-                    continue
-                }
-            }
-    
             var rejected = false;
             for (let typeId of query.types) {
                 if (pokemon.species.indexOf(typeId) === -1) {
@@ -331,12 +324,12 @@ class PokedexHelper {
                 } 
             }
     
-            if (!rejected && ids.indexOf(pokemonId) === -1) {
-                ids.push(pokemonId);
+            if (!rejected) {
+                result.push(pokemonId);
             }
         }
 
-        return ids;
+        return result.filter((item, pos) => result.indexOf(item) === pos)
     }
 
     setLocaleCountry(country) {
@@ -411,6 +404,27 @@ class PokedexHelper {
 
     isLegendary(pokemonId) {
         return LEGENDARY.indexOf(Number(pokemonId)) !== -1
+    }
+
+    getFuseDatas() {
+
+        if (!this.fuseDatas) {
+            this.fuseDatas = Object.keys(Pokedex.pokemons).map(id => {
+                const pokemon = Pokedex.pokemons[id]
+                const result = {
+                    name: this.loc(pokemon),
+                    id: pokemon.id
+                }
+            
+                if (pokemon.form) {
+                    result.form = this.loc(pokemon.form)
+                }
+            
+                return result
+            })
+        }
+
+        return this.fuseDatas
     }
 
 }
