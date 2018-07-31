@@ -91,7 +91,7 @@ class Pokemon extends React.Component {
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }
                     </div>
-                    <Lazimage className="lazimage" src='../assets/images/wait.gif' target={ "../assets/pokemons/" + this.props.id + ".png" } style={{ display: 'block' }}/>
+                    <Lazimage className="lazimage" src='../assets/images/wait.gif' target={ PokedexHelper.getImagePath(pokemon) } style={{ display: 'block' }}/>
                     <div className="bar">
                         <div className={ valueClass }></div>
                     </div>

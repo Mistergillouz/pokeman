@@ -1,16 +1,35 @@
 import Fuse from 'fuse.js'
 import Pokedex from './pokedex.json'
 import Eggs from './eggs.json'
+import Shinies from './shinies.json'
 import Constants from './Constants'
 import Utils from './Utils'
 
 class PokedexHelper {
    
-    constructor() {
+    constructor () {
 
         this.locale = Constants.LOCALES.FRENCH;
         this.rankings = null
         this.fuseDatas = null
+    }
+
+    getShinies () {
+        return Shinies.shinies
+    }
+
+    getImagePath (pokemon) {
+        let path = '../assets/pokemons/', id = pokemon.id
+        if (pokemon.form && pokemon.form.alola) {
+            path += 'alola/'
+            id = pokemon.form.parent
+        }
+        
+        return path + id + '.png'
+    }
+
+    getShinyImagePath (pokemon) {
+        return '../assets/pokemons/shiny/' + pokemon.id + '.png'
     }
 
     getForms() {

@@ -122,14 +122,15 @@ class CombatPanel extends React.Component {
         )
     }
 
-    generateFormInfos(pokemon) {
+    generateFormInfos (pokemon) {
         if (!pokemon.form) {
             return null
         }
 
         return <span className='info-pokemon-form-name'>{ 'Forme ' + PokedexHelper.loc(pokemon.form) }</span>
     }
-    render() { 
+
+    render () { 
 
         let pokemon = PokedexHelper.getPokemon(this.props.id)
         
@@ -137,13 +138,12 @@ class CombatPanel extends React.Component {
             return <NotFound text="Désolé. Seules les informations sur les pokémons existants dans Pokemon-Go sont disponibles"/>
         }
         
-        let rankings = PokedexHelper.getRankings(this.props.id)
         let typesTable = this.generateTypesTable(pokemon.species)
         let species = PokedexHelper.getSpecies(pokemon.species[0])
         let typeKey = PokedexHelper.getSpeciesKey(species)
         let attacks = PokedexHelper.getAttacks(this.props.id)
         let styles = {
-            backgroundImage: 'url(../assets/pokemons/' + this.props.id + '.png)'
+            backgroundImage: 'url(' + PokedexHelper.getImagePath(pokemon) + ')'
         }
 
         return (

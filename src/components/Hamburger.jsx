@@ -91,6 +91,13 @@ class Hamburger extends React.Component {
                             </li>
                         </PokemanLink>
 
+                        <PokemanLink to='/shinies'>
+                            <li>
+                                <span className="fa fa-random" aria-hidden="true"/>
+                                <span>Shinies</span>
+                            </li>
+                        </PokemanLink>
+
                     </ul>
                 </div>
             </div>

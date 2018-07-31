@@ -3,17 +3,17 @@ import Lazimage from './Lazimage'
 import PokedexHelper from '../data/PokedexHelper'
 
 class SmallPokemon extends React.Component {
-   constructor() {
+   constructor () {
         super(...arguments)
     }
 
-    onClick() {
+    onClick () {
         if (this.props.onClick) {
             this.props.onClick(this.props.id)
         }
     }
     
-    render() {
+    render () {
 
         let clazz = this.props.selected ? 'egg-pokemon-selected' : ''
         let genSpanClasses = this.props.showGen ? 'egg-pokemon-gen' : 'hidden'
@@ -24,14 +24,23 @@ class SmallPokemon extends React.Component {
                 <Lazimage className="egg-pokemon-img"
                     key={ this.props.id } 
                     src='../assets/images/wait.gif'
-                    target={ '../assets/pokemons/' + this.props.id + '.png' }/>
+                    target={ this.getImagePath(pokemon) }/>
                 { this.generateName(pokemon) }
                 <span className={ genSpanClasses }>{ pokemon.gen }</span>
             </div>
         )
     }
 
-    generateName(pokemon) {
+    getImagePath (pokemon) {
+        if (this.props.shiny) {
+            return PokedexHelper.getShinyImagePath(pokemon)
+        }
+
+        return PokedexHelper.getImagePath(pokemon)
+            
+    }
+
+    generateName (pokemon) {
         return this.props.hideName ? null : <label className="egg-pokemon-img-text">{ PokedexHelper.loc(pokemon) }</label>
     }
 }
