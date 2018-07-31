@@ -18,18 +18,17 @@ class PokedexHelper {
         return Shinies.shinies
     }
 
-    getImagePath (pokemon) {
+    getImagePath (pokemon, isShiny) {
         let path = '../assets/pokemons/', id = pokemon.id
-        if (pokemon.form && pokemon.form.alola) {
+        if (isShiny) {
+            path += 'shiny/'
+        }
+        else if (pokemon.form && pokemon.form.alola) {
             path += 'alola/'
             id = pokemon.form.parent
         }
         
         return path + id + '.png'
-    }
-
-    getShinyImagePath (pokemon) {
-        return '../assets/pokemons/shiny/' + pokemon.id + '.png'
     }
 
     getForms() {
