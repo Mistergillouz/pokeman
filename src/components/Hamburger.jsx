@@ -65,36 +65,36 @@ class Hamburger extends React.Component {
 
                         <PokemanLink to='/eggs'>
                             <li>
-                                <div className='nav-icon-egg'/>
-                                <span>Voir les oeufs</span>
+                                <p className='nav-icon-egg'/>
+                                <a>Voir les oeufs</a>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/evolutions'>
                             <li>
-                                <div className='nav-icon-evolves'/>
-                                <span>Evolutions explorer</span>
+                                <p className='nav-icon-evolves'/>
+                                <a>Evolutions explorer</a>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/babies'>
                             <li>
-                                <div className='nav-icon-baby'/>
-                                <span>Maternelle</span>
+                                <p className='nav-icon-baby'/>
+                                <a>Maternelle</a>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/forms'>
                             <li>
-                                <span className="fa fa-random" aria-hidden="true"/>
-                                <span>Formes</span>
+                                <p className="fa fa-random" aria-hidden="true"/>
+                                <a>Formes</a>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/shinies'>
                             <li>
-                                <span className="fa fa-hand-o-right" aria-hidden="true"/>
-                                <span>Shinies</span>
+                                <p className="fa fa-hand-o-right" aria-hidden="true"/>
+                                <a>Shinies</a>
                             </li>
                         </PokemanLink>
 
