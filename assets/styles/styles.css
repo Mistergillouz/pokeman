@@ -581,7 +581,7 @@ h2, .inactive-h2 {
 
 .gen .pokemon img {
     position: absolute;
-    max-width: 70px;
+    /*max-width: 70px;*/
     max-height: 70px;
     top: 15px;
     right: 10px;
