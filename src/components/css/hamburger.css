@@ -48,7 +48,15 @@
 }
 
 .navigation ul li span {
+    position: absolute;
+    left: 2em;
+    right: 0.5em;
+    line-height: 1.5em;
     padding-left: 0.5em;
+}
+
+.navigation ul li span:active {
+    background-color: #ADD8FF;
 }
 
 .navigation ul li a {
@@ -66,6 +74,7 @@
     height: 1px !important;
     border-top: 1px solid lightgray;
     margin-right: 5px;
+    line-height: 1.5em;
 }
 
 .btn-navigation {

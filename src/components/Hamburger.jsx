@@ -57,7 +57,7 @@ class Hamburger extends React.Component {
         return (
             <div>
                 <FontIcon key="nav" icon={ btnIcon } className="btn-navigation fa-pokeman-normal" ref='btn-navigation' onClick={ e => this.onToggleMenuVisibility(e) }/>
-                <div key="nav-pan" className={ 'navigation '  + toggle } ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
+                <div key="nav-pan" className={ 'navigation ' + toggle } ref="navigation" onClick={ () => this.onToggleMenuVisibility() }>
                     <ul>
                         <li className="menu-section">Langues</li>
                         { this.generateLangRadio() }
@@ -66,35 +66,35 @@ class Hamburger extends React.Component {
                         <PokemanLink to='/eggs'>
                             <li>
                                 <p className="fa fa-child" aria-hidden="true"/>
-                                <a>Oeufs</a>
+                                <span>Oeufs</span>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/evolutions'>
                             <li>
                                 <p className='nav-icon-evolves'/>
-                                <a>Evolutions explorer</a>
+                                <span>Evolutions explorer</span>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/babies'>
                             <li>
                                 <p className='nav-icon-baby'/>
-                                <a>Maternelle</a>
+                                <span>Maternelle</span>
                             </li>
                         </PokemanLink>
 
                         <PokemanLink to='/forms'>
                             <li>
                                 <p className="fa fa-random" aria-hidden="true"/>
-                                <a>Formes</a>
+                                <span>Formes</span>
                             </li>
                         </PokemanLink>
 
-                        <PokemanLink to='/shinies'>
+                        <PokemanLink to='/shinies' onClick={ e => this.onClick(e) }>
                             <li>
                                 <p className="far fa-gem" aria-hidden="true"/>
-                                <a>Shinies</a>
+                                <span>Shinies</span>
                             </li>
                         </PokemanLink>
 
@@ -102,6 +102,10 @@ class Hamburger extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    onClick (e) {
+        let ii = 1
     }
 }
 
