@@ -72,7 +72,6 @@ input {
     border: none;
     background-color: white;
     padding-bottom: 0.5em;
-    border-bottom: 2px solid lightslategray;
 }
 
 .attack-table th {
@@ -80,14 +79,15 @@ input {
     font-size: 12pt;
     text-align: left;
     color: inherit;
-    padding-top: 10px;
-    padding-left: 5px;
+    padding-top: 0.75em;
+    padding-left: 0.5em;
+    padding-bottom: 0.25em;
     font-weight: bold;
 }
 
 .attack-table .section {
     font-weight: 700;
-    padding-top: 1em;
+    padding-top: 1.25em;
     padding-left: 0.5em;
     padding-bottom: 5px;
     font-size: 9pt;
@@ -103,7 +103,7 @@ input {
 }
 
 .attack-table tbody td:first-child {
-    padding-left: 0.5em;
+    padding-left: 0.75em;
     padding-right: 1em;
     width: 2em;
 }

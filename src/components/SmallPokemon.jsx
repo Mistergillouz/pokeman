@@ -33,7 +33,7 @@ class SmallPokemon extends React.Component {
 
     getImagePath (pokemon) {
         if (this.props.shiny) {
-            return PokedexHelper.getShinyImagePath(pokemon)
+            return PokedexHelper.getImagePath(pokemon, true)
         }
 
         return PokedexHelper.getImagePath(pokemon)
