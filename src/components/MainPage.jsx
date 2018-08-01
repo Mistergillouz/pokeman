@@ -15,7 +15,7 @@ import Store from '../data/Store'
 
 class MainPage extends PokemanPage {
    
-    constructor() {
+    constructor () {
         super(null, arguments)
 
         let storage = getStorageData()
@@ -42,7 +42,7 @@ class MainPage extends PokemanPage {
         
     }
 
-    setState(state, ignore) {
+    setState (state, ignore) {
 
         if (!ignore) {
             Store.set('mainpage', state)
@@ -51,7 +51,7 @@ class MainPage extends PokemanPage {
         super.setState(state)
     }
 
-    eventHandler(args) {
+    eventHandler (args) {
 
         switch (args.eventType) {
             case Constants.EVENT.PokemonClicked:
@@ -73,11 +73,11 @@ class MainPage extends PokemanPage {
         }
     }
 
-    onToggleFilterPanel() {
+    onToggleFilterPanel () {
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
-    onFilterTextChanged(event) {
+    onFilterTextChanged (event) {
         if (this.filterTimerId) {
             clearTimeout(this.filterTimerId)
         }
@@ -107,7 +107,7 @@ class MainPage extends PokemanPage {
     }
 
     toggleSelected(id) {
-        let selected;
+        let selected, index;
         switch (id) {
             case Constants.SELECT.UNSELECT_ALL:
                 selected = []
@@ -117,7 +117,7 @@ class MainPage extends PokemanPage {
                 break;
             default:
                 selected = this.state.selected.slice()
-                let index = selected.indexOf(id)
+                index = selected.indexOf(id)
                 if (index === -1) {
                     selected.push(id)
                 } else {
@@ -138,17 +138,17 @@ class MainPage extends PokemanPage {
         this._focusInput = true
     }
 
-    leaveSelection() {
+    leaveSelection () {
         this.toggleSelected(Constants.SELECT.UNSELECT_ALL)
         this.setState({ viewMode: ViewMode.DEFAULT })
     }
 
-    toggleSelectAll() {
+    toggleSelectAll () {
         let id = (this.state.selected.length === this.state.pokemons.length) ? Constants.SELECT.UNSELECT_ALL : Constants.SELECT.SELECT_ALL
         this.toggleSelected(id)
     }
 
-    generateToolbar() {
+    generateToolbar () {
 
         switch (this.state.viewMode) {
 
@@ -157,8 +157,8 @@ class MainPage extends PokemanPage {
 
                 return (
                     <div className="left-panel">
-                        <FontIcon icon="fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
-                        <FontIcon icon="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
+                        <FontIcon icon="fa fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
+                        <FontIcon icon="fa fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
                         <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
                             placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
                     </div>
@@ -167,11 +167,11 @@ class MainPage extends PokemanPage {
             case ViewMode.SELECTIONS:
 
                 let compareVisibility = this.state.selected.length < 2 ? 'hidden' : ''
-                let selectIcon = (this.state.selected.length === this.state.pokemons.length) ? 'fa-check-circle text-selected' : 'fa-circle-thin'
+                let selectIcon = (this.state.selected.length === this.state.pokemons.length) ? 'fa fa-check-circle text-selected' : 'far fa-circle'
         
                 return (
                     <div className="left-panel">
-                        <FontIcon icon="fa-arrow-left" onClick={ () => this.leaveSelection() }/>
+                        <FontIcon icon="fa fa-arrow-left" onClick={ () => this.leaveSelection() }/>
                         <span className="title-text">Selections</span>
                         <div className="toolbar-button-text-group" onClick={ () => this.toggleSelectAll() }>
                             <FontIcon icon={ selectIcon }/>
@@ -194,7 +194,7 @@ class MainPage extends PokemanPage {
                     <div>
                         <Hamburger eventHandler={ args => this.eventHandler(args) }/>
                         <div className="left-panel">
-                            <FontIcon icon="fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
+                            <FontIcon icon="fa fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
                             <span className="pokeman-title">Pokéman</span>
                             <i className="fa fa-search fa-lg search-icon" aria-hidden="true" onClick={ () => this.onActivateSearch(true) }></i>
                         </div>

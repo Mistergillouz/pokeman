@@ -25,6 +25,10 @@ export default class Utils {
         return genButtons
     }
 
+    static findWord (str, word) {
+        return str.split(' ').some(w => w === word)
+    }
+
     static toggle(array, value, isMono) {
         let  index = array.indexOf(value), copy
         if (!isMono) {

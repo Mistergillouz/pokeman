@@ -52,7 +52,7 @@ class Hamburger extends React.Component {
             return <Redirect to={ this.state.to }/>
         }
 
-        let btnIcon = this.state.opened ? 'fa-close' : 'fa-bars'
+        let btnIcon = this.state.opened ? 'fas fa-times' : 'fa fa-bars'
         let toggle = this.state.opened ? 'nav-opened' : ''
         return (
             <div>
@@ -65,8 +65,8 @@ class Hamburger extends React.Component {
 
                         <PokemanLink to='/eggs'>
                             <li>
-                                <p className='nav-icon-egg'/>
-                                <a>Voir les oeufs</a>
+                                <p className="fa fa-child" aria-hidden="true"/>
+                                <a>Oeufs</a>
                             </li>
                         </PokemanLink>
 
@@ -93,7 +93,7 @@ class Hamburger extends React.Component {
 
                         <PokemanLink to='/shinies'>
                             <li>
-                                <p className="fa fa-hand-o-right" aria-hidden="true"/>
+                                <p className="far fa-gem" aria-hidden="true"/>
                                 <a>Shinies</a>
                             </li>
                         </PokemanLink>
