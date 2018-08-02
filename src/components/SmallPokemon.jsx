@@ -16,6 +16,11 @@ class SmallPokemon extends React.Component {
     render () {
 
         let clazz = this.props.selected ? 'egg-pokemon-selected' : ''
+
+        if (!this.props.onClick) {
+            clazz += ' default-cursor'
+        }
+        
         let genSpanClasses = this.props.showGen ? 'egg-pokemon-gen' : 'hidden'
         let pokemon = PokedexHelper.getPokemon(this.props.id)
 
