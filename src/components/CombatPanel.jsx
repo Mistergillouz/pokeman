@@ -13,6 +13,16 @@ class CombatPanel extends React.Component {
         super(...arguments)
     }
 
+    isShiny(pokemon) {
+        const shinies = PokedexHelper.getShinies()
+
+        if (shinies.indexOf(pokemon.id) !== -1) {
+            return 
+        }
+
+        return null
+    }
+
     generateTable(title, rows) {
 
         return (
@@ -149,6 +159,7 @@ class CombatPanel extends React.Component {
         return (
             <div className={ 'info-container info-back-' + typeKey }>
                 <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.cpmax }</span></div>
+                { this.isShiny(pokemon) }
                 <div className='info-cp-circle'>
                     <div className='info-pokemon-img' style={ styles }/>
                 </div>
