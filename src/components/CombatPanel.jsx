@@ -17,7 +17,9 @@ class CombatPanel extends React.Component {
         const shinies = PokedexHelper.getShinies()
 
         if (shinies.indexOf(pokemon.id) !== -1) {
-            return 
+            return (
+                <img src="../assets/images/shiny_true.png" className="shiny" />
+            );
         }
 
         return null

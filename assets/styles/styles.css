@@ -66,6 +66,14 @@ input {
     background-image: url(../images/favicon.png);
 }
 
+.shiny {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+}
+
 /*---------------------------------------------------------------------*/
 /*  ATTACK PANEL
 /*---------------------------------------------------------------------*/
