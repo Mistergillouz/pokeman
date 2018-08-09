@@ -68,7 +68,7 @@ class FilterPanel extends React.Component {
             <div className={ filterContainerCls }>
                 <div id="gen-table-container" className="gen-table-container">
                     {genButtons}
-                    <div onClick={ () => this.onToggleLeg() } className={ 'gen-button gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }>LEG</div>
+                    <div onClick={ () => this.onToggleLeg() } className={ 'gen-button leg gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }></div>
                 </div>
                 <div id="type-table-container" className="type-table-container">
                     {types}

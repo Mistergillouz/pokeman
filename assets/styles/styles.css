@@ -101,7 +101,7 @@ input {
 }
 
 .attack-table td {
-    font-size: 8pt;
+    font-size: 9pt;
     padding-top: 0.5em;
 }
 
@@ -366,16 +366,23 @@ input {
 }
 
 .gen-button {
-    background-color: #e4e4e4;
-    border: 1px solid rgba(0,0,0,.15);
-    width: 2.5em;
-    min-width: 2.5em;
-    height: 2em;
+    font-size: 17px;
+    width: 33px;
+    height: 33px;
+    line-height: 33px;
     text-align: center;
-    border-left-width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center
+    border: 2px solid transparent;
+    margin-right: 3px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.8);
+    font-weight: bold;
+}
+
+.gen-button:hover,
+.gen-button.selected {
+    border: 2px solid #000;
 }
 
 .filter-type-inactive {
@@ -395,14 +402,14 @@ input {
 }
 
 .gen-button-left {
-    border-radius: 10px 0 0 10px;
-    border-left-width: 1px;
+    /*border-radius: 10px 0 0 10px;
+    border-left-width: 1px;*/
     margin-left: 5px;
 }
 
 .gen-button-right {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    /*border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;*/
     margin-right: 5px;
 }
 
@@ -740,7 +747,8 @@ h2, .inactive-h2 {
 
 .info-container {
     background-repeat: no-repeat;
-    width: 300px;
+    background-size: 375px;
+    width: 375px;
     text-align: center;
     padding-bottom: 20px;
     color: #44696C;
@@ -854,11 +862,46 @@ h2, .inactive-h2 {
 }
 
 .close-button {
-    background-image: url(../images/close.png);
+    background-image: url(../images/close.svg);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 10px;
+
+    position: relative;
+    width: 40px;
     height: 40px;
-    background-size: 35px;
+    line-height: 40px;
+    color: #b6f6e4;
+    background-color: #1b8796;
+    margin: 0;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    border: 0;
+    padding: 6px;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.24),0 4px 5px rgba(0,0,0,.2)!important;
+    outline: none;
+}
+
+.button-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    flex-flow: row nowrap;
+}
+
+.cercle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    top: 3px;
+    left: 3px;
+    width: 32px;
+    height: 32px;
 }
 
 .info-back-BUG { background-image: url(../images/BUG.png); background-color: #bcab11; }
@@ -920,22 +963,49 @@ h2, .inactive-h2 {
 /*  CONST
 /*---------------------------------------------------------------------*/
 
-.POKEMON_TYPE_NORMAL {background-color:#A8A878;}
-.POKEMON_TYPE_FIRE {background-color:#F08030;}
-.POKEMON_TYPE_WATER {background-color:#6890F0;}
-.POKEMON_TYPE_GRASS {background-color:#78C850;}
-.POKEMON_TYPE_POISON {background-color:#A040A0;}
-.POKEMON_TYPE_ELECTRIC {background-color:#F8D030;}
-.POKEMON_TYPE_GROUND {background-color:#E0C068;}
-.POKEMON_TYPE_PSYCHIC {background-color:#F85888;}
-.POKEMON_TYPE_ROCK {background-color:#B8A038;}
-.POKEMON_TYPE_ICE {background-color:#98D8D8;}
-.POKEMON_TYPE_BUG {background-color:#A8B820;}
-.POKEMON_TYPE_DRAGON {background-color:#7038F8;}
-.POKEMON_TYPE_GHOST {background-color:#705898;}
-.POKEMON_TYPE_STEEL {background-color:#B8B8D0;}
-.POKEMON_TYPE_FAIRY {background-color:#EE99AC;}
-.POKEMON_TYPE_DARK {background-color:#705848;}
-.POKEMON_TYPE_FLYING {background-color:#A890F0;}
-.POKEMON_TYPE_FIGHTING {background-color:#C02038;
+.POKEMON_TYPE_NORMAL {background-color: #A8A878;}
+.POKEMON_TYPE_FIRE {background-color: #F08030;}
+.POKEMON_TYPE_WATER {background-color: #6890F0;}
+.POKEMON_TYPE_GRASS {background-color: #78C850;}
+.POKEMON_TYPE_POISON {background-color: #A040A0;}
+.POKEMON_TYPE_ELECTRIC {background-color: #F8D030;}
+.POKEMON_TYPE_GROUND {background-color: #E0C068;}
+.POKEMON_TYPE_PSYCHIC {background-color: #F85888;}
+.POKEMON_TYPE_ROCK {background-color: #B8A038;}
+.POKEMON_TYPE_ICE {background-color: #98D8D8;}
+.POKEMON_TYPE_BUG {background-color: #A8B820;}
+.POKEMON_TYPE_DRAGON {background-color: #7038F8;}
+.POKEMON_TYPE_GHOST {background-color: #705898;}
+.POKEMON_TYPE_STEEL {background-color: #B8B8D0;}
+.POKEMON_TYPE_FAIRY {background-color: #EE99AC;}
+.POKEMON_TYPE_DARK {background-color: #705848;}
+.POKEMON_TYPE_FLYING {background-color: #A890F0;}
+.POKEMON_TYPE_FIGHTING {background-color: #C02038;}
+
+.gen-button1 {background-color: #42a5f5;}
+.gen-button2 {background-color: #ef5350;}
+.gen-button3 {background-color: #66bb6a;}
+.gen-button4 {background-color: #705848;}
+.gen-button5 {background-color: #F85888;}
+.gen-button6 {background-color: #F8D030;}
+.gen-button7 {background-color: #B8A038;}
+
+.leg {
+    background-image: url(../../assets/images/legendary-bronze.png);
+    height: 33px;
+    width: 33px;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 0;
+    border-radius: 50%;
+    border: 2px solid #655ad3;
+}
+.leg.selected {
+    background-image: url(../../assets/images/legendary-gold.png);
+    border: 2px solid #ffd755;
+    background-color: transparent;
+}
+.leg:hover {
+    border: 2px solid #ffd755;
 }
