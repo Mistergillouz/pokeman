@@ -15,8 +15,15 @@ export default class BackButton extends React.Component {
     render() {
         return (
             <PokemanLink back>
-                { this.props.image ? <div className={ this.props.image }/> : <FontIcon x2 icon={ BackButton.defaultIcon }/> }
+            { this.props.image ? 
+                <button className={ this.props.image }>
+                     <span className="button-inner">
+                         <div className="cercle"></div>
+                         <div className="close"></div>
+                     </span>
+                 </button>
+                 : <FontIcon x2 icon={ BackButton.defaultIcon }/> }
             </PokemanLink>
         )
-    }
+    } 
 }
