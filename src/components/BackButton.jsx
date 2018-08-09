@@ -9,7 +9,7 @@ export default class BackButton extends React.Component {
     }
 
     static get defaultIcon() {
-        return 'fa-arrow-circle-left'
+        return 'fa fa-arrow-circle-left'
     } 
 
     render() {

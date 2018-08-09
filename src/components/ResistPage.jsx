@@ -234,8 +234,8 @@ export default class ResistPage extends PokemanPage {
 }
 
 ResistPage.TABS = [
-    { id: 'atk', text: 'Attaques', target: 'strength-table', icon: 'fa-bolt' },
-    { id: 'def', text: 'Résistances', target: 'defense-table', icon: 'fa-shield' }
+    { id: 'atk', text: 'Attaques', target: 'strength-table', icon: 'fa fa-bolt' },
+    { id: 'def', text: 'Résistances', target: 'defense-table', icon: 'fas fa-shield-alt' }
 ]
 
 ResistPage.MODE = {

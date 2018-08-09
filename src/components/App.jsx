@@ -14,7 +14,7 @@ import FormsPage from './FormsPage'
 import ShinyPage from './ShinyPage'
 
 export default class App extends React.Component {
-   constructor() {
+    constructor () {
         super(...arguments)
     }
 

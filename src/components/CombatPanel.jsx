@@ -171,7 +171,7 @@ class CombatPanel extends React.Component {
                         <div className="info-cp-button info-cp-button-shield"/>
                     </PokemanLink>
                     <PokemanLink to={ '/pokemon/' + this.props.id + '/ranking'}>
-                        <FontIcon icon="fa-line-chart" className="info-cp-button"/>
+                        <FontIcon icon="fas fa-chart-line" className="info-cp-button"/>
                     </PokemanLink>
                     
                 </div>

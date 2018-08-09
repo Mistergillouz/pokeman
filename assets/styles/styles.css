@@ -54,6 +54,9 @@ body {
     border-radius: .25rem;
 }
 
+.default-cursor {
+    cursor: default !important;
+}
 input {
     padding: .5rem .75rem;
 }
@@ -241,6 +244,7 @@ input {
 
 .title-text {
     position: absolute;
+    font-size: 15pt;
 }
 
 .egg-section {

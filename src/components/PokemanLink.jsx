@@ -2,19 +2,19 @@ import React from 'react'
 import { withRouter, Link, Redirect } from 'react-router-dom'
 
 class PokemanLink extends React.Component {
-    constructor() {
+    constructor () {
         super(...arguments)
         this.state = {}
     }
 
-    onClick() {
+    onClick () {
         if (this.props.back) {
             this.props.history.goBack()
         } else {
             this.setState({ redirect: true })
         }
     }
-    render() {
+    render () {
         if (this.state.redirect) {
             return <Redirect push to={ this.props.to }/>
         }
