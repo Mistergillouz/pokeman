@@ -6,11 +6,21 @@ import NotFound from './NotFound'
 import BackButton from './BackButton'
 import FontIcon from './FontIcon'
 import RankingPage from './RankingPage'
+import PokedexHelperObj from '../data/PokedexHelper';
 
 class CombatPanel extends React.Component {
    
     constructor() {
         super(...arguments)
+        this.state = {}
+        this.state.showShiny = Boolean(this.props.showShiny)
+    }
+
+    
+    componentWillMount() {
+    }
+
+    componentWillReceiveProps(props) {
     }
 
     generateTable(title, rows) {
@@ -108,7 +118,7 @@ class CombatPanel extends React.Component {
             rows.push(<tr><td colSpan="2" align="left">Femelle</td><td align="right">{ (pokemon.gender.f * 100) + '%' }</td></tr>)
         }
 
-        return this.generateTable("Informations", rows)
+        return this.generateTable('Informations', rows)
     }
 
     generateTypesTable(species) {
@@ -130,6 +140,20 @@ class CombatPanel extends React.Component {
         return <span className='info-pokemon-form-name'>{ 'Forme ' + PokedexHelper.loc(pokemon.form) }</span>
     }
 
+    generateShinyButton (pokemon) {
+        const hasShiny = PokedexHelper.getShinies().indexOf(pokemon.id) !== -1
+        if (!hasShiny) {
+            return null
+        }
+
+        const clazz = this.state.showShiny ? 'shiny-button-pressed' : 'shiny-button'
+        return <div className={ clazz } onClick={ () => this.onShinyToggle() }/>
+    }
+
+    onShinyToggle () {
+        this.setState({ showShiny: !this.state.showShiny })
+    }
+
     render () { 
 
         let pokemon = PokedexHelper.getPokemon(this.props.id)
@@ -143,11 +167,12 @@ class CombatPanel extends React.Component {
         let typeKey = PokedexHelper.getSpeciesKey(species)
         let attacks = PokedexHelper.getAttacks(this.props.id)
         let styles = {
-            backgroundImage: 'url(' + PokedexHelper.getImagePath(pokemon) + ')'
+            backgroundImage: 'url(' + PokedexHelper.getImagePath(pokemon, this.state.showShiny) + ')'
         }
 
         return (
             <div className={ 'info-container info-back-' + typeKey }>
+                { this.generateShinyButton(pokemon) }
                 <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.cpmax }</span></div>
                 <div className='info-cp-circle'>
                     <div className='info-pokemon-img' style={ styles }/>

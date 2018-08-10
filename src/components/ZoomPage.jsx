@@ -15,6 +15,11 @@ export default class ZoomPage extends PokemanPage {
 
     constructor() {
         super(null, arguments)
+
+        let params = new URLSearchParams(this.props.location.search)
+        this.state = {
+            showShiny: params.get('shiny') === 'true'
+        }
     }
     
     render() { 
@@ -37,7 +42,7 @@ export default class ZoomPage extends PokemanPage {
                 </div>
                 <div className="pokemon-zoom">
                     <EvolutionPanel id={ id } evolves={ evolves }/>
-                    <CombatPanel id={ id } eventHandler={ this.props.eventHandler }/>
+                    <CombatPanel id={ id } showShiny={ this.state.showShiny } eventHandler={ this.props.eventHandler }/>
                 </div>
                 { super.render() }
 		    </div>
