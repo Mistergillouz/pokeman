@@ -14,12 +14,7 @@ export default class CalculationPage extends PokemanPage {
     constructor() {
         super(null, arguments)
         this.parseQueryString(this.props.location.search)
-        
-        let pokemon = this.getPokemon()
-        if (pokemon) {
-            let name = PokedexHelper.loc(pokemon)
-            this.setPageCaption('Meilleurs attaquants vs ' + name)
-        }
+        this.setPageCaption('Meilleurs attaquants')
     }
     
     componentWillReceiveProps(newProps) {

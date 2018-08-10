@@ -38,7 +38,10 @@ export default class FormsPage extends PokemanPage {
 
     generateForms () {
         const shinies = PokedexHelper.getShinies()
-        return shinies.map(pokemonId => <SmallPokemon id={ pokemonId } shiny={ true }/>)
+        return shinies.map(pokemonId => <SmallPokemon id={ pokemonId } shiny={ true } onClick={ () => this.onPokemonClicked(pokemonId) }/>)
     }
 
+    onPokemonClicked (pokemonId) {
+        this.setState({ redirect: true, to: '/pokemon/' + pokemonId + '?shiny=true' })
+    }
 }

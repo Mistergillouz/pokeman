@@ -765,6 +765,13 @@ h2, .inactive-h2 {
     position: relative;
 }
 
+@media all and (max-width: 550px) {
+    .info-container {
+        width: 100%;
+        background-size: 100%;
+    }
+}
+
 .info-cp-circle {
     background-image: url(../images/cpcircle.png);
     background-repeat: no-repeat;
@@ -814,6 +821,24 @@ h2, .inactive-h2 {
 .info-cp-value {
     font-size: 18pt;
     color: white;
+}
+
+.shiny-button, .shiny-button-pressed {
+    background-image: url(../images/ic_shiny0.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2em;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    cursor: pointer;
+    z-index: 50;
+}
+
+.shiny-button-pressed {
+    background-image: url(../images/ic_shiny1.png);
 }
 
 .info-pokemon-img {
