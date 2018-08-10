@@ -23,18 +23,6 @@ class CombatPanel extends React.Component {
     componentWillReceiveProps(props) {
     }
 
-    isShiny(pokemon) {
-        const shinies = PokedexHelper.getShinies()
-
-        if (shinies.indexOf(pokemon.id) !== -1) {
-            return (
-                <img src="../assets/images/shiny_true.png" className="shiny" />
-            );
-        }
-
-        return null
-    }
-
     generateTable(title, rows) {
 
         return (
@@ -186,7 +174,6 @@ class CombatPanel extends React.Component {
             <div className={ 'info-container info-back-' + typeKey }>
                 { this.generateShinyButton(pokemon) }
                 <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.cpmax }</span></div>
-                { this.isShiny(pokemon) }
                 <div className='info-cp-circle'>
                     <div className='info-pokemon-img' style={ styles }/>
                 </div>

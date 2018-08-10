@@ -66,14 +66,6 @@ input {
     background-image: url(../images/favicon.png);
 }
 
-.shiny {
-    position: absolute;
-    top: 155px;
-    left: 25px;
-    width: 30px;
-    height: 30px;
-}
-
 /*---------------------------------------------------------------------*/
 /*  ATTACK PANEL
 /*---------------------------------------------------------------------*/
@@ -824,7 +816,7 @@ h2, .inactive-h2 {
 }
 
 .shiny-button, .shiny-button-pressed {
-    background-image: url(../images/ic_shiny0.png);
+    background-image: url(../images/shiny_false.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 2em;
@@ -838,7 +830,7 @@ h2, .inactive-h2 {
 }
 
 .shiny-button-pressed {
-    background-image: url(../images/ic_shiny1.png);
+    background-image: url(../images/shiny_true.png);
 }
 
 .info-pokemon-img {
