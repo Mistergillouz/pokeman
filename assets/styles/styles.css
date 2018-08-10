@@ -757,6 +757,13 @@ h2, .inactive-h2 {
     position: relative;
 }
 
+@media all and (max-width: 550px) {
+    .info-container {
+        width: 100%;
+        background-size: 100%;
+    }
+}
+
 .info-cp-circle {
     background-image: url(../images/cpcircle.png);
     background-repeat: no-repeat;
