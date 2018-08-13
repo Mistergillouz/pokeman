@@ -31,6 +31,19 @@ class PokedexHelper {
         return path + id + '.png'
     }
 
+    getBigImagePath (pokemon, isShiny) {
+        let path = '../assets/pokemons-big/', id = pokemon.id
+        if (isShiny) {
+            path += 'shiny/'
+        }
+        else if (pokemon.form && pokemon.form.alola) {
+            path += 'alola/'
+            id = pokemon.form.parent
+        }
+        
+        return path + id + '.png'
+    }
+
     getForms() {
         let forms = {}
         this.enumPokemons(pokemon => {

@@ -167,19 +167,28 @@ class CombatPanel extends React.Component {
         let typeKey = PokedexHelper.getSpeciesKey(species)
         let attacks = PokedexHelper.getAttacks(this.props.id)
         let styles = {
-            backgroundImage: 'url(' + PokedexHelper.getImagePath(pokemon, this.state.showShiny) + ')'
+            backgroundImage: 'url(' + PokedexHelper.getBigImagePath(pokemon, this.state.showShiny) + ')'
         }
 
         return (
             <div className={ 'info-container info-back-' + typeKey }>
+                <img className='info-back' src={'../assets/images/' + typeKey + '.png'} />
                 { this.generateShinyButton(pokemon) }
-                <div className='info-cp-label'>PC<span className='info-cp-value'>{ pokemon.cpmax }</span></div>
                 <div className='info-cp-circle'>
-                    <div className='info-pokemon-img' style={ styles }/>
+                    <h1 className='info-cp-label'>
+                        <span className='info-cp'>PC</span>
+                        <span className='info-cp-value'>{ pokemon.cpmax }</span>
+                    </h1>
+                    <img className='info-pokemon-img' src={ PokedexHelper.getBigImagePath(pokemon, this.state.showShiny) } />
+                    <div className='cp'>
+                        <img src='../assets/images/circle.svg' />
+                        <img className='cp-circle-value' src='../assets/images/circleValue.svg' />
+                    </div>
+                    <p className='cp-40'>40</p>
                 </div>
                 <div className="info-pokemon-details">
                     <div className="info-pokemon-name-container">
-                        <span className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</span>
+                        <h2 className='info-pokemon-name'>{ PokedexHelper.loc(pokemon) }</h2>
                         { this.generateFormInfos(pokemon) }
                     </div>
                     { typesTable }

@@ -747,8 +747,8 @@ h2, .inactive-h2 {
 
 .info-container {
     background-repeat: no-repeat;
-    background-size: 375px;
-    width: 375px;
+    background-size: 480px;
+    width: 480px;
     text-align: center;
     padding-bottom: 20px;
     color: #44696C;
@@ -762,14 +762,32 @@ h2, .inactive-h2 {
         width: 100%;
         background-size: 100%;
     }
+    }
+
+.info-back {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.info-pokemon-img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 256px!important;
+    height: 256px!important;
+    max-width: inherit!important;
+    max-height: inherit!important;
+    margin-left: -128px;
+    z-index: 3;
 }
 
 .info-cp-circle {
-    background-image: url(../images/cpcircle.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 210px;
-    margin-bottom: 20px;
+    position: relative;
+    top: 20px;
+    height: 205px;
+    z-index: 3;
 }
 
 .info-cp-button-container {
@@ -778,6 +796,7 @@ h2, .inactive-h2 {
     position: absolute;
     right: 4px;
     top: 4px;
+    z-index: 3;
 }
 
 .info-cp-button {
@@ -804,15 +823,56 @@ h2, .inactive-h2 {
 }
 
 .info-cp-label {
-    font-size: 12pt;
-    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
-    position: relative;
+    margin: 0;
+    font-weight: 400;
+    font-size: 28px;
+    font-family: Lato!important;
+    color: rgba(255,255,255,.84);
+    z-index: 4;
 }
 
-.info-cp-value {
-    font-size: 18pt;
-    color: white;
+.info-cp {
+    font-size: .6em;
+}
+
+.cp {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 260px;
+    height: 130px;
+    margin-left: -130px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cp img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: inherit!important;
+    max-height: inherit!important;
+}
+
+.cp-circle-value {
+    transform: rotate(0deg);
+}
+
+.cp-40 {
+    position: absolute;
+    left: 50%;
+    top: 161px;
+    margin-left: 138px;
+    font-size: 8px;
+    color: rgba(255,255,255,.84);
+    z-index: 3;
 }
 
 .shiny-button, .shiny-button-pressed {
@@ -833,15 +893,6 @@ h2, .inactive-h2 {
     background-image: url(../images/shiny_true.png);
 }
 
-.info-pokemon-img {
-    position: relative;
-    top: 20px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    min-height: 115px;
-}
-
 .info-types-table {
     display: flex;
     justify-content: center;
@@ -853,15 +904,16 @@ h2, .inactive-h2 {
 }
 
 .info-pokemon-details {
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: white;
     border-radius: 8px;
-    margin-top: -20px;
     margin-left: 15px;
     margin-right: 15px;
-    padding-top: 25px;
+    padding-top: 65px;
     padding-bottom: 5px;
+    z-index: 2;
 }
 
 .info-pokemon-details table:last-of-type {
@@ -877,8 +929,13 @@ h2, .inactive-h2 {
     padding-bottom: 0.25rem;
 }
 .info-pokemon-name {
-    font-size: 15pt;
-    font-weight: bold;
+    width: 100%;
+    margin: 0!important;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: Lato!important;
+    text-align: center;
+    color: #456c6e;
 }
 
 .info-pokemon-form-name {
@@ -929,24 +986,24 @@ h2, .inactive-h2 {
     height: 32px;
 }
 
-.info-back-BUG { background-image: url(../images/BUG.png); background-color: #bcab11; }
-.info-back-DARK { background-image: url(../images/DARK.png); background-color: #0B1334; }
-.info-back-DRAGON { background-image: url(../images/DRAGON.png); background-color: #3e683e; }
-.info-back-ELECTRIC { background-image: url(../images/ELECTRIC.png); background-color: #0e3761; }
-.info-back-FAIRY { background-image: url(../images/FAIRY.png); background-color: #8e70e3; }
-.info-back-FIGHTING { background-image: url(../images/FIGHTING.png); background-color: #827150; }
-.info-back-FIRE { background-image: url(../images/FIRE.png); background-color: #5d2a3c; }
-.info-back-FLYING { background-image: url(../images/FLYING.png); background-color: #6d9feb; }
-.info-back-GHOST { background-image: url(../images/GHOST.png); background-color: #123b65; }
-.info-back-GRASS { background-image: url(../images/GRASS.png); background-color: #aed05a; }
-.info-back-GROUND { background-image: url(../images/GROUND.png); background-color: #bb9a71; }
-.info-back-ICE { background-image: url(../images/ICE.png); background-color: #416886; }
-.info-back-NORMAL { background-image: url(../images/NORMAL.png); background-color: #d4c49a; }
-.info-back-POISON { background-image: url(../images/POISON.png); background-color: #181255; }
-.info-back-PSYCHIC { background-image: url(../images/PSYCHIC.png); background-color: #2029b5; }
-.info-back-ROCK { background-image: url(../images/ROCK.png); background-color: #767f8f; }
-.info-back-STEEL { background-image: url(../images/STEEL.png); background-color: #1A2B33; }
-.info-back-WATER { background-image: url(../images/WATER.png); background-color: #0485a2; }
+.info-back-BUG { background-color: #bcab11; }
+.info-back-DARK { background-color: #0B1334; }
+.info-back-DRAGON { background-color: #3e683e; }
+.info-back-ELECTRIC { background-color: #0e3761; }
+.info-back-FAIRY { background-color: #8e70e3; }
+.info-back-FIGHTING { background-color: #827150; }
+.info-back-FIRE { background-color: #5d2a3c; }
+.info-back-FLYING { background-color: #6d9feb; }
+.info-back-GHOST { background-color: #123b65; }
+.info-back-GRASS { background-color: #aed05a; }
+.info-back-GROUND { background-color: #bb9a71; }
+.info-back-ICE { background-color: #416886; }
+.info-back-NORMAL { background-color: #d4c49a; }
+.info-back-POISON { background-color: #181255; }
+.info-back-PSYCHIC { background-color: #2029b5; }
+.info-back-ROCK { background-color: #767f8f; }
+.info-back-STEEL { background-color: #1A2B33; }
+.info-back-WATER { background-color: #0485a2; }
 
 /*---------------------------------------------------------------------*/
 /*  RATING STARS
