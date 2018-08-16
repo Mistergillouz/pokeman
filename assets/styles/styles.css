@@ -831,7 +831,6 @@ h2, .inactive-h2 {
     margin: 0;
     font-weight: 400;
     font-size: 28px;
-    font-family: Lato!important;
     color: rgba(255,255,255,.84);
     z-index: 4;
 }
@@ -933,7 +932,6 @@ h2, .inactive-h2 {
     margin: 0!important;
     font-weight: 700;
     font-size: 24px;
-    font-family: Lato!important;
     text-align: center;
     color: #456c6e;
 }
