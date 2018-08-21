@@ -380,7 +380,6 @@ input {
     font-weight: bold;
 }
 
-.gen-button:hover,
 .gen-button.selected {
     border: 2px solid #000;
 }

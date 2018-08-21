@@ -4,3 +4,21 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+
+.shiny-filters {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    align-items: center;
+}
+
+.shiny-filters-gens {
+    display: flex;
+}
+
+.shiny-filters span {
+    font-size: 8pt;
+}

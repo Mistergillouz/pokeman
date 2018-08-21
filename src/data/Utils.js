@@ -4,19 +4,19 @@ import Constants from './Constants'
 
 export default class Utils {
 
-    static generateGenButtons(selected, onClickCallback) {
+    static generateGenButtons (selected, onClickCallback, maxGen = Constants.MAX_GEN) {
         let genButtons = [];
 
-        for (let i = 1; i <= Constants.MAX_GEN; i++) {
+        for (let i = 1; i <= maxGen; i++) {
 
-            let clazz = (i === 1) ? 'gen-button-left' : (i === Constants.MAX_GEN) ? 'gen-button-right' : 'gen-button-center';
+            let clazz = (i === 1) ? 'gen-button-left' : (i === maxGen) ? 'gen-button-right' : 'gen-button-center';
             if (Utils.arrayfy(selected).indexOf(i) !== -1) {
                 clazz += ' selected';
             }
 
             genButtons.push(
                 <label key={ i }
-                    className={ "gen-button " + "gen-button" + i + " " + clazz } 
+                    className={ 'gen-button ' + 'gen-button' + i + ' ' + clazz } 
                     onClick={(e) => { onClickCallback(i) }}>
                     {i}
                 </label>);
@@ -29,8 +29,8 @@ export default class Utils {
         return str.split(' ').some(w => w === word)
     }
 
-    static toggle(array, value, isMono) {
-        let  index = array.indexOf(value), copy
+    static toggle (array, value, isMono) {
+        let index = array.indexOf(value), copy
         if (!isMono) {
             copy = array.slice()
             if (index !== -1) {
@@ -48,12 +48,12 @@ export default class Utils {
         return copy
     }
 
-    static arrayfy(a) {
+    static arrayfy (a) {
         return a.length === undefined ? [a] : a
     }
 
     
-    static normalizeText(text) {
+    static normalizeText (text) {
         
         const subs = [
             [ 'é', 'e' ],
@@ -74,26 +74,26 @@ export default class Utils {
     }
 
     
-    static replaceAll(str, find, replace) {
+    static replaceAll (str, find, replace) {
         return str.replace(new RegExp(find, 'g'), replace);
     }
 
     
-    static round(num, decimals) {
+    static round (num, decimals) {
         var n = Math.pow(10, decimals);
         return Math.round( (n * num).toFixed(decimals) )  / n;
     }
 
-    static match(str, rule) {
+    static match (str, rule) {
         let regex = new RegExp("^" + rule.split("*").join(".*") + "$")
         return regex.test(str) || str.indexOf(rule) !== -1
     }
 
-    static isMobileDevice() {
+    static isMobileDevice () {
         return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
     }
 
-    static isChildOf(/*child node*/c, /*parent node*/p){ //returns boolean
+    static isChildOf (/*child node*/c, /*parent node*/p){ //returns boolean
         while((c=c.parentNode)&&c!==p); 
         return !!c; 
       }
