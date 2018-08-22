@@ -1,6 +1,0 @@
-<mvc:View controllerName="sap.bi.webi.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-	<App class="sapWing wingTestApplication"
-         busy="{app>/display/app/busy}"
-         busyIndicatorDelay="300"
-         id="app" />
-</mvc:View>

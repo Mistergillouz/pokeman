@@ -12,14 +12,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "html"
+        "react"
     ],
-
-    "settings": {
-        "html/xml-extensions": [".xml"]
-    },
-    
     "rules": {
         "linebreak-style": [
             "error",
