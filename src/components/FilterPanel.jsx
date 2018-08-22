@@ -57,7 +57,7 @@ class FilterPanel extends React.Component {
             return (
                 <div key={ type.id }
                     className={ clazz }
-                    onClick={(e) => { this.onTypeClicked(type.id) }}>
+                    onClick={() => { this.onTypeClicked(type.id) }}>
                     {type.name}
                 </div>
             );
