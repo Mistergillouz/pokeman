@@ -23,6 +23,7 @@
 }
 
 .navigation.nav-opened {
+    background: linear-gradient(135deg,#4ab583 0,#266378 100%);
     transform: translateX(0);
     -webkit-transform: translateX(0);
     transition: transform 0.25s ease-in-out;
@@ -114,7 +115,7 @@
 }
 
 .menu-section {
-    color: darkgray;
+    color: #caedcf;
 }
 
 .nav-icon-egg, .nav-icon-evolves, .nav-icon-baby {
