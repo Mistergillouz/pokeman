@@ -21,7 +21,8 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
     "eslint": "^4.13.1",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-html": "^4.0.5",
+    "eslint-plugin-react": "^7.11.1",
     "file-loader": "^0.11.2",
     "imports-loader": "^0.7.1",
     "less": "^2.7.3",
@@ -35,6 +36,7 @@
   "scripts": {
     "prod": "webpack -p",
     "watch": "webpack-dev-server --progress --colors --history-api-fallback",
-    "lint": "eslint src/**/*.js*"
+    "lint": "eslint src/**/*.js*",
+    "linthtml": "eslint -ext html xml/*.xml"
   }
 }

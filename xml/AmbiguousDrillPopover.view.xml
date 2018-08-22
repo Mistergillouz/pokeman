@@ -1,0 +1,33 @@
+<mvc:View controllerName="sap.bi.webi.controller.AmbiguousDrillPopover"
+          displayBlock="true"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m">
+    <Popover class="wingTestAmbiguousDrillPopover wingAmbiguousDrillPopover"
+             id="drillPopover"
+             placement="HorizontalPreferredRight"
+             afterClose="onAmbiguousDrillPopoverClose"
+             visible="false">
+        <customHeader>
+            <VBox class="wingAmbiguousDrillPopoverHeader wingTestAmbiguousDrillPopoverHeader">
+                <Label
+                    text="{/title}"
+                    textAlign="Center"
+                    class="wingAmbiguousDrillPopoverHeaderLabel wingTestAmbiguousDrillPopoverHeaderLabel">
+                </Label>
+            </VBox>
+        </customHeader>
+        <content>
+            <List
+                id="DrillDownToList"
+                items="{/items}"
+                includeItemInSelection="true">
+                <StandardListItem
+                    title="{dimensionLabel}"
+                    description="{hierarchieLabel}"
+                    type="Active"
+                    press="onListItemPress"
+                />
+            </List>
+        </content>
+    </Popover>
+</mvc:View>
