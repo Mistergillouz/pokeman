@@ -677,6 +677,10 @@ h2, .inactive-h2 {
 /*  ATTACK TYPES
 /*---------------------------------------------------------------------*/
 
+.icon-type {
+    margin-right: 3px;
+}
+
 .icon-type-BUG, .icon-type-DARK, .icon-type-DRAGON, .icon-type-ELECTRIC, .icon-type-FAIRY, 
 .icon-type-FIGHTING, .icon-type-FIRE, .icon-type-FLYING, .icon-type-GHOST, .icon-type-GRASS, 
 .icon-type-GROUND, .icon-type-ICE, .icon-type-NORMAL, .icon-type-POISON, .icon-type-PSYCHIC, 
@@ -830,9 +834,9 @@ h2, .inactive-h2 {
     margin: 0;
     font-weight: 400;
     font-size: 28px;
-    color: rgba(255,255,255,.84);
+    color: rgba(255,255,255,1);
     z-index: 4;
-}
+}p 
 
 .info-cp {
     font-size: .6em;
@@ -874,21 +878,15 @@ h2, .inactive-h2 {
 }
 
 .shiny-button, .shiny-button-pressed {
-    background-image: url(../images/shiny_false.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 2em;
-    width: 2em;
-    height: 2em;
     position: absolute;
-    top: 0.5em;
-    left: 0.5em;
+    top: 215px;
+    height: 18px;
+    width: 18px;
+    pointer-events: inherit;
+    padding: 8px;
+    left: 27px;
+    z-index: 11;
     cursor: pointer;
-    z-index: 50;
-}
-
-.shiny-button-pressed {
-    background-image: url(../images/shiny_true.png);
 }
 
 .info-types-table {

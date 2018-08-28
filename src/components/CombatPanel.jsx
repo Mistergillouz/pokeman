@@ -147,7 +147,9 @@ class CombatPanel extends React.Component {
         }*/
 
         const clazz = this.state.showShiny ? 'shiny-button-pressed' : 'shiny-button'
-        return <div className={ clazz } onClick={ () => this.onShinyToggle() }/>
+        const img = this.state.showShiny ? '../assets/images/shiny_true.png' : '../assets/images/shiny_false.png'
+        //return <div className={ clazz } onClick={ () => this.onShinyToggle() }/>
+        return <img className={ clazz } src={ img } onClick={ () => this.onShinyToggle() } />
     }
 
     onShinyToggle () {
