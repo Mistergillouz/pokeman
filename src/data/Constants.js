@@ -1,6 +1,7 @@
 
 const Constants = {
 
+    APPNAME: 'Pokéman',
     EVENT: {
         ShowTooltip: 'ShowTooltip',
         HideTooltip: 'HideTooltip',

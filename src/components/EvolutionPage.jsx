@@ -17,20 +17,36 @@ class EvolutionPage extends PokemanPage {
     constructor() {
         super('Evolutions Explorer', arguments)
 
-        this.state = {
-            fromGens: [Constants.CURRENT_GEN],
-            toGens: [Constants.CURRENT_GEN]
-        }
+        const searchParams = new URLSearchParams(this.props.location.search)
+        const paramText = searchParams.get('q')
+        const fromGens = this._toGen(paramText, true) || [Constants.CURRENT_GEN]
+        const toGens = this._toGen(paramText, false) || [Constants.CURRENT_GEN]
+        
+        Object.assign(this.state, { 
+            fromGens,
+            toGens
+        })
     }
 
     onGenFromClicked(gen) {
-        let array = Utils.toggle(this.state.fromGens, gen, false)
-        this.setState({ fromGens: array })
+        const args = { fromGens: Utils.toggle(this.state.fromGens, gen, false) }
+        this.updatePageLink(args)
     }
 
     onGenToClicked(gen) {
-        let array = Utils.toggle(this.state.toGens, gen, false)
-        this.setState({ toGens: array })
+        const args = { toGens: Utils.toggle(this.state.toGens, gen, false) }
+        this.updatePageLink(args)
+    }
+
+    updatePageLink(args = {}) {
+        const fromGens = args.fromGens || this.state.fromGens
+        const toGens = args.toGens || this.state.toGens
+        this.setState({
+            fromGens,
+            toGens
+        })
+
+        this.setUrlParam('q', fromGens.sort().join('') + '-' + toGens.sort().join(''))
     }
 
     onPokemonSelected(pokemonId) {
@@ -49,7 +65,8 @@ class EvolutionPage extends PokemanPage {
     render() { 
 
         if (this.state.redirect) {
-            return <Redirect push to={ this.state.to }/>
+            delete this.state.redirect
+            return <Redirect to={ this.state.to }/>
         }
 
         let genFromButtons = Utils.generateGenButtons(this.state.fromGens, this.onGenFromClicked.bind(this))
@@ -85,6 +102,29 @@ class EvolutionPage extends PokemanPage {
 
             </div>
         )
+    }
+
+    _toGen (inputText, isFrom) {
+        if (!inputText) {
+            return null
+        }
+
+        const index = inputText.indexOf('-')
+        if (index < 0) {
+            return null
+        }
+
+        const text = isFrom ? inputText.substring(0, index) : inputText.substring(index + 1)
+        const gens = []
+        for (let i = 0; i < text.length; i++) {
+            const gen = Number(text.charAt(i))
+            if (isNaN(gen) || gen > Constants.MAX_GEN) {
+                return null
+            }
+            gens.push(gen)
+        }
+
+        return gens.sort()
     }
 }
 

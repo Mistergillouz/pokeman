@@ -20,9 +20,7 @@ export default class RankingPage extends PokemanPage {
         if (this.state.pokemon) {
             this.setPageCaption(PokedexHelper.loc(this.state.pokemon))
             if (!window.google) {
-                ScriptJS('https://www.gstatic.com/charts/loader.js', response => {
-                    this.setState({ google: true })
-                })
+                ScriptJS('https://www.gstatic.com/charts/loader.js', () => this.setState({ google: true }))
             }
         } 
     }
