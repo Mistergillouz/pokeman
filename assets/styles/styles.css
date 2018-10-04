@@ -538,7 +538,9 @@ input {
 }
 
 .gen .pokemon .types {
-    margin: 30px 10px 0;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -552,7 +554,7 @@ input {
     }
 
     .gen .pokemon .types {
-        margin: 10px 10px 0;
+        left: 10px;
         display: flex;
         flex-direction: column;
     }
@@ -573,14 +575,24 @@ input {
     content: attr(data-gen);
 }
 
-h2, .inactive-h2 {
+.pokemon-name-div {
+    margin: 5px 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemon-name, .pokemon-name-inactive {
     font-size: 18px;
-    margin: 7px 10px 0;
     color: #4078c0;
 }
 
-.inactive-h2 {
+.pokemon-name-inactive {
     color: lightslategray;
+}
+
+.form-name {
+    font-size: x-small;
+    color: black;
 }
 
 .gen .pokemon .types .type {
