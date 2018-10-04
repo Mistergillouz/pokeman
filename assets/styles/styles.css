@@ -540,7 +540,7 @@ input {
 .gen .pokemon .types {
     position: absolute;
     bottom: 5px;
-    left: 0;
+    left: 10px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -554,7 +554,6 @@ input {
     }
 
     .gen .pokemon .types {
-        left: 10px;
         display: flex;
         flex-direction: column;
     }
