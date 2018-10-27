@@ -98,6 +98,13 @@ class Hamburger extends React.Component {
                             </li>
                         </PokemanLink>
 
+                        <PokemanLink to='/attacks' onClick={ e => this.onClick(e) }>
+                            <li>
+                                <p className='nav-icon-attacks'/>
+                                <span>Attaques</span>
+                            </li>
+                        </PokemanLink>
+
                     </ul>
                 </div>
             </div>

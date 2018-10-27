@@ -12,6 +12,7 @@ import ResistPage from './ResistPage'
 import RankingPage from './RankingPage'
 import FormsPage from './FormsPage'
 import ShinyPage from './ShinyPage'
+import AttackPage from './AttackPage'
 
 export default class App extends React.Component {
     constructor () {
@@ -35,6 +36,7 @@ export default class App extends React.Component {
                     <Route path="/compare" component={ComparePage}/>
                     <Route path="/forms" component={FormsPage}/>
                     <Route path='/shinies' component={ShinyPage}/>
+                    <Route path='/attacks' component={AttackPage}/>
                 </Switch>
             </Router>
         )
