@@ -101,7 +101,7 @@ export default class CalculationPage extends PokemanPage {
 
     generateAttacks(entry) {
 
-        entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
+        entry.attacks.sort((a, b) => (b.attack.rating * b.percent) - (a.attack.rating * a.percent))
 
         let attacks = []
         attacks.push(this.generateAttack(entry.fastAttack, 0, true))

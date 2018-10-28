@@ -166,7 +166,7 @@ class PokedexHelper {
 
         if (attacks) {
             for (let attackId of attacks) {
-                let attack = Pokedex.attacks[attackId];
+                const attack = Pokedex.attacks[attackId];
                         
                 let bonus = 1;
                 for (let type of pokemon.species) {
@@ -175,17 +175,19 @@ class PokedexHelper {
                     }
                 }
     
-                let dps = Utils.round((attack.dmg / attack.duration) * bonus, 1) ;
-                let entry = Object.assign({}, attack, {
+                const dps = Utils.round((attack.dmg / attack.duration) * bonus, 1);
+                const dpe = attack.energy < 0 ? attack.dmg / Math.abs(attack.energy) : 1
+                const entry = Object.assign({}, attack, {
                     name:  this.loc(attack),
-                    dps: dps
+                    dps,
+                    rating: dps * dpe
                 });
     
                 result.push(entry);
             }
         }
     
-        result.sort((a, b) => { return b.dps - a.dps; });
+        result.sort((a, b) => { return b.rating - a.rating; });
         return result;
     }
 
