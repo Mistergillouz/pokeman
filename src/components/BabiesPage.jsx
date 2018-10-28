@@ -23,8 +23,8 @@ export default class BabiesPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
-                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
+                    <sup className='centered-text'>{ this.getPageCaption() }</sup>
                 </div>
 
                 <div className="baby-results">

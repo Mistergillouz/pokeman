@@ -14,6 +14,56 @@ class PokedexHelper {
         this.fuseDatas = null
     }
 
+    searchAttacks(typeIds, inputSearchText, charged) {
+
+        const list = {}
+        if (typeIds.length || Boolean(inputSearchText) || typeof charged === 'boolean') {
+
+            let result = Object.keys(Pokedex.attacks).filter(id => {
+                const attack = Pokedex.attacks[id]
+                if (typeIds.length && typeIds.indexOf(attack.type) === -1) {
+                    return false
+                }
+                return typeof charged !== 'boolean' || charged === Boolean(attack.energy < 0) 
+            })
+
+            const searchText = (inputSearchText || '').trim()
+            if (searchText) {
+                const fuseData = result.map(id => ({
+                    name: this.loc(Pokedex.attacks[id]),
+                    id
+                }))
+
+                const fuse = new Fuse(fuseData, {
+                    keys: [ 'name' ],
+                    threshold: 0.3,
+                    id: 'id'
+                })
+
+                result = fuse.search(searchText)
+            }
+
+            result.forEach(id => {
+                const attack = Pokedex.attacks[id]
+                const isCharged = Boolean(attack.energy < 0)
+                this.enumPokemons(pokemon => {
+                    if (pokemon.attacks) {
+                        const pokemonAttacks = isCharged ? pokemon.attacks.charged : pokemon.attacks.fast
+                        if (pokemonAttacks.some(pokemonAttackId => pokemonAttackId === Number(id))) {
+                            if (!list[id]) {
+                                list[id] = Object.assign({}, Pokedex.attacks[id], { pokemons: [] })
+                            }
+        
+                            list[id].pokemons.push(pokemon)
+                        }
+                    }
+                })
+            })
+        }
+
+        return list
+    }
+
     getShinies () {
         return Shinies.shinies
     }
@@ -73,6 +123,10 @@ class PokedexHelper {
         let results = { count: this.rankings.count }
         attributes.forEach(attribute => results[attribute] = _getRank(this.rankings[attribute], pokemon[attribute]))
         return results
+    }
+
+    getAttack(attackId) {
+        return Pokedex.attacks[attackId]
     }
 
     getAttacks(pokemonId) {

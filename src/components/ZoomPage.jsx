@@ -37,8 +37,8 @@ export default class ZoomPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
-                        <sup className='title-text'>{ label }</sup>
                     </div>
+                    <sup className='centered-text'>{ label }</sup>
                 </div>
                 <div className="pokemon-zoom">
                     <EvolutionPanel id={ id } evolves={ evolves }/>

@@ -1,0 +1,78 @@
+.attack-page-container {
+    background-color: white;
+    width: 100%;
+}
+
+.attack-page-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.attack-page-attack {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75em;
+    width: 12em;
+    height: 5em;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    margin-right: 3px;
+
+    table {
+        tr {
+            font-size: smaller;
+            margin-right: 0.5em;
+        }
+        td {
+            text-align: center;
+        }
+    }
+}
+
+.attack-page-attack-desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25em;
+}
+
+.attack-page-attack-name {
+    padding-left: 0.25em;
+    font-weight: bold;
+}
+
+
+.attack-page-attack-icon {
+    transform: scale(0.7);
+}
+
+.attack-page-attack-nrg33, .attack-page-attack-nrg50, .attack-page-attack-nrg100 {
+    height: 7px;
+    width: 62px;
+    margin: 0 auto;
+}
+
+.attack-page-energy-plus {
+    color: green;
+}
+
+.attack-page-energy-plus-value {
+    padding-left: 0.3em;
+}
+
+.attack-page-attack-nrg33 {
+    -webkit-mask-image: url(../../../assets/images/energy33.png);
+    mask-image: url(../../../assets/images/energy33.png);
+}
+
+.attack-page-attack-nrg50 {
+    -webkit-mask-image: url(../../../assets/images/energy50.png);
+    mask-image: url(../../../assets/images/energy50.png);
+}
+
+.attack-page-attack-nrg100 {
+    -webkit-mask-image: url(../../../assets/images/energy100.png);
+    mask-image: url(../../../assets/images/energy100.png);
+}

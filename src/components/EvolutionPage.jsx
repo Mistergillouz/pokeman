@@ -78,8 +78,8 @@ class EvolutionPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
-                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
+                    <sup className='centered-text'>{ this.getPageCaption() }</sup>
                 </div>
 
                 <div className="evol-filters">

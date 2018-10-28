@@ -12,7 +12,7 @@ class TypeFilter extends React.Component {
     }
 
     onTypeClicked(typeId) {
-        let selectedTypes = Utils.toggle(this.state.selectedTypes, typeId)
+        let selectedTypes = Utils.toggle(this.state.selectedTypes, typeId, Boolean(this.props.isMono))
         this.setState({ selectedTypes: selectedTypes })
         this.props.onTypeClicked(selectedTypes)
     }

@@ -114,8 +114,8 @@ export default class RankingPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton history={ this.props.history }/>
-                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
+                    <span className='centered-text'>{ this.getPageCaption() }</span>
                 </div>
 
                 <div key="ranking-container" ref="ranking-container" className="ranking-container">
