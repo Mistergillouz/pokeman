@@ -6,6 +6,7 @@ import TypeFilter from './TypeFilter'
 import PokemanPage from './PokemanPage'
 import FontIcon from './FontIcon'
 import PokedexHelper from '../data/PokedexHelper'
+import SmallPokemon from './SmallPokemon'
 
 import './css/attackpage.less'
 
@@ -25,6 +26,14 @@ export default class AttackPage extends PokemanPage {
             types: [],
             searchText: null
         })
+    }
+
+    onAttackPressed(attack) {
+        this.setState({ viewMode: ViewMode.ZOOM, attack, prevMode: this.state.viewMode })
+    }
+
+    onLeaveZoom() {
+        this.setState({ viewMode: this.state.prevMode })
     }
 
     onTypeClicked(list) {
@@ -69,42 +78,77 @@ export default class AttackPage extends PokemanPage {
         return <div className={ 'attack-page-attack-nrg' + percent + ' POKEMON_TYPE_' + key }></div>
     }
 
+    generateAttackTile(attack) {
+        const species = PokedexHelper.getSpecies(attack.type)
+        const key = PokedexHelper.getSpeciesKey(species)
+        
+        return (
+            <div className='attack-page-attack' onClick={() => this.onAttackPressed(attack) }>
+                <div className='attack-page-attack-desc'>
+                    <div className={ 'attack-page-attack-icon icon-type-' + key }/>
+                    <span className='attack-page-attack-name'>{ PokedexHelper.loc(attack) }</span>
+                </div>
+                <table>
+                    <tr>
+                        <th>Dégât</th>
+                        <th>Durée</th>
+                        <th>Energie</th>
+                    </tr>
+                    <tr>
+                        <td>{ attack.dmg }</td>
+                        <td>{ attack.duration + 's' }</td>
+                        <td>{ this.getEnergyCode(attack.energy, key) }</td>
+                    </tr>
+                </table>
+            </div>
+        )
+    }
+
     generateAttackTiles() {
         const attacks = PokedexHelper.searchAttacks(this.state.types, this.state.searchText)
-        const parts = Object.keys(attacks).map(id => {
-            const attack = PokedexHelper.getAttack(id)
-            const species = PokedexHelper.getSpecies(attack.type)
-            const key = PokedexHelper.getSpeciesKey(species)
-            
-            return (
-                <div className='attack-page-attack'>
-                    <div className='attack-page-attack-desc'>
-                        <div className={ 'attack-page-attack-icon icon-type-' + key }/>
-                        <span className='attack-page-attack-name'>{ PokedexHelper.loc(attack) }</span>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Dégât</th>
-                            <th>Durée</th>
-                            <th>Energie</th>
-                        </tr>
-                        <tr>
-                            <td>{ attack.dmg }</td>
-                            <td>{ attack.duration + 's' }</td>
-                            <td>{ this.getEnergyCode(attack.energy, key) }</td>
-                        </tr>
-                    </table>
-                </div>
-            )
-        })
+        const parts = Object.keys(attacks).map(id => this.generateAttackTile(attacks[id]))
+        return parts
+    }
+
+    generateZoom(attack) {
+        const parts = []
+        
+        parts.push(
+            <div className='attack-page-selected-attack'>
+                { this.generateAttackTile(attack) }
+            </div>
+        )
+
+        parts.push(
+            <div className="attack-page-pokemons">
+                { attack.pokemons.map(pokemon => <SmallPokemon id={ pokemon.id }/>) }
+            </div>
+        )
 
         return parts
+
     }
 
     render() { 
 
+        let showFilters = true
         const parts = []
         switch (this.state.viewMode) {
+
+            case ViewMode.ZOOM:
+                parts.push(
+                    <div className="navbar">
+                        <div className="left-panel">
+                            <FontIcon x2 icon={ BackButton.defaultIcon } onClick={ () => this.onLeaveZoom() }/>
+                        </div>
+                        <sup className='centered-text'>{ this.getPageCaption() }</sup>
+                    </div>
+                )
+
+                parts.push(...this.generateZoom(this.state.attack))
+                showFilters = false
+                break
+
             case ViewMode.SEARCH:
 
                 const styles = { width: '100%' }
@@ -137,15 +181,19 @@ export default class AttackPage extends PokemanPage {
                 break
         }
 
+        if (showFilters) {
+            parts.push(
+                <div>
+                    <TypeFilter isMono={ true } onTypeClicked={(list) => this.onTypeClicked(list)}/>
+                    <div className='attack-page-list'>
+                        { this.generateAttackTiles() }
+                    </div>
+                </div>
+            )
+        }
+
         parts.push(
             <div>
-                <div className="attack-page-switch-div">
-                </div>
-                <TypeFilter isMono={ true } onTypeClicked={(list) => this.onTypeClicked(list)}/>
-                <div className='attack-page-list'>
-                    { this.generateAttackTiles() }
-                </div>
-
                 { super.render() }     
             </div>
         )
@@ -155,4 +203,4 @@ export default class AttackPage extends PokemanPage {
     }
 }
 
-const ViewMode = { DEFAULT: 0, SEARCH: 1 }
+const ViewMode = { DEFAULT: 0, SEARCH: 1, ZOOM: 2 }
