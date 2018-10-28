@@ -19,10 +19,11 @@ export default class FormsPage extends PokemanPage {
         for (let i = 0; i < Constants.CURRENT_GEN; i++) {
             gens.push(i + 1)
         }
-        this.state = {
+        
+        Object.assign(this.state, {
             selectedGens: gens,
             rarity: false
-        }
+        })
     }
 
     render () { 
@@ -37,8 +38,8 @@ export default class FormsPage extends PokemanPage {
             <div className="navbar">
                 <div className="left-panel">
                     <BackButton/>
-                    <sup className='title-text'>{ this.getPageCaption() }</sup>
                 </div>
+                <sup className='centered-text'>{ this.getPageCaption() }</sup>
             </div>
 
             <div className="shiny-filters">

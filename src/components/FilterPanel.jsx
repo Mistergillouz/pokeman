@@ -1,9 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import PokedexHelper from '../data/PokedexHelper'
 import Store from '../data/Store'
 import Utils from '../data/Utils'
-import Constants from '../data/Constants'
+import TypeFilter from './TypeFilter'
 
 const KEY = 'filters'
 
@@ -13,7 +11,6 @@ class FilterPanel extends React.Component {
 
         this.state = Store.get(KEY, {
             selectedGen: 0,
-            selectedTypes: [],
             rarity: false
         })
     }
@@ -29,10 +26,7 @@ class FilterPanel extends React.Component {
         this.props.notifyChange({ genId: selectedGen });
     }
 
-    onTypeClicked(typeId) {
-
-        let selectedTypes = Utils.toggle(this.state.selectedTypes, typeId)
-        this.setState({ selectedTypes: selectedTypes });
+    onTypeClicked(selectedTypes) {
         this.props.notifyChange({ types: selectedTypes });
     }
 
@@ -44,35 +38,15 @@ class FilterPanel extends React.Component {
 
     render() { 
 
-        let genButtons = Utils.generateGenButtons(this.state.selectedGen, this.onGenClicked.bind(this))
-        let types = PokedexHelper.getAllSpecies().map((type) => {
-            let clazz = 'filter-type-toggle POKEMON_TYPE_' + type.key;
-            if (this.state.selectedTypes.indexOf(type.id) !== -1) {
-                    clazz += ' filter-type-active';
-                }
-            if (this.state.selectedTypes.length === 0) {
-                clazz += ' filter-type-inactive';
-            }
-
-            return (
-                <div key={ type.id }
-                    className={ clazz }
-                    onClick={() => { this.onTypeClicked(type.id) }}>
-                    {type.name}
-                </div>
-            );
-        });
-
-        let filterContainerCls = 'filters-container ' + (this.props.visible ? 'filters-container-open' : 'filters-container-closed')
+        const genButtons = Utils.generateGenButtons(this.state.selectedGen, this.onGenClicked.bind(this))
+        const filterContainerCls = 'filters-container ' + (this.props.visible ? 'filters-container-open' : 'filters-container-closed')
         return (
             <div className={ filterContainerCls }>
                 <div id="gen-table-container" className="gen-table-container">
                     {genButtons}
                     <div onClick={ () => this.onToggleLeg() } className={ 'gen-button leg gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }></div>
                 </div>
-                <div id="type-table-container" className="type-table-container">
-                    {types}
-                </div>
+                <TypeFilter onTypeClicked={ (list) => this.onTypeClicked(list) }/>
             </div>
         )
 

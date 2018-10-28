@@ -56,7 +56,7 @@
 }
 
 .navigation ul li span:active {
-    background-color: #ADD8FF;
+    background-color: #f0f0f0;
 }
 
 .navigation ul li a {
@@ -78,8 +78,6 @@
 }
 
 .btn-navigation {
-    float: left;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,7 +115,7 @@
     color: darkgray;
 }
 
-.nav-icon-egg, .nav-icon-evolves, .nav-icon-baby {
+.nav-icon-egg, .nav-icon-evolves, .nav-icon-baby,.nav-icon-attacks {
     background-repeat: no-repeat;
     background-size: 24px;
     width: 24px;
@@ -127,3 +125,4 @@
 .nav-icon-egg { background-image: url(../../../assets/images/egg.png) }
 .nav-icon-evolves { background-image: url(../../../assets/images/evolves.png) }
 .nav-icon-baby { background-image: url(../../../assets/images/baby.png) }
+.nav-icon-attacks { background-image: url(../../../assets/images/attacks.png) }

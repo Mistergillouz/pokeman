@@ -19,11 +19,10 @@ class EggPage extends PokemanPage {
             this.maxGen = Math.max(this.maxGen, pokemon.gen)
         })
 
-        this.state = {
+        Object.assign(this.state, {
             distances: [],
             gens: [ this.maxGen ]
-        }
-
+        })
     }
 
 
@@ -145,23 +144,26 @@ class EggPage extends PokemanPage {
         return (
             <div className="page">
                 <div className="navbar">
+                
+                <div className="left-panel">
+                    <BackButton/>
+                    { this.generateDistancesFilter() }
+                </div>
+                
+                <span className='title-text'>{ this.getPageCaption() }</span>
+
                 <div className="right-panel">
                     { this.generateGenFilter() }
                 </div>
 
-                <div className="left-panel">
-                    <BackButton/>
-                    { this.generateDistancesFilter() }
-                    <sup className='centered-text'>{ this.getPageCaption() }</sup>
-                </div>
                 
                 </div>
                 <div className="eggs-container">
                     { this.generatePage() }
-    		    </div>
+                </div>
 
                 { super.render() }
-		    </div>
+            </div>
         )
     }
 }
