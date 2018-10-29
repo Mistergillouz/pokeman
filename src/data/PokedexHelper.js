@@ -61,7 +61,11 @@ class PokedexHelper {
             })
         }
 
-        return list
+        const result = Object.keys(list)
+            .map(id => list[id])
+            .sort((a, b) => this.loc(a).localeCompare(this.loc(b)))
+
+        return result
     }
 
     getShinies () {

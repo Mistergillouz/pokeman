@@ -7,12 +7,18 @@ class TypeFilter extends React.Component {
     constructor() {
         super(...arguments)
         this.state = {
-            selectedTypes: []
+            types: this.props.types || []
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        if (Array.isArray(props.types)) {
+            this.state.types = props.types
         }
     }
 
     onTypeClicked(typeId) {
-        let selectedTypes = Utils.toggle(this.state.selectedTypes, typeId, Boolean(this.props.isMono))
+        let selectedTypes = Utils.toggle(this.state.types, typeId, Boolean(this.props.isMono))
         this.setState({ selectedTypes: selectedTypes })
         this.props.onTypeClicked(selectedTypes)
     }
@@ -21,10 +27,10 @@ class TypeFilter extends React.Component {
 
         const types = PokedexHelper.getAllSpecies().map((type) => {
             let clazz = 'filter-type-toggle POKEMON_TYPE_' + type.key;
-            if (this.state.selectedTypes.indexOf(type.id) !== -1) {
+            if (this.state.types.indexOf(type.id) !== -1) {
                 clazz += ' filter-type-active'
             }
-            if (this.state.selectedTypes.length === 0) {
+            if (this.state.types.length === 0) {
                 clazz += ' filter-type-inactive'
             }
 

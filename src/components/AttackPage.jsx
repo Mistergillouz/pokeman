@@ -43,7 +43,7 @@ export default class AttackPage extends PokemanPage {
     onFilterTextChanged (e) {
         clearTimeout(this._timeout)
         const searchText = e.target.value
-        this._timeout = setTimeout(() => this.setState({ searchText }), 250)
+        this._timeout = setTimeout(() => this.setState({ searchText, types: [] }), 250)
     }
     
     onActivateSearch (active) {
@@ -57,7 +57,7 @@ export default class AttackPage extends PokemanPage {
         }
     }
     
-    getEnergyCode(energy, key) {
+    generateEnergyInfo(energy, key) {
         if (energy > 0) {
             return (
                 <div>
@@ -97,7 +97,7 @@ export default class AttackPage extends PokemanPage {
                     <tr>
                         <td>{ attack.dmg }</td>
                         <td>{ attack.duration + 's' }</td>
-                        <td>{ this.getEnergyCode(attack.energy, key) }</td>
+                        <td>{ this.generateEnergyInfo(attack.energy, key) }</td>
                     </tr>
                 </table>
             </div>
@@ -106,8 +106,7 @@ export default class AttackPage extends PokemanPage {
 
     generateAttackTiles() {
         const attacks = PokedexHelper.searchAttacks(this.state.types, this.state.searchText)
-        const parts = Object.keys(attacks).map(id => this.generateAttackTile(attacks[id]))
-        return parts
+        return attacks.map(attack => this.generateAttackTile(attack))
     }
 
     generateZoom(attack) {
@@ -184,7 +183,7 @@ export default class AttackPage extends PokemanPage {
         if (showFilters) {
             parts.push(
                 <div>
-                    <TypeFilter isMono={ true } onTypeClicked={(list) => this.onTypeClicked(list)}/>
+                    <TypeFilter isMono={ true } types={ this.state.types } onTypeClicked={(list) => this.onTypeClicked(list)}/>
                     <div className='attack-page-list'>
                         { this.generateAttackTiles() }
                     </div>
