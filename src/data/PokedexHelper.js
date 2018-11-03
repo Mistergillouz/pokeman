@@ -1,7 +1,6 @@
 import Fuse from 'fuse.js'
 import Pokedex from './pokedex.json'
 import Eggs from './eggs.json'
-import Shinies from './shinies.json'
 import Constants from './Constants'
 import Utils from './Utils'
 
@@ -12,6 +11,15 @@ class PokedexHelper {
         this.locale = Constants.LOCALES.FRENCH;
         this.rankings = null
         this.fuseDatas = null
+        this.config = null
+    }
+
+    setConfig(config) {
+        this.config = config
+    }
+
+    getShinies () {
+        return this.config.shinies
     }
 
     searchAttacks(typeIds, inputSearchText, charged) {
@@ -66,10 +74,6 @@ class PokedexHelper {
             .sort((a, b) => this.loc(a).localeCompare(this.loc(b)))
 
         return result
-    }
-
-    getShinies () {
-        return Shinies.shinies
     }
 
     getImagePath (pokemon, isShiny) {
