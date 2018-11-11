@@ -35,10 +35,7 @@ module.exports = {
         rules: [
             {
                 test: /.jsx?$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['env', 'react']
-                }
+                loader: 'babel-loader'
             },
             { 
                 test: /node_modules\/jquery\/.+\.(jsx|js)$/,
@@ -53,8 +50,7 @@ module.exports = {
                 loader: 'file-loader?name=images/[name].[ext]',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: 'assets/images/', 
-                    publicPath: '../'
+                    outputPath: 'assets/images/'
                 }
             },
             {

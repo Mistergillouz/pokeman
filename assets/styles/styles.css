@@ -364,7 +364,8 @@ input {
 }
 
 .gen-button {
-font-size: 17px;
+    background: #fbfbfb;
+    font-size: 17px;
     min-width: 2em;
     height: 2em;
     line-height: 2em;
@@ -374,13 +375,16 @@ font-size: 17px;
     color: #564b4b;
     cursor: pointer;
     border-radius: 3px;
-    /* text-shadow: 0 1px 1px rgba(0,0,0,.8); */
     font-weight: bold;
     cursor: pointer;
 }
 
 .gen-button.selected {
-    border: 2px solid #000;
+    /* border: 2px solid #000; */
+}
+
+.gen-button:hover {
+    border: 1px solid #000;
 }
 
 .filter-type-inactive {
@@ -1016,13 +1020,13 @@ font-size: 17px;
 .POKEMON_TYPE_FLYING {background-color: #A890F0;}
 .POKEMON_TYPE_FIGHTING {background-color: #C02038;}
 
-.gen-button1 {background-color: #42a5f5;}
+/* .gen-button1 {background-color: #42a5f5;}
 .gen-button2 {background-color: #ef5350;}
 .gen-button3 {background-color: #66bb6a;}
 .gen-button4 {background-color: #705848;}
 .gen-button5 {background-color: #F85888;}
 .gen-button6 {background-color: #F8D030;}
-.gen-button7 {background-color: #B8A038;}
+.gen-button7 {background-color: #B8A038;} */
 
 .leg {
     background-image: url(../../assets/images/legendary-bronze.png);
@@ -1032,14 +1036,14 @@ font-size: 17px;
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 0;
-    border-radius: 50%;
-    border: 2px solid #655ad3;
+    border-radius: 0px 5px 0px 5px;
+    border: 2px solid #ffe1bd;
 }
 .leg.selected {
     background-image: url(../../assets/images/legendary-gold.png);
-    border: 2px solid #ffd755;
+    border: 2px solid #0fb69e;;
     background-color: transparent;
 }
 .leg:hover {
-    border: 2px solid #ffd755;
+    border: 2px solid #ffe1bd; 
 }
