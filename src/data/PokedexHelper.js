@@ -489,24 +489,21 @@ class PokedexHelper {
     }
 
     getFuseDatas() {
-
-        if (!this.fuseDatas) {
-            this.fuseDatas = Object.keys(Pokedex.pokemons).map(id => {
-                const pokemon = Pokedex.pokemons[id]
-                const result = {
-                    name: this.loc(pokemon),
-                    id: pokemon.id
-                }
-            
-                if (pokemon.form) {
-                    result.form = this.loc(pokemon.form)
-                }
-            
-                return result
-            })
-        }
-
-        return this.fuseDatas
+        const fuseDatas = Object.keys(Pokedex.pokemons).map(id => {
+            const pokemon = Pokedex.pokemons[id]
+            const result = {
+                name: this.loc(pokemon),
+                id: pokemon.id
+            }
+        
+            if (pokemon.form) {
+                result.form = this.loc(pokemon.form)
+            }
+        
+            return result
+        })
+    
+        return fuseDatas
     }
 
 }
