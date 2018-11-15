@@ -1,41 +1,44 @@
 {
-  "name": "pokeman",
-  "version": "1.0.0",
-  "description": "Pokeman react app",
-  "__main": "index.js",
-  "dependencies": {
-    "fuse.js": "^3.2.1",
-    "less-loader": "^4.0.5",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "rollup-plugin-jsx": "^1.0.3",
-    "scriptjs": "^2.5.8"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-env": "^2.4.1",
-    "babel-loader": "^6.4.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "css-lint": "^1.0.1",
-    "css-loader": "^0.28.7",
-    "eslint-plugin-react": "^7.11.1",
-    "file-loader": "^0.11.2",
-    "imports-loader": "^0.7.1",
-    "less": "^2.7.3",
-    "rollup-plugin-css-only": "^0.4.0",
-    "style-loader": "^0.16.1",
-    "uglify-js-brunch": "^2.10.0",
-    "url-loader": "^0.5.8",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
-  },
-  "scripts": {
-    "prod": "webpack -p",
-    "watch": "webpack-dev-server --progress --colors --history-api-fallback",
-    "lint": "eslint src/**/*.js*",
-    "csslint": "css-lint src/**/*.css"
+    "name": "pokeman",
+    "version": "1.0.0",
+    "description": "Pokeman react app",
+    "__main": "index.js",
+    "dependencies": {
+      "fuse.js": "^3.3.0",
+      "less-loader": "^4.1.0",
+      "prop-types": "^15.6.2",
+      "react": "^16.6.1",
+      "react-dom": "^16.6.1",
+      "react-router": "^4.3.1",
+      "react-router-dom": "^4.3.1",
+      "scriptjs": "^2.5.9"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.1.5",
+      "@babel/plugin-proposal-class-properties": "^7.1.0",
+      "@babel/plugin-proposal-decorators": "^7.1.2",
+      "@babel/plugin-transform-react-constant-elements": "^7.0.0",
+      "@babel/plugin-transform-react-inline-elements": "^7.0.0",
+      "@babel/preset-env": "^7.1.5",
+      "@babel/preset-react": "^7.0.0",
+      "babel-loader": "^8.0.4",
+      "babel-preset-react-optimize": "^1.0.1",
+      "css-loader": "^1.0.1",
+      "eslint": "^5.9.0",
+      "eslint-plugin-react": "^7.11.1",
+      "file-loader": "^2.0.0",
+      "imports-loader": "^0.8.0",
+      "less": "^3.8.1",
+      "style-loader": "^0.23.1",
+      "uglify-js-brunch": "^2.10.0",
+      "url-loader": "^1.1.2",
+      "webpack": "^4.25.1",
+      "webpack-cli": "^3.1.2",
+      "webpack-dev-server": "^3.1.10"
+    },
+    "scripts": {
+      "prod": "webpack -p --mode production",
+      "watch": "webpack-dev-server --progress --colors --history-api-fallback --mode development",
+      "lint": "eslint src/**/*.js*"
+    }
   }
-}

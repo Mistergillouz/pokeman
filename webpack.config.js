@@ -16,7 +16,7 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         historyApiFallback: true,
-        port: 8000
+        port: 9000
     },
 
     resolve: {
@@ -24,21 +24,13 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
 
-    plugins: [
-         new webpack.ProvidePlugin({
-            jQuery: 'jquery',
-            $: 'jquery'
-        })
-    ],
+    plugins: [],
 
     module: {
         rules: [
             {
                 test: /.jsx?$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['env', 'react']
-                }
+                loader: 'babel-loader'
             },
             { 
                 test: /node_modules\/jquery\/.+\.(jsx|js)$/,
@@ -53,8 +45,7 @@ module.exports = {
                 loader: 'file-loader?name=images/[name].[ext]',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: 'assets/images/', 
-                    publicPath: '../'
+                    outputPath: 'assets/images/'
                 }
             },
             {

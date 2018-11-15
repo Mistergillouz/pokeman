@@ -1,7 +1,6 @@
 import Fuse from 'fuse.js'
 import Pokedex from './pokedex.json'
 import Eggs from './eggs.json'
-import Shinies from './shinies.json'
 import Constants from './Constants'
 import Utils from './Utils'
 
@@ -12,10 +11,69 @@ class PokedexHelper {
         this.locale = Constants.LOCALES.FRENCH;
         this.rankings = null
         this.fuseDatas = null
+        this.config = null
+    }
+
+    setConfig(config) {
+        this.config = config
     }
 
     getShinies () {
-        return Shinies.shinies
+        return this.config.shinies
+    }
+
+    searchAttacks(typeIds, inputSearchText, charged) {
+
+        const list = {}
+        if (typeIds.length || Boolean(inputSearchText) || typeof charged === 'boolean') {
+
+            let result = Object.keys(Pokedex.attacks).filter(id => {
+                const attack = Pokedex.attacks[id]
+                if (typeIds.length && typeIds.indexOf(attack.type) === -1) {
+                    return false
+                }
+                return typeof charged !== 'boolean' || charged === Boolean(attack.energy < 0) 
+            })
+
+            const searchText = (inputSearchText || '').trim()
+            if (searchText) {
+                const fuseData = result.map(id => ({
+                    name: this.loc(Pokedex.attacks[id]),
+                    id
+                }))
+
+                const fuse = new Fuse(fuseData, {
+                    keys: [ 'name' ],
+                    threshold: 0.3,
+                    id: 'id'
+                })
+
+                result = fuse.search(searchText)
+            }
+
+            result.forEach(id => {
+                const attack = Pokedex.attacks[id]
+                const isCharged = Boolean(attack.energy < 0)
+                this.enumPokemons(pokemon => {
+                    if (pokemon.attacks) {
+                        const pokemonAttacks = isCharged ? pokemon.attacks.charged : pokemon.attacks.fast
+                        if (pokemonAttacks.some(pokemonAttackId => pokemonAttackId === Number(id))) {
+                            if (!list[id]) {
+                                list[id] = Object.assign({}, Pokedex.attacks[id], { pokemons: [] })
+                            }
+        
+                            list[id].pokemons.push(pokemon)
+                        }
+                    }
+                })
+            })
+        }
+
+        const result = Object.keys(list)
+            .map(id => list[id])
+            .sort((a, b) => this.loc(a).localeCompare(this.loc(b)))
+
+        return result
     }
 
     getImagePath (pokemon, isShiny) {
@@ -88,6 +146,10 @@ class PokedexHelper {
         return results
     }
 
+    getAttack(attackId) {
+        return Pokedex.attacks[attackId]
+    }
+
     getAttacks(pokemonId) {
         
         let pokemon = this.getPokemon(pokemonId), fast = [], charged = []
@@ -125,7 +187,7 @@ class PokedexHelper {
 
         if (attacks) {
             for (let attackId of attacks) {
-                let attack = Pokedex.attacks[attackId];
+                const attack = Pokedex.attacks[attackId];
                         
                 let bonus = 1;
                 for (let type of pokemon.species) {
@@ -134,17 +196,19 @@ class PokedexHelper {
                     }
                 }
     
-                let dps = Utils.round((attack.dmg / attack.duration) * bonus, 1) ;
-                let entry = Object.assign({}, attack, {
+                const dps = Utils.round((attack.dmg / attack.duration) * bonus, 1);
+                const dpe = attack.energy < 0 ? attack.dmg / Math.abs(attack.energy) : 1
+                const entry = Object.assign({}, attack, {
                     name:  this.loc(attack),
-                    dps: dps
+                    dps,
+                    rating: dps * dpe
                 });
     
                 result.push(entry);
             }
         }
     
-        result.sort((a, b) => { return b.dps - a.dps; });
+        result.sort((a, b) => { return b.rating - a.rating; });
         return result;
     }
 
@@ -438,24 +502,21 @@ class PokedexHelper {
     }
 
     getFuseDatas() {
-
-        if (!this.fuseDatas) {
-            this.fuseDatas = Object.keys(Pokedex.pokemons).map(id => {
-                const pokemon = Pokedex.pokemons[id]
-                const result = {
-                    name: this.loc(pokemon),
-                    id: pokemon.id
-                }
-            
-                if (pokemon.form) {
-                    result.form = this.loc(pokemon.form)
-                }
-            
-                return result
-            })
-        }
-
-        return this.fuseDatas
+        const fuseDatas = Object.keys(Pokedex.pokemons).map(id => {
+            const pokemon = Pokedex.pokemons[id]
+            const result = {
+                name: this.loc(pokemon),
+                id: pokemon.id
+            }
+        
+            if (pokemon.form) {
+                result.form = this.loc(pokemon.form)
+            }
+        
+            return result
+        })
+    
+        return fuseDatas
     }
 
 }

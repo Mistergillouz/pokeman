@@ -20,9 +20,7 @@ export default class RankingPage extends PokemanPage {
         if (this.state.pokemon) {
             this.setPageCaption(PokedexHelper.loc(this.state.pokemon))
             if (!window.google) {
-                ScriptJS('https://www.gstatic.com/charts/loader.js', response => {
-                    this.setState({ google: true })
-                })
+                ScriptJS('https://www.gstatic.com/charts/loader.js', () => this.setState({ google: true }))
             }
         } 
     }
@@ -116,8 +114,8 @@ export default class RankingPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton history={ this.props.history }/>
-                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
+                    <span className='centered-text'>{ this.getPageCaption() }</span>
                 </div>
 
                 <div key="ranking-container" ref="ranking-container" className="ranking-container">

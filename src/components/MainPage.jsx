@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
@@ -77,7 +78,7 @@ class MainPage extends PokemanPage {
         this.setState({ filterVisible: !this.state.filterVisible });
     } 
 
-    onFilterTextChanged (event) {
+    onFilterTextChanged () {
         if (this.filterTimerId) {
             clearTimeout(this.filterTimerId)
         }
@@ -154,14 +155,17 @@ class MainPage extends PokemanPage {
 
             case ViewMode.SEARCH:
 
-
+                const styles = { width: '100%' }
                 return (
-                    <div className="left-panel">
-                        <FontIcon icon="fa fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
-                        <FontIcon icon="fa fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
-                        <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
-                            placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
+                    <div className="navbar">
+                        <div className="left-panel" style={ styles }>
+                            <FontIcon icon="fa fa-arrow-left" onClick= {() => this.onActivateSearch(false) }/>
+                            <FontIcon icon="fa fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
+                            <input key="search-input" type="search" ref="search" className="search-input ui-styles" 
+                                placeholder="Rechercher un Pokémon"  onChange={ e => this.onFilterTextChanged(e) }/>
+                        </div>
                     </div>
+                    
                 )
 
             case ViewMode.SELECTIONS:
@@ -170,34 +174,35 @@ class MainPage extends PokemanPage {
                 let selectIcon = (this.state.selected.length === this.state.pokemons.length) ? 'fa fa-check-circle text-selected' : 'far fa-circle'
         
                 return (
-                    <div className="left-panel">
-                        <FontIcon icon="fa fa-arrow-left" onClick={ () => this.leaveSelection() }/>
-                        <span className="title-text">Selections</span>
-                        <div className="toolbar-button-text-group" onClick={ () => this.toggleSelectAll() }>
-                            <FontIcon icon={ selectIcon }/>
-                            <span className="toolbar-button-text">Tout</span>
-                        </div>
-        
-                        <PokemanLink to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
-                            <div className={ "toolbar-button-text-group " + compareVisibility }>
-                                <div className='compare-button '></div>
-                                <span className="toolbar-button-text">Comparer</span>
+                    <div className="navbar">
+                        <div className="left-panel">
+                            <FontIcon icon="fa fa-arrow-left" onClick={ () => this.leaveSelection() }/>
+                            <span className="title-text">Selections</span>
+                            <div className="toolbar-button-text-group" onClick={ () => this.toggleSelectAll() }>
+                                <FontIcon icon={ selectIcon }/>
+                                <span className="toolbar-button-text">Tout</span>
                             </div>
-                        </PokemanLink>
-        
+            
+                            <PokemanLink to={{ pathname: '/compare', search: '?ids=' + this.state.selected.join(',') }}>
+                                <div className={ 'toolbar-button-text-group ' + compareVisibility }>
+                                    <div className='compare-button '></div>
+                                    <span className="toolbar-button-text">Comparer</span>
+                                </div>
+                            </PokemanLink>
+                        </div>
                     </div>
                 )
        
             default:
 
                 return (
-                    <div>
-                        <Hamburger eventHandler={ args => this.eventHandler(args) }/>
+                    <div className="navbar">
                         <div className="left-panel">
+                            <Hamburger eventHandler={ args => this.eventHandler(args) }/>
                             <FontIcon icon="fa fa-filter" onClick={ (e) => this.onToggleFilterPanel(e) }/>
-                            <span className="pokeman-title">Pokéman</span>
-                            <i className="fa fa-search fa-lg search-icon" aria-hidden="true" onClick={ () => this.onActivateSearch(true) }></i>
                         </div>
+                        <span className="centered-text">Pokéman</span>
+                        <i className="fa fa-search fa-lg search-icon" aria-hidden="true" onClick={ () => this.onActivateSearch(true) }></i>
                     </div>
                 )
         }
@@ -212,9 +217,7 @@ class MainPage extends PokemanPage {
         let compareButtonClass = this.state.selected.length < 2 ? 'hidden' : ''
         return (
             <div className="page" data-content-id="tiles-container">
-                <div className="navbar">
-                    { this.generateToolbar() }
-                </div> 
+                { this.generateToolbar() }
 
                 <FilterPanel 
                     visible={ this.state.filterVisible } 

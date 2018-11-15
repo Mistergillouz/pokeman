@@ -17,12 +17,11 @@ class SortTable extends React.Component {
             sortIndex: sortIndex,
             ascending: ascending
         })
-
-        if (sortIndex !== -1) {
-            this._sort(sortIndex, ascending)
-        }
     }
 
+    componentWillReceiveProps(args) {
+        delete this.indices
+    }
     /**
      * columns (array): 
      * value: String
@@ -50,7 +49,7 @@ class SortTable extends React.Component {
         let rows = this.getIndices().map(rowIndex => {
             let cols = this.props.datas[rowIndex].map((value, colIndex) => {
                 if (this.props.columns[colIndex].callback) {
-                    value = this.props.columns[colIndex].callback(rowIndex, colIndex)
+                    value = this.props.columns[colIndex].callback(rowIndex, colIndex, value)
                 }
                 if (value === undefined) {
                     value = '-'
@@ -113,7 +112,10 @@ class SortTable extends React.Component {
     
     getIndices() {
         if (!this.indices) {
-            this.indices = this.props.datas.map((_, index) => index)
+            this.indices = this.props.datas.map((_, index) => index)                            
+            if (this.state.sortIndex !== -1) {
+                this._sort(this.state.sortIndex, this.state.ascending)
+            }
         }
 
         return this.indices;

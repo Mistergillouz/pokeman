@@ -16,7 +16,7 @@ export default class Utils {
 
             genButtons.push(
                 <label key={ i }
-                    className={ 'gen-button ' + 'gen-button' + i + ' ' + clazz } 
+                    className={ 'gen-button ' + clazz } 
                     onClick={(e) => { onClickCallback(i) }}>
                     {i}
                 </label>);

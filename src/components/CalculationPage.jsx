@@ -101,7 +101,7 @@ export default class CalculationPage extends PokemanPage {
 
     generateAttacks(entry) {
 
-        entry.attacks.sort((a, b) => (b.attack.dmg * b.percent) - (a.attack.dmg * a.percent))
+        entry.attacks.sort((a, b) => (b.attack.rating * b.percent) - (a.attack.rating * a.percent))
 
         let attacks = []
         attacks.push(this.generateAttack(entry.fastAttack, 0, true))
@@ -194,14 +194,14 @@ export default class CalculationPage extends PokemanPage {
         return (
             <div className="calc-container">
                 <div className="navbar">
+                    <div className="left-panel">
+                        <BackButton history={ this.props.history }/>
+                    </div>
+                    <a className='title-text'>{ this.getPageCaption() }</a>
                     <div className="right-panel">
                         <PokemanLink to={{ pathname: this.props.location.pathname, search: this.buildQueryString() }}>
                             <div className={ 'gen-button gen-button-right gen-button-left' + (this.showLegendary ? ' selected': '') }>LEG</div>
                         </PokemanLink>
-                    </div>
-                    <div className="left-panel">
-                        <BackButton history={ this.props.history }/>
-                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                     </div>
                 </div>
                 <div className="calc-options-container">

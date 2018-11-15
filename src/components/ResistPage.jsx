@@ -110,7 +110,7 @@ export default class ResistPage extends PokemanPage {
         )
     }
 
-    generate(data, table, isAttack, isStrenght) {
+    generate(data, table, isAttack) {
 
         let rows = []
         table.sort((a, b) => data[b] - data[a])
@@ -222,9 +222,9 @@ export default class ResistPage extends PokemanPage {
                 <div className="navbar">
                     <div className="left-panel">
                         <BackButton/>
-                        <sup className='title-text'>{ this.getPageCaption() }</sup>
                         { this.state.mode === ResistPage.MODE.ShowResistSelect ? this.generateSelects() : null }
                     </div>
+                    <sup className='centered-text'>{ this.getPageCaption() }</sup>
                 </div>
                 { this.generatePage(this.state.species) }
                 { super.render() }

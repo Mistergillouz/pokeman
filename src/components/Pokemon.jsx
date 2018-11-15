@@ -74,8 +74,9 @@ class Pokemon extends React.Component {
 
         let pokemon = PokedexHelper.getPokemon(this.props.id);
         let name = PokedexHelper.loc(pokemon);
-        let h2Class = this.props.inactive ? 'inactive-h2' : '';
+        let h2Class = this.props.inactive ? 'pokemon-name-inactive' : 'pokemon-name';
         let valueClass = this.props.inactive ? 'inactive-value' : 'value';
+        const formName = pokemon.form ? PokedexHelper.loc(pokemon.form) : null
 
         return (
             <div className={ 'gen ' + (this.props.className || '') }>
@@ -87,7 +88,10 @@ class Pokemon extends React.Component {
                     onMouseDown={ e => this._onMouseDown(e) }
                     onMouseUp={ e => this._onMouseUp(e) }>
 
-                <h2 className={ h2Class }>{ name }</h2>
+                <div className="pokemon-name-div">
+                    <a className={ h2Class }>{ name }</a>
+                    { formName ? <a className="form-name">{ formName }</a> : null }
+                </div>
                     <div className="types">
                         { pokemon.species.map((id) => this.buildSpecies(id)) }
                     </div>

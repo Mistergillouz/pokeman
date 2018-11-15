@@ -123,7 +123,7 @@ input {
 }
 
 .search-input {
-    width: 100%;
+    flex-grow: 1;
     background-size: 14px;
     margin-right: 1em;
     padding: 0.4rem 0px 0.25em 0.5em !important;
@@ -143,6 +143,7 @@ input {
 
 .right-panel, .left-panel {
     display: flex;
+    flex-grow: 0;
     align-items: center;
     cursor: pointer;
     height: 50px;
@@ -150,15 +151,13 @@ input {
 
 .left-panel {
     white-space: nowrap;
-    overflow: hidden;
 }
 
 .right-panel {
-    float: right;
-    right: 0;
 }
 
 .navbar {
+    display: flex;
     position: relative;
     background-color: #f8f8f8;
     border-color: #e7e7e7;
@@ -202,19 +201,28 @@ input {
 
 .search-icon {
     position: absolute;
-    right: 1em;
+    right: 0;
+    top: 0;
+    line-height: 50px;
+    padding-right: 1em;
+    text-align: center;
 }
 
 
-.pokeman-title {
-    font-size: 15pt;
+.centered-text, .title-text, .pokeman-title {
     text-align: center;
+    pointer-events: none;
+    vertical-align: middle;
+    line-height: 50px;
+    flex-grow: 1;
+}
+
+.centered-text {
     position: absolute;
     right: 0;
     left: 0;
-    pointer-events: none;
+    /* font-size: 15pt; */
 }
-
 
 .eggs-container {
     display: flex;
@@ -236,16 +244,6 @@ input {
     text-align: center;
 }
 
-.centered-text, .title-text {
-    width: 100%;
-    text-align: center;
-    pointer-events: none;
-}
-
-.title-text {
-    position: absolute;
-    font-size: 15pt;
-}
 
 .egg-section {
     display: flex;
@@ -366,22 +364,27 @@ input {
 }
 
 .gen-button {
+    background: #fbfbfb;
     font-size: 17px;
-    width: 33px;
-    height: 33px;
-    line-height: 33px;
+    min-width: 2em;
+    height: 2em;
+    line-height: 2em;
     text-align: center;
-    border: 2px solid transparent;
-    margin-right: 3px;
-    color: #fff;
+    border: 1px solid #cecece;
+    margin-right: 0.25em;
+    color: #564b4b;
     cursor: pointer;
     border-radius: 3px;
-    text-shadow: 0 1px 1px rgba(0,0,0,.8);
     font-weight: bold;
+    cursor: pointer;
 }
 
 .gen-button.selected {
-    border: 2px solid #000;
+    /* border: 2px solid #000; */
+}
+
+.gen-button:hover {
+    border: 1px solid #000;
 }
 
 .filter-type-inactive {
@@ -538,7 +541,9 @@ input {
 }
 
 .gen .pokemon .types {
-    margin: 30px 10px 0;
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -552,7 +557,6 @@ input {
     }
 
     .gen .pokemon .types {
-        margin: 10px 10px 0;
         display: flex;
         flex-direction: column;
     }
@@ -573,14 +577,24 @@ input {
     content: attr(data-gen);
 }
 
-h2, .inactive-h2 {
+.pokemon-name-div {
+    margin: 5px 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemon-name, .pokemon-name-inactive {
     font-size: 18px;
-    margin: 7px 10px 0;
     color: #4078c0;
 }
 
-.inactive-h2 {
+.pokemon-name-inactive {
     color: lightslategray;
+}
+
+.form-name {
+    font-size: x-small;
+    color: black;
 }
 
 .gen .pokemon .types .type {
@@ -1059,13 +1073,13 @@ h2, .inactive-h2 {
 .POKEMON_TYPE_FLYING {background-color: #A890F0;}
 .POKEMON_TYPE_FIGHTING {background-color: #C02038;}
 
-.gen-button1 {background-color: #42a5f5;}
+/* .gen-button1 {background-color: #42a5f5;}
 .gen-button2 {background-color: #ef5350;}
 .gen-button3 {background-color: #66bb6a;}
 .gen-button4 {background-color: #705848;}
 .gen-button5 {background-color: #F85888;}
 .gen-button6 {background-color: #F8D030;}
-.gen-button7 {background-color: #B8A038;}
+.gen-button7 {background-color: #B8A038;} */
 
 .leg {
     background-image: url(../../assets/images/legendary-bronze.png);
@@ -1075,14 +1089,14 @@ h2, .inactive-h2 {
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 0;
-    border-radius: 50%;
-    border: 2px solid #655ad3;
+    border-radius: 0px 5px 0px 5px;
+    border: 2px solid #ffe1bd;
 }
 .leg.selected {
     background-image: url(../../assets/images/legendary-gold.png);
-    border: 2px solid #ffd755;
+    border: 2px solid #0fb69e;;
     background-color: transparent;
 }
 .leg:hover {
-    border: 2px solid #ffd755;
+    border: 2px solid #ffe1bd; 
 }
