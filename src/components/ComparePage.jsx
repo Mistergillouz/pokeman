@@ -12,7 +12,6 @@ class ComparePage extends PokemanPage {
     constructor() {
         super('Comparaisons', arguments)
 
-        this.state = {}
         let params = new URLSearchParams(this.props.location.search)
         if (params.has('ids')) {
             this.ids = params.get('ids').split(',')

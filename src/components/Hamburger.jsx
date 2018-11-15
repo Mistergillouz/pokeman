@@ -105,6 +105,13 @@ class Hamburger extends React.Component {
                             </li>
                         </PokemanLink>
 
+                        <PokemanLink to='/diffs' onClick={ e => this.onClick(e) }>
+                            <li>
+                                <p className="fas fa-balance-scale" aria-hidden="true"/>
+                                <span>Differences</span>
+                            </li>
+                        </PokemanLink>
+
                     </ul>
                 </div>
             </div>

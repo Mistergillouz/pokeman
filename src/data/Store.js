@@ -31,7 +31,7 @@ class Store {
 }
 
 function _isObject (item) {
-    return (typeof item === "object" && !Array.isArray(item) && item !== null);
+    return (typeof item === 'object' && !Array.isArray(item) && item !== null);
   }
 
  // Singleton
