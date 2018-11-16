@@ -219,7 +219,8 @@ class MainPage extends PokemanPage {
             <div className="page" data-content-id="tiles-container">
                 { this.generateToolbar() }
 
-                <FilterPanel 
+                <FilterPanel
+                    types={ this.state.searchSettings.types }
                     visible={ this.state.filterVisible } 
                     notifyChange={ this.onFilterChangeListener.bind(this) }/>
                 <PokemonList

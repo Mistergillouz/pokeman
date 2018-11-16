@@ -11,8 +11,15 @@ class FilterPanel extends React.Component {
 
         this.state = Store.get(KEY, {
             selectedGen: 0,
-            rarity: false
+            rarity: false,
+            types: []
         })
+    }
+
+    componentWillReceiveProps(props) {
+        if (Array.isArray(props.types)) {
+            this.state.types = props.types
+        }
     }
 
     setState(args) {
@@ -28,6 +35,7 @@ class FilterPanel extends React.Component {
 
     onTypeClicked(selectedTypes) {
         this.props.notifyChange({ types: selectedTypes });
+        this.setState({ types: selectedTypes })
     }
 
     onToggleLeg() {
@@ -46,7 +54,7 @@ class FilterPanel extends React.Component {
                     {genButtons}
                     <div onClick={ () => this.onToggleLeg() } className={ 'gen-button leg gen-button-right gen-button-left' + (this.state.rarity ? ' selected': '') }></div>
                 </div>
-                <TypeFilter onTypeClicked={ (list) => this.onTypeClicked(list) }/>
+                <TypeFilter types = { this.state.types } onTypeClicked={ (list) => this.onTypeClicked(list) }/>
             </div>
         )
 
