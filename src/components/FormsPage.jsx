@@ -9,48 +9,46 @@ import SmallPokemon from './SmallPokemon'
 import './css/formspage.css'
 
 export default class FormsPage extends PokemanPage {
-   
-    constructor() {
-        super('Formes', arguments)
+  constructor () {
+    super('Formes', arguments)
+  }
+
+  render () {
+    if (this.state.redirect) {
+      return <Redirect push to={this.state.to} />
     }
 
-    render() { 
-
-        if (this.state.redirect) {
-            return <Redirect push to={ this.state.to }/>
-        }
-
-        return <div className="page">
-            <div className="navbar">
-                <div className="left-panel">
-                    <BackButton/>
-                </div>
-                <sup className='centered-text'>{ this.getPageCaption() }</sup>
-            </div>
-            <div className="forms-container">
-                { this.generateForms() }
-            </div>
-
-            { super.render() }
+    return <div className='page'>
+      <div className='navbar'>
+        <div className='left-panel'>
+          <BackButton />
         </div>
-    }
+        <sup className='centered-text'>{ this.getPageCaption() }</sup>
+      </div>
+      <div className='forms-container'>
+        { this.generateForms() }
+      </div>
 
-    generateForms() {
-        const forms = PokedexHelper.getForms()
-        return Object.keys(forms).map(pokemonId => {
-            return (
-                <div className="forms-pokemon-parent">
-                    <SmallPokemon id={ pokemonId } onClick={ id => this.onClick(id) }/>
-                    <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                    <div className="form-pokemon-forms">
-                        { forms[pokemonId].map(pokemon => <SmallPokemon id={ pokemon.id } hideName={ true } onClick={ id => this.onClick(id) }/>)}
-                    </div>
-                </div>
-            )
-        })
-    }
+      { super.render() }
+    </div>
+  }
 
-    onClick(id) {
-        this.setState({ redirect: true, to: '/pokemon/' + id })
-    }
+  generateForms () {
+    const forms = PokedexHelper.getForms()
+    return Object.keys(forms).map(pokemonId => {
+      return (
+        <div className='forms-pokemon-parent'>
+          <SmallPokemon id={pokemonId} onClick={id => this.onClick(id)} />
+          <i className='fa fa-chevron-right' aria-hidden='true' />
+          <div className='form-pokemon-forms'>
+            { forms[pokemonId].map(pokemon => <SmallPokemon id={pokemon.id} hideName onClick={id => this.onClick(id)} />)}
+          </div>
+        </div>
+      )
+    })
+  }
+
+  onClick (id) {
+    this.setState({ redirect: true, to: '/pokemon/' + id })
+  }
 }

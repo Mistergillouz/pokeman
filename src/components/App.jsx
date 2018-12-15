@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter as Router, Switch, Route, browserHistory } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
 import MainPage from './MainPage'
 import ZoomPage from './ZoomPage'
@@ -15,30 +15,25 @@ import AttackPage from './AttackPage'
 import DiffPage from './DiffPage'
 
 export default class App extends React.Component {
-    constructor () {
-        super(...arguments)
-    }
-
-    render() { 
-
-        return (
-            <Router hashType="noslash">
-                <Switch>
-                    <Route path="/" exact={ true } component={MainPage}/>
-                    <Route path="/pokemon/:id" exact={ true } component={ZoomPage}/>
-                    <Route path="/pokemon/:id/calc" exact={ true } component={CalculationPage}/>
-                    <Route path="/pokemon/:id/resist" exact={ true } component={ResistPage}/>
-                    <Route path="/pokemon/:id/ranking" exact={ true } component={RankingPage}/>
-                    <Route path="/resist/:ids" component={ResistPage}/>
-                    <Route path="/eggs" component={EggPage}/>
-                    <Route path="/evolutions" component={EvolutionPage}/>
-                    <Route path="/babies" component={BabiesPage}/>
-                    <Route path="/compare" component={ComparePage}/>
-                    <Route path="/forms" component={FormsPage}/>
-                    <Route path='/attacks' component={AttackPage}/>
-                    <Route path='/diffs' component={DiffPage}/>
-                </Switch>
-            </Router>
-        )
-    }
+  render () {
+    return (
+      <Router hashType='noslash'>
+        <Switch>
+          <Route path='/' exact component={MainPage} />
+          <Route path='/pokemon/:id' exact component={ZoomPage} />
+          <Route path='/pokemon/:id/calc' exact component={CalculationPage} />
+          <Route path='/pokemon/:id/resist' exact component={ResistPage} />
+          <Route path='/pokemon/:id/ranking' exact component={RankingPage} />
+          <Route path='/resist/:ids' component={ResistPage} />
+          <Route path='/eggs' component={EggPage} />
+          <Route path='/evolutions' component={EvolutionPage} />
+          <Route path='/babies' component={BabiesPage} />
+          <Route path='/compare' component={ComparePage} />
+          <Route path='/forms' component={FormsPage} />
+          <Route path='/attacks' component={AttackPage} />
+          <Route path='/diffs' component={DiffPage} />
+        </Switch>
+      </Router>
+    )
+  }
 }

@@ -2,29 +2,29 @@ import React from 'react'
 import { withRouter, Link, Redirect } from 'react-router-dom'
 
 class PokemanLink extends React.Component {
-    constructor () {
-        super(...arguments)
-        this.state = {}
+  constructor () {
+    super(...arguments)
+    this.state = {}
+  }
+
+  onClick () {
+    if (this.props.back) {
+      this.props.history.goBack()
+    } else {
+      this.setState({ redirect: true })
+    }
+  }
+  render () {
+    if (this.state.redirect) {
+      return <Redirect push to={this.props.to} />
+    }
+    if (this.props.to) {
+      let replace = (this.props.push === 'false')
+      return <Link replace={replace} to={this.props.to}>{ this.props.children }</Link>
     }
 
-    onClick () {
-        if (this.props.back) {
-            this.props.history.goBack()
-        } else {
-            this.setState({ redirect: true })
-        }
-    }
-    render () {
-        if (this.state.redirect) {
-            return <Redirect push to={ this.props.to }/>
-        }
-        if (this.props.to) {
-            let replace = (this.props.push === 'false')
-            return <Link replace={ replace } to={ this.props.to }>{ this.props.children }</Link>
-        }
-
-        return <a onClick={ () => this.onClick() }>{ this.props.children }</a>
-    }
+    return <a onClick={() => this.onClick()}>{ this.props.children }</a>
+  }
 }
 
 export default withRouter(PokemanLink)

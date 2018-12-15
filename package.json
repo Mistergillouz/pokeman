@@ -29,6 +29,8 @@
     "file-loader": "^2.0.0",
     "imports-loader": "^0.8.0",
     "less": "^3.8.1",
+    "snazzy": "^8.0.0",
+    "standard": "^12.0.1",
     "style-loader": "^0.23.1",
     "uglify-js-brunch": "^2.10.0",
     "url-loader": "^1.1.2",
@@ -39,6 +41,7 @@
   "scripts": {
     "prod": "webpack -p --mode production",
     "watch": "webpack-dev-server --progress --colors --history-api-fallback --mode development",
-    "lint": "eslint src/**/*.js*"
+    "lint": "standard src/**/*.js src/**/*.jsx --verbose | snazzy",
+    "lint-fix": "standard --fix src/**/*.js*"
   }
 }
