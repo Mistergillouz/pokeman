@@ -18,8 +18,8 @@ class PokedexHelper {
         this.config = config
     }
 
-    getShinies () {
-        return this.config.shinies
+    hasShiny (id) {
+        return this.config.shinies.indexOf(id) === -1
     }
 
     searchAttacks(typeIds, inputSearchText, charged) {

@@ -141,7 +141,7 @@ class CombatPanel extends React.Component {
     }
 
     generateShinyButton (pokemon) {
-        const hasShiny = PokedexHelper.getShinies().indexOf(pokemon.id) !== -1
+        const hasShiny = PokedexHelper.hasShiny(pokemon.id)
         if (!hasShiny) {
             return null
         }
