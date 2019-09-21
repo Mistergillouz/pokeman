@@ -38,10 +38,6 @@ export default class PokemanPage extends React.Component {
     )
   }
 
-  getUrlParams (params) {
-    return params.length ? '?' + escape(params) : ''
-  }
-
   setUrlParam (name, value) {
     this.params.set(name, value)
     this.setState({ render: true })

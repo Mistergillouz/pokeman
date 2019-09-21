@@ -21,6 +21,7 @@ export default class App extends React.Component {
         <Switch>
           <Route path='/' exact component={MainPage} />
           <Route path='/pokemon/:id' exact component={ZoomPage} />
+          <Route path='/pokemon/:id/shiny' exact component={ZoomPage} />
           <Route path='/pokemon/:id/calc' exact component={CalculationPage} />
           <Route path='/pokemon/:id/resist' exact component={ResistPage} />
           <Route path='/pokemon/:id/ranking' exact component={RankingPage} />

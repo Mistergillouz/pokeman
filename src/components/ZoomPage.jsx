@@ -15,9 +15,8 @@ export default class ZoomPage extends PokemanPage {
   constructor () {
     super(null, arguments)
 
-    let params = new URLSearchParams(this.props.location.search)
     this.state = {
-      showShiny: params.get('shiny') === 'true'
+      showShiny: this.props.location.pathname.endsWith('shiny')
     }
   }
 
@@ -31,7 +30,7 @@ export default class ZoomPage extends PokemanPage {
   }
 
   getUrlParams () {
-    return this.state.showShiny ? '&shiny=true' : ''
+    return ''
   }
 
   render () {
