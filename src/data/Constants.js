@@ -13,11 +13,12 @@ const Constants = {
     EggPage: 'EggPage',
     EvolutionPage: 'EvolutionPage',
     BabiesPage: 'BabiesPage',
-    CalculationPage: 'CalculationPage'
+    CalculationPage: 'CalculationPage',
+    ShinyButtonPressed: 'ShinyButtonPressed'
   },
 
   MAX_GEN: 7,
-  CURRENT_GEN: 4,
+  CURRENT_GEN: 5,
   LOCALES: {
     FRENCH: { country: 'fr', name: 'Français', id: 5 },
     ENGLISH: { country: 'en', name: 'English', id: 9 }

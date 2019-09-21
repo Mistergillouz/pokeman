@@ -146,7 +146,13 @@ class CombatPanel extends React.Component {
   }
 
   onShinyToggle () {
-    this.setState({ showShiny: !this.state.showShiny })
+    const showShiny = !this.state.showShiny
+    this.setState({ showShiny })
+    this.props.eventHandler({
+      eventType: Constants.EVENT.ShinyButtonPressed,
+      id: this.props.id,
+      showShiny
+    })
   }
 
   render () {

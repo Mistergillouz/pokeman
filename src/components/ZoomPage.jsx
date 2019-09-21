@@ -21,6 +21,19 @@ export default class ZoomPage extends PokemanPage {
     }
   }
 
+  onEvent (args) {
+    if (args.eventType === Constants.EVENT.ShinyButtonPressed) {
+      this.state.showShiny = args.showShiny
+      this.render()
+    } else {
+      this.props.eventHandler(args)
+    }
+  }
+
+  getUrlParams () {
+    return this.state.showShiny ? '&shiny=true' : ''
+  }
+
   render () {
     let id = Number(this.props.match.params.id)
     let evolves = PokedexHelper.getEvolvesList(id)
@@ -39,7 +52,7 @@ export default class ZoomPage extends PokemanPage {
         </div>
         <div className='pokemon-zoom'>
           <EvolutionPanel id={id} evolves={evolves} />
-          <CombatPanel id={id} showShiny={this.state.showShiny} eventHandler={this.props.eventHandler} />
+          <CombatPanel id={id} showShiny={this.state.showShiny} eventHandler={(args) => this.onEvent(args)} />
         </div>
         { super.render() }
       </div>
