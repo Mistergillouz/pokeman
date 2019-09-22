@@ -29,13 +29,20 @@ export default class PokemanPage extends React.Component {
       return null
     }
 
-    const params = unescape(this.params.toString())
-    const text = this.getPageCaption() + ' - ' + escape(this.baseUrl)
+    const text = this.updateUrl(this.getPageCaption() + ' - ' + escape(this.baseUrl))
     return (
       <a href={'whatsapp://send?text=' + text}>
         <div className='pokeman-button' />
       </a>
     )
+  }
+
+  getBaseUrl () {
+    return this.baseUrl
+  }
+
+  updateUrl (url) {
+    return url
   }
 
   setUrlParam (name, value) {

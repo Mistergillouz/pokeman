@@ -29,6 +29,20 @@ export default class ZoomPage extends PokemanPage {
     }
   }
 
+  updateUrl (url) {
+    let result = url
+    const index = url.indexOf('shiny')
+    if (this.state.showShiny) {
+      if (index === -1) {
+        result += '/shiny'
+      }
+    } else if (index !== -1) {
+      result = result.substring(0, index - 1)
+    }
+
+    return result
+  }
+
   render () {
     let id = Number(this.props.match.params.id)
     let evolves = PokedexHelper.getEvolvesList(id)
