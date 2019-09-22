@@ -29,10 +29,6 @@ export default class ZoomPage extends PokemanPage {
     }
   }
 
-  getUrlParams () {
-    return ''
-  }
-
   render () {
     let id = Number(this.props.match.params.id)
     let evolves = PokedexHelper.getEvolvesList(id)
